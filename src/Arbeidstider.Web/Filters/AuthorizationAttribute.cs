@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Services;
+using Arbeidstider.Web.Constants;
 
 namespace Arbeidstider.Web.Filters
 {
@@ -24,6 +25,12 @@ namespace Arbeidstider.Web.Filters
 
         public static bool UserIsLoggedIn()
         {
+            bool remembeMe = HttpContext.Current.Response.Cookies[Session.USERNAME] != null &&
+                             HttpContext.Current.Response.Cookies[Session.PASSWORD_HASH] != null &&
+                             UserService.VerifyUser(HttpContext.Current.Response.Cookies[Session.USERNAME].ToString(), HttpContext.Current.Response.Cookies[Session.PASSWORD_HASH].ToString());
+
+            if (remembeMe) return true;
+
             bool loggedIn = HttpContext.Current.Session["Username"] != null && HttpContext.Current.Session["Passwordhash"] != null && UserService.VerifyUser(HttpContext.Current.Session["Username"].ToString(), HttpContext.Current.Session["Passwordhash"].ToString());
             return loggedIn;
         }
