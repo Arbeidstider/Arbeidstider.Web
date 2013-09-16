@@ -1,0 +1,4 @@
+C:\Users\johan\Documents\Visual Studio 2010\Projects\Arbeidstider\Arbeidstider.Database\bin\Debug\Arbeidstider.Database.dll
+C:\Users\johan\Documents\Visual Studio 2010\Projects\Arbeidstider\Arbeidstider.Database\bin\Debug\Arbeidstider.Database.pdb
+C:\Users\johan\Documents\Visual Studio 2010\Projects\Arbeidstider\Arbeidstider.Database\obj\Debug\Arbeidstider.Database.dll
+C:\Users\johan\Documents\Visual Studio 2010\Projects\Arbeidstider\Arbeidstider.Database\obj\Debug\Arbeidstider.Database.pdb
