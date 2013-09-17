@@ -16,23 +16,26 @@ namespace Arbeidstider.Web.Filters
         }
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (!UserIsLoggedIn())
-            {
-                filterContext.Result = new RedirectResult("/login");
-                return;
-            }
+            if (UserIsLoggedIn()) return;
+            filterContext.Result = new RedirectResult("/login");
+        }
+
+        private static string GetSession(string key)
+        {
+            if (HttpContext.Current.Session[key] == null) return null;
+            return (string) HttpContext.Current.Session[key];
+        }
+
+        private static string GetCookie(string key)
+        {
+            if (HttpContext.Current.Response.Cookies[key] == null) return null;
+            return (string) HttpContext.Current.Response.Cookies[key].Value;
         }
 
         public static bool UserIsLoggedIn()
         {
-            bool remembeMe = HttpContext.Current.Response.Cookies[Session.USERNAME] != null &&
-                             HttpContext.Current.Response.Cookies[Session.PASSWORD_HASH] != null &&
-                             UserService.VerifyUser(HttpContext.Current.Response.Cookies[Session.USERNAME].ToString(), HttpContext.Current.Response.Cookies[Session.PASSWORD_HASH].ToString());
-
-            if (remembeMe) return true;
-
-            bool loggedIn = HttpContext.Current.Session["Username"] != null && HttpContext.Current.Session["Passwordhash"] != null && UserService.VerifyUser(HttpContext.Current.Session["Username"].ToString(), HttpContext.Current.Session["Passwordhash"].ToString());
-            return loggedIn;
+            return (UserService.Instance.VerifyUser(GetCookie(Session.USERNAME), GetCookie(Session.PASSWORD_HASH)) || 
+                UserService.Instance.VerifyUser(GetSession(Session.USERNAME), GetSession(Session.PASSWORD_HASH)));
         }
     }
 }

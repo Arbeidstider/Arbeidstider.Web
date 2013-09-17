@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Database;
 
@@ -9,7 +8,22 @@ namespace Arbeidstider.Business.Repository
 {
     public class TimesheetRepository : IRepository
     {
-        public static IEnumerable<Timesheet> GetWeeklyTimesheets(int employerID, DateTime startDate, DateTime endDate)
+        private static TimesheetRepository _instance;
+
+        public static TimesheetRepository Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    return new TimesheetRepository();
+
+                return _instance;
+            }
+        }
+
+        private TimesheetRepository() {}
+
+        public IEnumerable<Timesheet> GetAllTimesheets(int employerID, DateTime startDate, DateTime endDate)
         {
             var parameters = new List<KeyValuePair<string, object>>()
             {
@@ -23,7 +37,7 @@ namespace Arbeidstider.Business.Repository
             return timesheets;
         }
 
-        public static IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employer employer, DateTime startDate, DateTime endDate)
+        public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employer employer, DateTime startDate, DateTime endDate)
         {
             if (!employer.HasAccessToWorkplace(workplaceID))
             {

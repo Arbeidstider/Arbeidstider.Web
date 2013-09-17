@@ -1,31 +1,33 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
+using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Database
 {
     public class DatabaseConnection
     {
-        private readonly static string _connectionString =
-            @"Data Source=remote.bjonn.com,4200\SQLSERVER;Initial Catalog=Arbeidstider;User ID=dbUserArbeidstider;Password=kottbullar2013";
-
-        private static DatabaseConnection _instance = null;
-        private static SqlConnection _connection = null;
+        private readonly string _connectionString;
+        private static DatabaseConnection _instance;
 
         public static DatabaseConnection Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new DatabaseConnection();
+                    if (HttpContext.Current.Request.Url.ToString().Contains("arbeidstider.no"))
+                        _instance = new DatabaseConnection(ConnectionStrings.LOCAL);
+                    _instance = new DatabaseConnection(ConnectionStrings.REMOTE);
+
 
                 return _instance;
             }
         }
 
-
-        private DatabaseConnection()
+        private DatabaseConnection(string connectionString)
         {
+            _connectionString = connectionString;
         }
 
         public DataTable ExecuteSP(string spName, IEnumerable<KeyValuePair<string, object>> parameters)

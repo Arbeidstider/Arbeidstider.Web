@@ -22,8 +22,9 @@ namespace Arbeidstider.Business.Services
             
         }
 
-        public static bool VerifyUser(string user, string passwordHash)
+        public bool VerifyUser(string user, string passwordHash)
         {
+            if (user == null || passwordHash == null) return false;
             if (user == "test" && passwordHash == "test123") return true;
             return false;
         }
