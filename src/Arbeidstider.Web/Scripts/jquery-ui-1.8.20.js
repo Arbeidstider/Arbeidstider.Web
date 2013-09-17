@@ -4303,7 +4303,7 @@ $.extend($.effects, {
 			wrapper = $('<div></div>')
 				.addClass('ui-effects-wrapper')
 				.css({
-					fontSize: '100%',
+					Fontsize: '100%',
 					background: 'transparent',
 					border: 'none',
 					margin: 0,
@@ -5180,7 +5180,7 @@ $.effects.size = function(o) {
 		var el = $(this), props = ['position','top','bottom','left','right','width','height','overflow','opacity'];
 		var props1 = ['position','top','bottom','left','right','overflow','opacity']; // Always restore
 		var props2 = ['width','height','overflow']; // Copy for children
-		var cProps = ['fontSize'];
+		var cProps = ['Fontsize'];
 		var vProps = ['borderTopWidth', 'borderBottomWidth', 'paddingTop', 'paddingBottom'];
 		var hProps = ['borderLeftWidth', 'borderRightWidth', 'paddingLeft', 'paddingRight'];
 
