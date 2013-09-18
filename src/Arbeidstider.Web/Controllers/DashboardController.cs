@@ -1,14 +1,17 @@
 ﻿using System.Web.Mvc;
-using Arbeidstider.Web.Filters;
 
 namespace Arbeidstider.Web.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
-        [Authorization]
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Profile()
+        {
+            return View("UserProfile");
         }
     }
 }

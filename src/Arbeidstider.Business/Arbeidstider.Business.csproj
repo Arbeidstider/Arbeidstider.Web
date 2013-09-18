@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Constants\Exceptions.cs" />
     <Compile Include="Domain\Employee.cs" />
     <Compile Include="Domain\EmployeeGroup.cs" />
     <Compile Include="Domain\Timesheet.cs" />

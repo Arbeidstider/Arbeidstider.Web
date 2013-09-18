@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Web", "Arbeids
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Business", "Arbeidstider.Business\Arbeidstider.Business.csproj", "{3517ED30-6C90-4335-AC9C-9003C6D44003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Web.Services", "Arbeidstider.Services\Arbeidstider.Web.Services.csproj", "{CC04907A-E80E-4BDC-81EB-856C82467D64}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Database", "Arbeidstider.Database\Arbeidstider.Database.csproj", "{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Web.Services", "Arbeidstider.Web.Services\Arbeidstider.Web.Services.csproj", "{CC04907A-E80E-4BDC-81EB-856C82467D64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC04907A-E80E-4BDC-81EB-856C82467D64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

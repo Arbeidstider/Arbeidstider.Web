@@ -10,7 +10,7 @@ namespace Arbeidstider.Web.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Login",
+                name: "login",
                 url: "login",
                 defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
             );
@@ -21,9 +21,12 @@ namespace Arbeidstider.Web.App_Start
                 defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
             );
 
+            //routes.Add("Dashboard", new DomainRoute("mine.arbeidstider.no", "index", new { controller = "Dashboard", action = "Index"}));
+            routes.Add("Dashboard", new DomainRoute("mine.arbeidstider.no", "{action}/{id}", new { controller = "Dashboard", action = "Index"}));
+
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
+                name: "LandingPage",
+                url: "index",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
             );
         }

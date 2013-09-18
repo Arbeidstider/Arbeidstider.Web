@@ -15,7 +15,7 @@ namespace Arbeidstider.Business.Repository
             get
             {
                 if (_instance == null)
-                    return new TimesheetRepository();
+                    _instance = new TimesheetRepository();
 
                 return _instance;
             }
@@ -27,7 +27,7 @@ namespace Arbeidstider.Business.Repository
         {
             var parameters = new List<KeyValuePair<string, object>>()
             {
-                new KeyValuePair<string, object>("@EmployeeID", employerID),
+                new KeyValuePair<string, object>("@EmployerID", employerID),
                 new KeyValuePair<string, object>("@StartDate", startDate),
                 new KeyValuePair<string, object>("@EndDate", endDate)
             };

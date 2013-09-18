@@ -19,7 +19,6 @@ namespace Arbeidstider.Business.Services
 
         private UserService()
         {
-            
         }
 
         public bool VerifyUser(string user, string passwordHash)
@@ -27,11 +26,6 @@ namespace Arbeidstider.Business.Services
             if (user == null || passwordHash == null) return false;
             if (user == "test" && passwordHash == "test123") return true;
             return false;
-        }
-
-        public Employer Authorize(string user, string password)
-        {
-            return new Employer();
         }
     }
 }

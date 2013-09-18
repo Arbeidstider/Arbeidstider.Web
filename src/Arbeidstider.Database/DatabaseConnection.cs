@@ -16,9 +16,9 @@ namespace Arbeidstider.Database
             get
             {
                 if (_instance == null)
-                    if (HttpContext.Current.Request.Url.ToString().Contains("arbeidstider.no"))
-                        _instance = new DatabaseConnection(ConnectionStrings.LOCAL);
-                    _instance = new DatabaseConnection(ConnectionStrings.REMOTE);
+                    if (!HttpContext.Current.IsDebuggingEnabled)
+                        _instance = new DatabaseConnection(ConnectionStrings.RELEASE);
+                    _instance = new DatabaseConnection(ConnectionStrings.DEBUG);
 
 
                 return _instance;

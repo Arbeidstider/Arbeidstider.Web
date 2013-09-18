@@ -4,7 +4,7 @@
     ViewBag.Title = "Log in";
 }
 
-@using (Html.BeginForm(new RouteValueDictionary() { {"ReturnUrl", string.Empty}} ))
+@using (Html.BeginForm(new RouteValueDictionary() { {"ReturnUrl", string.Empty}, { "controller", "Account"}, { "action", "login"}} ))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <label class='checkbox' for='remember_me'>
-                <input id='remember_me' name='RememberMe' type='checkbox' value='1'>
+                <input id='remember_me' name='RememberMe' type='checkbox'>
                 Husk meg
             </label>
             <button class='btn btn-block'>Logg inn</button>
