@@ -71,10 +71,11 @@ namespace Arbeidstider.Web.Helpers
 
         public static string GetCookie(this HttpContext context, string key)
         {
+            string cookie = null;
             if (context.Request.Cookies[Cookie.Key] != null) 
-                return (string) context.Request.Cookies[Cookie.Key][key];
+                cookie = (string) context.Request.Cookies[Cookie.Key][key];
 
-            return null;
+            return cookie;
         }
     }
 }

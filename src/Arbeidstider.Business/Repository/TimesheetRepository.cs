@@ -6,11 +6,11 @@ using Arbeidstider.Database;
 
 namespace Arbeidstider.Business.Repository
 {
-    public class TimesheetRepository : IRepository
+    public class TimesheetRepository : IRepository<Timesheet>
     {
         private static TimesheetRepository _instance;
 
-        public static TimesheetRepository Instance
+        public static IRepository<Timesheet> Instance
         {
             get
             {
@@ -19,6 +19,21 @@ namespace Arbeidstider.Business.Repository
 
                 return _instance;
             }
+        }
+
+        public IEnumerable<Timesheet> GetAll(List<KeyValuePair<string, object>> parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Timesheet Create(List<KeyValuePair<string, object>> parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Timesheet obj, List<KeyValuePair<string, object>> parameters)
+        {
+            throw new NotImplementedException();
         }
 
         private TimesheetRepository() {}
@@ -101,5 +116,7 @@ namespace Arbeidstider.Business.Repository
         {
             return true;
         }
+
+        IRepository<Timesheet> IRepository<Timesheet>.Instance { get; set; }
     }
 }

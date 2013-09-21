@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Web.Mvc;
 using Arbeidstider.Business.Services;
-using Arbeidstider.Web.Constants;
 using Arbeidstider.Web.Helpers;
 using Arbeidstider.Web.Models;
-using Microsoft.Ajax.Utilities;
 
 namespace Arbeidstider.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        public ActionResult Login()
+        private readonly UserService _userservice;
+
+        public AccountController()
         {
-            //ViewBag.ReturnUrl = returnUrl;
-            return View();
+            _userservice = UserService.Instance;
         }
 
-        //
-        // POST: /Account/Login
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            if (UserService.Instance.VerifyUser(model.UserName, PasswordHelper.Hashpassword(model.Password)))
+            if (_userservice.VerifyUser(model.UserName, PasswordHelper.Hashpassword(model.Password)))
             {
                 HttpContext.SetSession(Constants.Session.USERNAME, model.UserName);
                 HttpContext.SetSession(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password));
                 HttpContext.SetCookie(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password), DateTime.Now.AddDays(7));
                 HttpContext.SetCookie(Constants.Session.USERNAME, model.UserName, DateTime.Now.AddDays(7));
-                return Redirect(Urls.DASH_BOARD);
+                return RedirectToAction("Index", "Dashboard");
             }
 
             // If we got this far, something failed, redisplay form
@@ -44,7 +45,7 @@ namespace Arbeidstider.Web.Controllers
             HttpContext.SetCookie(Constants.Session.PASSWORD_HASH, null, null);
             HttpContext.SetCookie(Constants.Session.USERNAME, null, null);
 
-            return Redirect(Urls.START_PAGE);
+            return RedirectToAction("Login", "Account");
         }
     }
 }

@@ -44,8 +44,10 @@
     <Compile Include="Domain\EmployeeGroup.cs" />
     <Compile Include="Domain\Timesheet.cs" />
     <Compile Include="Domain\Workplace.cs" />
+    <Compile Include="Repository\RepositoryAction.cs" />
     <Compile Include="Interfaces\ITimesheet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\EmployerRepository.cs" />
     <Compile Include="Repository\IRepostiory.cs" />
     <Compile Include="Repository\TimesheetRepository.cs" />
     <Compile Include="Services\UserService.cs" />

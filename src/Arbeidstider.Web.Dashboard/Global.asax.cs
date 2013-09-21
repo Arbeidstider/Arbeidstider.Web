@@ -27,15 +27,16 @@ namespace Arbeidstider.Web
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             if (Context.Request.Url.ToString().ToLower().Contains("assets")) return;
-            if (Context.Request.Url.ToString().ToLower().EndsWith("login")) return;
             if (IsLoggedIn()) return;
+            if (Context.Request.Url.ToString().ToLower().EndsWith("login")) return;
             Context.Response.RedirectToRoute("login");
         }
 
         private bool IsLoggedIn()
         {
-            return UserService.Instance.VerifyUser(Context.GetSession(Constants.Session.USERNAME), Context.GetSession(Constants.Session.USERNAME)) || 
-                UserService.Instance.VerifyUser(Context.GetCookie(Constants.Session.PASSWORD_HASH), Context.GetCookie(Constants.Session.PASSWORD_HASH));
+            bool loggedIn =  UserService.Instance.VerifyUser(Context.GetSession(Constants.Session.USERNAME), Context.GetSession(Constants.Session.PASSWORD_HASH)) || 
+                UserService.Instance.VerifyUser(Context.GetCookie(Constants.Session.USERNAME), Context.GetCookie(Constants.Session.PASSWORD_HASH));
+            return loggedIn;
         }
     }
 }

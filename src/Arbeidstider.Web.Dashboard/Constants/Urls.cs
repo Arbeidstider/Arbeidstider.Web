@@ -2,12 +2,12 @@
 
 namespace Arbeidstider.Web.Constants
 {
-    public class Urls
+    internal class Urls
     {
-        public static readonly string START_PAGE = "http://dev.arbeidstider.no:{0}".Format();
+        public static readonly string START_PAGE = "http://mine.arbeidstider.no:{0}".Format();
         public static readonly string USER_PROFILE = "http://mine.arbeidstider.no:{0}/profile".Format();
-        public static readonly string LOGIN = "http://dev.arbeidstider.no:{0}/login".Format();
-        public static readonly string LOGOFF = "http://dev.arbeidstider.no:{0}/logoff".Format();
+        public static readonly string LOGIN = "http://mine.arbeidstider.no:{0}/login".Format();
+        public static readonly string LOGOFF = "http://mine.arbeidstider.no:{0}/logoff".Format();
         public static readonly string DASH_BOARD = "http://mine.arbeidstider.no:{0}/index".Format();
     }
 
