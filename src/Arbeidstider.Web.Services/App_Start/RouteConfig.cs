@@ -10,10 +10,13 @@ namespace Arbeidstider.Web.Services.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                name: "TimesheetService",
+                url: "TimesheetService/{action}",
+                defaults: new { controller = "Timesheet", action = "GetAllTimesheets"  }
             );
+
+
+            ControllerBuilder.Current.DefaultNamespaces.Add("Arbeidstider.Web.Services.Controllers");
         }
     }
 }

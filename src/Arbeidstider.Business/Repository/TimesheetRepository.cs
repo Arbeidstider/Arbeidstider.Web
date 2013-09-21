@@ -64,7 +64,7 @@ namespace Arbeidstider.Business.Repository
                 var timesheet = new Timesheet();
                 var selectedDay = (DateTime)row["SelectedDay"];
                 var scheduleEnd = (TimeSpan) row["ScheduleEnd"];
-                var scheduleStart = (TimeSpan) row["ScheduleEnd"];
+                var scheduleStart = (TimeSpan) row["ScheduleStart"];
 
                 timesheet.ShiftWorker = ParseEmployer(row);
                 timesheet.Day = selectedDay;
@@ -81,6 +81,25 @@ namespace Arbeidstider.Business.Repository
         private static Employer ParseEmployer(DataRow row)
         {
             return new Employer();
+        }
+
+        public bool CreateNewTimesheet(int employerID, DateTime SelectedDay, string shiftStart, string shiftEnd)
+        {
+            var parameters = new List<KeyValuePair<string, object>>()
+            {
+                new KeyValuePair<string, object>("@EmployerID", employerID),
+                new KeyValuePair<string, object>("@SelectedDay", SelectedDay),
+                new KeyValuePair<string, object>("@ShiftStart", shiftStart),
+                new KeyValuePair<string, object>("@ShiftEnd", shiftEnd)
+            };
+
+            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
+            return ParseResult(dt);
+        }
+
+        private static bool ParseResult(DataTable dt)
+        {
+            return true;
         }
     }
 }

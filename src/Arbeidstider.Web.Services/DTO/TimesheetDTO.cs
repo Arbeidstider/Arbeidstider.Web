@@ -1,42 +1,33 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Arbeidstider.Business.Interfaces;
 
 namespace Arbeidstider.Web.Services.DTO
 {
-    [DataContract]
-    public class TimesheetDTO
+    public class TimesheetDTO : ITimesheet
     {
-        public TimesheetDTO(DateTime shiftStart, DateTime shiftEnd, int employerID, EmployerDTO employer = null)
+        public TimesheetDTO(string shiftStart, string shiftEnd, int employerID, EmployerDTO employer = null)
         {
             ShiftStart = shiftStart;
             ShiftEnd = shiftEnd;
             EmployerID = employerID;
-            if (employer != null) Employer = employer;
         }
 
-        private int _employerID = 0;
+        public TimesheetDTO()
+        {
+            
+        }
 
-        [DataMember]
         public int EmployerID
         {
-            get
-            {
-                if (Employer != null) 
-                    return Employer.EmployerID;
-
-                return _employerID;
-            }
-            set
-            {
-                _employerID = value;
-            }
+            get;
+            set;
         }
-        
-        [DataMember]
-        public EmployerDTO Employer { get; set; }
-        [DataMember]
-        public DateTime ShiftStart { get; set; }
-        [DataMember]
-        public DateTime ShiftEnd { get; set; }
+
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public DateTime SelectedDay { get; set; }
+
+        public string ShiftStart { get; set; }
+        public string ShiftEnd { get; set; }
     }
 }

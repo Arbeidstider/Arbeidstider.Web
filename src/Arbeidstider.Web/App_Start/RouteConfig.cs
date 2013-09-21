@@ -1,7 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Arbeidstider.Web.App_Start
+namespace Arbeidstider.Web
 {
     public class RouteConfig
     {
@@ -10,24 +14,9 @@ namespace Arbeidstider.Web.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "login",
-                url: "login",
-                defaults: new { controller = "Account", action = "Login", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
-                name: "Logoff",
-                url: "logoff",
-                defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
-            );
-
-            //routes.Add("Dashboard", new DomainRoute("mine.arbeidstider.no", "index", new { controller = "Dashboard", action = "Index"}));
-            routes.Add("Dashboard", new DomainRoute("mine.arbeidstider.no", "{action}/{id}", new { controller = "Dashboard", action = "Index"}));
-
-            routes.MapRoute(
-                name: "LandingPage",
-                url: "index",
-                defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

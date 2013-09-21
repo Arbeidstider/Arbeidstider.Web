@@ -6748,7 +6748,7 @@ if ( document.documentElement.currentStyle ) {
 			if ( rsLeft ) {
 				elem.runtimeStyle.left = elem.currentStyle.left;
 			}
-			style.left = name === "Fontsize" ? "1em" : ( ret || 0 );
+			style.left = name === "fontSize" ? "1em" : ( ret || 0 );
 			ret = style.pixelLeft + "px";
 
 			// Revert the changed values
