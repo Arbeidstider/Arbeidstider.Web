@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Business.Logic", "Arbeidstider.Business\Arbeidstider.Business.Logic.csproj", "{3517ED30-6C90-4335-AC9C-9003C6D44003}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Database", "Arbeidstider.Database\Arbeidstider.Database.csproj", "{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Database Layer", "3. Database Layer", "{CAFB167F-F40B-4C6A-AA62-7819A8692A96}"
@@ -21,16 +19,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Business.Inter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Common", "Arbeidstider.Common\Arbeidstider.Common.csproj", "{1BB21573-E161-432C-9D41-570E6FDA7751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Business.Logic", "Arbeidstider.Business.Logic\Arbeidstider.Business.Logic.csproj", "{3517ED30-6C90-4335-AC9C-9003C6D44003}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,14 +51,18 @@ Global
 		{1BB21573-E161-432C-9D41-570E6FDA7751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BB21573-E161-432C-9D41-570E6FDA7751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BB21573-E161-432C-9D41-570E6FDA7751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3517ED30-6C90-4335-AC9C-9003C6D44003}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3517ED30-6C90-4335-AC9C-9003C6D44003} = {FD91A673-588F-47A5-8067-ACD12589D97A}
 		{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067} = {FD91A673-588F-47A5-8067-ACD12589D97A}
 		{1BB21573-E161-432C-9D41-570E6FDA7751} = {FD91A673-588F-47A5-8067-ACD12589D97A}
+		{3517ED30-6C90-4335-AC9C-9003C6D44003} = {FD91A673-588F-47A5-8067-ACD12589D97A}
 		{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899} = {CAFB167F-F40B-4C6A-AA62-7819A8692A96}
 		{F1B079FE-B5D1-411B-AB08-9100F5820BF5} = {58D0D5F3-B861-4B67-80E7-B36CA32332F9}
 		{5F606020-9ED8-4B54-A9FD-2509845DDDED} = {58D0D5F3-B861-4B67-80E7-B36CA32332F9}

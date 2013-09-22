@@ -25,7 +25,7 @@ namespace Arbeidstider.Business.Repository
             }
         }
 
-        private EmployerRepository()
+        public EmployerRepository()
         {
         }
 

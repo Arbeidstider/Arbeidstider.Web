@@ -3,16 +3,13 @@ using System.Web;
 using System.Web.SessionState;
 using Arbeidstider.Web.Constants;
 
-namespace Arbeidstider.Web.Helpers
+namespace Arbeidstider.Web.Dashboard.Helpers
 {
     public static class WebHelper
     {
-        public static void SetCookie(this HttpContextBase context, string key, object value, DateTime? expires = null)
-        {
-            SetCookie(context.Response, key, value, expires);
-        }
+        private static readonly HttpContext context = HttpContext.Current;
 
-        public static void SetCookie(this HttpContext context, string key, object value, DateTime? expires = null)
+        public static void SetCookie(string key, object value, DateTime? expires = null)
         {
             SetCookie(context.Response, key, value, expires);
         }
@@ -41,35 +38,32 @@ namespace Arbeidstider.Web.Helpers
             if (response.Cookies[Cookie.Key] != null) response.Cookies.Remove(Cookie.Key);
         }
 
-        public static void SetSession(this HttpContextBase context, string key, object value)
-        {
-            SetSession(context.Session, key, value);
-        }
-
-        public static void SetSession(this HttpContext context, string key, object value)
+        public static void SetSession(string key, object value)
         {
             SetSession(context.Session, key, value);
         }
 
         public static void SetSession(HttpSessionStateBase session, string key, object value)
         {
+            if (session == null) return;
             session[key] = null;
             session[key] = (string)value;
         }
 
         public static void SetSession(HttpSessionState session, string key, object value)
         {
+            if (session == null) return;
             session[key] = null;
             session[key] = (string)value;
         }
 
-        public static string GetSession(this HttpContext context, string key)
+        public static string GetSession(string key)
         {
             if (context.Session == null || context.Session[key] == null) return null;
             return (string) context.Session[key];
         }
 
-        public static string GetCookie(this HttpContext context, string key)
+        public static string GetCookie(string key)
         {
             string cookie = null;
             if (context.Request.Cookies[Cookie.Key] != null) 

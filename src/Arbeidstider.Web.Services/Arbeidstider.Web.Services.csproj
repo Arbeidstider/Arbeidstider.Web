@@ -145,7 +145,7 @@
       <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
       <Name>Arbeidstider.Business.Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Arbeidstider.Business\Arbeidstider.Business.Logic.csproj">
+    <ProjectReference Include="..\Arbeidstider.Business.Logic\Arbeidstider.Business.Logic.csproj">
       <Project>{3517ED30-6C90-4335-AC9C-9003C6D44003}</Project>
       <Name>Arbeidstider.Business.Logic</Name>
     </ProjectReference>
@@ -170,7 +170,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>62389</DevelopmentServerPort>
+          <DevelopmentServerPort>49646</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

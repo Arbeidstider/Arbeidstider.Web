@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Repository;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Web.Services.DTO;
 using Arbeidstider.Web.Services.Models;
@@ -14,9 +13,9 @@ namespace Arbeidstider.Web.Services.Controllers
     {
         private readonly IRepository<Timesheet> _repository;
 
-        public TimesheetController()
+        public TimesheetController(IRepository<Timesheet> repository)
         {
-            _repository = TimesheetRepository.Instance;
+            _repository = repository;
         }
 
         [HttpGet]

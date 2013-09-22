@@ -7,11 +7,10 @@
 
 @using (Html.BeginForm(new RouteValueDictionary() { {"ReturnUrl", string.Empty}, { "controller", "Account"}, { "action", "login"}} ))
 {
-    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div class='application'>
         <div class='application-content'>
-            <a href='sign_in.html'>
+            <a href='@Url.Action("Login", "Account")'>
                 <div class='icon-heart'></div>
                 <span>Mine Arbeidstider</span>
             </a>

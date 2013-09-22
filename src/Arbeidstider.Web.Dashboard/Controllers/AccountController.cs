@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Web.Mvc;
+using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Interfaces.Services;
-using Arbeidstider.Business.Services;
+using Arbeidstider.Web.Dashboard.Helpers;
 using Arbeidstider.Web.Helpers;
 using Arbeidstider.Web.Models;
 using Arbeidstider.Web.Services.Models;
 using Arbeidstider.Web.Services.Parameters;
 
-namespace Arbeidstider.Web.Controllers
+namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class AccountController : BaseController
     {
         private readonly IUserService _userservice;
+        private readonly IRepository<Employer> _repository;
 
-        public AccountController()
+        public AccountController(IRepository<Employer> repository, IUserService userservice) : base(userservice)
         {
-            _userservice = UserService.Instance;
+            _repository = repository;
+            _userservice = userservice;
         }
 
         public ActionResult Login()
@@ -24,7 +28,6 @@ namespace Arbeidstider.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
             var userParameters = new UserParameters(new User()
@@ -34,10 +37,10 @@ namespace Arbeidstider.Web.Controllers
             }).Parameters;
             if (_userservice.VerifyUser(userParameters))
             {
-                HttpContext.SetSession(Constants.Session.USERNAME, model.UserName);
-                HttpContext.SetSession(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password));
-                HttpContext.SetCookie(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password), DateTime.Now.AddDays(7));
-                HttpContext.SetCookie(Constants.Session.USERNAME, model.UserName, DateTime.Now.AddDays(7));
+                WebHelper.SetSession(Constants.Session.USERNAME, model.UserName);
+                WebHelper.SetSession(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password));
+                WebHelper.SetCookie(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password), DateTime.Now.AddDays(7));
+                WebHelper.SetCookie(Constants.Session.USERNAME, model.UserName, DateTime.Now.AddDays(7));
                 return RedirectToAction("Index", "Dashboard");
             }
 
@@ -48,10 +51,10 @@ namespace Arbeidstider.Web.Controllers
 
         public ActionResult LogOff()
         {
-            HttpContext.SetSession(Constants.Session.USERNAME, null);
-            HttpContext.SetSession(Constants.Session.PASSWORD_HASH, null);
-            HttpContext.SetCookie(Constants.Session.PASSWORD_HASH, null, null);
-            HttpContext.SetCookie(Constants.Session.USERNAME, null, null);
+            WebHelper.SetSession(Constants.Session.USERNAME, null);
+            WebHelper.SetSession(Constants.Session.PASSWORD_HASH, null);
+            WebHelper.SetCookie(Constants.Session.PASSWORD_HASH, null, null);
+            WebHelper.SetCookie(Constants.Session.USERNAME, null, null);
 
             return RedirectToAction("Login", "Account");
         }

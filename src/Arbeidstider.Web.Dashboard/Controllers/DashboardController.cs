@@ -1,9 +1,16 @@
 ﻿using System.Web.Mvc;
+using Arbeidstider.Business.Interfaces.Services;
+using Arbeidstider.Web.Dashboard.Filters;
 
-namespace Arbeidstider.Web.Controllers
+namespace Arbeidstider.Web.Dashboard.Controllers
 {
+    [Authorization]
     public class DashboardController : BaseController
     {
+        public DashboardController(IUserService userservice) : base(userservice)
+        {
+            
+        }
         public ActionResult Index()
         {
             return View();
