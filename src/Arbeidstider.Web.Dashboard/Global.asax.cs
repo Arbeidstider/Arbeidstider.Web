@@ -34,10 +34,10 @@ namespace Arbeidstider.Web.Dashboard
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             // Repositories
-            builder.RegisterType<EmployerRepository>().As<IRepository<Employer>>().InstancePerHttpRequest();
+            builder.RegisterType<EmployerRepository>().As<IRepository<Employer>>().SingleInstance();
             // Services
-            builder.RegisterType<UserService>().As<IUserService>().InstancePerHttpRequest();
-            builder.Register(x => LogManager.GetLogger("FileLogger")).As<ILog>();
+            builder.RegisterType<UserService>().As<IUserService>().SingleInstance();
+            builder.Register(x => LogManager.GetLogger("FileLogger")).As<ILog>().SingleInstance();
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
