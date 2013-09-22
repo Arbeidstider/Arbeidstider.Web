@@ -180,7 +180,6 @@
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\EmployerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -671,7 +670,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -682,7 +680,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Dashboard\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\_Layout.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\Assets.cshtml" />
@@ -719,6 +717,8 @@
     <None Include="Assets\javascripts\plugins\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Views\Dashboard\UserProfile.cshtml" />
     <Content Include="Views\Dashboard\AddressBook.cshtml" />
+    <Content Include="Views\Dashboard\ConfirmShifts.cshtml" />
+    <Content Include="Views\Dashboard\Messages.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

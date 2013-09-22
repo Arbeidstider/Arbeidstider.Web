@@ -65,10 +65,12 @@ namespace Arbeidstider.Business.Repository
 
         public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employer employer, DateTime startDate, DateTime endDate)
         {
+            /*
             if (!employer.HasAccessToWorkplace(workplaceID))
             {
                 throw new Exception(string.Format("Employer: {0}, does not have access to workplace with ID: {1}", employer.Fullname, workplaceID));
             }
+             */
 
             var parameters = new List<KeyValuePair<string, object>>()
             {

@@ -15,12 +15,4 @@ namespace Arbeidstider.Business.Domain
         public string Email { get; set; }
         public string Mobile { get; set; }
     }
-
-    public static class EmployerHelper
-    {
-        public static bool HasAccessToWorkplace(this Employer employer, int workplaceID)
-        {
-            return true;
-        }
-    }
 }

@@ -14,9 +14,14 @@ namespace Arbeidstider.Web.Controllers
             return View();
         }
 
+        public ActionResult ConfirmShifts()
+        {
+            return View();
+        }
+
         public ActionResult UserProfile()
         {
-            return View("UserProfile");
+            return View();
         }
     }
 }
