@@ -1,27 +1,21 @@
 ﻿using System;
-using Arbeidstider.Business.Interfaces;
+using Arbeidstider.Business.Interfaces.Domain;
+using Arbeidstider.Business.Interfaces.DTO;
 
 namespace Arbeidstider.Web.Services.DTO
 {
-    public class TimesheetDTO : ITimesheet
+    public class TimesheetDTO : ITimesheetDTO
     {
-        public TimesheetDTO(string shiftStart, string shiftEnd, int employerID, EmployerDTO employer = null)
+        public TimesheetDTO(ITimesheet timesheet)
         {
-            ShiftStart = shiftStart;
-            ShiftEnd = shiftEnd;
-            EmployerID = employerID;
+            ShiftStart = timesheet.ShiftStart.ToString();
+            ShiftEnd = timesheet.ShiftEnd.ToString();
+            EmployerID = timesheet.EmployerID;
         }
 
-        public TimesheetDTO()
-        {
-            
-        }
+        public TimesheetDTO() { }
 
-        public int EmployerID
-        {
-            get;
-            set;
-        }
+        public int EmployerID { get; set; }
 
         public string StartDate { get; set; }
         public string EndDate { get; set; }

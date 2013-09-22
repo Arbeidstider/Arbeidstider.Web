@@ -1,27 +1,30 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
+using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Repository;
+using Arbeidstider.Common.Enums;
 using Arbeidstider.Web.Services.DTO;
 using Arbeidstider.Web.Services.Models;
+using Arbeidstider.Web.Services.Parameters;
 
 namespace Arbeidstider.Web.Services.Controllers
 {
     public class TimesheetController : BaseServiceController
     {
+        private readonly IRepository<Timesheet> _repository;
+
+        public TimesheetController()
+        {
+            _repository = TimesheetRepository.Instance;
+        }
+
         [HttpGet]
         public JsonResult GetAllTimesheets(TimesheetDTO timesheet)
         {
-            int employerID = timesheet.EmployerID;
-            DateTime startDate = DateTime.Parse(timesheet.StartDate);
-            DateTime endDate = DateTime.Parse(timesheet.EndDate);
+            var parameters = new TimesheetParameters(timesheet, RepositoryAction.GetAll).Parameters;
+            var timesheets = _repository.GetAll(parameters);
 
-            if (employerID == 0) throw new Exception("You have not specified a employerID.");
-            if (endDate < startDate) throw new Exception("The end date must be a date happening after the start date.");
-
-            var timesheets = TimesheetRepository.Instance.GetAllTimesheets(employerID, startDate, endDate);
-
-            var timesheetDTOs = timesheets.Select(x => new TimesheetDTO(x.ShiftStart.ToString(), x.ShiftEnd.ToString(), employerID)).ToArray();
+            var timesheetDTOs = timesheets.Select(x => new TimesheetDTO(x)).ToArray();
             return Json(timesheetDTOs, JsonRequestBehavior.AllowGet);
         }
 
@@ -35,10 +38,12 @@ namespace Arbeidstider.Web.Services.Controllers
                 return result;
             }
 
+            var parameters = new TimesheetParameters(timesheet, RepositoryAction.Create).Parameters;
+
             result.Data = new
             {
-                Result = TimesheetRepository.Instance.CreateNewTimesheet(timesheet.EmployerID, timesheet.SelectedDay,
-                    timesheet.ShiftStart, timesheet.ShiftEnd)
+                Data = _repository.Create(parameters),
+                Result = true
             };
 
             return result;

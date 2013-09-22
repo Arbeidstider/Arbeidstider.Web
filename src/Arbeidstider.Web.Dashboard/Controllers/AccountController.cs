@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Web.Mvc;
+using Arbeidstider.Business.Interfaces.Services;
 using Arbeidstider.Business.Services;
 using Arbeidstider.Web.Helpers;
 using Arbeidstider.Web.Models;
+using Arbeidstider.Web.Services.Models;
+using Arbeidstider.Web.Services.Parameters;
 
 namespace Arbeidstider.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly UserService _userservice;
+        private readonly IUserService _userservice;
 
         public AccountController()
         {
@@ -24,7 +27,12 @@ namespace Arbeidstider.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            if (_userservice.VerifyUser(model.UserName, PasswordHelper.Hashpassword(model.Password)))
+            var userParameters = new UserParameters(new User()
+            {
+                Username = model.UserName,
+                Passwordhash = PasswordHelper.Hashpassword(model.Password)
+            }).Parameters;
+            if (_userservice.VerifyUser(userParameters))
             {
                 HttpContext.SetSession(Constants.Session.USERNAME, model.UserName);
                 HttpContext.SetSession(Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password));

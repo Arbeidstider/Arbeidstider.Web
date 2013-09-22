@@ -2,6 +2,8 @@
 {
     public class User
     {
+        public string Username { get; set; }
+        public string Passwordhash { get; set; }
     }
 
     public static class UserHelper

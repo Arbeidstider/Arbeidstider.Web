@@ -115,6 +115,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs" />
+    <Compile Include="Parameters\IParameters.cs" />
+    <Compile Include="Parameters\TimesheetParameters.cs" />
+    <Compile Include="Parameters\UserParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +141,17 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arbeidstider.Business\Arbeidstider.Business.csproj">
+    <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">
+      <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
+      <Name>Arbeidstider.Business.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Business\Arbeidstider.Business.Logic.csproj">
       <Project>{3517ED30-6C90-4335-AC9C-9003C6D44003}</Project>
-      <Name>Arbeidstider.Business</Name>
+      <Name>Arbeidstider.Business.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Common\Arbeidstider.Common.csproj">
+      <Project>{1BB21573-E161-432C-9D41-570E6FDA7751}</Project>
+      <Name>Arbeidstider.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

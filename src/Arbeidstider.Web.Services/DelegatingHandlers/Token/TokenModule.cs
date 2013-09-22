@@ -1,11 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Arbeidstider.Web.Services.DelegatingHandlers.Token
+﻿namespace Arbeidstider.Web.Services.DelegatingHandlers.Token
 {
 
     /*

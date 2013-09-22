@@ -36,6 +36,11 @@ namespace Arbeidstider.Business.Repository
             throw new NotImplementedException();
         }
 
+        public bool Verify(List<KeyValuePair<string, object>> parameters)
+        {
+            return true;
+        }
+
         private TimesheetRepository() {}
 
         public IEnumerable<Timesheet> GetAllTimesheets(int employerID, DateTime startDate, DateTime endDate)
@@ -83,10 +88,8 @@ namespace Arbeidstider.Business.Repository
 
                 timesheet.ShiftWorker = ParseEmployer(row);
                 timesheet.Day = selectedDay;
-                timesheet.ShiftEnd = new DateTime(selectedDay.Year, selectedDay.Month, selectedDay.Day, scheduleEnd.Hours, scheduleEnd.Minutes,
-                    scheduleEnd.Seconds);
-                timesheet.ShiftStart = new DateTime(selectedDay.Year, selectedDay.Month, selectedDay.Day, scheduleStart.Hours, scheduleStart.Minutes,
-                    scheduleStart.Seconds);
+                timesheet.ShiftEnd = scheduleEnd;
+                timesheet.ShiftStart = scheduleStart;
                 timesheets.Add(timesheet);
             }
 
@@ -116,7 +119,5 @@ namespace Arbeidstider.Business.Repository
         {
             return true;
         }
-
-        IRepository<Timesheet> IRepository<Timesheet>.Instance { get; set; }
     }
 }

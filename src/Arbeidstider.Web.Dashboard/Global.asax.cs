@@ -5,6 +5,8 @@ using System.Web.Routing;
 using Arbeidstider.Business.Services;
 using Arbeidstider.Web.App_Start;
 using Arbeidstider.Web.Helpers;
+using Arbeidstider.Web.Services.Models;
+using Arbeidstider.Web.Services.Parameters;
 
 namespace Arbeidstider.Web
 {
@@ -34,8 +36,17 @@ namespace Arbeidstider.Web
 
         private bool IsLoggedIn()
         {
-            bool loggedIn =  UserService.Instance.VerifyUser(Context.GetSession(Constants.Session.USERNAME), Context.GetSession(Constants.Session.PASSWORD_HASH)) || 
-                UserService.Instance.VerifyUser(Context.GetCookie(Constants.Session.USERNAME), Context.GetCookie(Constants.Session.PASSWORD_HASH));
+            var sessionParameters = new UserParameters(new User()
+            {
+                Username = Context.GetSession(Constants.Session.USERNAME),
+                Passwordhash = Context.GetSession(Constants.Session.PASSWORD_HASH)
+            }).Parameters;
+            var cookieParameters = new UserParameters(new User()
+            {
+                Username = Context.GetCookie(Constants.Session.USERNAME), 
+                Passwordhash = Context.GetCookie(Constants.Session.PASSWORD_HASH)
+            }).Parameters;
+            bool loggedIn = UserService.Instance.VerifyUser(sessionParameters) || UserService.Instance.VerifyUser(cookieParameters);
             return loggedIn;
         }
     }

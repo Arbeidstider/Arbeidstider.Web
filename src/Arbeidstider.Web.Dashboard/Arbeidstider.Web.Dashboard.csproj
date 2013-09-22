@@ -167,7 +167,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\Cookie.cs" />
     <Compile Include="Constants\Session.cs" />
-    <Compile Include="Constants\Urls.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -686,9 +685,17 @@
     <Content Include="Views\Dashboard\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arbeidstider.Business\Arbeidstider.Business.csproj">
+    <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">
+      <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
+      <Name>Arbeidstider.Business.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Business\Arbeidstider.Business.Logic.csproj">
       <Project>{3517ED30-6C90-4335-AC9C-9003C6D44003}</Project>
-      <Name>Arbeidstider.Business</Name>
+      <Name>Arbeidstider.Business.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Web.Services\Arbeidstider.Web.Services.csproj">
+      <Project>{97385D1E-A858-4DD5-9EBD-13BCF86AF6CD}</Project>
+      <Name>Arbeidstider.Web.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

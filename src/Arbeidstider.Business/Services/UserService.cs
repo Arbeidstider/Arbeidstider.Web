@@ -1,12 +1,16 @@
-﻿using Arbeidstider.Business.Domain;
+﻿using System.Collections.Generic;
+using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Services;
+using Arbeidstider.Business.Repository;
 
 namespace Arbeidstider.Business.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
-        private static UserService _instance = null;
+        private static IUserService _instance;
+        private readonly IRepository<Employer> _repository; 
 
-        public static UserService Instance
+        public static IUserService Instance
         {
             get
             {
@@ -19,13 +23,13 @@ namespace Arbeidstider.Business.Services
 
         private UserService()
         {
+            _repository = EmployerRepository.Instance;
         }
 
-        public bool VerifyUser(string user, string passwordHash)
+        public bool VerifyUser(List<KeyValuePair<string, object>> parameters)
         {
-            if (user == null || passwordHash == null) return false;
-            if (user == "test" && passwordHash == "test123") return true;
-            return false;
+            if (parameters[0].Value == null || parameters[1].Value == null) return false;
+            return _repository.Verify(parameters);
         }
     }
 }

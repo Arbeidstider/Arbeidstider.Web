@@ -1,4 +1,4 @@
-﻿namespace Arbeidstider.Business.Repository
+﻿namespace Arbeidstider.Common.Enums
 {
     public enum RepositoryAction
     {
