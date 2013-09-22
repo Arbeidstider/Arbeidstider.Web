@@ -9,6 +9,11 @@ namespace Arbeidstider.Web.Controllers
             return View();
         }
 
+        public ActionResult AddressBook()
+        {
+            return View();
+        }
+
         public ActionResult UserProfile()
         {
             return View("UserProfile");

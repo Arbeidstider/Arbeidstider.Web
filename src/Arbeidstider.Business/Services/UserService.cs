@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Interfaces.Services;
 using Arbeidstider.Business.Repository;
 

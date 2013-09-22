@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Factories;
+using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Database;
 using Arbeidstider.Database.Constants;
@@ -24,7 +27,6 @@ namespace Arbeidstider.Business.Repository
 
         private EmployerRepository()
         {
-            
         }
 
         public IEnumerable<Employer> GetAll(List<KeyValuePair<string, object>> parameters)
@@ -37,9 +39,20 @@ namespace Arbeidstider.Business.Repository
             throw new System.NotImplementedException();
         }
 
+        public Employer Get(KeyValuePair<string, object> parameters)
+        {
+            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_EMPLOYER, parameters);
+
+            if ((DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL || dt.Rows[0] == null)
+                throw new Exception(string.Format("Could not find employer with username: {0}", parameters.Value));
+
+            return EmployerFactory.Create(dt.Rows[0]);
+        }
+
+
         public bool Update(Employer obj, List<KeyValuePair<string, object>> parameters)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         public bool Verify(List<KeyValuePair<string, object>> parameters)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Arbeidstider.Web.Helpers
 {
-    public class PasswordHelper
+    internal class PasswordHelper
     {
         private readonly static string _secretKey = "7zglpME2erPdu3a95Spi";
         private readonly static int _hashLength = 88;

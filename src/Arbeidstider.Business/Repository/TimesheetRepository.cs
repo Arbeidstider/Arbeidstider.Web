@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Database;
 
 namespace Arbeidstider.Business.Repository
@@ -27,6 +28,11 @@ namespace Arbeidstider.Business.Repository
         }
 
         public Timesheet Create(List<KeyValuePair<string, object>> parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Timesheet Get(KeyValuePair<string, object> parameters)
         {
             throw new NotImplementedException();
         }
@@ -86,7 +92,6 @@ namespace Arbeidstider.Business.Repository
                 var scheduleEnd = (TimeSpan) row["ScheduleEnd"];
                 var scheduleStart = (TimeSpan) row["ScheduleStart"];
 
-                timesheet.ShiftWorker = ParseEmployer(row);
                 timesheet.Day = selectedDay;
                 timesheet.ShiftEnd = scheduleEnd;
                 timesheet.ShiftStart = scheduleStart;
@@ -94,11 +99,6 @@ namespace Arbeidstider.Business.Repository
             }
 
             return timesheets;
-        }
-
-        private static Employer ParseEmployer(DataRow row)
-        {
-            return new Employer();
         }
 
         public bool CreateNewTimesheet(int employerID, DateTime SelectedDay, string shiftStart, string shiftEnd)

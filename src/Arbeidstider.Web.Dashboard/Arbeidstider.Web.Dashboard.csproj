@@ -40,6 +40,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="RequestReduce">
+      <HintPath>..\packages\RequestReduce.1.8.76\Lib\net40\RequestReduce.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -174,12 +177,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\EmployerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\RequestReduce.readme.txt" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\fonts\montserrat-bold-webfont.svg" />
     <Content Include="Assets\fonts\montserrat-regular-webfont.svg" />
@@ -713,7 +718,7 @@
     <None Include="Assets\javascripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
     <None Include="Assets\javascripts\plugins\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Views\Dashboard\UserProfile.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Dashboard\AddressBook.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -743,6 +748,10 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+start /MIN xcopy /s /y "$(SolutionDir)packages\RequestReduce.1.8.76\pngoptimization\*.exe" "$(TargetDir)"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

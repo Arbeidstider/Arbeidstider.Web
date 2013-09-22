@@ -2,11 +2,8 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Arbeidstider.Business.Services;
 using Arbeidstider.Web.App_Start;
 using Arbeidstider.Web.Helpers;
-using Arbeidstider.Web.Services.Models;
-using Arbeidstider.Web.Services.Parameters;
 
 namespace Arbeidstider.Web
 {
@@ -29,25 +26,9 @@ namespace Arbeidstider.Web
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
             if (Context.Request.Url.ToString().ToLower().Contains("assets")) return;
-            if (IsLoggedIn()) return;
+            if (Context.IsLoggedIn()) return;
             if (Context.Request.Url.ToString().ToLower().EndsWith("login")) return;
             Context.Response.RedirectToRoute("login");
-        }
-
-        private bool IsLoggedIn()
-        {
-            var sessionParameters = new UserParameters(new User()
-            {
-                Username = Context.GetSession(Constants.Session.USERNAME),
-                Passwordhash = Context.GetSession(Constants.Session.PASSWORD_HASH)
-            }).Parameters;
-            var cookieParameters = new UserParameters(new User()
-            {
-                Username = Context.GetCookie(Constants.Session.USERNAME), 
-                Passwordhash = Context.GetCookie(Constants.Session.PASSWORD_HASH)
-            }).Parameters;
-            bool loggedIn = UserService.Instance.VerifyUser(sessionParameters) || UserService.Instance.VerifyUser(cookieParameters);
-            return loggedIn;
         }
     }
 }

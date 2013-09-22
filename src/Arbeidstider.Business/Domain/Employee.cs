@@ -12,6 +12,8 @@ namespace Arbeidstider.Business.Domain
         public string Username { get; set; }
         public string Passwordhash { get; set; }
         public bool RememberMe { get; set; }
+        public string Email { get; set; }
+        public string Mobile { get; set; }
     }
 
     public static class EmployerHelper

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Repository;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Web.Services.DTO;

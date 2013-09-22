@@ -30,6 +30,11 @@ namespace Arbeidstider.Database
             _connectionString = connectionString;
         }
 
+        public DataTable ExecuteSP(string spName, KeyValuePair<string, object> parameters)
+        {
+            return ExecuteSP(spName, new List<KeyValuePair<string, object>>() {parameters});
+        }
+
         public DataTable ExecuteSP(string spName, IEnumerable<KeyValuePair<string, object>> parameters)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString)) 
