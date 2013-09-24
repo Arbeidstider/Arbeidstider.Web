@@ -1,11 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Common.DTO;
 using Arbeidstider.Common.Enums;
-using Arbeidstider.Web.Services.DTO;
-using Arbeidstider.Web.Services.Models;
-using Arbeidstider.Web.Services.Parameters;
+using Arbeidstider.Common.Parameters;
+using Arbeidstider.Web.Framework.ViewModels.Account;
+using Arbeidstider.Web.Framework.ViewModels.Timesheet;
+using Arbeidstider.Web.Framework.Helpers;
 
 namespace Arbeidstider.Web.Services.Controllers
 {
@@ -21,7 +24,13 @@ namespace Arbeidstider.Web.Services.Controllers
         [HttpGet]
         public JsonResult GetAllTimesheets(TimesheetDTO timesheet)
         {
-            var parameters = new TimesheetParameters(timesheet, RepositoryAction.GetAll).Parameters;
+            var parameters = new TimesheetParameters(new Timesheet()
+            {
+                StartDate = DateTime.Parse(timesheet.StartDate),
+                EndDate = DateTime.Parse(timesheet.EndDate),
+                EmployerID = timesheet.EmployerID
+            }, RepositoryAction.GetAll).Parameters;
+
             var timesheets = _repository.GetAll(parameters);
 
             var timesheetDTOs = timesheets.Select(x => new TimesheetDTO(x)).ToArray();
@@ -38,7 +47,7 @@ namespace Arbeidstider.Web.Services.Controllers
                 return result;
             }
 
-            var parameters = new TimesheetParameters(timesheet, RepositoryAction.Create).Parameters;
+            var parameters = new TimesheetParameters(new CreateTimesheet(timesheet), RepositoryAction.Create).Parameters;
 
             result.Data = new
             {

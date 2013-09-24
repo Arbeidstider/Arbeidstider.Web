@@ -1,17 +1,9 @@
-﻿using System;
-using System.Reflection;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Arbeidstider.Business.Domain;
-using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Interfaces.Services;
-using Arbeidstider.Business.Repository;
-using Arbeidstider.Business.Services;
+using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Web.App_Start;
-using Autofac;
 using Autofac.Integration.Mvc;
-using log4net;
 
 namespace Arbeidstider.Web.Dashboard
 {
@@ -30,16 +22,8 @@ namespace Arbeidstider.Web.Dashboard
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            var builder = new ContainerBuilder();
-
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            // Repositories
-            builder.RegisterType<EmployerRepository>().As<IRepository<Employer>>().SingleInstance();
-            // Services
-            builder.RegisterType<UserService>().As<IUserService>().SingleInstance();
-            builder.Register(x => LogManager.GetLogger("FileLogger")).As<ILog>().SingleInstance();
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            Container.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(Container.BaseContainer));
         }
     }
 }

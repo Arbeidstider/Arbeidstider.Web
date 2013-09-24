@@ -68,11 +68,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\EmployerDTO.cs" />
+    <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="Enums\DatabaseResult.cs" />
     <Compile Include="Enums\RepositoryAction.cs" />
+    <Compile Include="Parameters\IParameters.cs" />
+    <Compile Include="Parameters\TimesheetParameters.cs" />
+    <Compile Include="Parameters\UserParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">
+      <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
+      <Name>Arbeidstider.Business.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

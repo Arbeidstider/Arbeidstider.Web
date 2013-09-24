@@ -2,11 +2,12 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Web;
+using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Database
 {
-    public class DatabaseConnection
+    public class DatabaseConnection : IDatabaseConnection
     {
         private readonly string _connectionString;
         private static DatabaseConnection _instance;
@@ -25,7 +26,7 @@ namespace Arbeidstider.Database
             }
         }
 
-        private DatabaseConnection(string connectionString)
+        public DatabaseConnection(string connectionString)
         {
             _connectionString = connectionString;
         }

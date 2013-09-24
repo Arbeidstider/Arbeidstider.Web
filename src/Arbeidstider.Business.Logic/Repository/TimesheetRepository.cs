@@ -2,24 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Common.Enums;
 using Arbeidstider.Database;
 
-namespace Arbeidstider.Business.Repository
+namespace Arbeidstider.Business.Logic.Repository
 {
     public class TimesheetRepository : IRepository<Timesheet>
     {
-        private static TimesheetRepository _instance;
+        private readonly IDatabaseConnection _connection;
 
-        public static IRepository<Timesheet> Instance
+        public TimesheetRepository()
         {
-            get
-            {
-                if (_instance == null)
-                    _instance = new TimesheetRepository();
-
-                return _instance;
-            }
+            _connection = Container.Resolve<IDatabaseConnection>();
         }
 
         public IEnumerable<Timesheet> GetAll(List<KeyValuePair<string, object>> parameters)
@@ -29,8 +26,11 @@ namespace Arbeidstider.Business.Repository
 
         public Timesheet Create(List<KeyValuePair<string, object>> parameters)
         {
-            throw new NotImplementedException();
+            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
+            if (dt.Rows.Count == 0|| dt.Rows[0]["Result"] == null || (DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL) return null;
+            return new Timesheet();
         }
+
 
         public Timesheet Get(KeyValuePair<string, object> parameters)
         {
@@ -47,7 +47,6 @@ namespace Arbeidstider.Business.Repository
             return true;
         }
 
-        private TimesheetRepository() {}
 
         public IEnumerable<Timesheet> GetAllTimesheets(int employerID, DateTime startDate, DateTime endDate)
         {
@@ -79,7 +78,7 @@ namespace Arbeidstider.Business.Repository
                 new KeyValuePair<string, object>("@EndDate", endDate)
             };
 
-            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_WORKPLACE_TIMESHEETS, parameters);
+            var dt = _connection.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_WORKPLACE_TIMESHEETS, parameters);
             var timesheets = ParseTimesheets(dt);
             return timesheets;
         }
@@ -101,25 +100,6 @@ namespace Arbeidstider.Business.Repository
             }
 
             return timesheets;
-        }
-
-        public bool CreateNewTimesheet(int employerID, DateTime SelectedDay, string shiftStart, string shiftEnd)
-        {
-            var parameters = new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>("@EmployerID", employerID),
-                new KeyValuePair<string, object>("@SelectedDay", SelectedDay),
-                new KeyValuePair<string, object>("@ShiftStart", shiftStart),
-                new KeyValuePair<string, object>("@ShiftEnd", shiftEnd)
-            };
-
-            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
-            return ParseResult(dt);
-        }
-
-        private static bool ParseResult(DataTable dt)
-        {
-            return true;
         }
     }
 }

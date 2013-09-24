@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Arbeidstider.Business.Logic.IoC;
+using Autofac.Integration.WebApi;
 
-namespace Arbeidstider.Web.Services
+namespace Arbeidstider.Web.Services.App_Start
 {
     public static class WebApiConfig
     {
@@ -14,6 +13,11 @@ namespace Arbeidstider.Web.Services
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            Container.Build();
+            var resolver = new AutofacWebApiDependencyResolver(Container.BaseContainer);
+
+            config.DependencyResolver = resolver;
         }
     }
 }

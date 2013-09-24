@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Arbeidstider.Web.Services.Models;
+using Arbeidstider.Web.Framework.ViewModels.Account;
 
 namespace Arbeidstider.Web.Services.Controllers
 {

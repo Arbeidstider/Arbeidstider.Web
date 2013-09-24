@@ -1,18 +1,14 @@
-﻿using System.Web;
-using System.Web.Mvc;
-using Arbeidstider.Business.Interfaces;
+﻿using System.Web.Mvc;
 using Arbeidstider.Business.Interfaces.Services;
-using Arbeidstider.Business.Services;
-using Arbeidstider.Web.Dashboard.Helpers;
-using Arbeidstider.Web.Services.Models;
-using Arbeidstider.Web.Services.Parameters;
-using Autofac;
+using Arbeidstider.Common.Parameters;
+using Arbeidstider.Web.Framework.Helpers;
+using Arbeidstider.Web.Framework.Services;
 
 namespace Arbeidstider.Web.Dashboard.Filters
 {
     public class AuthorizationAttribute : ActionFilterAttribute
     {
-        private static readonly IUserService _userservice = DependencyResolver.Current.GetService<IUserService>();
+        private static readonly IUserService _userservice = UserService.Instance;
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (IsLoggedIn()) return;
@@ -22,16 +18,14 @@ namespace Arbeidstider.Web.Dashboard.Filters
 
         protected internal bool IsLoggedIn()
         {
-            var sessionParameters = new UserParameters(new User()
-            {
-                Username = WebHelper.GetSession(Constants.Session.USERNAME),
-                Passwordhash = WebHelper.GetSession(Constants.Session.PASSWORD_HASH)
-            }).Parameters;
-            var cookieParameters = new UserParameters(new User()
-            {
-                Username = WebHelper.GetCookie(Constants.Session.USERNAME), 
-                Passwordhash = WebHelper.GetCookie(Constants.Session.PASSWORD_HASH)
-            }).Parameters;
+            var sessionParameters = new UserParameters(
+                WebHelper.GetSession(Web.Framework.Constants.Session.USERNAME),
+                WebHelper.GetSession(Framework.Constants.Session.PASSWORD_HASH)
+            ).Parameters;
+            var cookieParameters = new UserParameters(
+                WebHelper.GetCookie(Framework.Constants.Session.USERNAME), 
+                WebHelper.GetCookie(Framework.Constants.Session.PASSWORD_HASH)
+            ).Parameters;
             bool loggedIn = _userservice.VerifyUser(sessionParameters) || _userservice.VerifyUser(cookieParameters);
             return loggedIn;
         }
