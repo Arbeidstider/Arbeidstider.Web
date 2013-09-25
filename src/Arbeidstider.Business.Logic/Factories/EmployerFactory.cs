@@ -1,20 +1,21 @@
 ﻿using System.Data;
-using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Logic.Domain;
 
 namespace Arbeidstider.Business.Factories
 {
-    internal class EmployerFactory
+    internal class EmployeeFactory
     {
-        internal static Employer Create(DataRow row)
+        internal static Employee Create(DataRow row)
         {
-            var employer = new Employer();
-            employer.Firstname = (string) row["Firstname"];
-            employer.Lastname = (string) row["Lastname"];
-            employer.Email = (string) row["Email"];
-            employer.Mobile = (string) row["Email"];
-            employer.Username = (string) row["Username"];
+            var Employee = new Employee();
+            Employee.EmployeeID = (int) row["EmployeeID"];
+            Employee.Firstname = (string) row["Firstname"];
+            Employee.Lastname = (string) row["Lastname"];
+            Employee.Email = (string) row["Email"];
+            Employee.Mobile = (string) row["Email"];
+            Employee.Username = (string) row["Username"];
 
-            return employer;
+            return Employee;
         }
     }
 }

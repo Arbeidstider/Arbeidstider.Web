@@ -28,7 +28,7 @@ namespace Arbeidstider.Web.Services.Controllers
             {
                 StartDate = DateTime.Parse(timesheet.StartDate),
                 EndDate = DateTime.Parse(timesheet.EndDate),
-                EmployerID = timesheet.EmployerID
+                EmployeeID = timesheet.EmployeeID
             }, RepositoryAction.GetAll).Parameters;
 
             var timesheets = _repository.GetAll(parameters);
@@ -41,11 +41,13 @@ namespace Arbeidstider.Web.Services.Controllers
         public JsonResult CreateTimesheet(TimesheetDTO timesheet)
         {
             var result = new JsonResult();
-            if (!CurrentUser.HasAccessToEmployer(timesheet.EmployerID))
+            /*
+            if (!CurrentUser.HasAccessToEmployee(timesheet.EmployeeID))
             {
                 result.Data = new {Result = false};
                 return result;
             }
+             */
 
             var parameters = new TimesheetParameters(new CreateTimesheet(timesheet), RepositoryAction.Create).Parameters;
 

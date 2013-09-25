@@ -1,8 +1,8 @@
 ﻿namespace Arbeidstider.Business.Domain
 {
-    public enum EmployerGroup
+    public enum EmployeeGroup
     {
-        Employer, 
+        Employee, 
         Manager
     }
 }

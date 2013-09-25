@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Arbeidstider.Business.Interfaces.Services;
 using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.Helpers;
 using Arbeidstider.Web.Framework.Services;
@@ -10,7 +9,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IUserService _userservice;
+        private readonly UserService _userservice;
 
         public AccountController() : base()
         {
@@ -29,12 +28,11 @@ namespace Arbeidstider.Web.Dashboard.Controllers
                 model.UserName,
                 PasswordHelper.Hashpassword(model.Password)
             ).Parameters;
-            if (_userservice.VerifyUser(userParameters))
+
+            var user = _userservice.VerifyUser(userParameters);
+            if (user != null)
             {
-                WebHelper.SetSession(Framework.Constants.Session.USERNAME, model.UserName);
-                WebHelper.SetSession(Framework.Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password));
-                WebHelper.SetCookie(Framework.Constants.Session.PASSWORD_HASH, PasswordHelper.Hashpassword(model.Password), DateTime.Now.AddDays(7));
-                WebHelper.SetCookie(Framework.Constants.Session.USERNAME, model.UserName, DateTime.Now.AddDays(7));
+                SetCurrentUser(user);
                 return RedirectToAction("Index", "Dashboard");
             }
 

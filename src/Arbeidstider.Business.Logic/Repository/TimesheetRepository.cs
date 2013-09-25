@@ -4,6 +4,7 @@ using System.Data;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Database;
@@ -31,8 +32,7 @@ namespace Arbeidstider.Business.Logic.Repository
             return new Timesheet();
         }
 
-
-        public Timesheet Get(KeyValuePair<string, object> parameters)
+        public Timesheet Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             throw new NotImplementedException();
         }
@@ -42,17 +42,17 @@ namespace Arbeidstider.Business.Logic.Repository
             throw new NotImplementedException();
         }
 
-        public bool Verify(List<KeyValuePair<string, object>> parameters)
+        public bool Exists(List<KeyValuePair<string, object>> parameters)
         {
             return true;
         }
 
 
-        public IEnumerable<Timesheet> GetAllTimesheets(int employerID, DateTime startDate, DateTime endDate)
+        public IEnumerable<Timesheet> GetAllTimesheets(int EmployeeID, DateTime startDate, DateTime endDate)
         {
             var parameters = new List<KeyValuePair<string, object>>()
             {
-                new KeyValuePair<string, object>("@EmployerID", employerID),
+                new KeyValuePair<string, object>("@EmployeeID", EmployeeID),
                 new KeyValuePair<string, object>("@StartDate", startDate),
                 new KeyValuePair<string, object>("@EndDate", endDate)
             };
@@ -62,12 +62,12 @@ namespace Arbeidstider.Business.Logic.Repository
             return timesheets;
         }
 
-        public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employer employer, DateTime startDate, DateTime endDate)
+        public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employee Employee, DateTime startDate, DateTime endDate)
         {
             /*
-            if (!employer.HasAccessToWorkplace(workplaceID))
+            if (!Employee.HasAccessToWorkplace(workplaceID))
             {
-                throw new Exception(string.Format("Employer: {0}, does not have access to workplace with ID: {1}", employer.Fullname, workplaceID));
+                throw new Exception(string.Format("Employee: {0}, does not have access to workplace with ID: {1}", Employee.Fullname, workplaceID));
             }
              */
 

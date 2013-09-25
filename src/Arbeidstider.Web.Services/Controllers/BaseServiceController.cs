@@ -5,6 +5,6 @@ namespace Arbeidstider.Web.Services.Controllers
 {
     public class BaseServiceController : Controller
     {
-        public User CurrentUser { get; set; }
+        public EmployeeUser CurrentUser { get; set; }
     }
 }

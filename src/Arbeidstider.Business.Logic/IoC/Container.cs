@@ -3,6 +3,7 @@ using System.Web;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Repository;
 using Arbeidstider.Database;
 using Autofac;
@@ -24,7 +25,7 @@ namespace Arbeidstider.Business.Logic.IoC
                 builder.RegisterControllers(Assembly.GetCallingAssembly());
 
                 // Repositories
-                builder.RegisterType<EmployerRepository>().As<IRepository<Employer>>().SingleInstance();
+                builder.RegisterType<EmployeeRepository>().As<IRepository<Employee>>().SingleInstance();
                 builder.RegisterType<TimesheetRepository>().As<IRepository<Timesheet>>().SingleInstance();
 
                 // Services

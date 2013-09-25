@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arbeidstider.Web.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
@@ -90,9 +91,11 @@
     <Compile Include="Scaffolding\Timesheets.cs" />
     <Compile Include="Services\TimesheetService.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\Account\User.cs" />
+    <Compile Include="ViewModels\Account\EmployeeUser.cs" />
     <Compile Include="ViewModels\Account\AccountModels.cs" />
+    <Compile Include="ViewModels\Dashboard\Index.cs" />
     <Compile Include="ViewModels\Timesheet\CreateTimesheet.cs" />
+    <Compile Include="ViewModels\Timesheet\WeeklyTimesheet.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">

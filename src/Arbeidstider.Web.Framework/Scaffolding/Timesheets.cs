@@ -11,13 +11,13 @@ namespace Arbeidstider.Web.Framework.Scaffolding
 {
     public class Timesheets
     {
-        public static void Scaffold(int employerID, DateTime[] dates, TimeSpan[] shifts)
+        public static void Scaffold(int EmployeeID, DateTime[] dates, TimeSpan[] shifts)
         {
             var repository = Container.BaseContainer.Resolve<IRepository<Timesheet>>();
             for (int i = 0; i < dates.Length; i++)
             {
                 ITimesheet dto = new Timesheet();
-                dto.EmployerID = 7;
+                dto.EmployeeID = 7;
                 dto.SelectedDay = dates[i];
                 if (i%2 == 0)
                 {

@@ -8,12 +8,12 @@ namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
     {
         public CreateTimesheet(TimesheetDTO dto)
         {
-            EmployerID = dto.EmployerID;
+            EmployeeID = dto.EmployeeID;
             SelectedDay = DateTime.Parse(dto.SelectedDay);
             ShiftStart = TimeSpan.Parse(dto.ShiftStart);
             ShiftEnd = TimeSpan.Parse(dto.ShiftEnd);
         }
-        public int EmployerID { get; set; }
+        public int EmployeeID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime SelectedDay { get; set; }

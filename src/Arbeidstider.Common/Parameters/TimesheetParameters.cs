@@ -25,7 +25,7 @@ namespace Arbeidstider.Common.Parameters
                 {
                     Parameters = new List<KeyValuePair<string, object>>()
                     {
-                        new KeyValuePair<string, object>("@EmployerID", _timesheet.EmployerID),
+                        new KeyValuePair<string, object>("@EmployeeID", _timesheet.EmployeeID),
                         new KeyValuePair<string, object>("@StartDate", _timesheet.StartDate),
                         new KeyValuePair<string, object>("@EndDate", _timesheet.EndDate),
                     };
@@ -35,7 +35,7 @@ namespace Arbeidstider.Common.Parameters
                 {
                     Parameters = new List<KeyValuePair<string, object>>()
                     {
-                        new KeyValuePair<string, object>("@EmployerID", _timesheet.EmployerID),
+                        new KeyValuePair<string, object>("@EmployeeID", _timesheet.EmployeeID),
                         new KeyValuePair<string, object>("@SelectedDay", _timesheet.SelectedDay),
                         new KeyValuePair<string, object>("@ShiftStart", _timesheet.ShiftStart),
                         new KeyValuePair<string, object>("@ShiftEnd", _timesheet.ShiftEnd)
@@ -53,7 +53,7 @@ namespace Arbeidstider.Common.Parameters
             {
                 case RepositoryAction.GetAll:
                 {
-                    if (_timesheet.EmployerID == 0) throw new Exception("You have not specified a employerID.");
+                    if (_timesheet.EmployeeID == 0) throw new Exception("You have not specified a EmployeeID.");
                     //if (DateTime.Parse(_timesheet.EndDate) < DateTime.Parse(_timesheet.StartDate)) throw new Exception("The end date must be a date happening after the start date.");
                     break;
                 }

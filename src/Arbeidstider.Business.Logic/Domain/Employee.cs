@@ -1,9 +1,11 @@
 ﻿using System;
+using Arbeidstider.Business.Domain;
 
-namespace Arbeidstider.Business.Domain
+namespace Arbeidstider.Business.Logic.Domain
 {
-    public class Employer
+    public class Employee
     {
+        public int EmployeeID { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public Enum EmployeeGroup { get; set; }

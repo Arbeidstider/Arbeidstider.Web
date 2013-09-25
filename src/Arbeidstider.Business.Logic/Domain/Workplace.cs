@@ -1,8 +1,10 @@
-﻿namespace Arbeidstider.Business.Domain
+﻿using Arbeidstider.Business.Logic.Domain;
+
+namespace Arbeidstider.Business.Domain
 {
     public class Workplace
     {
         public string Name { get; set; }
-        public Employer Manager { get; set; }
+        public Employee Manager { get; set; }
     }
 }
