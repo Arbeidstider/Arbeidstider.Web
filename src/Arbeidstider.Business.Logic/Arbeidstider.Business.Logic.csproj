@@ -58,10 +58,12 @@
     <Compile Include="Domain\Timesheet.cs" />
     <Compile Include="Domain\Workplace.cs" />
     <Compile Include="Factories\EmployerFactory.cs" />
+    <Compile Include="Factories\TimesheetFactory.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.log4net.cs" />
-    <Compile Include="Repository\EmployerRepository.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\RepositoryExtensions.cs" />
     <Compile Include="Repository\TimesheetRepository.cs" />
   </ItemGroup>
   <ItemGroup>

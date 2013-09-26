@@ -10,9 +10,9 @@ namespace Arbeidstider.Web.Dashboard.Filters
         private static readonly UserService _userservice = UserService.Instance;
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
+            base.OnActionExecuting(filterContext);
             if (IsLoggedIn()) return;
             filterContext.Result = new RedirectToRouteResult("login", null);
-            base.OnActionExecuting(filterContext);
         }
 
         protected internal bool IsLoggedIn()

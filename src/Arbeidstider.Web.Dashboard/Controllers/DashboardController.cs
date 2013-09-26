@@ -14,7 +14,6 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         public DashboardController() : base()
         {
             _timesheetService = TimesheetService.Instance;
-
         }
 
         public ActionResult Index()

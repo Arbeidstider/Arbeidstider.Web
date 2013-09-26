@@ -68,10 +68,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\EmployerDTO.cs" />
+    <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="Enums\DatabaseResult.cs" />
     <Compile Include="Enums\RepositoryAction.cs" />
+    <Compile Include="Parameters\EmployeeParameters.cs" />
     <Compile Include="Parameters\IParameters.cs" />
     <Compile Include="Parameters\TimesheetParameters.cs" />
     <Compile Include="Parameters\UserParameters.cs" />

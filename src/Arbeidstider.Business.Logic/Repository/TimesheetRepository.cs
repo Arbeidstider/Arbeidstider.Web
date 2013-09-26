@@ -22,7 +22,9 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public IEnumerable<Timesheet> GetAll(List<KeyValuePair<string, object>> parameters)
         {
-            throw new NotImplementedException();
+            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
+            var timesheets = ParseTimesheets(dt);
+            return timesheets;
         }
 
         public Timesheet Create(List<KeyValuePair<string, object>> parameters)
@@ -45,21 +47,6 @@ namespace Arbeidstider.Business.Logic.Repository
         public bool Exists(List<KeyValuePair<string, object>> parameters)
         {
             return true;
-        }
-
-
-        public IEnumerable<Timesheet> GetAllTimesheets(int EmployeeID, DateTime startDate, DateTime endDate)
-        {
-            var parameters = new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>("@EmployeeID", EmployeeID),
-                new KeyValuePair<string, object>("@StartDate", startDate),
-                new KeyValuePair<string, object>("@EndDate", endDate)
-            };
-
-            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
-            var timesheets = ParseTimesheets(dt);
-            return timesheets;
         }
 
         public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employee Employee, DateTime startDate, DateTime endDate)

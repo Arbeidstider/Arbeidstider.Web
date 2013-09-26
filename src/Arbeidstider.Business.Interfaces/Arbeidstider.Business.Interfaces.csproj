@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\IDatabaseConnection.cs" />
+    <Compile Include="Domain\IEmployee.cs" />
     <Compile Include="Domain\ITimesheet.cs" />
     <Compile Include="DTO\ITimesheetDTO.cs" />
     <Compile Include="Factories\IFactory.cs" />

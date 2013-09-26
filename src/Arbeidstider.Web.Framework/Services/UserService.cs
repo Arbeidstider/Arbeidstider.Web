@@ -10,11 +10,6 @@ namespace Arbeidstider.Web.Framework.Services
     {
         private readonly IRepository<Employee> _repository; 
         private static UserService _instance; 
-        public UserService(IRepository<Employee> repository)
-        {
-            _repository = repository;
-        }
-
         public static UserService Instance
         {
             get
@@ -25,6 +20,12 @@ namespace Arbeidstider.Web.Framework.Services
                 return _instance;
             }
         }
+
+        private UserService(IRepository<Employee> repository)
+        {
+            _repository = repository;
+        }
+
 
 
         public EmployeeUser VerifyUser(List<KeyValuePair<string, object>> parameters)

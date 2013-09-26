@@ -40,12 +40,10 @@ namespace Arbeidstider.Web.Framework.Services
         /// <returns></returns>
         public WeeklyTimesheet GetWeeklyTimesheet(int employeeID, DateTime weekStart)
         {
-            var model = new WeeklyTimesheet();
-            var parameters =
-                new TimesheetParameters(
-                    (ITimesheet)(object) (new {EmployeeID = employeeID, StartDate = weekStart, EndDate = weekStart.AddDays(6)}),
-                    RepositoryAction.GetAll).Parameters;
+            var parameters = new TimesheetParameters(new CreateTimesheet(employeeID, weekStart), RepositoryAction.GetAll).Parameters;
             var timesheets = _repository.GetAll(parameters);
+
+            var model = new WeeklyTimesheet();
             model.Shifts = ParseTimesheetsToShifts(timesheets);
 
             return model;

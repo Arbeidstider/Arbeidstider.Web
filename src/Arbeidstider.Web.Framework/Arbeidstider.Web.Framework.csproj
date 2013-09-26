@@ -89,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.log4net.cs" />
     <Compile Include="Scaffolding\ScaffoldHelper.cs" />
     <Compile Include="Scaffolding\Timesheets.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\TimesheetService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\Account\EmployeeUser.cs" />

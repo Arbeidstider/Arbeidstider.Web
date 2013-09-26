@@ -1,7 +1,9 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Arbeidstider.Business.Logic.Domain;
 
-namespace Arbeidstider.Business.Factories
+namespace Arbeidstider.Business.Logic.Factories
 {
     internal class EmployeeFactory
     {
@@ -14,8 +16,14 @@ namespace Arbeidstider.Business.Factories
             Employee.Email = (string) row["Email"];
             Employee.Mobile = (string) row["Email"];
             Employee.Username = (string) row["Username"];
+            Employee.Passwordhash = (string) row["Passwordhash"];
 
             return Employee;
+        }
+
+        public static IEnumerable<Employee> CreateArray(DataRowCollection rows)
+        {
+            return (from DataRow row in rows select Create(row)).ToList();
         }
     }
 }

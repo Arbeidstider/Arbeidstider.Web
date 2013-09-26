@@ -6,9 +6,7 @@ using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Common.DTO;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Common.Parameters;
-using Arbeidstider.Web.Framework.ViewModels.Account;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
-using Arbeidstider.Web.Framework.Helpers;
 
 namespace Arbeidstider.Web.Services.Controllers
 {

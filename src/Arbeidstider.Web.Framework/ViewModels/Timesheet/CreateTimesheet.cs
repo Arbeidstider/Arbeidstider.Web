@@ -13,6 +13,14 @@ namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
             ShiftStart = TimeSpan.Parse(dto.ShiftStart);
             ShiftEnd = TimeSpan.Parse(dto.ShiftEnd);
         }
+
+        public CreateTimesheet(int employeeID, DateTime weekStart)
+        {
+            EmployeeID = employeeID;
+            StartDate = weekStart;
+            EndDate = weekStart.AddDays(6);
+        }
+
         public int EmployeeID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

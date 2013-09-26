@@ -1,6 +1,5 @@
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Arbeidstider.Web.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Arbeidstider.Web.pdb
-C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Antlr3.Runtime.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Microsoft.Web.WebPages.OAuth.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Newtonsoft.Json.dll
@@ -19,6 +18,7 @@ C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.We
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\WebGrease.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\WebMatrix.Data.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\WebMatrix.WebData.dll
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Antlr3.Runtime.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Newtonsoft.Json.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.Net.Http.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.Net.Http.Formatting.xml
@@ -32,7 +32,8 @@ C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.We
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.Web.WebPages.Deployment.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\System.Web.WebPages.Razor.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\WebMatrix.Data.xml
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Microsoft.Web.WebPages.OAuth.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\WebMatrix.WebData.xml
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\obj\Debug\Arbeidstider.Web.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\obj\Debug\Arbeidstider.Web.pdb
-C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\bin\Microsoft.Web.WebPages.OAuth.xml
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Web\obj\Debug\Arbeidstider.Web.csprojResolveAssemblyReference.cache

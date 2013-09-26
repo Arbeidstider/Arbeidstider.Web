@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using Arbeidstider.Business.Factories;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
+using Arbeidstider.Business.Logic.Factories;
 using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Common.Enums;
 using Arbeidstider.Database;
@@ -22,30 +22,29 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public IEnumerable<Employee> GetAll(List<KeyValuePair<string, object>> parameters)
         {
-            throw new System.NotImplementedException();
+            var dt = _connection.ExecuteSP(StoredProcedures.GET_ALL_EMPLOYEES, parameters);
+
+            if (!dt.QueryExecutedSuccessfully()) return null;
+
+            return EmployeeFactory.CreateArray(dt.Rows);
         }
 
         public Employee Create(List<KeyValuePair<string, object>> parameters)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Employee Get(IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Employee Get(KeyValuePair<string, object> parameters)
-        {
-            var dt = DatabaseConnection.Instance.ExecuteSP(StoredProcedures.GET_EMPLOYEE, parameters);
-
-            if ((DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL || dt.Rows[0] == null)
-                return null;
-                //throw new EmployeeRepositoryException(string.Format("Could not find Employee with username: {0}", parameters.Value));
+            var dt = _connection.ExecuteSP(StoredProcedures.CREATE_EMPLOYEE, parameters);
+            if (!dt.QueryExecutedSuccessfully()) return null;
 
             return EmployeeFactory.Create(dt.Rows[0]);
         }
 
+        public Employee Get(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            var dt = _connection.ExecuteSP(StoredProcedures.GET_EMPLOYEE, parameters);
+
+            if (!dt.QueryExecutedSuccessfully()) return null;
+
+            return EmployeeFactory.Create(dt.Rows[0]);
+        }
 
         public bool Update(Employee obj, List<KeyValuePair<string, object>> parameters)
         {

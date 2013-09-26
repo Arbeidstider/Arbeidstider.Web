@@ -41,14 +41,24 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             return View(model);
         }
 
-        public ActionResult LogOff()
+        [HttpGet]
+        public JsonResult LogOff()
         {
-            WebHelper.SetSession(Framework.Constants.Session.USERNAME, null);
-            WebHelper.SetSession(Framework.Constants.Session.PASSWORD_HASH, null);
-            WebHelper.SetCookie(Framework.Constants.Session.PASSWORD_HASH, null, null);
-            WebHelper.SetCookie(Framework.Constants.Session.USERNAME, null, null);
+            var result = new JsonResult();
+            try
+            {
+                result.Data = true;
+                WebHelper.SetSession(Framework.Constants.Session.USERNAME, null);
+                WebHelper.SetSession(Framework.Constants.Session.PASSWORD_HASH, null);
+                WebHelper.SetCookie(Framework.Constants.Session.PASSWORD_HASH, null, null);
+                WebHelper.SetCookie(Framework.Constants.Session.USERNAME, null, null);
+            }
+            catch (Exception)
+            {
+                result.Data = false;
+            }
 
-            return RedirectToAction("Login", "Account");
+            return Json(result);
         }
     }
 }

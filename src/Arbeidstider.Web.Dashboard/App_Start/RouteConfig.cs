@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Arbeidstider.Web.App_Start
+namespace Arbeidstider.Web.Dashboard.App_Start
 {
     public class RouteConfig
     {

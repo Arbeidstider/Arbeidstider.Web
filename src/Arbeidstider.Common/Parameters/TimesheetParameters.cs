@@ -13,7 +13,6 @@ namespace Arbeidstider.Common.Parameters
         {
             _action = action;
             _timesheet = timesheet;
-            Validate();
             Create();
         }
 
