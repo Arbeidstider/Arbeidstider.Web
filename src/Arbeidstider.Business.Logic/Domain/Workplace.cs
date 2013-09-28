@@ -1,6 +1,4 @@
-﻿using Arbeidstider.Business.Logic.Domain;
-
-namespace Arbeidstider.Business.Domain
+﻿namespace Arbeidstider.Business.Logic.Domain
 {
     public class Workplace
     {

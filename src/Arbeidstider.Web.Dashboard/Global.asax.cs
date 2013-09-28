@@ -3,9 +3,10 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Web.Dashboard.App_Start;
 using Arbeidstider.Web.Dashboard.Controllers;
+using Arbeidstider.Web.Framework;
+using Arbeidstider.Web.Framework.Scaffolding;
 using Autofac.Integration.Mvc;
 
 namespace Arbeidstider.Web.Dashboard
@@ -25,8 +26,9 @@ namespace Arbeidstider.Web.Dashboard
             //BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
 
-            Container.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(Container.BaseContainer));
+            IoC.Initialize();
+            Data.Run();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.BaseContainer));
         }
 
         protected void Application_Error(object sender, EventArgs e)

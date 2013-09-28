@@ -7,7 +7,7 @@ namespace Arbeidstider.Business.Interfaces.Repository
         IEnumerable<T> GetAll(List<KeyValuePair<string, object>> parameters);
         T Create(List<KeyValuePair<string, object>> parameters);
         T Get(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Update(T obj, List<KeyValuePair<string, object>> parameters);
+        bool Update(List<KeyValuePair<string, object>> parameters);
         bool Exists(List<KeyValuePair<string, object>> parameters);
     }
 }

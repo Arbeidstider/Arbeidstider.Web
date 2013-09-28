@@ -1,42 +1,29 @@
-﻿using System;
-using System.Linq;
-using System.Web.Mvc;
-using Arbeidstider.Business.Domain;
-using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Common.DTO;
-using Arbeidstider.Common.Enums;
-using Arbeidstider.Common.Parameters;
-using Arbeidstider.Web.Framework.ViewModels.Timesheet;
+﻿using System.Web.Mvc;
+using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Services;
 
 namespace Arbeidstider.Web.Services.Controllers
 {
     public class TimesheetController : BaseServiceController
     {
-        private readonly IRepository<Timesheet> _repository;
+        private readonly TimesheetService _timesheetservice;
 
-        public TimesheetController(IRepository<Timesheet> repository)
+        public TimesheetController()
         {
-            _repository = repository;
+            _timesheetservice = TimesheetService.Instance;
         }
 
         [HttpGet]
-        public JsonResult GetAllTimesheets(TimesheetDTO timesheet)
+        public JsonResult GetAllTimesheets(TimesheetDTO dto)
         {
-            var parameters = new TimesheetParameters(new Timesheet()
-            {
-                StartDate = DateTime.Parse(timesheet.StartDate),
-                EndDate = DateTime.Parse(timesheet.EndDate),
-                EmployeeID = timesheet.EmployeeID
-            }, RepositoryAction.GetAll).Parameters;
 
-            var timesheets = _repository.GetAll(parameters);
+            var timesheets = _timesheetservice.GetAllWithinRange(dto);
 
-            var timesheetDTOs = timesheets.Select(x => new TimesheetDTO(x)).ToArray();
-            return Json(timesheetDTOs, JsonRequestBehavior.AllowGet);
+            return Json(timesheets, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult CreateTimesheet(TimesheetDTO timesheet)
+        public JsonResult CreateTimesheet(TimesheetDTO dto)
         {
             var result = new JsonResult();
             /*
@@ -47,11 +34,10 @@ namespace Arbeidstider.Web.Services.Controllers
             }
              */
 
-            var parameters = new TimesheetParameters(new CreateTimesheet(timesheet), RepositoryAction.Create).Parameters;
 
             result.Data = new
             {
-                Data = _repository.Create(parameters),
+                Data = _timesheetservice.Create(dto),
                 Result = true
             };
 

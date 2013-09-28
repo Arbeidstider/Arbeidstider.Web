@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Arbeidstider.Web.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.3.1.1\lib\net40\Autofac.dll</HintPath>
     </Reference>
@@ -83,15 +82,21 @@
   <ItemGroup>
     <Compile Include="Constants\Cookie.cs" />
     <Compile Include="Constants\Session.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="DTO\EmployeeDTO.cs" />
+    <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
+    <Compile Include="IoC.cs" />
+    <Compile Include="Parameters\EmployeeParameters.cs" />
+    <Compile Include="Parameters\IParameters.cs" />
+    <Compile Include="Parameters\TimesheetParameters.cs" />
+    <Compile Include="Parameters\UserParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.log4net.cs" />
+    <Compile Include="Scaffolding\Data.cs" />
     <Compile Include="Scaffolding\ScaffoldHelper.cs" />
     <Compile Include="Scaffolding\Timesheets.cs" />
-    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="Services\TimesheetService.cs" />
-    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="ViewModels\Account\EmployeeUser.cs" />
     <Compile Include="ViewModels\Account\AccountModels.cs" />
     <Compile Include="ViewModels\Dashboard\Index.cs" />
@@ -106,10 +111,6 @@
     <ProjectReference Include="..\Arbeidstider.Business.Logic\Arbeidstider.Business.Logic.csproj">
       <Project>{3517ED30-6C90-4335-AC9C-9003C6D44003}</Project>
       <Name>Arbeidstider.Business.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Arbeidstider.Common\Arbeidstider.Common.csproj">
-      <Project>{1BB21573-E161-432C-9D41-570E6FDA7751}</Project>
-      <Name>Arbeidstider.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Database\Arbeidstider.Database.csproj">
       <Project>{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}</Project>

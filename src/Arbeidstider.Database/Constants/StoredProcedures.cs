@@ -10,5 +10,6 @@
         public static readonly string EMPLOYEE_EXISTS = "EmployeeExists";
         public static readonly string GET_EMPLOYEE = "GetEmployee";
         public static readonly string CREATE_EMPLOYEE = "CreateEmployee";
+        public static readonly string UPDATE_EMPLOYEE = "UpdateEmployee";
     }
 }

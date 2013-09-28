@@ -52,12 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\CacheService.cs" />
     <Compile Include="Domain\EmployeeGroup.cs" />
     <Compile Include="Domain\Employee.cs" />
     <Compile Include="Domain\EmployeeShift.cs" />
     <Compile Include="Domain\Timesheet.cs" />
     <Compile Include="Domain\Workplace.cs" />
-    <Compile Include="Factories\EmployerFactory.cs" />
+    <Compile Include="Enums\DatabaseResult.cs" />
+    <Compile Include="Enums\RepositoryAction.cs" />
+    <Compile Include="Factories\EmployeeFactory.cs" />
     <Compile Include="Factories\TimesheetFactory.cs" />
     <Compile Include="IoC\Container.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,10 +73,6 @@
     <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">
       <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
       <Name>Arbeidstider.Business.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Arbeidstider.Common\Arbeidstider.Common.csproj">
-      <Project>{1BB21573-E161-432C-9D41-570E6FDA7751}</Project>
-      <Name>Arbeidstider.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Database\Arbeidstider.Database.csproj">
       <Project>{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}</Project>

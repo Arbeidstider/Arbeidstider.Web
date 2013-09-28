@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using System.Web.SessionState;
-using Arbeidstider.Web.Framework.Constants;
 
 namespace Arbeidstider.Web.Framework.Helpers
 {
@@ -18,10 +17,9 @@ namespace Arbeidstider.Web.Framework.Helpers
         {
             if (expires != null)
             {
-                if (response.Cookies[Cookie.Key] == null) response.Cookies.Add(new HttpCookie(Cookie.Key));
-                response.Cookies[Cookie.Key][key] = value.ToString();
-                response.Cookies[Cookie.Key].Expires = expires.Value;
-                return;
+                if (response.Cookies[key] == null) response.Cookies.Add(new HttpCookie(key));
+                response.Cookies[key].Value = value.ToString();
+                response.Cookies[key].Expires = expires.Value;
             }
         }
 
@@ -29,10 +27,9 @@ namespace Arbeidstider.Web.Framework.Helpers
         {
             if (expires != null)
             {
-                if (response.Cookies[Cookie.Key] == null) response.Cookies.Add(new HttpCookie(Cookie.Key));
-                response.Cookies[Cookie.Key][key] = value.ToString();
-                response.Cookies[Cookie.Key].Expires = expires.Value;
-                return;
+                if (response.Cookies[key] == null) response.Cookies.Add(new HttpCookie(key));
+                response.Cookies[key].Value = value.ToString();
+                response.Cookies[key].Expires = expires.Value;
             }
         }
 
@@ -64,10 +61,24 @@ namespace Arbeidstider.Web.Framework.Helpers
         public static string GetCookie(string key)
         {
             string cookie = null;
-            if (context.Request.Cookies[Cookie.Key] != null) 
-                cookie = (string) context.Request.Cookies[Cookie.Key][key];
+            if (context.Request.Cookies[key] != null)
+                cookie = context.Request.Cookies[key].Value;
 
             return cookie;
         }
+
+        public static void RemoveSession(string key)
+        {
+            context.Session.Remove(key);
+        }
+
+        public static void RemoveCookie(string key)
+        {
+            if (context.Request.Cookies[key] != null)
+            {
+                context.Request.Cookies.Remove(key);
+            }
+        }
     }
 }
+        

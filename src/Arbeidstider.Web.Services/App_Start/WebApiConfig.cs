@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Web.Framework;
 using Autofac.Integration.WebApi;
 
 namespace Arbeidstider.Web.Services.App_Start
@@ -14,8 +14,8 @@ namespace Arbeidstider.Web.Services.App_Start
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            Container.Build();
-            var resolver = new AutofacWebApiDependencyResolver(Container.BaseContainer);
+            IoC.Initialize();
+            var resolver = new AutofacWebApiDependencyResolver(IoC.BaseContainer);
 
             config.DependencyResolver = resolver;
         }

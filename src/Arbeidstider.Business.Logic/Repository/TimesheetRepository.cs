@@ -5,8 +5,8 @@ using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
+using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.IoC;
-using Arbeidstider.Common.Enums;
 using Arbeidstider.Database;
 
 namespace Arbeidstider.Business.Logic.Repository
@@ -39,7 +39,7 @@ namespace Arbeidstider.Business.Logic.Repository
             throw new NotImplementedException();
         }
 
-        public bool Update(Timesheet obj, List<KeyValuePair<string, object>> parameters)
+        public bool Update(List<KeyValuePair<string, object>> parameters)
         {
             throw new NotImplementedException();
         }

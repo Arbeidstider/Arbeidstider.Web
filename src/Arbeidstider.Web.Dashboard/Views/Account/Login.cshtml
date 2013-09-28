@@ -7,6 +7,7 @@
 
 @using (Html.BeginForm(new RouteValueDictionary() { {"ReturnUrl", string.Empty}, { "controller", "Account"}, { "action", "login"}} ))
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div class='application'>
         <div class='application-content'>

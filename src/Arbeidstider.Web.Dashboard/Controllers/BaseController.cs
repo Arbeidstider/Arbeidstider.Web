@@ -1,31 +1,16 @@
 ﻿using System;
-using System.Web;
 using System.Web.Mvc;
 using Arbeidstider.Web.Framework.Helpers;
-using Arbeidstider.Web.Framework.ViewModels.Account;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class BaseController : Controller
     {
-        private readonly HttpContextBase _context;
-
         public BaseController()
         {
-            _context = HttpContext;
         }
 
-        protected internal void SetCurrentUser(EmployeeUser user)
-        {
-            WebHelper.SetSession(Framework.Constants.Session.USERNAME, user.Username);
-            WebHelper.SetSession(Framework.Constants.Session.PASSWORD_HASH, user.Passwordhash);
-            WebHelper.SetSession(Framework.Constants.Session.EMPLOYEE_ID, user.EmployeeID);
-            WebHelper.SetCookie(Framework.Constants.Session.PASSWORD_HASH, user.Passwordhash, DateTime.Now.AddDays(7));
-            WebHelper.SetCookie(Framework.Constants.Session.USERNAME, user.Username, DateTime.Now.AddDays(7));
-            WebHelper.SetCookie(Framework.Constants.Session.EMPLOYEE_ID, user.EmployeeID, DateTime.Now.AddDays(7));
-        }
-
-        protected internal int GetCurrentEmployeeID
+        protected internal int CurrentEmployeeID
         {
             get
             {
@@ -36,6 +21,19 @@ namespace Arbeidstider.Web.Dashboard.Controllers
                     return int.Parse(WebHelper.GetCookie(Framework.Constants.Session.EMPLOYEE_ID));
 
                 return 0;
+            }
+            set
+            {
+                if (value == 0)
+                {
+                    WebHelper.RemoveSession(Framework.Constants.Session.EMPLOYEE_ID);
+                    WebHelper.RemoveCookie(Framework.Constants.Session.EMPLOYEE_ID);
+                }
+                else
+                {
+                    WebHelper.SetSession(Framework.Constants.Session.EMPLOYEE_ID, value);
+                    WebHelper.SetCookie(Framework.Constants.Session.EMPLOYEE_ID, value, DateTime.Now.AddDays(7));
+                }
             }
         }
     }

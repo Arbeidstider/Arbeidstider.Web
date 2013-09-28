@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using Arbeidstider.Common.Enums;
 
 namespace Arbeidstider.Business.Logic.Repository
 {

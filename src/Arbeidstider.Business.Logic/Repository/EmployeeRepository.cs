@@ -3,10 +3,9 @@ using System.Data;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
+using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.Factories;
 using Arbeidstider.Business.Logic.IoC;
-using Arbeidstider.Common.Enums;
-using Arbeidstider.Database;
 using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Business.Logic.Repository
@@ -46,8 +45,10 @@ namespace Arbeidstider.Business.Logic.Repository
             return EmployeeFactory.Create(dt.Rows[0]);
         }
 
-        public bool Update(Employee obj, List<KeyValuePair<string, object>> parameters)
+        public bool Update(List<KeyValuePair<string, object>> parameters)
         {
+            var dt = _connection.ExecuteSP(StoredProcedures.UPDATE_EMPLOYEE, parameters);
+
             return true;
         }
 

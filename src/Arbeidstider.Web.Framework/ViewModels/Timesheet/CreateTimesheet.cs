@@ -1,6 +1,6 @@
 ﻿using System;
 using Arbeidstider.Business.Interfaces.Domain;
-using Arbeidstider.Common.DTO;
+using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
 {

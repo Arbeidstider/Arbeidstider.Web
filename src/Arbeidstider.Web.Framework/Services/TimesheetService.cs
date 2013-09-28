@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Arbeidstider.Business.Domain;
-using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
+using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.IoC;
-using Arbeidstider.Common.Enums;
-using Arbeidstider.Common.Parameters;
+using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
 
 namespace Arbeidstider.Web.Framework.Services
@@ -40,7 +40,7 @@ namespace Arbeidstider.Web.Framework.Services
         /// <returns></returns>
         public WeeklyTimesheet GetWeeklyTimesheet(int employeeID, DateTime weekStart)
         {
-            var parameters = new TimesheetParameters(new CreateTimesheet(employeeID, weekStart), RepositoryAction.GetAll).Parameters;
+            var parameters = new TimesheetParameters(new TimesheetDTO() { EmployeeID = employeeID, StartDate = weekStart.ToString() }, RepositoryAction.GetAll).Parameters;
             var timesheets = _repository.GetAll(parameters);
 
             var model = new WeeklyTimesheet();
@@ -59,6 +59,26 @@ namespace Arbeidstider.Web.Framework.Services
             }
 
             return shifts.OrderBy(x => x.Key).ToArray();
+        }
+
+        public IEnumerable<TimesheetDTO> GetAllWithinRange(TimesheetDTO dto)
+        {
+            var parameters = new TimesheetParameters(dto, RepositoryAction.GetAll).Parameters;
+            return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray();
+        }
+
+        public bool Create(TimesheetDTO dto)
+        {
+            var parameters = new TimesheetParameters(dto, RepositoryAction.Create).Parameters;
+            try
+            {
+                _repository.Create(parameters);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

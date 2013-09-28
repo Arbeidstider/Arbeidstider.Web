@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Security;
 using Arbeidstider.Common.Parameters;
-using Arbeidstider.Web.Framework.Helpers;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
 
@@ -9,11 +9,10 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly UserService _userservice;
-
-        public AccountController() : base()
+        private readonly EmployeeService _employeeService;
+        public AccountController()
         {
-            _userservice = UserService.Instance;
+            _employeeService = EmployeeService.Instance;
         }
 
         public ActionResult Login()
@@ -22,18 +21,19 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            var userParameters = new UserParameters(
-                model.UserName,
-                PasswordHelper.Hashpassword(model.Password)
-            ).Parameters;
-
-            var user = _userservice.VerifyUser(userParameters);
-            if (user != null)
+            if (Membership.ValidateUser(model.UserName, model.Password))
             {
-                SetCurrentUser(user);
-                return RedirectToAction("Index", "Dashboard");
+                var employee = _employeeService.GetEmployee(new UserParameters(model.UserName).Parameters);
+                if (employee != null)
+                {
+                    CurrentEmployeeID = employee.EmployeeID;
+                    FormsAuthentication.Authenticate(model.UserName, model.Password);
+                    FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
+                    return RedirectToAction("Index", "Dashboard");
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -44,21 +44,16 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         [HttpGet]
         public JsonResult LogOff()
         {
-            var result = new JsonResult();
             try
             {
-                result.Data = true;
-                WebHelper.SetSession(Framework.Constants.Session.USERNAME, null);
-                WebHelper.SetSession(Framework.Constants.Session.PASSWORD_HASH, null);
-                WebHelper.SetCookie(Framework.Constants.Session.PASSWORD_HASH, null, null);
-                WebHelper.SetCookie(Framework.Constants.Session.USERNAME, null, null);
+                CurrentEmployeeID = 0;
+                FormsAuthentication.SignOut();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                result.Data = false;
+                return Json(new {Result = false});
             }
-
-            return Json(result);
+            return Json(new {Result = true});
         }
     }
 }

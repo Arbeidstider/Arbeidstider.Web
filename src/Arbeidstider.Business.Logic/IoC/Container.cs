@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using System.Web;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Caching;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Repository;
 using Arbeidstider.Database;
@@ -27,6 +29,9 @@ namespace Arbeidstider.Business.Logic.IoC
                 // Repositories
                 builder.RegisterType<EmployeeRepository>().As<IRepository<Employee>>().SingleInstance();
                 builder.RegisterType<TimesheetRepository>().As<IRepository<Timesheet>>().SingleInstance();
+
+                // Caching
+                builder.RegisterType<CacheService>().As<ICacheService>().SingleInstance();
 
                 // Services
                 builder.Register(x => LogManager.GetLogger("FileLogger")).As<ILog>().SingleInstance();
