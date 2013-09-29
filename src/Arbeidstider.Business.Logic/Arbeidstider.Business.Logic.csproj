@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Caching\CacheKeys.cs" />
     <Compile Include="Caching\CacheService.cs" />
     <Compile Include="Domain\EmployeeGroup.cs" />
     <Compile Include="Domain\Employee.cs" />

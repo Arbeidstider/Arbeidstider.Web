@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Caching;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.IoC;
@@ -12,6 +14,7 @@ namespace Arbeidstider.Web.Framework.Services
 {
     public class EmployeeService
     {
+        private readonly ICacheService _cacheService; 
         private readonly IRepository<Employee> _repository; 
         private static EmployeeService _instance; 
         public static EmployeeService Instance
@@ -19,32 +22,31 @@ namespace Arbeidstider.Web.Framework.Services
             get
             {
                 if (_instance == null) 
-                    _instance =  new EmployeeService(Container.Resolve<IRepository<Employee>>());
+                    _instance =  new EmployeeService(IoC.Resolve<IRepository<Employee>>(), IoC.Resolve<ICacheService>());
 
                 return _instance;
             }
         }
 
-        private EmployeeService(IRepository<Employee> repository)
+        private EmployeeService(IRepository<Employee> repository, ICacheService cacheservice)
         {
+            _cacheService = cacheservice;
             _repository = repository;
         }
 
-
-
-        public EmployeeUser GetEmployee(List<KeyValuePair<string, object>> parameters)
+        public EmployeeUser GetEmployee(string username)
         {
-            if (parameters[0].Value == null) return null;
+            if (username == null) return null;
 
-            var employee = _repository.Get(new List<KeyValuePair<string, object>>() {parameters[0]});
-            var user = new EmployeeUser()
+            var employee = _cacheService.Get(CacheKeys.GetEmployee, () =>
+                _repository.Get(new UserParameters(username).Parameters), DateTime.UtcNow.AddHours(8));
+
+            return new EmployeeUser()
             {
                 EmployeeID = employee.EmployeeID,
                 Passwordhash = employee.Passwordhash,
                 Username = employee.Username
             };
-
-            return user;
         }
 
         public bool UpdateEmployee(EmployeeDTO dto, Guid userID)

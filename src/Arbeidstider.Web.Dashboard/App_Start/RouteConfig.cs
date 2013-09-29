@@ -18,7 +18,7 @@ namespace Arbeidstider.Web.Dashboard.App_Start
             routes.MapRoute(
                 name: "Logoff",
                 url: "logoff",
-                defaults: new { controller = "Account", action = "LogOff", id = UrlParameter.Optional }
+                defaults: new { controller = "Account", action = "LogOff"}
             );
 
             routes.MapRoute(

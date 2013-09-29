@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
 
@@ -26,7 +25,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         {
             if (Membership.ValidateUser(model.UserName, model.Password))
             {
-                var employee = _employeeService.GetEmployee(new UserParameters(model.UserName).Parameters);
+                var employee = _employeeService.GetEmployee(model.UserName);
                 if (employee != null)
                 {
                     CurrentEmployeeID = employee.EmployeeID;

@@ -69,7 +69,8 @@ namespace Arbeidstider.Web.Framework.Helpers
 
         public static void RemoveSession(string key)
         {
-            context.Session.Remove(key);
+            if (context.Session[key] != null)
+                context.Session.Remove(key);
         }
 
         public static void RemoveCookie(string key)
