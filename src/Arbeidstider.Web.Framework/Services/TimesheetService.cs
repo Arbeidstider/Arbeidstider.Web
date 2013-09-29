@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Arbeidstider.Business.Domain;
+using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
-using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
@@ -14,6 +14,7 @@ namespace Arbeidstider.Web.Framework.Services
 {
     public class TimesheetService
     {
+        private readonly ICacheService _cacheService; 
         private readonly IRepository<Timesheet> _repository;
         private static TimesheetService _instance;
 
@@ -22,14 +23,15 @@ namespace Arbeidstider.Web.Framework.Services
             get
             {
                 if (_instance == null)
-                    _instance = new TimesheetService(Container.Resolve<IRepository<Timesheet>>());
+                    _instance = new TimesheetService(IoC.Resolve<IRepository<Timesheet>>(), IoC.Resolve<ICacheService>());
 
                 return _instance;
             }
         }
 
-        private TimesheetService(IRepository<Timesheet> repository)
+        private TimesheetService(IRepository<Timesheet> repository, ICacheService cacheService)
         {
+            _cacheService = cacheService;
             _repository = repository;
         }
 

@@ -10,21 +10,6 @@ namespace Arbeidstider.Database
     public class DatabaseConnection : IDatabaseConnection
     {
         private readonly string _connectionString;
-        private static DatabaseConnection _instance;
-
-        public static DatabaseConnection Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    if (!HttpContext.Current.IsDebuggingEnabled)
-                        _instance = new DatabaseConnection(ConnectionStrings.RELEASE);
-                    _instance = new DatabaseConnection(ConnectionStrings.DEBUG);
-
-
-                return _instance;
-            }
-        }
 
         public DatabaseConnection(string connectionString)
         {

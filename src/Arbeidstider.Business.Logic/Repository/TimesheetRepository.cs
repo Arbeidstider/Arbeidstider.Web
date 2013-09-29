@@ -7,7 +7,6 @@ using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.IoC;
-using Arbeidstider.Database;
 
 namespace Arbeidstider.Business.Logic.Repository
 {
@@ -22,7 +21,7 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public IEnumerable<Timesheet> GetAll(List<KeyValuePair<string, object>> parameters)
         {
-            var dt = DatabaseConnection.Instance.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
+            var dt = _connection.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
             var timesheets = ParseTimesheets(dt);
             return timesheets;
         }
