@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Web;
 using Arbeidstider.Business.Interfaces.Database;
-using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Database
 {

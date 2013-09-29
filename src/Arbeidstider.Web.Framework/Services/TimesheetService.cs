@@ -4,11 +4,14 @@ using System.Linq;
 using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Caching;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
+using Arbeidstider.Business.Logic.Repository.Exceptions;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
+using log4net;
 
 namespace Arbeidstider.Web.Framework.Services
 {
@@ -17,6 +20,7 @@ namespace Arbeidstider.Web.Framework.Services
         private readonly ICacheService _cacheService; 
         private readonly IRepository<Timesheet> _repository;
         private static TimesheetService _instance;
+        private readonly ILog Logger;
 
         public static TimesheetService Instance
         {
@@ -33,6 +37,7 @@ namespace Arbeidstider.Web.Framework.Services
         {
             _cacheService = cacheService;
             _repository = repository;
+            Logger = IoC.Resolve<ILog>();
         }
 
         /// <summary>
@@ -42,13 +47,21 @@ namespace Arbeidstider.Web.Framework.Services
         /// <returns></returns>
         public WeeklyTimesheet GetWeeklyTimesheet(int employeeID, DateTime weekStart)
         {
-            var parameters = new TimesheetParameters(new TimesheetDTO() { EmployeeID = employeeID, StartDate = weekStart.ToString() }, RepositoryAction.GetAll).Parameters;
-            var timesheets = _repository.GetAll(parameters);
+            try
+            {
+                var model = new WeeklyTimesheet();
+                model.Shifts = _cacheService.Get(CacheKeys.GetWeeklyTimesheet, () => 
+                        ParseTimesheetsToShifts(_repository.GetAll(new TimesheetParameters(new TimesheetDTO() {EmployeeID = employeeID, StartDate = weekStart.ToString()},
+                        RepositoryAction.GetAll).Parameters)),
+                        DateTime.UtcNow.AddHours(8));
 
-            var model = new WeeklyTimesheet();
-            model.Shifts = ParseTimesheetsToShifts(timesheets);
-
-            return model;
+                return model;
+            }
+            catch (TimesheetRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
         }
 
         private static IEnumerable<KeyValuePair<DateTime, EmployeeShift>> ParseTimesheetsToShifts(IEnumerable<Timesheet> timesheets)
@@ -66,19 +79,22 @@ namespace Arbeidstider.Web.Framework.Services
         public IEnumerable<TimesheetDTO> GetAllWithinRange(TimesheetDTO dto)
         {
             var parameters = new TimesheetParameters(dto, RepositoryAction.GetAll).Parameters;
-            return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray();
+            return _cacheService.Get(CacheKeys.GetAllWithinRange,
+                () => _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray(),
+                DateTime.UtcNow.AddHours(8));
         }
-
+        
         public bool Create(TimesheetDTO dto)
         {
-            var parameters = new TimesheetParameters(dto, RepositoryAction.Create).Parameters;
             try
             {
+                var parameters = new TimesheetParameters(dto, RepositoryAction.Create).Parameters;
                 _repository.Create(parameters);
                 return true;
             }
-            catch (Exception ex)
+            catch (TimesheetRepositoryException ex)
             {
+                Logger.Error(ex.Message);
                 return false;
             }
         }

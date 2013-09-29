@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Framework.Parameters;
 
-namespace Arbeidstider.Common.Parameters
+namespace Arbeidstider.Web.Framework.Parameters
 {
     public class EmployeeParameters : IParameters
     {
@@ -44,7 +43,7 @@ namespace Arbeidstider.Common.Parameters
                         new KeyValuePair<string, object>("@EmployeeID", _dto.EmployeeID),
                         new KeyValuePair<string, object>("@Mobile", _dto.Mobile),
                         new KeyValuePair<string, object>("@Username", _dto.Username),
-                        new KeyValuePair<string, object>("@EmployeeGroupID", _dto.EmployeeGroupID),
+                        new KeyValuePair<string, object>("@EmployeeGroupID", (int)(EmployeeGroup) _dto.EmployeeGroup),
                         new KeyValuePair<string, object>("@WorkplaceID", _dto.WorkplaceID),
                         new KeyValuePair<string, object>("@UserID", _dto.UserID),
 

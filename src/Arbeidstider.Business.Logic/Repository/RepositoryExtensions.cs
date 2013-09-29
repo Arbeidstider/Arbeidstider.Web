@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Arbeidstider.Business.Logic.Enums;
 
 namespace Arbeidstider.Business.Logic.Repository
 {
@@ -6,8 +7,8 @@ namespace Arbeidstider.Business.Logic.Repository
     {
         public static bool QueryExecutedSuccessfully(this DataTable dt)
         {
-            return true;
-            //return ((DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL || dt.Rows[0] == null);
+            return (dt.Rows != null  && dt.Rows[0] != null && dt.Rows[0]["Result"] != null &&
+                (DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL);
         }
     }
 }

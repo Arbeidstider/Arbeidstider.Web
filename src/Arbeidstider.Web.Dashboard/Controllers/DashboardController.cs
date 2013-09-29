@@ -1,5 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Dashboard;
@@ -36,6 +35,15 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 
         public ActionResult Register()
         {
+            if (CurrentEmployeeID != 0)
+            {
+                var username = User.Identity.Name;
+                var employee = _employeeService.GetEmployee(username);
+                if (!employee.IsAdmin())
+                {
+                    return RedirectToAction("Unauthorized", "Error");
+                }
+            }
             return View();
         }
 

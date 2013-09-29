@@ -30,6 +30,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
                 {
                     CurrentEmployeeID = employee.EmployeeID;
                     FormsAuthentication.Authenticate(model.UserName, model.Password);
+                    if (model.RememberMe) FormsAuthentication.SetAuthCookie(model.UserName, true);
                     FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
                     return RedirectToAction("Index", "Dashboard");
                 }

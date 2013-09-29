@@ -16,5 +16,10 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             Response.StatusCode = statusCode;
             return View("500");
         }
+
+        public ActionResult Unauthorized()
+        {
+            return View("500");
+        }
     }
 }

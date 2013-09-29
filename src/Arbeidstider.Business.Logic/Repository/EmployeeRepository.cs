@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.Factories;
 using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Business.Logic.Repository.Exceptions;
 using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Business.Logic.Repository
@@ -23,7 +25,8 @@ namespace Arbeidstider.Business.Logic.Repository
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_ALL_EMPLOYEES, parameters);
 
-            if (!dt.QueryExecutedSuccessfully()) return null;
+            if (!dt.QueryExecutedSuccessfully()) 
+                throw new EmployeeRepositoryException(string.Format("{0} returned 0 rows.", StoredProcedures.GET_ALL_EMPLOYEES));
 
             return EmployeeFactory.CreateArray(dt.Rows);
         }
@@ -40,7 +43,7 @@ namespace Arbeidstider.Business.Logic.Repository
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_EMPLOYEE, parameters);
 
-            if (!dt.QueryExecutedSuccessfully()) return null;
+            if (!dt.QueryExecutedSuccessfully()) throw new EmployeeRepositoryException(string.Format("Failed to get employee with username: {0}", parameters.ElementAt(0).Value));
 
             return EmployeeFactory.Create(dt.Rows[0]);
         }

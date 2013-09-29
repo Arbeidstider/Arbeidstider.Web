@@ -5,17 +5,20 @@ using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Caching;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
-using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Business.Logic.Repository.Exceptions;
 using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.ViewModels.Account;
+using log4net;
 
 namespace Arbeidstider.Web.Framework.Services
 {
     public class EmployeeService
     {
         private readonly ICacheService _cacheService; 
-        private readonly IRepository<Employee> _repository; 
+        private readonly IRepository<Employee> _repository;
+        private readonly ILog Logger;
         private static EmployeeService _instance; 
         public static EmployeeService Instance
         {
@@ -32,21 +35,34 @@ namespace Arbeidstider.Web.Framework.Services
         {
             _cacheService = cacheservice;
             _repository = repository;
+            Logger = IoC.Resolve<ILog>();
         }
 
         public EmployeeUser GetEmployee(string username)
         {
-            if (username == null) return null;
-
-            var employee = _cacheService.Get(CacheKeys.GetEmployee, () =>
-                _repository.Get(new UserParameters(username).Parameters), DateTime.UtcNow.AddHours(8));
-
-            return new EmployeeUser()
+            try
             {
-                EmployeeID = employee.EmployeeID,
-                Passwordhash = employee.Passwordhash,
-                Username = employee.Username
-            };
+                return _cacheService.Get(CacheKeys.GetEmployee, 
+                    () => ParseEmployee(_repository.Get(new UserParameters(username).Parameters)), 
+                    DateTime.UtcNow.AddHours(8));
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
+        }
+
+        private EmployeeUser ParseEmployee(Employee employee)
+        {
+            EmployeeUser user = new EmployeeUser();
+
+            user.EmployeeID = employee.EmployeeID;
+            user.Passwordhash = employee.Passwordhash;
+            user.Username = employee.Username;
+            user.EmployeeGroup = employee.EmployeeGroup;
+
+            return user;
         }
 
         public bool UpdateEmployee(EmployeeDTO dto, Guid userID)
@@ -56,9 +72,37 @@ namespace Arbeidstider.Web.Framework.Services
             return _repository.Update(parameters);
         }
 
-        public IEnumerable<Employee> GetAllEmployees(List<KeyValuePair<string, object>> parameters)
+        public IEnumerable<EmployeeDTO> GetAllEmployees(int workplaceID)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                return _cacheService.Get(CacheKeys.GetAllEmployees, 
+                    () => ParseEmployees(_repository.GetAll(new EmployeeParameters(new EmployeeDTO() {WorkplaceID = workplaceID}, RepositoryAction.GetAll).Parameters)), 
+                    DateTime.Now.AddHours(8));
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
+        }
+
+        private IEnumerable<EmployeeDTO> ParseEmployees(IEnumerable<Employee> employees)
+        {
+            var list = new List<EmployeeDTO>();
+            foreach (var employee in employees)
+            {
+                var dto = new EmployeeDTO();
+                dto.EmployeeGroup = employee.EmployeeGroup;
+                dto.EmployeeID = employee.EmployeeID;
+                dto.Mobile = employee.Mobile;
+                dto.UserID = employee.UserID;
+                dto.Username = employee.Username;
+                dto.WorkplaceID = employee.WorkplaceID;
+                list.Add(dto);
+            }
+
+            return list;
         }
     }
 }

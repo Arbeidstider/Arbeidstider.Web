@@ -2,6 +2,7 @@
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.Services;
 
 namespace Arbeidstider.Web.Framework.Scaffolding
@@ -26,9 +27,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
 
         public static void Run()
         {
-            return;
-            var parameters = new EmployeeParameters(new EmployeeDTO() {WorkplaceID = 1}, RepositoryAction.GetAll).Parameters;
-            var employees = EmployeeService.Instance.GetAllEmployees(parameters);
+            var employees = EmployeeService.Instance.GetAllEmployees(1);
             foreach (var employee in employees)
             {
                 Timesheets.Scaffold(employee.EmployeeID, Dates, Times);

@@ -5,8 +5,9 @@ using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
-using Arbeidstider.Business.Logic.Enums;
+using Arbeidstider.Business.Logic.Factories;
 using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Business.Logic.Repository.Exceptions;
 
 namespace Arbeidstider.Business.Logic.Repository
 {
@@ -22,15 +23,19 @@ namespace Arbeidstider.Business.Logic.Repository
         public IEnumerable<Timesheet> GetAll(List<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
-            var timesheets = ParseTimesheets(dt);
-            return timesheets;
+            if (!dt.QueryExecutedSuccessfully()) throw new TimesheetRepositoryException("Failed to GetAll");
+
+            return ParseTimesheets(dt);
         }
 
         public Timesheet Create(List<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
-            if (dt.Rows.Count == 0|| dt.Rows[0]["Result"] == null || (DatabaseResult) (int) dt.Rows[0]["Result"] == DatabaseResult.FAIL) return null;
-            return new Timesheet();
+
+            if (!dt.QueryExecutedSuccessfully())
+                throw new TimesheetRepositoryException("Failed to create new timesheet");
+
+            return TimesheetFactory.Create(dt.Rows[0]);
         }
 
         public Timesheet Get(IEnumerable<KeyValuePair<string, object>> parameters)
@@ -65,27 +70,33 @@ namespace Arbeidstider.Business.Logic.Repository
             };
 
             var dt = _connection.ExecuteSP(Arbeidstider.Database.Constants.StoredProcedures.GET_WORKPLACE_TIMESHEETS, parameters);
-            var timesheets = ParseTimesheets(dt);
-            return timesheets;
+            return ParseTimesheets(dt);
         }
 
         private static IEnumerable<Timesheet> ParseTimesheets(DataTable dt)
         {
-            var timesheets = new List<Timesheet>();
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                var timesheet = new Timesheet();
-                var selectedDay = (DateTime)row["SelectedDay"];
-                var scheduleEnd = (TimeSpan) row["ScheduleEnd"];
-                var scheduleStart = (TimeSpan) row["ScheduleStart"];
+                var timesheets = new List<Timesheet>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    var timesheet = new Timesheet();
+                    var selectedDay = (DateTime) row["SelectedDay"];
+                    var scheduleEnd = (TimeSpan) row["ScheduleEnd"];
+                    var scheduleStart = (TimeSpan) row["ScheduleStart"];
 
-                timesheet.Day = selectedDay;
-                timesheet.ShiftEnd = scheduleEnd;
-                timesheet.ShiftStart = scheduleStart;
-                timesheets.Add(timesheet);
+                    timesheet.Day = selectedDay;
+                    timesheet.ShiftEnd = scheduleEnd;
+                    timesheet.ShiftStart = scheduleStart;
+                    timesheets.Add(timesheet);
+                }
+
+                return timesheets;
             }
-
-            return timesheets;
+            catch (Exception ex)
+            {
+                throw new EmployeeRepositoryException("Failed to parse timesheets from database");
+            }
         }
     }
 }
