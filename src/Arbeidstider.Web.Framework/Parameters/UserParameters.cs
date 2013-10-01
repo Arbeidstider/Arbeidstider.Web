@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Arbeidstider.Web.Framework.Parameters;
 
-namespace Arbeidstider.Common.Parameters
+namespace Arbeidstider.Web.Framework.Parameters
 {
-    public class UserParameters : IParameters
+    public class UserParameters
     {
         private readonly string _username;
         public UserParameters(string username)

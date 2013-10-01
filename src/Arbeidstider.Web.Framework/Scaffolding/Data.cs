@@ -2,7 +2,6 @@
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
-using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.Services;
@@ -15,7 +14,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
         {
             get
             {
-                return ScaffoldHelper.GetDates(new DateTime(2013, 10, 1));
+                return ScaffoldHelper.GetDates(new DateTime(2013, 10, 2));
             }
         }
 

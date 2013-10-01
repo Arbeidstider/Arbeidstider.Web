@@ -4,7 +4,7 @@ using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.Parameters
 {
-    public class EmployeeParameters : IParameters
+    public class EmployeeParameters 
     {
         private readonly EmployeeDTO _dto;
         private readonly RepositoryAction _action;

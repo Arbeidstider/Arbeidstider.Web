@@ -8,6 +8,8 @@ using Arbeidstider.Web.Dashboard.Controllers;
 using Arbeidstider.Web.Framework;
 using Arbeidstider.Web.Framework.Scaffolding;
 using Autofac.Integration.Mvc;
+using log4net;
+using log4net.Repository.Hierarchy;
 
 namespace Arbeidstider.Web.Dashboard
 {
@@ -58,6 +60,7 @@ namespace Arbeidstider.Web.Dashboard
             routeData.Values.Add("statusCode", statusCode);
             routeData.Values.Add("exception", lastError);
 
+            IoC.Resolve<ILog>().Error(lastError.Message);
             IController controller = new ErrorController();
 
             RequestContext requestContext = new RequestContext(new HttpContextWrapper(Context), routeData);

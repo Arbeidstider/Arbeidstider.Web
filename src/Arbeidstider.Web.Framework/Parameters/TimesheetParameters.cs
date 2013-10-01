@@ -5,24 +5,39 @@ using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.Parameters
 {
-    public class TimesheetParameters : IParameters
+    public class TimesheetParameters : ParameterBase
     {
-        private readonly TimesheetDTO _timesheet = null;
+        private readonly TimesheetDTO _dto = null;
         private readonly RepositoryAction _action;
         private readonly DateTime _selectedDay;
+        private readonly DateTime _startDate;
+        private readonly DateTime _endDate;
         private readonly TimeSpan _shiftStart;
         private readonly TimeSpan _shiftEnd;
         private readonly Guid _userID;
 
-
-        public TimesheetParameters(TimesheetDTO timesheet, RepositoryAction action)
+        public TimesheetParameters(TimesheetDTO dto, RepositoryAction action) : base()
         {
             _action = action;
-            _timesheet = timesheet;
+            if (dto.UserID != Guid.Empty) _userID = dto.UserID;
+            if (!string.IsNullOrEmpty(dto.StartDate)) _startDate = DateTime.Parse(dto.StartDate).Date;
+            if (!string.IsNullOrEmpty(dto.EndDate)) _endDate = DateTime.Parse(dto.EndDate).Date;
+            if (!string.IsNullOrEmpty(dto.SelectedDay)) _selectedDay = DateTime.Parse(dto.SelectedDay).Date;
+            if (!string.IsNullOrEmpty(dto.ShiftStart)) _shiftStart = TimeSpan.Parse(dto.ShiftStart);
+            if (!string.IsNullOrEmpty(dto.ShiftEnd)) _shiftEnd = TimeSpan.Parse(dto.ShiftEnd);
             Create();
         }
 
-        public TimesheetParameters(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd, RepositoryAction action)
+        public TimesheetParameters(Guid userID, DateTime weekStart, RepositoryAction action) : base()
+        {
+            _action = action;
+            _userID = userID;
+            _startDate = weekStart;
+            _endDate = weekStart.AddDays(6);
+            Create();
+        }
+
+        public TimesheetParameters(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd, RepositoryAction action) : base()
         {
             _userID = userID;
             _selectedDay = selectedDay;
@@ -38,60 +53,28 @@ namespace Arbeidstider.Web.Framework.Parameters
             {
                 case RepositoryAction.GetAll:
                 {
-                    var startDate = DateTime.Parse(_timesheet.StartDate).Date;
                     Parameters = new List<KeyValuePair<string, object>>()
                     {
-                        new KeyValuePair<string, object>("@UserID", _timesheet.UserID),
-                        new KeyValuePair<string, object>("@StartDate", startDate),
-                        new KeyValuePair<string, object>("@EndDate", string.IsNullOrEmpty(_timesheet.EndDate) ? startDate.AddHours(8) : DateTime.Parse(_timesheet.EndDate).Date),
+                        new KeyValuePair<string, object>("@UserID", _userID),
+                        new KeyValuePair<string, object>("@StartDate", _startDate),
+                        new KeyValuePair<string, object>("@EndDate", _endDate),
                     };
                     break;
                 }
                 case RepositoryAction.Create:
                 {
-                    if (_timesheet != null)
+                    Parameters = new List<KeyValuePair<string, object>>()
                     {
-                        Parameters = new List<KeyValuePair<string, object>>()
-                        {
-                            new KeyValuePair<string, object>("@UserID", _timesheet.UserID),
-                            new KeyValuePair<string, object>("@SelectedDay", _timesheet.SelectedDay),
-                            new KeyValuePair<string, object>("@ShiftStart", _timesheet.ShiftStart),
-                            new KeyValuePair<string, object>("@ShiftEnd",  _timesheet.ShiftEnd)
-                        };
-                    }
-                    else
-                    {
-                        Parameters = new List<KeyValuePair<string, object>>()
-                        {
-                            new KeyValuePair<string, object>("@UserID", _userID),
-                            new KeyValuePair<string, object>("@SelectedDay", _selectedDay),
-                            new KeyValuePair<string, object>("@ShiftStart", _shiftStart),
-                            new KeyValuePair<string, object>("@ShiftEnd", _shiftEnd)
-                        };
-                    }
+                        new KeyValuePair<string, object>("@UserID", _userID),
+                        new KeyValuePair<string, object>("@SelectedDay", _selectedDay.Date),
+                        new KeyValuePair<string, object>("@ShiftStart", _shiftStart),
+                        new KeyValuePair<string, object>("@ShiftEnd", _shiftEnd)
+                    };
                     break;
                 }
             }
         }
 
         public List<KeyValuePair<string, object>> Parameters { get; set; }
-
-        public void Validate()
-        {
-            switch (_action)
-            {
-                case RepositoryAction.GetAll:
-                {
-                    //if (DateTime.Parse(_timesheet.EndDate) < DateTime.Parse(_timesheet.StartDate)) throw new Exception("The end date must be a date happening after the start date.");
-                    break;
-                }
-                case RepositoryAction.Create:
-                {
-                    //if (_timesheet.SelectedDay == string.Empty) throw new Exception("You need to specify selected day");
-                    break;
-                }
-            }
-        }
-
     }
 }

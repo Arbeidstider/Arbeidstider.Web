@@ -57,7 +57,6 @@
     <Compile Include="Caching\CacheKeys.cs" />
     <Compile Include="Caching\CacheService.cs" />
     <Compile Include="Domain\Employee.cs" />
-    <Compile Include="Domain\EmployeeShift.cs" />
     <Compile Include="Domain\Timesheet.cs" />
     <Compile Include="Domain\Workplace.cs" />
     <Compile Include="Enums\DatabaseResult.cs" />

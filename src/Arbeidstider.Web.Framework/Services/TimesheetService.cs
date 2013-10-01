@@ -10,33 +10,28 @@ using Arbeidstider.Business.Logic.Repository.Exceptions;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Parameters;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
-using log4net;
 
 namespace Arbeidstider.Web.Framework.Services
 {
-    public class TimesheetService
+    public class TimesheetService : ServiceBase
     {
-        private readonly ICacheService _cacheService; 
         private readonly IRepository<Timesheet> _repository;
         private static TimesheetService _instance;
-        private readonly ILog Logger;
 
         public static TimesheetService Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new TimesheetService(IoC.Resolve<IRepository<Timesheet>>(), IoC.Resolve<ICacheService>());
+                    _instance = new TimesheetService(IoC.Resolve<IRepository<Timesheet>>());
 
                 return _instance;
             }
         }
 
-        private TimesheetService(IRepository<Timesheet> repository, ICacheService cacheService)
+        private TimesheetService(IRepository<Timesheet> repository)
         {
-            _cacheService = cacheService;
             _repository = repository;
-            Logger = IoC.Resolve<ILog>();
         }
 
         /// <summary>
@@ -44,16 +39,13 @@ namespace Arbeidstider.Web.Framework.Services
         /// <param name="username"></param>
         /// <param name="weekStart">The day that the work week starts, usually monday.</param>
         /// <returns></returns>
-        public WeeklyTimesheet GetWeeklyTimesheet(Guid userID, DateTime weekStart)
+        public IEnumerable<KeyValuePair<DateTime, EmployeeShift>> GetWeeklyTimesheet(Guid userID, DateTime weekStart)
         {
             try
             {
-                var model = new WeeklyTimesheet();
-                model.Shifts = _cacheService.Get(CacheKeys.GetWeeklyTimesheet, () => 
-                        ParseTimesheetsToShifts(_repository.GetAll(new TimesheetParameters(new TimesheetDTO() {UserID = userID, StartDate = weekStart.ToString()},
+                return Cache.Get(CacheKeys.GetWeeklyTimesheet, () => 
+                        ParseTimesheetsToShifts(_repository.GetAll(new TimesheetParameters(userID, weekStart,
                         RepositoryAction.GetAll).Parameters)));
-
-                return model;
             }
             catch (TimesheetRepositoryException ex)
             {
@@ -62,22 +54,10 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        private static IEnumerable<KeyValuePair<DateTime, EmployeeShift>> ParseTimesheetsToShifts(IEnumerable<Timesheet> timesheets)
-        {
-            var shifts = new List<KeyValuePair<DateTime, EmployeeShift>>();
-            foreach (var timesheet in timesheets)
-            {
-                shifts.Add(new KeyValuePair<DateTime, EmployeeShift>(timesheet.SelectedDay,
-                    new EmployeeShift(timesheet.ShiftStart, timesheet.ShiftEnd)));
-            }
-
-            return shifts.OrderBy(x => x.Key).ToArray();
-        }
-
         public IEnumerable<TimesheetDTO> GetAllWithinRange(TimesheetDTO dto)
         {
             var parameters = new TimesheetParameters(dto, RepositoryAction.GetAll).Parameters;
-            return _cacheService.Get(CacheKeys.GetAllWithinRange,
+            return Cache.Get(CacheKeys.GetAllWithinRange,
                 () => _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray());
         }
         
@@ -100,5 +80,19 @@ namespace Arbeidstider.Web.Framework.Services
         {
             return new TimesheetDTO();
         }
+
+        #region Private Methods
+        private static IEnumerable<KeyValuePair<DateTime, EmployeeShift>> ParseTimesheetsToShifts(IEnumerable<Timesheet> timesheets)
+        {
+            var shifts = new List<KeyValuePair<DateTime, EmployeeShift>>();
+            foreach (var timesheet in timesheets)
+            {
+                shifts.Add(new KeyValuePair<DateTime, EmployeeShift>(timesheet.SelectedDay,
+                    new EmployeeShift(timesheet.ShiftStart, timesheet.ShiftEnd)));
+            }
+
+            return shifts.OrderBy(x => x.Key).ToArray();
+        }
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arbeidstider.Business.Logic.Domain
+namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
 {
     public class EmployeeShift
     {

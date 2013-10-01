@@ -90,7 +90,7 @@
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="Parameters\EmployeeParameters.cs" />
-    <Compile Include="Parameters\IParameters.cs" />
+    <Compile Include="Parameters\ParameterBase.cs" />
     <Compile Include="Parameters\TimesheetParameters.cs" />
     <Compile Include="Parameters\UserParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +98,7 @@
     <Compile Include="Scaffolding\Data.cs" />
     <Compile Include="Scaffolding\ScaffoldHelper.cs" />
     <Compile Include="Scaffolding\Timesheets.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\TimesheetService.cs" />
     <Compile Include="Services\EmployeeService.cs" />
     <Compile Include="ViewModels\Account\AccountModels.cs" />
@@ -105,7 +106,7 @@
     <Compile Include="ViewModels\Dashboard\AddressBook.cs" />
     <Compile Include="ViewModels\Dashboard\Index.cs" />
     <Compile Include="ViewModels\Timesheet\CreateTimesheet.cs" />
-    <Compile Include="ViewModels\Timesheet\WeeklyTimesheet.cs" />
+    <Compile Include="ViewModels\Timesheet\EmployeeShift.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">

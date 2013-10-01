@@ -23,9 +23,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
             var times = new TimeSpan[]
             {
                 startTime,
-                new TimeSpan(startTime.Hours + 8, 0, 0),
                 starttime2,
-                new TimeSpan(starttime2.Hours + 8, 0, 0)
             };
 
             return times;
