@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Caching;
@@ -43,8 +44,7 @@ namespace Arbeidstider.Web.Framework.Services
             try
             {
                 return _cacheService.Get(CacheKeys.GetEmployee, 
-                    () => ParseEmployee(_repository.Get(new UserParameters(username).Parameters)), 
-                    DateTime.UtcNow.AddHours(8));
+                    () => ParseEmployee(_repository.Get(new UserParameters(username).Parameters)));
             }
             catch (EmployeeRepositoryException ex)
             {
@@ -53,32 +53,33 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        private EmployeeUser ParseEmployee(Employee employee)
+        private static EmployeeUser ParseEmployee(Employee employee)
         {
-            EmployeeUser user = new EmployeeUser();
-
-            user.EmployeeID = employee.EmployeeID;
-            user.Passwordhash = employee.Passwordhash;
-            user.Username = employee.Username;
-            user.EmployeeGroup = employee.EmployeeGroup;
-
-            return user;
+            return new EmployeeUser(employee);
         }
 
-        public bool UpdateEmployee(EmployeeDTO dto, Guid userID)
+        public EmployeeDTO UpdateEmployee(EmployeeDTO dto, string username)
         {
-            dto.UserID = userID;
-            var parameters = new EmployeeParameters(dto, RepositoryAction.Update).Parameters;
-            return _repository.Update(parameters);
+            try
+            {
+                if (!_repository.Update(new EmployeeParameters(dto, RepositoryAction.Update).Parameters))
+                    Logger.Error(string.Format("Couldn´t update employee with username: {0}", username));
+
+                    return new EmployeeDTO(_repository.Get(new EmployeeParameters(dto, RepositoryAction.Get).Parameters));
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
         }
 
-        public IEnumerable<EmployeeDTO> GetAllEmployees(int workplaceID)
+        public IEnumerable<EmployeeUser> GetAllEmployees(int workplaceID)
         {
             try
             {
                 return _cacheService.Get(CacheKeys.GetAllEmployees, 
-                    () => ParseEmployees(_repository.GetAll(new EmployeeParameters(new EmployeeDTO() {WorkplaceID = workplaceID}, RepositoryAction.GetAll).Parameters)), 
-                    DateTime.Now.AddHours(8));
+                    () => ParseEmployees(_repository.GetAll(new EmployeeParameters(new EmployeeDTO() {WorkplaceID = workplaceID}, RepositoryAction.GetAll).Parameters)));
             }
             catch (EmployeeRepositoryException ex)
             {
@@ -87,22 +88,9 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        private IEnumerable<EmployeeDTO> ParseEmployees(IEnumerable<Employee> employees)
+        private static IEnumerable<EmployeeUser> ParseEmployees(IEnumerable<Employee> employees)
         {
-            var list = new List<EmployeeDTO>();
-            foreach (var employee in employees)
-            {
-                var dto = new EmployeeDTO();
-                dto.EmployeeGroup = employee.EmployeeGroup;
-                dto.EmployeeID = employee.EmployeeID;
-                dto.Mobile = employee.Mobile;
-                dto.UserID = employee.UserID;
-                dto.Username = employee.Username;
-                dto.WorkplaceID = employee.WorkplaceID;
-                list.Add(dto);
-            }
-
-            return list;
+            return employees.Select(x => new EmployeeUser(x)).ToArray();
         }
     }
 }

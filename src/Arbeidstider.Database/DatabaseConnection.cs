@@ -21,6 +21,7 @@ namespace Arbeidstider.Database
 
         public DataTable ExecuteSP(string spName, IEnumerable<KeyValuePair<string, object>> parameters)
         {
+            if (parameters == null) return new DataTable();
             using (SqlConnection conn = new SqlConnection(_connectionString)) 
             {
                 conn.Open();

@@ -1,4 +1,6 @@
 ﻿using System;
+using Arbeidstider.Business.Interfaces.Repository;
+using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Common.Parameters;
 using Arbeidstider.Web.Framework.DTO;
@@ -21,16 +23,18 @@ namespace Arbeidstider.Web.Framework.Scaffolding
         {
             get
             {
-                return ScaffoldHelper.GetTimes(new TimeSpan(10, 0, 0), new TimeSpan(18, 0, 0));
+                return ScaffoldHelper.GetTimes(new TimeSpan(8, 0, 0), new TimeSpan(14, 0, 0));
             }
         }
 
         public static void Run()
         {
-            var employees = EmployeeService.Instance.GetAllEmployees(1);
+            var parameters = new EmployeeParameters(new EmployeeDTO() {WorkplaceID = 1}, RepositoryAction.GetAll);
+            var employees = IoC.Resolve<IRepository<Employee>>().GetAll(parameters.Parameters);
+            if (employees == null) return;
             foreach (var employee in employees)
             {
-                Timesheets.Scaffold(employee.EmployeeID, Dates, Times);
+                Timesheets.Scaffold(employee.UserID, Dates, Times);
             }
         }
     }

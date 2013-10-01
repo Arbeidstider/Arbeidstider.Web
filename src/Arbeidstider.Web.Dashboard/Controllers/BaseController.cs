@@ -1,40 +1,50 @@
 ﻿using System;
 using System.Web.Mvc;
-using Arbeidstider.Web.Framework.Helpers;
+using System.Web.Security;
+using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Framework.ViewModels.Account;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class BaseController : Controller
     {
-        public BaseController()
-        {
-        }
-
-        protected internal int CurrentEmployeeID
+        protected internal Guid CurrentUserID
         {
             get
             {
-                if (WebHelper.GetSession(Framework.Constants.Session.EMPLOYEE_ID) != null)
-                    return int.Parse(WebHelper.GetSession(Framework.Constants.Session.EMPLOYEE_ID));
+                var user = Membership.GetUser(CurrentUser);
+                if (user == null || user.ProviderUserKey == null) return Guid.Empty;
 
-                if (WebHelper.GetCookie(Framework.Constants.Session.EMPLOYEE_ID) != null)
-                    return int.Parse(WebHelper.GetCookie(Framework.Constants.Session.EMPLOYEE_ID));
-
-                return 0;
+                return (Guid)user.ProviderUserKey;
             }
-            set
+        }
+
+        protected internal string CurrentUser
+        {
+            get
             {
-                if (value == 0)
-                {
-                    WebHelper.RemoveSession(Framework.Constants.Session.EMPLOYEE_ID);
-                    WebHelper.RemoveCookie(Framework.Constants.Session.EMPLOYEE_ID);
-                }
-                else
-                {
-                    WebHelper.SetSession(Framework.Constants.Session.EMPLOYEE_ID, value);
-                    WebHelper.SetCookie(Framework.Constants.Session.EMPLOYEE_ID, value, DateTime.Now.AddDays(7));
-                }
+                return HttpContext.User.Identity.Name;
             }
+        }
+
+        protected internal EmployeeUser CurrentEmployee
+        {
+            get
+            {
+                var employee = EmployeeService.Instance.GetEmployee(CurrentUser);
+                if (employee != null) return employee;
+
+                return new EmployeeUser();
+            }
+        }
+
+        protected internal void CheckAdminAccess()
+        {
+            var employee = EmployeeService.Instance.GetEmployee(CurrentUser);
+            if (employee != null && employee.IsAdmin()) return;
+
+            RedirectToAction("Unauthorized", "Error");
         }
     }
 }

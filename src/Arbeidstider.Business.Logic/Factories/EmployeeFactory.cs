@@ -15,14 +15,13 @@ namespace Arbeidstider.Business.Logic.Factories
             try
             {
                 var Employee = new Employee();
-                Employee.EmployeeID = (int) row["EmployeeID"];
                 Employee.Firstname = (string) row["Firstname"];
                 Employee.Lastname = (string) row["Lastname"];
                 Employee.Mobile = (string) row["Mobile"];
                 Employee.Username = (string) row["Username"];
-                Employee.UserID = (Guid) row["UserID"];
+                Employee.UserID = Guid.Parse(row["UserID"].ToString());
                 Employee.WorkplaceID = (int) row["WorkplaceID"];
-                Employee.EmployeeGroup = (EmployeeGroup) (int) row["EmployeeGroupID"];
+                Employee.EmployeeGroup = (EmployeeGroup)(int) row["EmployeeGroupID"];
 
                 return Employee;
             }
@@ -32,9 +31,9 @@ namespace Arbeidstider.Business.Logic.Factories
             }
         }
 
-        public static IEnumerable<Employee> CreateArray(DataRowCollection rows)
+        internal static IEnumerable<Employee> CreateArray(DataRowCollection rows)
         {
-            return (from DataRow row in rows select Create(row)).ToList();
+            return (from DataRow row in rows select Create(row)).ToArray();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Web;
-using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
@@ -35,6 +35,8 @@ namespace Arbeidstider.Business.Logic.IoC
 
                 // Services
                 builder.Register(x => LogManager.GetLogger("FileLogger")).As<ILog>().SingleInstance();
+                builder.Register(x => new CacheService(HttpContext.Current.IsDebuggingEnabled ? 
+                    new DateTime() : DateTime.UtcNow.AddHours(8))).As<ICacheService>().SingleInstance();
 
                 // Database
                 builder.Register(x => new DatabaseConnection(HttpContext.Current.IsDebuggingEnabled ? 

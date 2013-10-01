@@ -16,7 +16,6 @@ namespace Arbeidstider.Web.Services.Controllers
         [HttpGet]
         public JsonResult GetAllTimesheets(TimesheetDTO dto)
         {
-
             var timesheets = _timesheetservice.GetAllWithinRange(dto);
 
             return Json(timesheets, JsonRequestBehavior.AllowGet);

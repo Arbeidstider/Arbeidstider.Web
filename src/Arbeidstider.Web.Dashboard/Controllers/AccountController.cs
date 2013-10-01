@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using Arbeidstider.Web.Framework;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
+using log4net;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class AccountController : BaseController
     {
         private readonly EmployeeService _employeeService;
+        private readonly ILog Logger;
         public AccountController()
         {
             _employeeService = EmployeeService.Instance;
+            Logger = IoC.Resolve<ILog>();
         }
 
         public ActionResult Login()
@@ -28,11 +32,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
                 var employee = _employeeService.GetEmployee(model.UserName);
                 if (employee != null)
                 {
-                    CurrentEmployeeID = employee.EmployeeID;
-                    FormsAuthentication.Authenticate(model.UserName, model.Password);
-                    if (model.RememberMe) FormsAuthentication.SetAuthCookie(model.UserName, true);
-                    FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
-                    return RedirectToAction("Index", "Dashboard");
+                    return AuthenicateAndRedirect(model);
                 }
             }
 
@@ -41,19 +41,26 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public JsonResult LogOff()
+        private ActionResult AuthenicateAndRedirect(LoginModel model)
+        {
+            FormsAuthentication.Authenticate(model.UserName, model.Password);
+            if (model.RememberMe) FormsAuthentication.SetAuthCookie(model.UserName, true);
+            FormsAuthentication.RedirectFromLoginPage(model.UserName, model.RememberMe);
+            return RedirectToAction("Index", "Dashboard");
+        }
+
+        public ActionResult LogOff()
         {
             try
             {
-                CurrentEmployeeID = 0;
                 FormsAuthentication.SignOut();
+                return Redirect("/");
             }
             catch (Exception ex)
             {
-                return Json(new {Result = false});
+                Logger.Error(string.Format("Failed to logoff user: {0}", CurrentUser));
             }
-            return Json(new {Result = true});
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

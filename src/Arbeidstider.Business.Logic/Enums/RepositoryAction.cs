@@ -4,6 +4,7 @@
     {
         GetAll,
         Create,
-        Update
+        Update,
+        Get
     }
 }

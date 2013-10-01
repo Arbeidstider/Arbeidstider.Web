@@ -8,7 +8,6 @@ namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
     {
         public CreateTimesheet(TimesheetDTO dto)
         {
-            EmployeeID = dto.EmployeeID;
             SelectedDay = DateTime.Parse(dto.SelectedDay);
             ShiftStart = TimeSpan.Parse(dto.ShiftStart);
             ShiftEnd = TimeSpan.Parse(dto.ShiftEnd);

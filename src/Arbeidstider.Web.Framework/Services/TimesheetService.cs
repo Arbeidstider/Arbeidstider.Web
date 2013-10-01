@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arbeidstider.Business.Domain;
 using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Caching;
@@ -42,18 +41,17 @@ namespace Arbeidstider.Web.Framework.Services
 
         /// <summary>
         /// </summary>
-        /// <param name="employerID"></param>
+        /// <param name="username"></param>
         /// <param name="weekStart">The day that the work week starts, usually monday.</param>
         /// <returns></returns>
-        public WeeklyTimesheet GetWeeklyTimesheet(int employeeID, DateTime weekStart)
+        public WeeklyTimesheet GetWeeklyTimesheet(Guid userID, DateTime weekStart)
         {
             try
             {
                 var model = new WeeklyTimesheet();
                 model.Shifts = _cacheService.Get(CacheKeys.GetWeeklyTimesheet, () => 
-                        ParseTimesheetsToShifts(_repository.GetAll(new TimesheetParameters(new TimesheetDTO() {EmployeeID = employeeID, StartDate = weekStart.ToString()},
-                        RepositoryAction.GetAll).Parameters)),
-                        DateTime.UtcNow.AddHours(8));
+                        ParseTimesheetsToShifts(_repository.GetAll(new TimesheetParameters(new TimesheetDTO() {UserID = userID, StartDate = weekStart.ToString()},
+                        RepositoryAction.GetAll).Parameters)));
 
                 return model;
             }
@@ -80,8 +78,7 @@ namespace Arbeidstider.Web.Framework.Services
         {
             var parameters = new TimesheetParameters(dto, RepositoryAction.GetAll).Parameters;
             return _cacheService.Get(CacheKeys.GetAllWithinRange,
-                () => _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray(),
-                DateTime.UtcNow.AddHours(8));
+                () => _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray());
         }
         
         public bool Create(TimesheetDTO dto)
@@ -97,6 +94,11 @@ namespace Arbeidstider.Web.Framework.Services
                 Logger.Error(ex.Message);
                 return false;
             }
+        }
+
+        public TimesheetDTO Update(TimesheetDTO dto)
+        {
+            return new TimesheetDTO();
         }
     }
 }

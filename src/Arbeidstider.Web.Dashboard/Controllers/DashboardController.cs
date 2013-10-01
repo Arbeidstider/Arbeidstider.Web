@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Dashboard;
@@ -16,16 +17,24 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             _timesheetService = TimesheetService.Instance;
         }
 
+        public ActionResult Flushcache()
+        {
+            CheckAdminAccess();
+            return Index();
+        }
+
         public ActionResult Index()
         {
             var model = new Index();
-            //model.CurrentWeeklyWorkHours = _timesheetService.GetWeeklyTimesheet(CurrentEmployeeID, new DateTime(2013, 9, 23));
+            model.CurrentWeeklyWorkHours = _timesheetService.GetWeeklyTimesheet(CurrentUserID, DateTime.Now);
             return View();
         }
 
         public ActionResult AddressBook()
         {
-            return View();
+            var model = new AddressBook();
+            model.Colleagues = _employeeService.GetAllEmployees(CurrentEmployee.WorkplaceID);
+            return View(model);
         }
 
         public ActionResult ConfirmShifts()
@@ -35,28 +44,25 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 
         public ActionResult Register()
         {
-            if (CurrentEmployeeID != 0)
-            {
-                var username = User.Identity.Name;
-                var employee = _employeeService.GetEmployee(username);
-                if (!employee.IsAdmin())
-                {
-                    return RedirectToAction("Unauthorized", "Error");
-                }
-            }
+            CheckAdminAccess();
             return View();
         }
 
         public JsonResult Register(EmployeeDTO dto)
         {
-            _employeeService.UpdateEmployee(dto, dto.UserID);
             return Json(true);
         }
         
-
         public ActionResult UserProfile()
         {
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult UserProfile(EmployeeDTO dto)
+        {
+            var updatedDto = _employeeService.UpdateEmployee(dto, HttpContext.User.Identity.Name);
+            return Json(new { Result = true });
         }
     }
 }

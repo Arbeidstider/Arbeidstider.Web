@@ -4,7 +4,6 @@ using System.Linq;
 using Arbeidstider.Business.Interfaces.Database;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
-using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.Factories;
 using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Business.Logic.Repository.Exceptions;
@@ -21,7 +20,7 @@ namespace Arbeidstider.Business.Logic.Repository
             _connection = Container.Resolve<IDatabaseConnection>();
         }
 
-        public IEnumerable<Employee> GetAll(List<KeyValuePair<string, object>> parameters)
+        public IEnumerable<Employee> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_ALL_EMPLOYEES, parameters);
 
@@ -31,36 +30,37 @@ namespace Arbeidstider.Business.Logic.Repository
             return EmployeeFactory.CreateArray(dt.Rows);
         }
 
-        public Employee Create(List<KeyValuePair<string, object>> parameters)
+        public bool Create(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.CREATE_EMPLOYEE, parameters);
-            if (!dt.QueryExecutedSuccessfully()) return null;
+            if (!dt.QueryExecutedSuccessfully()) throw new EmployeeRepositoryException(string.Format("Failed to create Employee with userID: {0}", parameters.Select(x => x.Key == "UserID").FirstOrDefault().ToString()));
 
-            return EmployeeFactory.Create(dt.Rows[0]);
+            return true;
         }
 
         public Employee Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_EMPLOYEE, parameters);
 
-            if (!dt.QueryExecutedSuccessfully()) throw new EmployeeRepositoryException(string.Format("Failed to get employee with username: {0}", parameters.ElementAt(0).Value));
+            if (!dt.QueryExecutedSuccessfully()) throw new EmployeeRepositoryException(string.Format("Failed to get employee with username: {0}", parameters.ElementAtOrDefault(0).Value));
 
             return EmployeeFactory.Create(dt.Rows[0]);
         }
 
-        public bool Update(List<KeyValuePair<string, object>> parameters)
+        public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.UPDATE_EMPLOYEE, parameters);
+
+            if (!dt.QueryExecutedSuccessfully()) throw new EmployeeRepositoryException(string.Format("Failed to update employee with employeeID: {0}", parameters.ElementAtOrDefault(0).Value));
 
             return true;
         }
 
-        public bool Exists(List<KeyValuePair<string, object>> parameters)
+        public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             DataTable dt = _connection.ExecuteSP(StoredProcedures.EMPLOYEE_EXISTS, parameters);
 
-            DatabaseResult result = (DatabaseResult)(int)dt.Rows[0]["Result"];
-            return result == DatabaseResult.SUCCESS;
+            return dt.QueryExecutedSuccessfully();
         }
     }
 }

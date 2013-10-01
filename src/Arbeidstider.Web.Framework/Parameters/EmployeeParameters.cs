@@ -13,6 +13,7 @@ namespace Arbeidstider.Web.Framework.Parameters
         {
             _action = action;
             _dto = dto;
+            Create();
         }
 
         public void Create()
@@ -25,6 +26,9 @@ namespace Arbeidstider.Web.Framework.Parameters
                     {
                         new KeyValuePair<string, object>("@EmployeeID", _dto.EmployeeID),
                         new KeyValuePair<string, object>("@UserID", _dto.UserID),
+                        new KeyValuePair<string, object>("@Firstname", _dto.UserID),
+                        new KeyValuePair<string, object>("@Lastname", _dto.UserID),
+                        new KeyValuePair<string, object>("@Mobile", _dto.UserID)
                     };
                     break;
                 }
@@ -36,6 +40,14 @@ namespace Arbeidstider.Web.Framework.Parameters
                     };
                     break;
                 }
+                case RepositoryAction.Get:
+                {
+                    Parameters = new List<KeyValuePair<string, object>>()
+                    {
+                        new KeyValuePair<string, object>("@Username", _dto.Username),
+                    };
+                    break;
+                }
                 case RepositoryAction.Create:
                 {
                     Parameters = new List<KeyValuePair<string, object>>()
@@ -43,7 +55,7 @@ namespace Arbeidstider.Web.Framework.Parameters
                         new KeyValuePair<string, object>("@EmployeeID", _dto.EmployeeID),
                         new KeyValuePair<string, object>("@Mobile", _dto.Mobile),
                         new KeyValuePair<string, object>("@Username", _dto.Username),
-                        new KeyValuePair<string, object>("@EmployeeGroupID", (int)(EmployeeGroup) _dto.EmployeeGroup),
+                        new KeyValuePair<string, object>("@EmployeeGroupID", (int)(EmployeeGroup) _dto.Group),
                         new KeyValuePair<string, object>("@WorkplaceID", _dto.WorkplaceID),
                         new KeyValuePair<string, object>("@UserID", _dto.UserID),
 

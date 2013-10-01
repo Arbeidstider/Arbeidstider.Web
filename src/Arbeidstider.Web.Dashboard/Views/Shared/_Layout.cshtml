@@ -1,4 +1,4 @@
-﻿@using Microsoft.VisualBasic
+﻿@using Arbeidstider.Web.Dashboard
 <!DOCTYPE html>
 <html>
   <head>
@@ -25,8 +25,8 @@
                   
                   <li class='dropdown dark user-menu'>
                     <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-                      <img width="23" height="23" alt="Henrik Gundersen" src="assets/Images/avatar.jpg" />
-                      <span class='user-name hidden-phone'>Henrik Gundersen</span>
+                      <img width="23" height="23" alt="Henrik Gundersen" src="/Assets/Images/avatar.jpg" />
+                      <span class='user-name hidden-phone'>@Html.Fullname()</span>
                       <b class='caret'></b>
                     </a>
                     <ul class='dropdown-menu'>

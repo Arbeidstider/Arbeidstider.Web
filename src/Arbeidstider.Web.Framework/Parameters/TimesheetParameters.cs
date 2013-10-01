@@ -7,12 +7,28 @@ namespace Arbeidstider.Web.Framework.Parameters
 {
     public class TimesheetParameters : IParameters
     {
-        private readonly TimesheetDTO _timesheet;
+        private readonly TimesheetDTO _timesheet = null;
         private readonly RepositoryAction _action;
+        private readonly DateTime _selectedDay;
+        private readonly TimeSpan _shiftStart;
+        private readonly TimeSpan _shiftEnd;
+        private readonly Guid _userID;
+
+
         public TimesheetParameters(TimesheetDTO timesheet, RepositoryAction action)
         {
             _action = action;
             _timesheet = timesheet;
+            Create();
+        }
+
+        public TimesheetParameters(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd, RepositoryAction action)
+        {
+            _userID = userID;
+            _selectedDay = selectedDay;
+            _shiftStart = shiftStart;
+            _shiftEnd = shiftEnd;
+            _action = action;
             Create();
         }
 
@@ -22,23 +38,37 @@ namespace Arbeidstider.Web.Framework.Parameters
             {
                 case RepositoryAction.GetAll:
                 {
+                    var startDate = DateTime.Parse(_timesheet.StartDate).Date;
                     Parameters = new List<KeyValuePair<string, object>>()
                     {
-                        new KeyValuePair<string, object>("@EmployeeID", _timesheet.EmployeeID),
-                        new KeyValuePair<string, object>("@StartDate", _timesheet.StartDate),
-                        new KeyValuePair<string, object>("@EndDate", _timesheet.EndDate),
+                        new KeyValuePair<string, object>("@UserID", _timesheet.UserID),
+                        new KeyValuePair<string, object>("@StartDate", startDate),
+                        new KeyValuePair<string, object>("@EndDate", string.IsNullOrEmpty(_timesheet.EndDate) ? startDate.AddHours(8) : DateTime.Parse(_timesheet.EndDate).Date),
                     };
                     break;
                 }
                 case RepositoryAction.Create:
                 {
-                    Parameters = new List<KeyValuePair<string, object>>()
+                    if (_timesheet != null)
                     {
-                        new KeyValuePair<string, object>("@EmployeeID", _timesheet.EmployeeID),
-                        new KeyValuePair<string, object>("@SelectedDay", _timesheet.SelectedDay),
-                        new KeyValuePair<string, object>("@ShiftStart", _timesheet.ShiftStart),
-                        new KeyValuePair<string, object>("@ShiftEnd", _timesheet.ShiftEnd)
-                    };
+                        Parameters = new List<KeyValuePair<string, object>>()
+                        {
+                            new KeyValuePair<string, object>("@UserID", _timesheet.UserID),
+                            new KeyValuePair<string, object>("@SelectedDay", _timesheet.SelectedDay),
+                            new KeyValuePair<string, object>("@ShiftStart", _timesheet.ShiftStart),
+                            new KeyValuePair<string, object>("@ShiftEnd",  _timesheet.ShiftEnd)
+                        };
+                    }
+                    else
+                    {
+                        Parameters = new List<KeyValuePair<string, object>>()
+                        {
+                            new KeyValuePair<string, object>("@UserID", _userID),
+                            new KeyValuePair<string, object>("@SelectedDay", _selectedDay),
+                            new KeyValuePair<string, object>("@ShiftStart", _shiftStart),
+                            new KeyValuePair<string, object>("@ShiftEnd", _shiftEnd)
+                        };
+                    }
                     break;
                 }
             }
@@ -52,7 +82,6 @@ namespace Arbeidstider.Web.Framework.Parameters
             {
                 case RepositoryAction.GetAll:
                 {
-                    if (_timesheet.EmployeeID == 0) throw new Exception("You have not specified a EmployeeID.");
                     //if (DateTime.Parse(_timesheet.EndDate) < DateTime.Parse(_timesheet.StartDate)) throw new Exception("The end date must be a date happening after the start date.");
                     break;
                 }

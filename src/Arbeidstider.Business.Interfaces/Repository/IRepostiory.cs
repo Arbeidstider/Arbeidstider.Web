@@ -4,10 +4,10 @@ namespace Arbeidstider.Business.Interfaces.Repository
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll(List<KeyValuePair<string, object>> parameters);
-        T Create(List<KeyValuePair<string, object>> parameters);
+        IEnumerable<T> GetAll(IEnumerable<KeyValuePair<string, object>> parameters);
+        bool Create(IEnumerable<KeyValuePair<string, object>> parameters);
         T Get(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Update(List<KeyValuePair<string, object>> parameters);
-        bool Exists(List<KeyValuePair<string, object>> parameters);
+        bool Update(IEnumerable<KeyValuePair<string, object>> parameters);
+        bool Exists(IEnumerable<KeyValuePair<string, object>> parameters);
     }
 }
