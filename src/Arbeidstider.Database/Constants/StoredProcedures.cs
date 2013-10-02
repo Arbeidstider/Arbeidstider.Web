@@ -12,5 +12,7 @@
         public static readonly string GET_USERID = "GetUserID";
         public static readonly string CREATE_EMPLOYEE = "CreateEmployee";
         public static readonly string UPDATE_EMPLOYEE = "UpdateEmployee";
+        public static readonly string GET_TIMESHEET = "GetTimesheet";
+        public static readonly string UPDATE_TIMESHEET = "UpdateTimesheet";
     }
 }

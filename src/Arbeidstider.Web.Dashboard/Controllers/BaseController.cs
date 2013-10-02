@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
-using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
 
@@ -9,6 +9,12 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class BaseController : Controller
     {
+        private readonly string[] _adminActions = {"Register", "FlushCache"};
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (_adminActions.Contains(filterContext.ActionDescriptor.ActionName))
+                CheckAdminAccess();
+        }
         protected internal Guid CurrentUserID
         {
             get

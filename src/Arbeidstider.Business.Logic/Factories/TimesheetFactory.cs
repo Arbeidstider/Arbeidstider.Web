@@ -17,7 +17,7 @@ namespace Arbeidstider.Business.Logic.Factories
                 var selectedDay = DateTime.Parse(row["SelectedDay"].ToString()).Date;
                 var scheduleEnd = (TimeSpan) row["ScheduleEnd"];
                 var scheduleStart = (TimeSpan) row["ScheduleStart"];
-
+                if (row["EmployeeScheduleEventID"] != null) timesheet.EmployeeScheduleEventID = (int) row["EmployeeScheduleEventID"];
                 timesheet.SelectedDay = selectedDay;
                 timesheet.Day = selectedDay;
                 timesheet.ShiftEnd = scheduleEnd;

@@ -22,6 +22,12 @@ namespace Arbeidstider.Web.Dashboard.App_Start
             );
 
             routes.MapRoute(
+                name: "register",
+                url: "register",
+                defaults: new { controller = "Dashboard", action = "Register"}
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",
                 defaults: new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional }

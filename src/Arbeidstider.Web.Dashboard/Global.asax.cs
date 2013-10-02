@@ -9,7 +9,6 @@ using Arbeidstider.Web.Framework;
 using Arbeidstider.Web.Framework.Scaffolding;
 using Autofac.Integration.Mvc;
 using log4net;
-using log4net.Repository.Hierarchy;
 
 namespace Arbeidstider.Web.Dashboard
 {

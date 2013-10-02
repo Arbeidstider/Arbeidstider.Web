@@ -7,5 +7,6 @@
         public static readonly string GetAllWithinRange = "GetAllWithinRange";
         public static readonly string GetAllEmployees = "GetAllEmployees";
         public static readonly string UpdateEmployee = "UpdateEmployee";
+        public static readonly string GetTimesheet = "GetTimesheet";
     }
 }

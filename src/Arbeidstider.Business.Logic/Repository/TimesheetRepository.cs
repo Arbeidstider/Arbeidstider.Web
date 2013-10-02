@@ -40,30 +40,24 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public Timesheet Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            throw new NotImplementedException();
+            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.GET_TIMESHEET, parameters);
+            if (!dt.QueryExecutedSuccessfully()) throw new TimesheetRepositoryException(string.Format("Failed to get timesheet for user with userID: {0}", parameters.ElementAtOrDefault(0).Value));
+
+            return TimesheetFactory.Create(dt.Rows[0]);
         }
 
         public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            throw new NotImplementedException();
+            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.UPDATE_TIMESHEET, parameters);
+
+            if (!dt.QueryExecutedSuccessfully()) throw new TimesheetRepositoryException("Failed to update timesheet");
+
+            return true;
         }
 
         public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             return true;
-        }
-
-        public IEnumerable<Timesheet> GetWorkplaceTimesheets(int workplaceID, Employee Employee, DateTime startDate, DateTime endDate)
-        {
-            var parameters = new List<KeyValuePair<string, object>>()
-            {
-                new KeyValuePair<string, object>("@WorkplaceID", workplaceID),
-                new KeyValuePair<string, object>("@StartDate", startDate),
-                new KeyValuePair<string, object>("@EndDate", endDate)
-            };
-
-            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.GET_WORKPLACE_TIMESHEETS, parameters);
-            return TimesheetFactory.CreateArray(dt.Rows);
         }
     }
 }

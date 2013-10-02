@@ -31,12 +31,40 @@ namespace Arbeidstider.Web.Framework.Services
             _repository = repository;
         }
 
+        public bool CreateEmployee(EmployeeDTO dto)
+        {
+            try
+            {
+                _repository.Create(new EmployeeParameters(dto, RepositoryAction.Create).Parameters);
+                return true;
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return false;
+            }
+        }
+
         public EmployeeUser GetEmployee(string username)
         {
             try
             {
-                return Cache.Get(CacheKeys.GetEmployee, 
-                    () => ParseEmployee(_repository.Get(new UserParameters(username).Parameters)));
+                return Cache.Get(CacheKeys.GetEmployee, () => new EmployeeUser(_repository.Get(new UserParameters(username).Parameters)));
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
+        }
+
+        public IEnumerable<EmployeeUser> GetAllEmployees(int workplaceID)
+        {
+            try
+            {
+                return Cache.Get(CacheKeys.GetAllEmployees, 
+                    () => (from x in _repository.GetAll(new EmployeeParameters(new EmployeeDTO() {WorkplaceID = workplaceID}, RepositoryAction.GetAll).Parameters)
+                          select new EmployeeUser(x)).ToArray());
             }
             catch (EmployeeRepositoryException ex)
             {
@@ -60,31 +88,5 @@ namespace Arbeidstider.Web.Framework.Services
                 return null;
             }
         }
-
-        public IEnumerable<EmployeeUser> GetAllEmployees(int workplaceID)
-        {
-            try
-            {
-                return Cache.Get(CacheKeys.GetAllEmployees, 
-                    () => ParseEmployees(_repository.GetAll(new EmployeeParameters(new EmployeeDTO() {WorkplaceID = workplaceID}, RepositoryAction.GetAll).Parameters)));
-            }
-            catch (EmployeeRepositoryException ex)
-            {
-                Logger.Error(ex.Message);
-                return null;
-            }
-        }
-
-        #region Private Methods
-        private static EmployeeUser ParseEmployee(Employee employee)
-        {
-            return new EmployeeUser(employee);
-        }
-
-        private static IEnumerable<EmployeeUser> ParseEmployees(IEnumerable<Employee> employees)
-        {
-            return employees.Select(x => new EmployeeUser(x)).ToArray();
-        }
-        #endregion
     }
 }

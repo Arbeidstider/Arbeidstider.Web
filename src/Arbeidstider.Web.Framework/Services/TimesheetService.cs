@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Caching;
 using Arbeidstider.Business.Logic.Domain;
@@ -54,6 +53,21 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
+        public TimesheetDTO GetTimesheet(Guid userID, DateTime selectedDay)
+        {
+            try
+            {
+                return Cache.Get(CacheKeys.GetTimesheet,
+                    () => new TimesheetDTO(_repository.Get(new TimesheetParameters(userID, selectedDay, TimeSpan.Zero, TimeSpan.Zero, RepositoryAction.Get)
+                            .Parameters)));
+            }
+            catch (TimesheetRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
+        }
+
         public IEnumerable<TimesheetDTO> GetAllWithinRange(TimesheetDTO dto)
         {
             var parameters = new TimesheetParameters(dto, RepositoryAction.GetAll).Parameters;
@@ -76,9 +90,18 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public TimesheetDTO Update(TimesheetDTO dto)
+        public bool UpdateTimesheet(TimesheetDTO updatedDTO)
         {
-            return new TimesheetDTO();
+            try
+            {
+                _repository.Update(new TimesheetParameters(updatedDTO, RepositoryAction.Update).Parameters);
+                return true;
+            }
+            catch (TimesheetRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return false;
+            }
         }
 
         #region Private Methods

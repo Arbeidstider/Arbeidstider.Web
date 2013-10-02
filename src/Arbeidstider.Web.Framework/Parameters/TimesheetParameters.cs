@@ -15,10 +15,12 @@ namespace Arbeidstider.Web.Framework.Parameters
         private readonly TimeSpan _shiftStart;
         private readonly TimeSpan _shiftEnd;
         private readonly Guid _userID;
+        private readonly int? _employeeScheduleEventID;
 
         public TimesheetParameters(TimesheetDTO dto, RepositoryAction action) : base()
         {
             _action = action;
+            if (dto.EmployeeScheduleEventID != 0) _employeeScheduleEventID = dto.EmployeeScheduleEventID;
             if (dto.UserID != Guid.Empty) _userID = dto.UserID;
             if (!string.IsNullOrEmpty(dto.StartDate)) _startDate = DateTime.Parse(dto.StartDate).Date;
             if (!string.IsNullOrEmpty(dto.EndDate)) _endDate = DateTime.Parse(dto.EndDate).Date;
@@ -41,8 +43,8 @@ namespace Arbeidstider.Web.Framework.Parameters
         {
             _userID = userID;
             _selectedDay = selectedDay;
-            _shiftStart = shiftStart;
-            _shiftEnd = shiftEnd;
+            if (shiftStart > TimeSpan.Zero) _shiftStart = shiftStart;
+            if (shiftEnd > TimeSpan.Zero)  _shiftEnd = shiftEnd;
             _action = action;
             Create();
         }
@@ -51,6 +53,15 @@ namespace Arbeidstider.Web.Framework.Parameters
         {
             switch (_action)
             {
+                case RepositoryAction.Get:
+                {
+                    Parameters = new List<KeyValuePair<string, object>>()
+                    {
+                        new KeyValuePair<string, object>("@UserID", _userID),
+                        new KeyValuePair<string, object>("@SelectedDay", _selectedDay),
+                    };
+                    break;
+                }
                 case RepositoryAction.GetAll:
                 {
                     Parameters = new List<KeyValuePair<string, object>>()
