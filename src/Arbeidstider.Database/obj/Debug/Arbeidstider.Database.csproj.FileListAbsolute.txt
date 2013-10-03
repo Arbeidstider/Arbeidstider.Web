@@ -9,3 +9,6 @@ C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\bin\Debu
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\obj\Debug\Arbeidstider.Database.csprojResolveAssemblyReference.cache
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\obj\Debug\Arbeidstider.Database.dll
 C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\obj\Debug\Arbeidstider.Database.pdb
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\bin\Debug\Arbeidstider.Database.dll.config
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\bin\Debug\log4net.dll
+C:\Users\johan\Documents\git\Arbeidstider.Web\src\Arbeidstider.Database\bin\Debug\log4net.xml

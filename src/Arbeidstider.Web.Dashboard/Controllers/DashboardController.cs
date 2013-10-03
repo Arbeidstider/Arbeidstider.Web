@@ -27,7 +27,6 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 
         public ActionResult Index()
         {
-
             var model = new Index();
             model.Shifts = _timesheetService.GetWeeklyTimesheet(CurrentUserID, DateTime.Now);
             return View();
@@ -51,6 +50,11 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             return View();
         }
 
+        [HttpGet]
+        public JsonResult ValidateEmployee(EmployeeDTO employee)
+        {
+            return Json(new {Result = true});
+        }
 
         [HttpPost]
         public ActionResult Register(string password, string email, EmployeeDTO employee)
@@ -58,10 +62,10 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             CheckAdminAccess();
             var model = new Register();
 
+            var username = employee.Username = employee.GenerateUsername();
             if (_employeeService.CreateEmployee(employee))
             {
-                var username = employee.GenerateUsername();
-                var user = Membership.CreateUser(username, password, email);
+                Membership.CreateUser(username, password, email);
                 var member = Membership.GetUser(username);
                 employee.UserID = (Guid)member.ProviderUserKey;
                 model.Success = true;

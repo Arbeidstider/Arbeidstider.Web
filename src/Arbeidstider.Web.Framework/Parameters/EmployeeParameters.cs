@@ -13,6 +13,10 @@ namespace Arbeidstider.Web.Framework.Parameters
         private readonly string _username;
         private readonly int _employeeGroupID;
         private readonly int _workplaceID;
+        private readonly string _firstname;
+        private readonly string _lastname;
+        private readonly string _email;
+
         private readonly Guid _userID;
 
         public EmployeeParameters(EmployeeDTO dto, RepositoryAction action)
@@ -21,8 +25,11 @@ namespace Arbeidstider.Web.Framework.Parameters
             _dto = dto;
             if (!string.IsNullOrEmpty(dto.Mobile)) _mobile = dto.Mobile;
             if (!string.IsNullOrEmpty(dto.Username)) _mobile = dto.Username;
+            if (!string.IsNullOrEmpty(dto.Firstname)) _firstname = dto.Firstname;
+            if (!string.IsNullOrEmpty(dto.Lastname)) _lastname = dto.Lastname;
+            if (!string.IsNullOrEmpty(dto.Email)) _email = dto.Email;
             if (dto.Group != 0) _employeeGroupID = (int) dto.Group;
-            if (dto.WorkplaceID != 0) _workplaceID = (int) dto.WorkplaceID;
+            if (dto.WorkplaceID != 0) _workplaceID = dto.WorkplaceID;
             if (dto.UserID != Guid.Empty) _userID = dto.UserID;
             Create();
         }
@@ -63,11 +70,13 @@ namespace Arbeidstider.Web.Framework.Parameters
                 {
                     Parameters = new List<KeyValuePair<string, object>>()
                     {
+                        new KeyValuePair<string, object>("@Firstname", _firstname),
+                        new KeyValuePair<string, object>("@Lastname", _lastname),
                         new KeyValuePair<string, object>("@Mobile", _mobile),
                         new KeyValuePair<string, object>("@Username", _username),
                         new KeyValuePair<string, object>("@EmployeeGroupID", _employeeGroupID),
-                        new KeyValuePair<string, object>("@WorkplaceID", _workplaceID),
                         new KeyValuePair<string, object>("@UserID", _userID),
+                        new KeyValuePair<string, object>("@WorkplaceID", _workplaceID),
                     };
 
                     break;

@@ -40,7 +40,7 @@ namespace Arbeidstider.Business.Logic.IoC
 
                 // Database
                 builder.Register(x => new DatabaseConnection(HttpContext.Current.IsDebuggingEnabled ? 
-                    Database.Constants.ConnectionStrings.DEBUG : Database.Constants.ConnectionStrings.RELEASE)).
+                    Database.Constants.ConnectionStrings.DEBUG : Database.Constants.ConnectionStrings.RELEASE, Resolve<ILog>())).
                     As<IDatabaseConnection>().
                     SingleInstance();
 

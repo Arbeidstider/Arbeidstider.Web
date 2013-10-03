@@ -14,5 +14,6 @@
         public static readonly string UPDATE_EMPLOYEE = "UpdateEmployee";
         public static readonly string GET_TIMESHEET = "GetTimesheet";
         public static readonly string UPDATE_TIMESHEET = "UpdateTimesheet";
+        public static readonly string UPDATE_EMPLOYEE_SCHEDULEVENT = "UpdateEmployeeSchduleEvent";
     }
 }

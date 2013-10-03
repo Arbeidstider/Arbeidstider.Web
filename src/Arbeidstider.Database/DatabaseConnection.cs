@@ -1,17 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Arbeidstider.Business.Interfaces.Database;
+using Arbeidstider.Database.Exceptions;
+using log4net;
 
 namespace Arbeidstider.Database
 {
     public class DatabaseConnection : IDatabaseConnection
     {
         private readonly string _connectionString;
+        private readonly ILog Logger;
 
-        public DatabaseConnection(string connectionString)
+        public DatabaseConnection(string connectionString, ILog _logger)
         {
             _connectionString = connectionString;
+            Logger = _logger;
         }
 
         public DataTable ExecuteSP(string spName, KeyValuePair<string, object> parameters)
@@ -34,10 +39,17 @@ namespace Arbeidstider.Database
                         cmd.Parameters.AddWithValue(param.Key, param.Value);
                     }
 
-                    var reader = cmd.ExecuteReader();
-
-                    dt.Load(reader);
-
+                    try
+                    {
+                        var reader = cmd.ExecuteReader();
+                        dt.Load(reader);
+                    }
+                    catch (Exception ex)
+                    {
+                       string exception = string.Format("Failed to execute stored procedure: {0}\n{1}", spName, ex.Message);
+                       Logger.Error(exception);
+                       throw new DatabaseException(exception); 
+                    }
                 }
                 conn.Close();
                 return dt;
