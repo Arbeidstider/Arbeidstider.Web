@@ -1,13 +1,15 @@
-﻿using Arbeidstider.Business.Logic.Domain;
+﻿using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Logic.Enums;
-using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Account
 {
-    public class EmployeeUser : EmployeeDTO
+    public class EmployeeUser : IEmployeeUser
     {
-        public EmployeeUser(Employee employee) : base(employee)
+        public EmployeeUser(IEmployee employee)
         {
+            WorkplaceID = employee.WorkplaceID;
+            Group = employee.EmployeeGroup;
+            Fullname = employee.Fullname;
         }
 
         public EmployeeUser()
@@ -15,19 +17,23 @@ namespace Arbeidstider.Web.Framework.ViewModels.Account
             
         }
 
+        public int WorkplaceID { get; set; }
+        public int Group { get; set; }
+        public string Fullname { get; set; }
+
         public bool IsAdmin()
         {
-            return base.Group.Equals(EmployeeGroup.Administrator);
+            return Group.Equals(EmployeeGroup.Administrator);
         }
 
         public bool IsManager()
         {
-            return base.Group.Equals(EmployeeGroup.Manager);
+            return Group.Equals(EmployeeGroup.Manager);
         }
 
         public bool HasAccessToWorkplace(int workplaceID)
         {
-            return (IsAdmin() || IsManager()) && base.WorkplaceID.Equals(workplaceID);
+            return (IsAdmin() || IsManager()) && WorkplaceID.Equals(workplaceID);
         }
     }
 }

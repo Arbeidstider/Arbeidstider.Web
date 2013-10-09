@@ -2,25 +2,24 @@
 using System.Data;
 using System.Linq;
 using Arbeidstider.Business.Interfaces.Database;
+using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Factories;
-using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Business.Logic.Repository.Constants;
 using Arbeidstider.Business.Logic.Repository.Exceptions;
-using Arbeidstider.Database.Constants;
 
 namespace Arbeidstider.Business.Logic.Repository
 {
-    public class EmployeeRepository : IRepository<Employee>
+    public class EmployeeRepository : IRepository<IEmployee>
     {
         private readonly IDatabaseConnection _connection;
 
-        public EmployeeRepository()
+        public EmployeeRepository(IDatabaseConnection connnection)
         {
-            _connection = Container.Resolve<IDatabaseConnection>();
+            _connection = connnection;
         }
 
-        public IEnumerable<Employee> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEnumerable<IEmployee> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_ALL_EMPLOYEES, parameters);
 
@@ -38,7 +37,7 @@ namespace Arbeidstider.Business.Logic.Repository
             return true;
         }
 
-        public Employee Get(IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEmployee Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             var dt = _connection.ExecuteSP(StoredProcedures.GET_EMPLOYEE, parameters);
 

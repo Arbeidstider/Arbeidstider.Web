@@ -1,22 +1,19 @@
 ﻿using System.Web.Mvc;
+using Arbeidstider.Web.Framework.Controllers;
 using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Framework.Services;
 
 namespace Arbeidstider.Web.Services.Controllers
 {
-    public class TimesheetController : BaseServiceController
+    public class TimesheetController : BaseController
     {
-        private readonly TimesheetService _timesheetservice;
-
         public TimesheetController()
         {
-            _timesheetservice = TimesheetService.Instance;
         }
 
         [HttpGet]
         public JsonResult GetAllTimesheets(TimesheetDTO dto)
         {
-            var timesheets = _timesheetservice.GetAllWithinRange(dto);
+            var timesheets = TimesheetService.GetAllWithinRange(dto);
 
             return Json(timesheets, JsonRequestBehavior.AllowGet);
         }
@@ -25,18 +22,16 @@ namespace Arbeidstider.Web.Services.Controllers
         public JsonResult CreateTimesheet(TimesheetDTO dto)
         {
             var result = new JsonResult();
-            /*
-            if (!CurrentUser.HasAccessToEmployee(timesheet.EmployeeID))
+
+            if (!CurrentEmployee.IsManager() || CurrentWorkplaceID != dto.WorkplaceID)
             {
-                result.Data = new {Result = false};
-                return result;
+                return Json(new {Result = false});
             }
-             */
 
 
             result.Data = new
             {
-                Data = _timesheetservice.Create(dto),
+                Data = TimesheetService.Create(dto),
                 Result = true
             };
 

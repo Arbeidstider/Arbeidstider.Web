@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Arbeidstider.Business.Logic.Domain;
-using Arbeidstider.Business.Logic.Enums;
-using Arbeidstider.Business.Logic.Repository.Exceptions;
+using EmployeeRepositoryException = Arbeidstider.Business.Logic.Repository.Exceptions.EmployeeRepositoryException;
 
 namespace Arbeidstider.Business.Logic.Factories
 {
@@ -21,7 +20,7 @@ namespace Arbeidstider.Business.Logic.Factories
                 Employee.Username = (string) row["Username"];
                 Employee.UserID = Guid.Parse(row["UserID"].ToString());
                 Employee.WorkplaceID = (int) row["WorkplaceID"];
-                Employee.EmployeeGroup = (EmployeeGroup)(int) row["EmployeeGroupID"];
+                Employee.EmployeeGroup = (int) row["EmployeeGroupID"];
 
                 return Employee;
             }

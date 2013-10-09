@@ -1,10 +1,8 @@
 ﻿using System;
+using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Logic.Domain;
-using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Business.Logic.IoC;
 using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Framework.Parameters;
 
 namespace Arbeidstider.Web.Framework.Scaffolding
 {
@@ -12,7 +10,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
     {
         public static void Scaffold(Guid userID, DateTime[] dates, TimeSpan[] shifts)
         {
-            var repository = Container.Resolve<IRepository<Timesheet>>();
+            var repository = Container.Resolve<IRepository<ITimesheet>>();
             for (int i = 0; i < dates.Length; i++)
             {
                 var uid = userID;
@@ -21,8 +19,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
                 var shiftEnd = new TimeSpan();
                 shiftStart = shifts[0];
                 shiftEnd = shifts[1];
-                var parameters = new TimesheetParameters(uid, selectedDay, shiftStart, shiftEnd, RepositoryAction.Create);
-                repository.Create(parameters.Parameters);
+                repository.Create(new TimesheetDTO() { UserID = userID, SelectedDay = selectedDay, ShiftStart = shiftStart, ShiftEnd = shiftEnd}.Parameters());
             }
         }
     }

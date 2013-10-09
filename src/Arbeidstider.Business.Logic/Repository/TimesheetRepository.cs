@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Arbeidstider.Business.Interfaces.Database;
+using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Factories;
-using Arbeidstider.Business.Logic.IoC;
+using Arbeidstider.Business.Logic.Repository.Constants;
 using Arbeidstider.Business.Logic.Repository.Exceptions;
 
 namespace Arbeidstider.Business.Logic.Repository
 {
-    public class TimesheetRepository : IRepository<Timesheet>
+    public class TimesheetRepository : RepositoryBase, IRepository<ITimesheet>
     {
         private readonly IDatabaseConnection _connection;
-
-        public TimesheetRepository()
+        public TimesheetRepository(IDatabaseConnection connection)
         {
-            _connection = Container.Resolve<IDatabaseConnection>();
+            _connection = connection;
         }
 
-        public IEnumerable<Timesheet> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEnumerable<ITimesheet> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.GET_ALL_TIMESHEETS, parameters);
+            var dt = Database.ExecuteSP(StoredProcedures.GET_ALL_TIMESHEETS, parameters);
             if (!dt.QueryExecutedSuccessfully()) 
                 throw new TimesheetRepositoryException(string.Format("Failed to GetAll with parameters: {0}", parameters.ElementAtOrDefault(0).Value));
 
@@ -30,7 +28,7 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public bool Create(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
+            var dt = Database.ExecuteSP(StoredProcedures.CREATE_NEW_TIMESHEET, parameters);
 
             if (!dt.QueryExecutedSuccessfully())
                 throw new TimesheetRepositoryException("Failed to create new timesheet");
@@ -38,9 +36,9 @@ namespace Arbeidstider.Business.Logic.Repository
             return true;
         }
 
-        public Timesheet Get(IEnumerable<KeyValuePair<string, object>> parameters)
+        public ITimesheet Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.GET_TIMESHEET, parameters);
+            var dt = Database.ExecuteSP(StoredProcedures.GET_TIMESHEET, parameters);
             if (!dt.QueryExecutedSuccessfully()) throw new TimesheetRepositoryException(string.Format("Failed to get timesheet for user with userID: {0}", parameters.ElementAtOrDefault(0).Value));
 
             return TimesheetFactory.Create(dt.Rows[0]);
@@ -48,7 +46,7 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _connection.ExecuteSP(Database.Constants.StoredProcedures.UPDATE_TIMESHEET, parameters);
+            var dt = Database.ExecuteSP(StoredProcedures.UPDATE_TIMESHEET, parameters);
 
             if (!dt.QueryExecutedSuccessfully()) throw new TimesheetRepositoryException("Failed to update timesheet");
 

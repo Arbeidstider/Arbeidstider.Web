@@ -3,9 +3,9 @@ using System.Reflection;
 using System.Web;
 using Arbeidstider.Business.Interfaces.Caching;
 using Arbeidstider.Business.Interfaces.Database;
+using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Caching;
-using Arbeidstider.Business.Logic.Domain;
 using Arbeidstider.Business.Logic.Repository;
 using Arbeidstider.Database;
 using Autofac;
@@ -27,8 +27,8 @@ namespace Arbeidstider.Business.Logic.IoC
                 builder.RegisterControllers(Assembly.GetCallingAssembly());
 
                 // Repositories
-                builder.RegisterType<EmployeeRepository>().As<IRepository<Employee>>().SingleInstance();
-                builder.RegisterType<TimesheetRepository>().As<IRepository<Timesheet>>().SingleInstance();
+                builder.RegisterType<EmployeeRepository>().As<IRepository<IEmployee>>().SingleInstance();
+                builder.RegisterType<TimesheetRepository>().As<IRepository<ITimesheet>>().SingleInstance();
 
                 // Caching
                 builder.RegisterType<CacheService>().As<ICacheService>().SingleInstance();
@@ -39,8 +39,7 @@ namespace Arbeidstider.Business.Logic.IoC
                     new DateTime() : DateTime.UtcNow.AddHours(8))).As<ICacheService>().SingleInstance();
 
                 // Database
-                builder.Register(x => new DatabaseConnection(HttpContext.Current.IsDebuggingEnabled ? 
-                    Database.Constants.ConnectionStrings.DEBUG : Database.Constants.ConnectionStrings.RELEASE, Resolve<ILog>())).
+                builder.Register(x => new DatabaseConnection(Resolve<ILog>())).
                     As<IDatabaseConnection>().
                     SingleInstance();
 

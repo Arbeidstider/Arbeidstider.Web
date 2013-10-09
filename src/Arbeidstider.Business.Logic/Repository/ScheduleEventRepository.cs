@@ -13,7 +13,7 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public bool Create(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            throw new System.NotImplementedException();
+            return true;
         }
 
         public ScheduleEvent Get(IEnumerable<KeyValuePair<string, object>> parameters)
@@ -23,6 +23,8 @@ namespace Arbeidstider.Business.Logic.Repository
 
         public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
+            var dt = Database.ExecuteSP(Constants.StoredProcedures.UPDATE_TIMESHEET, parameters);
+            return true;
         }
 
         public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)

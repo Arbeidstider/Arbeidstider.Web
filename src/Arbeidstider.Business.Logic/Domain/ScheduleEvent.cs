@@ -1,5 +1,5 @@
 ﻿using System;
-using Arbeidstider.Web.Framework.ViewModels.Timesheet;
+using Arbeidstider.Business.Interfaces.Domain;
 
 namespace Arbeidstider.Business.Logic.Domain
 {
@@ -8,6 +8,6 @@ namespace Arbeidstider.Business.Logic.Domain
         public ScheduleEvent() {}
         public int EmployeeScheduleEventD { get; set; }
         public DateTime SelectedDay { get; set; }
-        public EmployeeShift Shift { get; set; }
+        public IEmployeeShift Shift { get; set; }
     }
 }

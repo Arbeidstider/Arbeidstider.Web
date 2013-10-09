@@ -20,6 +20,7 @@ namespace Arbeidstider.Business.Logic.Factories
                 if (row["EmployeeScheduleEventID"] != null) timesheet.EmployeeScheduleEventID = (int) row["EmployeeScheduleEventID"];
                 timesheet.SelectedDay = selectedDay;
                 timesheet.Day = selectedDay;
+                timesheet.UserID = (Guid)row["userID"];
                 timesheet.ShiftEnd = scheduleEnd;
                 timesheet.ShiftStart = scheduleStart;
                 return timesheet;

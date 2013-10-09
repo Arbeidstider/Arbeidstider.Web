@@ -1,10 +1,8 @@
 ﻿using System;
+using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Business.Interfaces.Repository;
 using Arbeidstider.Business.Logic.Domain;
-using Arbeidstider.Business.Logic.Enums;
 using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Framework.Parameters;
-using Arbeidstider.Web.Framework.Services;
 
 namespace Arbeidstider.Web.Framework.Scaffolding
 {
@@ -28,8 +26,7 @@ namespace Arbeidstider.Web.Framework.Scaffolding
 
         public static void Run()
         {
-            var parameters = new EmployeeParameters(new EmployeeDTO() {WorkplaceID = 1}, RepositoryAction.GetAll);
-            var employees = IoC.Resolve<IRepository<Employee>>().GetAll(parameters.Parameters);
+            var employees = IoC.Resolve<IRepository<IEmployee>>().GetAll(EmployeeDTO.Create(workplaceID: 1).Parameters());
             if (employees == null) return;
             foreach (var employee in employees)
             {

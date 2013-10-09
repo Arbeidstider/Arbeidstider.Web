@@ -5,7 +5,7 @@
     ViewBag.Title = "Log in";
 }
 
-@using (Html.BeginForm(new RouteValueDictionary() {  { "controller", "Account"}, { "action", "login"}} ))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)

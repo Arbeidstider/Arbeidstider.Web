@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
+using Arbeidstider.Web.Dashboard.Filters;
+using Arbeidstider.Web.Framework.Controllers;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.Services;
-using Arbeidstider.Web.Framework.ViewModels.Account;
 using Arbeidstider.Web.Framework.ViewModels.Dashboard;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
@@ -19,9 +20,9 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             _timesheetService = TimesheetService.Instance;
         }
 
+        [AdminAccess]
         public ActionResult Flushcache()
         {
-            CheckAdminAccess();
             return Index();
         }
 
@@ -44,34 +45,41 @@ namespace Arbeidstider.Web.Dashboard.Controllers
             return View();
         }
 
+        [AdminAccess]
         public ActionResult Register()
         {
-            CheckAdminAccess();
             return View();
         }
 
         [HttpGet]
+        [AdminAccess]
         public JsonResult ValidateEmployee(EmployeeDTO employee)
         {
             return Json(new {Result = true});
         }
 
+        [AdminAccess]
         [HttpPost]
-        public ActionResult Register(string password, string email, EmployeeDTO employee)
+        public ActionResult Register(NewEmployee employee)
         {
-            CheckAdminAccess();
-            var model = new Register();
-
-            var username = employee.Username = employee.GenerateUsername();
-            if (_employeeService.CreateEmployee(employee))
+            var username = employee.GenerateUsername();
+            var password = employee.GeneratePassword();
+            Membership.CreateUser(username, password);
+            var member = Membership.GetUser(username);
+            if (_employeeService.CreateEmployee(
+                EmployeeDTO.Create(
+                username: username, 
+                userID: (Guid)member.ProviderUserKey,
+                lastname: employee.Lastname,
+                firstname: employee.Firstname,
+                mobile: employee.Mobile,
+                birthdate: employee.BirthDate
+                )))
             {
-                Membership.CreateUser(username, password, email);
-                var member = Membership.GetUser(username);
-                employee.UserID = (Guid)member.ProviderUserKey;
-                model.Success = true;
+                employee.Success = true;
             }
 
-            return View(model);
+            return View(employee);
         }
         
         public ActionResult UserProfile()
@@ -82,7 +90,6 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         [HttpPost]
         public JsonResult UserProfile(EmployeeDTO dto)
         {
-            var updatedDto = _employeeService.UpdateEmployee(dto, HttpContext.User.Identity.Name);
             return Json(new { Result = true });
         }
     }

@@ -28,7 +28,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DECE6
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Unit Tests", "4. Unit Tests", "{AD0D1E6D-A351-4F95-9A05-246EA000282F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arbeidstider.Web.UnitTests", "Arbeidstider.Web.UnitTests\Arbeidstider.Web.UnitTests.csproj", "{60F62090-0C9D-49C7-AC01-A6F6204A296E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{178356F3-3185-419D-8F94-8F7AD14E16EF}"
+	ProjectSection(SolutionItems) = preProject
+		Arbeidstider.vsmdi = Arbeidstider.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Arbeidstider.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -62,6 +76,10 @@ Global
 		{134152A9-4D12-44E9-8A13-3E48128B4CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{134152A9-4D12-44E9-8A13-3E48128B4CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{134152A9-4D12-44E9-8A13-3E48128B4CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60F62090-0C9D-49C7-AC01-A6F6204A296E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F62090-0C9D-49C7-AC01-A6F6204A296E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F62090-0C9D-49C7-AC01-A6F6204A296E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F62090-0C9D-49C7-AC01-A6F6204A296E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +92,7 @@ Global
 		{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067} = {FD91A673-588F-47A5-8067-ACD12589D97A}
 		{3517ED30-6C90-4335-AC9C-9003C6D44003} = {FD91A673-588F-47A5-8067-ACD12589D97A}
 		{134152A9-4D12-44E9-8A13-3E48128B4CE4} = {FD91A673-588F-47A5-8067-ACD12589D97A}
+		{60F62090-0C9D-49C7-AC01-A6F6204A296E} = {AD0D1E6D-A351-4F95-9A05-246EA000282F}
+		{178356F3-3185-419D-8F94-8F7AD14E16EF} = {AD0D1E6D-A351-4F95-9A05-246EA000282F}
 	EndGlobalSection
 EndGlobal

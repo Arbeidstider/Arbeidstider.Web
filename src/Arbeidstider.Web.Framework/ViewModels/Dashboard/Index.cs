@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Arbeidstider.Web.Framework.ViewModels.Timesheet;
+﻿using System.Collections.Generic;
+using Arbeidstider.Business.Interfaces.Domain;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Dashboard
 {
     public class Index
     {
-        public IEnumerable<KeyValuePair<DateTime, EmployeeShift>> Shifts  { get; set; }
+        public IEnumerable<IEmployeeShift> Shifts  { get; set; }
     }
 }

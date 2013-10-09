@@ -5,7 +5,7 @@ namespace Arbeidstider.Business.Logic.Domain
 {
     public class Timesheet : ITimesheet
     {
-        public int EmployeeID { get; set; }
+        public Guid UserID { get; set; } 
         public int EmployeeScheduleEventID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

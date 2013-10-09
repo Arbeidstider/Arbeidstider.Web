@@ -31,6 +31,19 @@ namespace Arbeidstider.Business.Logic.Caching
             }
         }
 
+        public void Invalidate(string cacheID)
+        {
+            List<string> toRemove = new List<string>();
+            foreach (DictionaryEntry cacheItem in HttpRuntime.Cache) {
+                if (cacheItem.Key.Equals(cacheID))
+                    toRemove.Add(cacheItem.Key.ToString());
+            }
+
+            foreach (string key in toRemove) {
+                HttpRuntime.Cache.Remove(key);
+            }
+        }
+
         public T Get<T>(string cacheID, Func<T> getItemCallback) where T : class
         {
             T item = HttpRuntime.Cache.Get(cacheID) as T;

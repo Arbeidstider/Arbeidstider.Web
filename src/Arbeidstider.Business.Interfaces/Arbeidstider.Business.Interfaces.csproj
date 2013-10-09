@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arbeidstider.Business.Logic">
+      <HintPath>..\Arbeidstider.Business.Logic\bin\Debug\Arbeidstider.Business.Logic.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,14 +46,21 @@
     <Compile Include="Caching\ICache.cs" />
     <Compile Include="Caching\ICacheService.cs" />
     <Compile Include="Database\IDatabaseConnection.cs" />
+    <Compile Include="Domain\EmployeeShift.cs" />
     <Compile Include="Domain\IEmployee.cs" />
+    <Compile Include="Domain\IEmployeeUser.cs" />
     <Compile Include="Domain\ITimesheet.cs" />
+    <Compile Include="ViewModels\ITimesheetModel.cs" />
+    <Compile Include="ViewModels\IViewmodel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepostiory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

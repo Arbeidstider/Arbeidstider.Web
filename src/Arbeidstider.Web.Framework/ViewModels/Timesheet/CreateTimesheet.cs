@@ -1,23 +1,16 @@
 ﻿using System;
-using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
 {
-    public class CreateTimesheet : ITimesheet
+    public class CreateTimesheet
     {
         public CreateTimesheet(TimesheetDTO dto)
         {
-            SelectedDay = DateTime.Parse(dto.SelectedDay);
-            ShiftStart = TimeSpan.Parse(dto.ShiftStart);
-            ShiftEnd = TimeSpan.Parse(dto.ShiftEnd);
         }
 
         public CreateTimesheet(int employeeID, DateTime weekStart)
         {
-            EmployeeID = employeeID;
-            StartDate = weekStart;
-            EndDate = weekStart.AddDays(6);
         }
 
         public int EmployeeID { get; set; }
