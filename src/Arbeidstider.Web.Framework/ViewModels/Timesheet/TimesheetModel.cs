@@ -1,4 +1,6 @@
-﻿using Arbeidstider.Business.Interfaces.Domain;
+﻿using System;
+using Arbeidstider.DataAccess.Domain;
+using Arbeidstider.Web.Framework.ViewModels.Account;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
 {
@@ -8,11 +10,13 @@ namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
         {
             Employee = EmployeeService.GetEmployee(domain.UserID);
             Shift = new EmployeeShift(domain);
+            SelectedDay = domain.SelectedDay;
             Logger.Debug("Created timesheetmodel with userID: " + domain.UserID);
         }
 
-        public IEmployeeUser Employee { get; set; }
-        public IEmployeeShift Shift { get; set; }
+        public DateTime SelectedDay { get; private set; }
+        public EmployeeUser Employee { get; private set; }
+        public EmployeeShift Shift { get; private set; }
 
         /* Timesheet Properties for JSON */
         /*

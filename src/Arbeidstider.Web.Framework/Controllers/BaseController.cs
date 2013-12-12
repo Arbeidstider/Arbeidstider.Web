@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using Arbeidstider.Business.Interfaces.Domain;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
 using log4net;
@@ -33,7 +32,7 @@ namespace Arbeidstider.Web.Framework.Controllers
             }
         }
 
-        protected internal IEmployeeUser CurrentEmployee
+        protected internal EmployeeUser CurrentEmployee
         {
             get
             {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arbeidstider.Business.Interfaces.Domain;
-using Arbeidstider.Business.Interfaces.Repository;
-using Arbeidstider.Business.Logic.Caching;
-using Arbeidstider.Business.Logic.Repository.Exceptions;
+using Arbeidstider.Cache;
+using Arbeidstider.DataAccess.Domain;
+using Arbeidstider.DataAccess.Repository;
+using Arbeidstider.DataAccess.Repository.Exceptions;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.ViewModels.Timesheet;
 
@@ -37,14 +37,20 @@ namespace Arbeidstider.Web.Framework.Services
         /// <param name="username"></param>
         /// <param name="weekStart">The day that the work week starts, usually monday.</param>
         /// <returns></returns>
-        public IEnumerable<IEmployeeShift> GetWeeklyTimesheet(Guid userID, DateTime weekStart)
+        public IEnumerable<IEmployeeShift> GetWeeklyShifts(Guid userID, DateTime weekStart)
         {
+            if (userID == Guid.Empty || weekStart == new DateTime()) 
+                throw new Exception("Null parameters were sent to GetWeeklyTimesheet");
+
+            var parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("UserID", userID));
+            parameters.Add(new KeyValuePair<string, object>("StartDate", weekStart));
+            parameters.Add(new KeyValuePair<string, object>("EndDate", weekStart.AddDays(6)));
+
             try
             {
-                return Cache.Get(CacheKeys.GetWeeklyTimesheet, () =>
-                    (from x in
-                        _repository.GetAll(TimesheetDTO.Create(userID: userID, startDate: weekStart).Parameters())
-                        select new EmployeeShift(x)).ToArray());
+                return Cache.Get(CacheKeys.GetWeeklyTimesheet,
+                                 () => _getWeeklyTimesheet(parameters));
             }
             catch (TimesheetRepositoryException ex)
             {
@@ -52,13 +58,24 @@ namespace Arbeidstider.Web.Framework.Services
                 return null;
             }
         }
+
+        #region GetWeeklyTimesheet Callback
+        private IEnumerable<IEmployeeShift> _getWeeklyTimesheet(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            return (from x in _repository.GetAll(parameters)
+                        select new EmployeeShift(x)).ToArray();
+        }
+        #endregion
 
         public TimesheetModel GetTimesheet(Guid userID, DateTime selectedDay)
         {
+            var parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("UserID", userID));
+            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay));
             try
             {
                 return Cache.Get(CacheKeys.GetTimesheet,
-                    () => new TimesheetModel(_repository.Get(TimesheetDTO.Create(userID: userID, selectedDay: selectedDay).Parameters())));
+                                 () => _getTimesheet(parameters));
             }
             catch (TimesheetRepositoryException ex)
             {
@@ -67,17 +84,42 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public IEnumerable<TimesheetModel> GetAllWithinRange(TimesheetDTO dto)
+        #region GetTimesheet Callback
+        private TimesheetModel _getTimesheet(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return Cache.Get(CacheKeys.GetAllWithinRange,
-                () => _repository.GetAll(dto.Parameters()).Select(x => new TimesheetModel(x)).ToArray());
+            return new TimesheetModel(_repository.Get(parameters));
         }
-        
+        #endregion
+
+        public IEnumerable<TimesheetModel> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
+        {
+            var parameters = new List<KeyValuePair<string, object>>
+                                 {
+                                     new KeyValuePair<string, object>("StartDate", startDate),
+                                     new KeyValuePair<string, object>("EndDate", endDate),
+                                     new KeyValuePair<string, object>("UserID", userID)
+                                 };
+            return Cache.Get(CacheKeys.GetAllWithinRange,
+                () => _getAllWithinRange(parameters));
+        }
+
+        #region GetAllWithinRange Callback
+        private IEnumerable<TimesheetModel> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            return _repository.GetAll(parameters).Select(x => new TimesheetModel(x)).ToArray();
+        }
+        #endregion
+
         public bool Create(TimesheetDTO dto)
         {
+            var parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("UserID", dto.UserID));
+            parameters.Add(new KeyValuePair<string, object>("SelectedDay", dto.SelectedDay));
+            parameters.Add(new KeyValuePair<string, object>("ShiftStart", dto.ShiftStart));
+            parameters.Add(new KeyValuePair<string, object>("ShiftEnd", dto.ShiftEnd));
             try
             {
-                _repository.Create(dto.Parameters());
+                _repository.Create(parameters);
                 return true;
             }
             catch (TimesheetRepositoryException ex)
@@ -87,12 +129,13 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public bool UpdateTimesheet(TimesheetDTO updatedDTO)
+        public bool UpdateTimesheet(Guid employeeScheduleEventID, DateTime selectedDate, TimeSpan startShift, TimeSpan endShift)
         {
+            var parameters = new List<KeyValuePair<string, object>>();
             try
             {
-                _repository.Update(updatedDTO.Parameters());
-                InvalidateTimesheetCache();
+                if (_repository.Update(parameters))
+                    InvalidateTimesheetCache();
                 return true;
             }
             catch (TimesheetRepositoryException ex)

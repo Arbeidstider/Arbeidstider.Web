@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Arbeidstider.Business.Interfaces.Domain;
+using Arbeidstider.DataAccess.Domain;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Dashboard
 {

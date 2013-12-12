@@ -2,19 +2,12 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using Arbeidstider.Web.Framework.Controllers;
-using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.ViewModels.Account;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly EmployeeService _employeeService;
-        public AccountController()
-        {
-            _employeeService = EmployeeService.Instance;
-        }
-
         public ActionResult Login()
         {
             return View();
@@ -26,7 +19,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         {
             if (EmployeeService.ValidateEmployee(model.UserName, model.Password))
             {
-                var employee = _employeeService.GetEmployee(model.UserName);
+                var employee = EmployeeService.GetEmployee(model.UserName);
                 if (employee != null)
                 {
                     AuthenicateAndRedirect(model);

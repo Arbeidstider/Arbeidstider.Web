@@ -1,4 +1,4 @@
-﻿using Arbeidstider.Business.Interfaces.Caching;
+﻿using Arbeidstider.Cache;
 
 namespace Arbeidstider.Web.Framework
 {

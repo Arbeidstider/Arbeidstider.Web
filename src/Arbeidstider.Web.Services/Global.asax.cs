@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Arbeidstider.Web.Framework;
 using Arbeidstider.Web.Services.App_Start;
 
 namespace Arbeidstider.Web.Services
@@ -16,6 +17,7 @@ namespace Arbeidstider.Web.Services
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            IoC.Initialize();
         }
 
         protected void Application_Error()

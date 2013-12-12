@@ -9,6 +9,7 @@ namespace Arbeidstider.Web.Framework.ViewModels.Dashboard
         public string Mobile { get; set; }
         public string BirthDate { get; set; }
         public int EmployeeGroup { get; set; }
+        public int WorkplaceID { get; set; }
 
         public string GenerateUsername()
         {
@@ -16,13 +17,13 @@ namespace Arbeidstider.Web.Framework.ViewModels.Dashboard
             string month = BirthDate.Substring(3, 2);
             string firstname = Firstname.Substring(0, 2);
             string lastname = Lastname.Substring(0, 2);
-            return firstname + lastname + day + month;
+            return firstname.ToLower() + lastname.ToLower() + day + month;
         }
 
         public bool? Success { get; set; }
         public string GeneratePassword()
         {
-            return "test123";
+            return "Test123!";
         }
     }
 }

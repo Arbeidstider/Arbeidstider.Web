@@ -1,4 +1,4 @@
-﻿using Arbeidstider.Business.Logic.IoC;
+﻿using Arbeidstider.IoC;
 
 namespace Arbeidstider.Web.Framework
 {

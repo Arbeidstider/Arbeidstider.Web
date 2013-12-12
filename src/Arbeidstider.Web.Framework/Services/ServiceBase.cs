@@ -1,4 +1,4 @@
-﻿using Arbeidstider.Business.Interfaces.Caching;
+﻿using Arbeidstider.Cache;
 using log4net;
 
 namespace Arbeidstider.Web.Framework.Services

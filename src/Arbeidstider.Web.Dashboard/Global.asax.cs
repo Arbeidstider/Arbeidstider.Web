@@ -6,15 +6,11 @@ using System.Web.Routing;
 using Arbeidstider.Web.Dashboard.App_Start;
 using Arbeidstider.Web.Dashboard.Controllers;
 using Arbeidstider.Web.Framework;
-using Arbeidstider.Web.Framework.Scaffolding;
 using Autofac.Integration.Mvc;
 using log4net;
 
 namespace Arbeidstider.Web.Dashboard
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -25,8 +21,12 @@ namespace Arbeidstider.Web.Dashboard
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            Initialize();
+        }
+
+        private static void Initialize()
+        {
             IoC.Initialize();
-            Data.Run();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(IoC.BaseContainer));
         }
 
@@ -59,7 +59,7 @@ namespace Arbeidstider.Web.Dashboard
             routeData.Values.Add("statusCode", statusCode);
             routeData.Values.Add("exception", lastError);
 
-            IoC.Resolve<ILog>().Error(lastError.Message);
+            LogManager.GetLogger("FileLogger").Error(lastError.Message);
             IController controller = new ErrorController();
 
             RequestContext requestContext = new RequestContext(new HttpContextWrapper(Context), routeData);

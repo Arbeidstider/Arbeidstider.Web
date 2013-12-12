@@ -1,5 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Arbeidstider.Web.Dashboard.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <PublishDatabases>false</PublishDatabases>
+    <PackageAsSingleFile>false</PackageAsSingleFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Arbeidstider.Web.Dashboard.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,7 +65,8 @@
     <PublishDatabases>false</PublishDatabases>
     <DeployIisAppPath>Arbeidstider.Web.Dashboard</DeployIisAppPath>
     <ExcludeApp_Data>true</ExcludeApp_Data>
-    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
+    <ExcludeGeneratedDebugSymbol>false</ExcludeGeneratedDebugSymbol>
+    <PackageAsSingleFile>true</PackageAsSingleFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -58,7 +93,13 @@
     <Reference Include="log4net, Version=1.2.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -137,76 +178,7 @@
   <ItemGroup>
     <Content Include="App_Readme\Release Notes 1.5.txt" />
     <Content Include="App_Readme\RequestReduce.readme.txt" />
-    <Content Include="Assets\fonts\fontawesome-webfont.svg" />
-    <Content Include="Assets\fonts\montserrat-bold-webfont.svg" />
-    <Content Include="Assets\fonts\montserrat-regular-webfont.svg" />
-    <Content Include="Assets\images\ajax-loaders\1.gif" />
-    <Content Include="Assets\images\ajax-loaders\10.gif" />
-    <Content Include="Assets\images\ajax-loaders\11.gif" />
-    <Content Include="Assets\images\ajax-loaders\12.gif" />
-    <Content Include="Assets\images\ajax-loaders\13.gif" />
-    <Content Include="Assets\images\ajax-loaders\14.gif" />
-    <Content Include="Assets\images\ajax-loaders\15.gif" />
-    <Content Include="Assets\images\ajax-loaders\16.gif" />
-    <Content Include="Assets\images\ajax-loaders\17.gif" />
-    <Content Include="Assets\images\ajax-loaders\18.gif" />
-    <Content Include="Assets\images\ajax-loaders\2.gif" />
-    <Content Include="Assets\images\ajax-loaders\3.gif" />
-    <Content Include="Assets\images\ajax-loaders\4.gif" />
-    <Content Include="Assets\images\ajax-loaders\5.gif" />
-    <Content Include="Assets\images\ajax-loaders\6.gif" />
-    <Content Include="Assets\images\ajax-loaders\7.gif" />
-    <Content Include="Assets\images\ajax-loaders\8.gif" />
-    <Content Include="Assets\images\ajax-loaders\9.gif" />
-    <Content Include="Assets\images\avatar%402x.jpg" />
-    <Content Include="Assets\images\avatar.jpg" />
-    <Content Include="Assets\images\bootstrap\glyphicons-halflings-white.png" />
-    <Content Include="Assets\images\bootstrap\glyphicons-halflings.png" />
-    <Content Include="Assets\images\emails\logomail.png" />
-    <Content Include="Assets\images\emails\logomailhvit.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_glass_75_ffffff_1x400.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Assets\images\jquery_ui\ui-bg_inset-soft_95_fef1ec_1x100.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_222222_256x240.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_454545_256x240.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_888888_256x240.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Assets\images\jquery_ui\ui-icons_f6cf3b_256x240.png" />
-    <Content Include="Assets\images\meta_icons\apple-touch-icon-114x114.png" />
-    <Content Include="Assets\images\meta_icons\apple-touch-icon-144x144.png" />
-    <Content Include="Assets\images\meta_icons\apple-touch-icon-57x57.png" />
-    <Content Include="Assets\images\meta_icons\apple-touch-icon-72x72.png" />
-    <Content Include="Assets\images\meta_icons\apple-touch-icon.png" />
     <Content Include="Assets\images\meta_icons\favicon.ico" />
-    <Content Include="Assets\images\plugins\bootstrap_colorpicker\alpha.png" />
-    <Content Include="Assets\images\plugins\bootstrap_colorpicker\hue.png" />
-    <Content Include="Assets\images\plugins\bootstrap_colorpicker\saturation.png" />
-    <Content Include="Assets\images\plugins\dynatree\icons.gif" />
-    <Content Include="Assets\images\plugins\dynatree\loading.gif" />
-    <Content Include="Assets\images\plugins\flags\flags.png" />
-    <Content Include="Assets\images\plugins\naked_password\f0.png" />
-    <Content Include="Assets\images\plugins\naked_password\f1.png" />
-    <Content Include="Assets\images\plugins\naked_password\f2.png" />
-    <Content Include="Assets\images\plugins\naked_password\f3.png" />
-    <Content Include="Assets\images\plugins\naked_password\f4.png" />
-    <Content Include="Assets\images\plugins\naked_password\f5.png" />
-    <Content Include="Assets\images\plugins\naked_password\m0.png" />
-    <Content Include="Assets\images\plugins\naked_password\m1.png" />
-    <Content Include="Assets\images\plugins\naked_password\m2.png" />
-    <Content Include="Assets\images\plugins\naked_password\m3.png" />
-    <Content Include="Assets\images\plugins\naked_password\m4.png" />
-    <Content Include="Assets\images\plugins\naked_password\m5.png" />
-    <Content Include="Assets\images\plugins\select2\select2.png" />
-    <Content Include="Assets\images\plugins\select2\select2x2.png" />
-    <Content Include="Assets\images\plugins\select2\spinner.gif" />
-    <Content Include="Assets\images\plugins\xeditable\clear.png" />
-    <Content Include="Assets\images\plugins\xeditable\loading.gif" />
     <Content Include="Assets\javascripts\bootstrap\bootstrap.js" />
     <Content Include="Assets\javascripts\bootstrap\bootstrap.min.js" />
     <Content Include="Assets\javascripts\dashboard.js" />
@@ -345,15 +317,12 @@
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\about\dialogs\about.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\div\dialogs\div.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\fakeobjects\images\spacer.gif" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\find\dialogs\find.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\flash\dialogs\flash.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\flash\images\placeholder.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\button.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\checkbox.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\form.js" />
@@ -362,57 +331,16 @@
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\select.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\textarea.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\dialogs\textfield.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\forms\images\hiddenfield.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\icons.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\iframe\dialogs\iframe.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\iframe\images\placeholder.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\image\dialogs\image.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\image\images\noimage.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\link\dialogs\anchor.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\link\dialogs\link.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\link\images\anchor.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\magicline\images\icon.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\pastefromword\filter\default.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\preview\preview.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\scayt\dialogs\options.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\scayt\dialogs\toolbar.css" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_address.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_blockquote.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_div.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h1.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h2.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h3.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h4.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h5.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_h6.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_p.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\block_pre.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\dialogs\smiley.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\angel_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\angry_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\broken_heart.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\confused_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\cry_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\devil_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\envelope.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\heart.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\kiss.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\lightbulb.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\omg_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\regular_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\sad_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\shades_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\teeth_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\thumbs_down.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\thumbs_up.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\tongue_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\tounge_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\wink_smile.gif" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
@@ -449,9 +377,6 @@
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\dialogs\templates.css" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\dialogs\templates.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\templates\default.js" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\templates\images\template1.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\templates\images\template2.gif" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\plugins\templates\templates\images\template3.gif" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\wsc\dialogs\ciframe.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\plugins\wsc\dialogs\wsc.css" />
@@ -459,10 +384,8 @@
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\ajax.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\api.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\appendto.html" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\samples\assets\inlineall\logo.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\assets\outputxhtml\outputxhtml.css" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\assets\sample.css" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\samples\assets\sample.jpg" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\assets\uilanguages\languages.js" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\datafiltering.html" />
     <Content Include="Assets\javascripts\plugins\ckeditor\samples\divreplace.html" />
@@ -500,10 +423,6 @@
     <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\editor_ie7.css" />
     <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\editor_ie8.css" />
     <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\editor_iequirks.css" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\icons.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\images\arrow.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\images\close.png" />
-    <Content Include="Assets\javascripts\plugins\ckeditor\skins\moono\images\mini.png" />
     <Content Include="Assets\javascripts\plugins\ckeditor\styles.js" />
     <Content Include="Assets\javascripts\plugins\common\bootstrap-wysihtml5.js" />
     <Content Include="Assets\javascripts\plugins\common\wysihtml5.min.js" />
@@ -580,86 +499,9 @@
     <Content Include="Assets\stylesheets\plugins\wizard_master\bootstrap-wizard.css" />
     <Content Include="Assets\stylesheets\plugins\xeditable\bootstrap-editable.css" />
     <Content Include="Assets\stylesheets\theme-colors.css" />
-    <Content Include="Content\themes\base\images\animated-overlay.gif" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\jquery-ui.css" />
-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
-    <Content Include="Content\themes\base\jquery.ui.all.css" />
-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
-    <Content Include="Content\themes\base\jquery.ui.base.css" />
-    <Content Include="Content\themes\base\jquery.ui.button.css" />
-    <Content Include="Content\themes\base\jquery.ui.core.css" />
-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
-    <Content Include="Content\themes\base\jquery.ui.menu.css" />
-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
-    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
-    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
-    <Content Include="Content\themes\base\minified\images\animated-overlay.gif" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="COPYING.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-2.0.3-vsdoc.js" />
-    <Content Include="Scripts\jquery-2.0.3.js" />
-    <Content Include="Scripts\jquery-2.0.3.min.js" />
-    <Content Include="Scripts\jquery-ui-1.10.3.js" />
-    <Content Include="Scripts\jquery-ui-1.10.3.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.3.0.debug.js" />
-    <Content Include="Scripts\knockout-2.3.0.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -676,7 +518,31 @@
     <Content Include="Views\Web.config" />
     <Content Include="WURFL AGPL License.txt" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\images\ajax-loaders\" />
+    <Folder Include="Assets\images\bootstrap\" />
+    <Folder Include="Assets\images\emails\" />
+    <Folder Include="Assets\images\jquery_ui\" />
+    <Folder Include="Assets\images\plugins\bootstrap_colorpicker\" />
+    <Folder Include="Assets\images\plugins\dynatree\" />
+    <Folder Include="Assets\images\plugins\flags\" />
+    <Folder Include="Assets\images\plugins\naked_password\" />
+    <Folder Include="Assets\images\plugins\select2\" />
+    <Folder Include="Assets\images\plugins\xeditable\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\fakeobjects\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\flash\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\forms\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\iframe\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\image\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\link\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\magicline\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\pagebreak\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\showblocks\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\smiley\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\plugins\templates\templates\images\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\samples\assets\inlineall\" />
+    <Folder Include="Assets\javascripts\plugins\ckeditor\skins\moono\images\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -691,9 +557,9 @@
     <Content Include="Views\Dashboard\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arbeidstider.Business.Interfaces\Arbeidstider.Business.Interfaces.csproj">
-      <Project>{4EACAEEC-8D34-40BC-97BB-C5E5F6C55067}</Project>
-      <Name>Arbeidstider.Business.Interfaces</Name>
+    <ProjectReference Include="..\Arbeidstider.DataAccess.Domain\Arbeidstider.DataAccess.Domain.csproj">
+      <Project>{89ABA23F-72BE-4B40-8A8E-F8281A6BBCA6}</Project>
+      <Name>Arbeidstider.DataAccess.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Web.Framework\Arbeidstider.Web.Framework.csproj">
       <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>
@@ -704,19 +570,6 @@
     <Content Include="App_Data\wurfl-latest.zip" />
     <None Include="App_Readme\WURFL Quick Guide_v1_5.pdf" />
     <None Include="App_Readme\WURFL-v15.chm" />
-    <None Include="Assets\fonts\fontawesome-webfont.eot" />
-    <None Include="Assets\fonts\fontawesome-webfont.ttf" />
-    <None Include="Assets\fonts\fontawesome-webfont.woff" />
-    <None Include="Assets\fonts\FontAwesome.otf" />
-    <None Include="Assets\fonts\montserrat-bold-webfont.eot" />
-    <None Include="Assets\fonts\montserrat-bold-webfont.ttf" />
-    <None Include="Assets\fonts\montserrat-bold-webfont.woff" />
-    <None Include="Assets\fonts\montserrat-regular-webfont.eot" />
-    <None Include="Assets\fonts\montserrat-regular-webfont.ttf" />
-    <None Include="Assets\fonts\montserrat-regular-webfont.woff" />
-    <None Include="Assets\javascripts\plugins\ckeditor\samples\assets\posteddata.php" />
-    <None Include="Assets\javascripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <None Include="Assets\javascripts\plugins\ckeditor\samples\sample_posteddata.php" />
     <Content Include="Views\Dashboard\UserProfile.cshtml" />
     <Content Include="Views\Dashboard\AddressBook.cshtml" />
     <Content Include="Views\Dashboard\ConfirmShifts.cshtml" />
@@ -726,8 +579,23 @@
     <Content Include="Views\Error\_Layout.cshtml" />
     <Content Include="Views\Dashboard\Register.cshtml" />
     <Content Include="Introspector\Introspector.ashx" />
+    <None Include="Assets\fonts\fontawesome-webfont.eot" />
+    <None Include="Assets\fonts\fontawesome-webfont.svg" />
+    <None Include="Assets\fonts\fontawesome-webfont.ttf" />
+    <None Include="Assets\fonts\fontawesome-webfont.woff" />
+    <None Include="Assets\fonts\FontAwesome.otf" />
+    <None Include="Assets\fonts\montserrat-bold-webfont.eot" />
+    <None Include="Assets\fonts\montserrat-bold-webfont.svg" />
+    <None Include="Assets\fonts\montserrat-bold-webfont.ttf" />
+    <None Include="Assets\fonts\montserrat-bold-webfont.woff" />
+    <None Include="Assets\fonts\montserrat-regular-webfont.eot" />
+    <None Include="Assets\fonts\montserrat-regular-webfont.svg" />
+    <None Include="Assets\fonts\montserrat-regular-webfont.ttf" />
+    <None Include="Assets\fonts\montserrat-regular-webfont.woff" />
+    <None Include="Assets\javascripts\plugins\ckeditor\samples\assets\posteddata.php" />
+    <None Include="Assets\javascripts\plugins\ckeditor\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <None Include="Assets\javascripts\plugins\ckeditor\samples\sample_posteddata.php" />
     <None Include="Introspector\Introspector.pdf" />
-    <None Include="Scripts\jquery-2.0.3.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
