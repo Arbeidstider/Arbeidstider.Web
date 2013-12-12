@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using Arbeidstider.Web.Framework.ViewModels.Error;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
 {
@@ -13,8 +14,10 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 
         public ActionResult Index(Exception exception, int statusCode)
         {
-            Response.StatusCode = statusCode;
-            return View("500");
+            var model = new ErrorModel();
+            model.Exception = exception;
+            model.StatusCode = statusCode;
+            return View("500", model);
         }
 
         public ActionResult Unauthorized()

@@ -17,20 +17,5 @@ namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
         public DateTime SelectedDay { get; private set; }
         public EmployeeUser Employee { get; private set; }
         public EmployeeShift Shift { get; private set; }
-
-        /* Timesheet Properties for JSON */
-        /*
-        public int? EmployeeScheduleEventID { get; set; }
-        public Guid? UserID { get; set; }
-        public string Username { get; set; }
-
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
-        public string SelectedDay { get; set; }
-
-        public string ShiftStart { get; set; }
-        public string ShiftEnd { get; set; }
-        public int? WorkplaceID { get; set; }
-         */
     }
 }

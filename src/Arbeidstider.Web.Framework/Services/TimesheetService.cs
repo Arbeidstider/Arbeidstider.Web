@@ -91,7 +91,7 @@ namespace Arbeidstider.Web.Framework.Services
         }
         #endregion
 
-        public IEnumerable<TimesheetModel> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
+        public IEnumerable<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
         {
             var parameters = new List<KeyValuePair<string, object>>
                                  {
@@ -104,19 +104,20 @@ namespace Arbeidstider.Web.Framework.Services
         }
 
         #region GetAllWithinRange Callback
-        private IEnumerable<TimesheetModel> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
+        private IEnumerable<TimesheetDTO> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return _repository.GetAll(parameters).Select(x => new TimesheetModel(x)).ToArray();
+            return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray();
         }
         #endregion
 
-        public bool Create(TimesheetDTO dto)
+        public bool Create(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd)
         {
             var parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("UserID", dto.UserID));
-            parameters.Add(new KeyValuePair<string, object>("SelectedDay", dto.SelectedDay));
-            parameters.Add(new KeyValuePair<string, object>("ShiftStart", dto.ShiftStart));
-            parameters.Add(new KeyValuePair<string, object>("ShiftEnd", dto.ShiftEnd));
+            parameters.Add(new KeyValuePair<string, object>("UserID", userID));
+            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay));
+            parameters.Add(new KeyValuePair<string, object>("ShiftStart", shiftStart));
+            parameters.Add(new KeyValuePair<string, object>("ShiftEnd", shiftEnd));
+
             try
             {
                 _repository.Create(parameters);

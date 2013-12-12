@@ -119,7 +119,7 @@
     <Compile Include="Cache.cs" />
     <Compile Include="Constants\Cookie.cs" />
     <Compile Include="Constants\Session.cs" />
-    <Compile Include="DTO\EmployeeDTO.cs" />
+    <Compile Include="DTO\TimesheetRequestDTO.cs" />
     <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="IoC.cs" />

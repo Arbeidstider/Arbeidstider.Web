@@ -1,11 +1,10 @@
 ﻿using System;
-using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.ViewModels.Timesheet
 {
     public class CreateTimesheet
     {
-        public CreateTimesheet(TimesheetDTO dto)
+        public CreateTimesheet()
         {
         }
 

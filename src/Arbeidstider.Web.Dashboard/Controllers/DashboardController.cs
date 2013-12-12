@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Arbeidstider.Web.Dashboard.Filters;
 using Arbeidstider.Web.Framework.Controllers;
-using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Framework.ViewModels.Dashboard;
 
 namespace Arbeidstider.Web.Dashboard.Controllers
@@ -52,7 +51,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
 
         [HttpGet]
         [AdminAccess]
-        public JsonResult ValidateEmployee(EmployeeDTO employee)
+        public JsonResult ValidateEmployee()
         {
             return Json(new {Result = true});
         }
@@ -72,7 +71,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         }
 
         [HttpPost]
-        public JsonResult UserProfile(EmployeeDTO dto)
+        public JsonResult UserProfile(Guid userID)
         {
             return Json(new { Result = true });
         }

@@ -15,30 +15,34 @@ namespace Arbeidstider.Web.Services.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAllTimesheets(DateTime startDate, DateTime endDate, Guid userID)
+        public JsonResult GetAllTimesheets(TimesheetRequestDTO requestDto)
         {
-            var timesheets = _timesheetService.GetAllWithinRange(startDate, endDate, userID);
+            var timesheets = _timesheetService.GetAllWithinRange(requestDto.StartDate, requestDto.EndDate, requestDto.UserID);
 
             return Json(timesheets, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult CreateTimesheet(TimesheetDTO dto)
+        public JsonResult CreateTimesheet(
+            int workplaceID)
         {
             var result = new JsonResult();
 
-            if (!(CurrentEmployee.IsManager() && dto.WorkplaceID == CurrentWorkplaceID) 
+            if (!(CurrentEmployee.IsManager() && workplaceID == CurrentWorkplaceID) 
                 || !CurrentEmployee.IsAdmin())
             {
                 return Json(new {Result = false});
             }
 
 
+            /*
+             
             result.Data = new
             {
                 Data = _timesheetService.Create(dto),
                 Result = true
             };
+             */
 
             return result;
         }

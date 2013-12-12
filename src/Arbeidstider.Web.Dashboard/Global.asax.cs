@@ -56,8 +56,9 @@ namespace Arbeidstider.Web.Dashboard
                 routeData.Values.Add("action", "Index");
             else
                 routeData.Values.Add("action", "NotFound");
-            routeData.Values.Add("statusCode", statusCode);
+
             routeData.Values.Add("exception", lastError);
+            routeData.Values.Add("statusCode", statusCode);
 
             LogManager.GetLogger("FileLogger").Error(lastError.Message);
             IController controller = new ErrorController();

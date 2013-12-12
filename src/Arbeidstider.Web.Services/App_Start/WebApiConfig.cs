@@ -14,7 +14,6 @@ namespace Arbeidstider.Web.Services.App_Start
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            IoC.Initialize();
             var resolver = new AutofacWebApiDependencyResolver(IoC.BaseContainer);
 
             config.DependencyResolver = resolver;
