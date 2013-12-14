@@ -21,7 +21,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
         public ActionResult Index()
         {
             var model = new Index();
-            model.Shifts = TimesheetService.GetWeeklyShifts(CurrentUserID, DateTime.Now);
+            //model.Shifts = TimesheetService.GetWeeklyShifts(CurrentUserID, DateTime.Now);
             return View();
         }
 

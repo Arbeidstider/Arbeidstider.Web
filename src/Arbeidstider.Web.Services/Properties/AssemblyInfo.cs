@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Arbeidstider.Web.Services")]
+[assembly: AssemblyTitle("Arbeidstider.Web.Services2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Intility AS")]
-[assembly: AssemblyProduct("Arbeidstider.Web.Services")]
-[assembly: AssemblyCopyright("Copyright © Intility AS 2013")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Arbeidstider.Web.Services2")]
+[assembly: AssemblyCopyright("Copyright © Microsoft 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("283133a4-6f71-403a-affc-c656852bfef8")]
+[assembly: Guid("2168cb21-9365-4de0-9777-69279511badc")]
 
 // Version information for an assembly consists of the following four values:
 //

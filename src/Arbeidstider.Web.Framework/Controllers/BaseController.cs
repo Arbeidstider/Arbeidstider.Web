@@ -11,7 +11,6 @@ namespace Arbeidstider.Web.Framework.Controllers
     {
         protected readonly static ILog Logger = IoC.Resolve<ILog>();
         protected static readonly EmployeeService EmployeeService = EmployeeService.Instance;
-        protected static readonly TimesheetService TimesheetService = TimesheetService.Instance;
 
         protected internal Guid CurrentUserID
         {

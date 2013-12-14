@@ -4,7 +4,6 @@ namespace Arbeidstider.DataAccess.Domain
 {
     public interface IEmployee
     {
-        int EmployeeID { get; set; }
         string Firstname { get; set; }
         string Lastname { get; set; }
         string Fullname { get; }

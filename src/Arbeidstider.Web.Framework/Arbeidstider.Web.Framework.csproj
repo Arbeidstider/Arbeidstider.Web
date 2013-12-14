@@ -79,6 +79,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -119,7 +120,6 @@
     <Compile Include="Cache.cs" />
     <Compile Include="Constants\Cookie.cs" />
     <Compile Include="Constants\Session.cs" />
-    <Compile Include="DTO\TimesheetRequestDTO.cs" />
     <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="IoC.cs" />

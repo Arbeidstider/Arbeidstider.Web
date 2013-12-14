@@ -87,7 +87,7 @@
     <Compile Include="Exceptions\RepositoryExceptionBase.cs" />
     <Compile Include="Exceptions\ScheduleEventRepositoryException.cs" />
     <Compile Include="Exceptions\TimesheetRepositoryException.cs" />
-    <Compile Include="IRepostiory.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryExtensions.cs" />
     <Compile Include="ScheduleEventRepository.cs" />

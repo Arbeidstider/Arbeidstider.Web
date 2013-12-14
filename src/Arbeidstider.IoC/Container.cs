@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Reflection;
 using System.Web;
 using Arbeidstider.Cache;
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository;
 using Autofac;
-using Autofac.Integration.Mvc;
 using log4net;
 
 namespace Arbeidstider.IoC
@@ -19,8 +17,6 @@ namespace Arbeidstider.IoC
             if (BaseContainer == null)
             {
                 var builder = new ContainerBuilder();
-
-                builder.RegisterControllers(Assembly.GetCallingAssembly());
 
                 // Repositories
                 builder.RegisterType<EmployeeRepository>().As<IRepository<IEmployee>>().SingleInstance();
