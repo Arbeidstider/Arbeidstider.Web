@@ -67,6 +67,7 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.4.0.5\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -103,13 +104,18 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App_Start\WebServiceExamples.cs" />
+    <Compile Include="Exceptions\TimesheetServiceException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceInterfaces\CreateTimesheetService.cs" />
+    <Compile Include="ServiceInterfaces\ServiceBase.cs" />
+    <Compile Include="ServiceModels\CreateTimesheet.cs" />
+    <Compile Include="ServiceModels\CreateTimesheetResponse.cs" />
     <Compile Include="ServiceModels\Timesheets.cs" />
     <Compile Include="ServiceModels\TimesheetsResponse.cs" />
-    <Compile Include="TimesheetsService.cs" />
+    <Compile Include="ServiceInterfaces\TimesheetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using Arbeidstider.Web.Framework;
-using Arbeidstider.Web.Services.App_Start;
 
 namespace Arbeidstider.Web.Services
 {
@@ -9,7 +8,6 @@ namespace Arbeidstider.Web.Services
         protected void Application_Start(object sender, EventArgs e)
         {
             IoC.Initialize();
-            //AppHost.Start();
         }
 
         protected void Session_Start(object sender, EventArgs e)

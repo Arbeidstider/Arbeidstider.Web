@@ -2,48 +2,48 @@
 <publishData>
   <publishProfile publishUrl="ftp://remote.bjonn.com" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="FTP" replaceMatchingFiles="True" userName="ftpUserArbeidstiderServices" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAApyIbXBO4L02xdTNKq3A6iQAAAAACAAAAAAAQZgAAAAEAACAAAAAgicNlsOrNh8S5Te+/i/lbzSEOOXrfQJB3gvJn+0oirAAAAAAOgAAAAAIAACAAAADnmhbCjmPa0TKPrkIOQ9BRUF/+PSnz6NK58DdXB9o3AiAAAAD05/Q2FniiJedarzIz5Q7hgkN/kZfCttgz7ocRG0kQPEAAAABHuT6DHiKxcYFGrCVXgWNnC7jnKRff95JIVX4LsTt9QcJLWJ2uOaKxYdF++PNP+Edrc2HqZPoDPouZifl/0mtF" SelectedForPublish="True">
     <file relUrl="default.htm" publishTime="12/14/2013 01:09:38" />
-    <file relUrl="bin/ServiceStack.Text.xml" publishTime="12/14/2013 00:48:16" />
-    <file relUrl="bin/Arbeidstider.DataAccess.Repository.pdb" publishTime="12/14/2013 03:47:30" />
-    <file relUrl="bin/ServiceStack.Interfaces.xml" publishTime="12/14/2013 00:48:16" />
+    <file relUrl="bin/Arbeidstider.DataAccess.Repository.pdb" publishTime="12/18/2013 00:47:11" />
+    <file relUrl="bin/ServiceStack.OrmLite.xml" publishTime="12/14/2013 01:09:22" />
     <file relUrl="bin/log4net.xml" publishTime="10/26/2013 02:07:06" />
     <file relUrl="bin/Dapper.xml" publishTime="11/20/2013 21:13:34" />
     <file relUrl="Global.asax" publishTime="12/14/2013 01:49:09" />
-    <file relUrl="bin/ServiceStack.OrmLite.xml" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="bin/Autofac.dll" publishTime="10/26/2013 02:07:06" />
-    <file relUrl="bin/Arbeidstider.Web.Framework.dll" publishTime="12/14/2013 03:47:34" />
+    <file relUrl="bin/ServiceStack.xml" publishTime="12/14/2013 00:48:17" />
+    <file relUrl="bin/ServiceStack.Text.dll" publishTime="12/14/2013 00:48:16" />
     <file relUrl="bin/log4net.dll" publishTime="10/26/2013 02:07:06" />
     <file relUrl="bin/ServiceStack.Common.dll" publishTime="12/14/2013 00:48:16" />
-    <file relUrl="bin/Arbeidstider.DataAccess.Domain.pdb" publishTime="12/14/2013 03:47:27" />
+    <file relUrl="bin/Arbeidstider.DataAccess.Domain.pdb" publishTime="12/18/2013 00:47:07" />
     <file relUrl="bin/ServiceStack.Redis.dll" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="bin/Arbeidstider.DataAccess.pdb" publishTime="12/14/2013 03:47:29" />
-    <file relUrl="bin/ServiceStack.Client.xml" publishTime="12/14/2013 00:48:16" />
-    <file relUrl="bin/ServiceStack.Text.dll" publishTime="12/14/2013 00:48:16" />
+    <file relUrl="bin/Arbeidstider.DataAccess.Repository.dll" publishTime="12/18/2013 00:47:11" />
+    <file relUrl="bin/Arbeidstider.DataAccess.pdb" publishTime="12/18/2013 00:47:09" />
     <file relUrl="bin/WebActivator.dll" publishTime="12/14/2013 01:09:21" />
-    <file relUrl="bin/Arbeidstider.DataAccess.dll" publishTime="12/14/2013 03:47:29" />
-    <file relUrl="bin/ServiceStack.OrmLite.SqlServer.dll" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="bin/Arbeidstider.Cache.pdb" publishTime="12/14/2013 03:42:48" />
-    <file relUrl="bin/Arbeidstider.Web.Framework.pdb" publishTime="12/14/2013 03:47:34" />
-    <file relUrl="bin/ServiceStack.xml" publishTime="12/14/2013 00:48:17" />
-    <file relUrl="bin/Arbeidstider.Cache.dll" publishTime="12/14/2013 03:42:48" />
-    <file relUrl="bin/ServiceStack.Server.xml" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="bin/Arbeidstider.DataAccess.Domain.dll" publishTime="12/14/2013 03:47:27" />
-    <file relUrl="bin/Arbeidstider.DataAccess.Repository.dll" publishTime="12/14/2013 03:47:31" />
-    <file relUrl="bin/ServiceStack.Redis.xml" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="bin/Arbeidstider.IoC.dll" publishTime="12/14/2013 03:47:32" />
-    <file relUrl="bin/Arbeidstider.IoC.pdb" publishTime="12/14/2013 03:47:32" />
+    <file relUrl="bin/ServiceStack.Interfaces.dll" publishTime="12/14/2013 00:48:16" />
     <file relUrl="bin/Autofac.xml" publishTime="10/26/2013 02:07:06" />
-    <file relUrl="bin/ServiceStack.Server.dll" publishTime="12/14/2013 01:09:22" />
-    <file relUrl="packages.config" publishTime="12/14/2013 01:09:42" />
+    <file relUrl="bin/Arbeidstider.DataAccess.dll" publishTime="12/18/2013 00:47:09" />
+    <file relUrl="bin/ServiceStack.OrmLite.SqlServer.dll" publishTime="12/14/2013 01:09:22" />
+    <file relUrl="bin/Arbeidstider.Web.Framework.dll" publishTime="12/18/2013 00:47:14" />
     <file relUrl="bin/ServiceStack.Common.xml" publishTime="12/14/2013 00:48:16" />
+    <file relUrl="bin/Arbeidstider.Web.Framework.pdb" publishTime="12/18/2013 00:47:14" />
+    <file relUrl="bin/Arbeidstider.Cache.dll" publishTime="12/14/2013 03:42:48" />
+    <file relUrl="bin/Arbeidstider.DataAccess.Domain.dll" publishTime="12/18/2013 00:47:07" />
+    <file relUrl="bin/Autofac.dll" publishTime="10/26/2013 02:07:06" />
+    <file relUrl="bin/ServiceStack.Redis.xml" publishTime="12/14/2013 01:09:22" />
+    <file relUrl="bin/Arbeidstider.IoC.dll" publishTime="12/18/2013 00:47:12" />
+    <file relUrl="bin/Arbeidstider.IoC.pdb" publishTime="12/18/2013 00:47:12" />
+    <file relUrl="bin/Arbeidstider.Cache.pdb" publishTime="12/14/2013 03:42:48" />
+    <file relUrl="bin/ServiceStack.Server.dll" publishTime="12/14/2013 01:09:22" />
+    <file relUrl="bin/ServiceStack.Text.xml" publishTime="12/14/2013 00:48:16" />
+    <file relUrl="bin/ServiceStack.Client.xml" publishTime="12/14/2013 00:48:16" />
     <file relUrl="bin/Dapper.pdb" publishTime="11/20/2013 21:13:34" />
-    <file relUrl="bin/Arbeidstider.Web.Services.pdb" publishTime="12/14/2013 03:47:36" />
+    <file relUrl="bin/Arbeidstider.Web.Services.pdb" publishTime="12/18/2013 00:47:16" />
     <file relUrl="bin/ServiceStack.dll" publishTime="12/14/2013 00:48:17" />
-    <file relUrl="bin/Arbeidstider.Web.Services.dll" publishTime="12/14/2013 03:47:36" />
+    <file relUrl="bin/Arbeidstider.Web.Services.dll" publishTime="12/18/2013 00:47:16" />
     <file relUrl="bin/Microsoft.Web.Infrastructure.dll" publishTime="10/26/2013 02:07:06" />
     <file relUrl="Web.config" publishTime="12/14/2013 03:47:39" />
+    <file relUrl="packages.config" publishTime="12/14/2013 01:09:42" />
+    <file relUrl="bin/ServiceStack.Interfaces.xml" publishTime="12/14/2013 00:48:16" />
     <file relUrl="bin/ServiceStack.OrmLite.dll" publishTime="12/14/2013 01:09:22" />
     <file relUrl="bin/ServiceStack.Client.dll" publishTime="12/14/2013 00:48:16" />
-    <file relUrl="bin/ServiceStack.Interfaces.dll" publishTime="12/14/2013 00:48:16" />
+    <file relUrl="bin/ServiceStack.Server.xml" publishTime="12/14/2013 01:09:22" />
     <file relUrl="bin/Dapper.dll" publishTime="11/20/2013 21:13:34" />
   </publishProfile>
 </publishData>

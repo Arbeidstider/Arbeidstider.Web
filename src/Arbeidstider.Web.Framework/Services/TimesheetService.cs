@@ -114,9 +114,9 @@ namespace Arbeidstider.Web.Framework.Services
         {
             var parameters = new List<KeyValuePair<string, object>>();
             parameters.Add(new KeyValuePair<string, object>("UserID", userID));
-            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay));
-            parameters.Add(new KeyValuePair<string, object>("ShiftStart", shiftStart));
-            parameters.Add(new KeyValuePair<string, object>("ShiftEnd", shiftEnd));
+            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay.Date));
+            parameters.Add(new KeyValuePair<string, object>("ShiftStart", shiftStart.ToString()));
+            parameters.Add(new KeyValuePair<string, object>("ShiftEnd", shiftEnd.ToString()));
 
             try
             {

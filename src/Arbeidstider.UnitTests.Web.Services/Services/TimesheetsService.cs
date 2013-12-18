@@ -4,15 +4,16 @@ using Arbeidstider.Web.Services.ServiceModels;
 using NUnit.Framework;
 using ServiceStack;
 
-namespace Arbeidstider.UnitTests.Web.Services.Controllers
+namespace Arbeidstider.UnitTests.Web.Services.Services
 {
     [TestFixture]
-    public class TimesheetController : TestBase
+    public class TimesheetsService : TestBase
     {
+        /* Route: /timesheets */
         [TestCase]
-        public void GetAllTimesheets()
+        public void GetAll_1()
         {
-            var client = new JsonServiceClient("http://services.arbeidstider.no");
+            var client = new JsonServiceClient("http://localhost:8181");
             var request = new Timesheets()
                                 {
                                     StartDate = new DateTime(2013, 9, 1),
@@ -20,7 +21,7 @@ namespace Arbeidstider.UnitTests.Web.Services.Controllers
                                     UserID = new Guid("62560772-CFD8-4DDB-8CE3-3F37638C4327")
                                 };
 
-            var all = client.Get<TimesheetsResponse>(request);
+            var all = client.Get(request);
             Assert.That(all.Timesheets != null);
             foreach (var timesheetDto in all.Timesheets)
             {

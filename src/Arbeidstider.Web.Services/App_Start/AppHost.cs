@@ -32,7 +32,9 @@ namespace Arbeidstider.Web.Services.App_Start
 		
 			//Configure User Defined REST Paths
 		    Routes
-		        .Add<Timesheets>("/timesheets");
+		        .Add<Timesheets>("/timesheets", "GET")
+    		    .Add<CreateTimesheet>("/timesheet/create", "POST");
+    		    //.Add<Timesheet>("/timesheet/update", "POST");
 		}
 
 		/* Example ServiceStack Authentication and CustomUserSession */
