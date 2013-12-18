@@ -4,6 +4,7 @@ using Arbeidstider.Web.Services.ServiceModels;
 using Arbeidstider.Web.Services2.App_Start;
 using ServiceStack;
 using ServiceStack.Auth;
+using ServiceStack.Caching;
 using ServiceStack.Configuration;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
@@ -27,14 +28,15 @@ namespace Arbeidstider.Web.Services.App_Start
 
 		public override void Configure(Funq.Container container)
 		{
+            container.Register<ICacheClient>(new MemoryCacheClient());
 			//Set JSON web services to return idiomatic JSON camelCase properties
 			ServiceStack.Text.JsConfig.EmitCamelCaseNames = true;
 		
 			//Configure User Defined REST Paths
 		    Routes
 		        .Add<Timesheets>("/timesheets", "GET")
-    		    .Add<CreateTimesheet>("/timesheet/create", "POST");
-    		    //.Add<Timesheet>("/timesheet/update", "POST");
+    		    .Add<CreateTimesheet>("/timesheet/create", "POST")
+    		    .Add<UpdateTimesheet>("/timesheet/update", "POST");
 		}
 
 		/* Example ServiceStack Authentication and CustomUserSession */

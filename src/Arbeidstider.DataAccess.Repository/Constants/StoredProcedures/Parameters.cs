@@ -12,6 +12,14 @@ namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
                 return new EmployeeParameters();
             }
         }
+
+        public static TimesheetParameters Timesheet
+        {
+            get
+            {
+                return new TimesheetParameters();
+            }
+        }
     }
 
     public class EmployeeParameters
@@ -45,5 +53,10 @@ namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
                            new KeyValuePair<string, object>("Username", username),
                        };
         }
+    }
+
+    public class TimesheetParameters
+    {
+        
     }
 }

@@ -135,7 +135,6 @@
     <Compile Include="ViewModels\Dashboard\AddressBook.cs" />
     <Compile Include="ViewModels\Dashboard\Index.cs" />
     <Compile Include="ViewModels\Error\ErrorModel.cs" />
-    <Compile Include="ViewModels\Timesheet\TimesheetModel.cs" />
     <Compile Include="ViewModels\Timesheet\WeeklyTimesheet.cs" />
   </ItemGroup>
   <ItemGroup>

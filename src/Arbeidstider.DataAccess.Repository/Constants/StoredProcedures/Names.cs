@@ -15,5 +15,6 @@
         internal static readonly string GET_TIMESHEET = "GetTimesheet";
         internal static readonly string UPDATE_TIMESHEET = "UpdateTimesheet";
         internal static readonly string UPDATE_EMPLOYEE_SCHEDULEVENT = "UpdateEmployeeSchduleEvent";
+        internal static readonly string DELETE_TIMESHEET = "DeleteTimesheet";
     }
 }

@@ -67,31 +67,7 @@ namespace Arbeidstider.Web.Framework.Services
         }
         #endregion
 
-        public TimesheetModel GetTimesheet(Guid userID, DateTime selectedDay)
-        {
-            var parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("UserID", userID));
-            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay));
-            try
-            {
-                return Cache.Get(CacheKeys.GetTimesheet,
-                                 () => _getTimesheet(parameters));
-            }
-            catch (TimesheetRepositoryException ex)
-            {
-                Logger.Error(ex.Message);
-                return null;
-            }
-        }
-
-        #region GetTimesheet Callback
-        private TimesheetModel _getTimesheet(IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            return new TimesheetModel(_repository.Get(parameters));
-        }
-        #endregion
-
-        public IEnumerable<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
+        public List<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
         {
             var parameters = new List<KeyValuePair<string, object>>
                                  {
@@ -104,9 +80,9 @@ namespace Arbeidstider.Web.Framework.Services
         }
 
         #region GetAllWithinRange Callback
-        private IEnumerable<TimesheetDTO> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
+        private List<TimesheetDTO> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToArray();
+            return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToList();
         }
         #endregion
 
@@ -114,7 +90,7 @@ namespace Arbeidstider.Web.Framework.Services
         {
             var parameters = new List<KeyValuePair<string, object>>();
             parameters.Add(new KeyValuePair<string, object>("UserID", userID));
-            parameters.Add(new KeyValuePair<string, object>("SelectedDay", selectedDay.Date));
+            parameters.Add(new KeyValuePair<string, object>("ShiftDate", selectedDay.Date));
             parameters.Add(new KeyValuePair<string, object>("ShiftStart", shiftStart.ToString()));
             parameters.Add(new KeyValuePair<string, object>("ShiftEnd", shiftEnd.ToString()));
 
@@ -130,9 +106,22 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public bool UpdateTimesheet(Guid employeeScheduleEventID, DateTime selectedDate, TimeSpan startShift, TimeSpan endShift)
+        public bool UpdateTimesheet(int shiftID, Guid? userID, DateTime? selectedDate, TimeSpan? startShift, TimeSpan? endShift)
         {
             var parameters = new List<KeyValuePair<string, object>>();
+            /* Id of timesheet to update */
+            parameters.Add(new KeyValuePair<string, object>("ShiftID", shiftID));
+
+            /* Change user of shiftworker */
+            if (userID != null)
+                parameters.Add(new KeyValuePair<string, object>("UserID", userID.Value));
+            else
+            {
+                parameters.Add(new KeyValuePair<string, object>("ShiftDate", selectedDate.Value.Date));
+                parameters.Add(new KeyValuePair<string, object>("ShiftStart", startShift.Value.ToString()));
+                parameters.Add(new KeyValuePair<string, object>("ShiftEnd", endShift.Value.ToString()));
+            }
+
             try
             {
                 if (_repository.Update(parameters))
@@ -151,6 +140,18 @@ namespace Arbeidstider.Web.Framework.Services
             Cache.Invalidate(CacheKeys.GetTimesheet);
             Cache.Invalidate(CacheKeys.GetWeeklyTimesheet);
             Cache.Invalidate(CacheKeys.GetAllWithinRange);
+        }
+
+        public List<TimesheetDTO> GetWorkplaceTimesheets(int? workplaceId, DateTime? startDate, DateTime? endDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(int timesheetID)
+        {
+            var parameters = new List<KeyValuePair<string, object>>();
+            parameters.Add(new KeyValuePair<string, object>("EmployeeShiftID", timesheetID));
+            return _repository.Delete(parameters);
         }
     }
 }

@@ -51,6 +51,11 @@ namespace Arbeidstider.DataAccess.Repository
             return true;
         }
 
+        public bool Delete(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            return _database.Execute(Names.DELETE_TIMESHEET, parameters);
+        }
+
         public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)
         {
             return true;

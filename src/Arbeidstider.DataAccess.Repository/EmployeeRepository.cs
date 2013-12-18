@@ -56,5 +56,10 @@ namespace Arbeidstider.DataAccess.Repository
         {
             return _database.Execute(Names.EMPLOYEE_EXISTS, parameters);
         }
+
+        public bool Delete(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Arbeidstider.Web.Services.ServiceModels
 {
     public class TimesheetsResponse
     {
-        public IEnumerable<TimesheetDTO> Timesheets { get; set; }
+        public List<TimesheetDTO> Timesheets { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
     }
 }

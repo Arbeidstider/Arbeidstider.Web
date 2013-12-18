@@ -37,5 +37,10 @@ namespace Arbeidstider.DataAccess.Repository
         {
             throw new System.NotImplementedException();
         }
+
+        public bool Delete(IEnumerable<KeyValuePair<string, object>> parameters)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace Arbeidstider.DataAccess.Repository
         T Get(IEnumerable<KeyValuePair<string, object>> parameters);
         bool Update(IEnumerable<KeyValuePair<string, object>> parameters);
         bool Exists(IEnumerable<KeyValuePair<string, object>> parameters);
+        bool Delete(IEnumerable<KeyValuePair<string, object>> parameters);
     }
 }

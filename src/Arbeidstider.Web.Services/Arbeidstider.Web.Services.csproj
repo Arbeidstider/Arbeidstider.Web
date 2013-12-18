@@ -110,12 +110,18 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\CreateTimesheetService.cs" />
+    <Compile Include="ServiceModels\DeleteTimesheet.cs" />
+    <Compile Include="ServiceInterfaces\DeleteTimesheetService.cs" />
     <Compile Include="ServiceInterfaces\ServiceBase.cs" />
+    <Compile Include="ServiceInterfaces\UpdateTimesheetService.cs" />
     <Compile Include="ServiceModels\CreateTimesheet.cs" />
     <Compile Include="ServiceModels\CreateTimesheetResponse.cs" />
+    <Compile Include="ServiceModels\DeleteTimesheetResponse.cs" />
     <Compile Include="ServiceModels\Timesheets.cs" />
     <Compile Include="ServiceModels\TimesheetsResponse.cs" />
-    <Compile Include="ServiceInterfaces\TimesheetService.cs" />
+    <Compile Include="ServiceInterfaces\TimesheetsService.cs" />
+    <Compile Include="ServiceModels\UpdateTimesheet.cs" />
+    <Compile Include="ServiceModels\UpdateTimesheetResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

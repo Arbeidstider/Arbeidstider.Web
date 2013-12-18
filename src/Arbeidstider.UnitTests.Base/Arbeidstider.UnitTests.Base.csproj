@@ -60,6 +60,10 @@
       <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>
       <Name>Arbeidstider.Web.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Web.Services\Arbeidstider.Web.Services.csproj">
+      <Project>{8B11AF98-9801-4FFF-9152-DC367B049D92}</Project>
+      <Name>Arbeidstider.Web.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
