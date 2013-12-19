@@ -4,9 +4,7 @@
     Layout = "_Layout.cshtml";
     ViewBag.Title = "Log in";
 }
-
-@using (Html.BeginForm())
-{
+    <form action="http://localhost:8181/auth/credentials" method="post">
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div class='application'>
@@ -37,6 +35,7 @@
                 <input id='remember_me' name='RememberMe' type='checkbox'>
                 Husk meg
             </label>
+            @Html.HiddenFor(m => m.Continue)
             <button class='btn btn-block'>Logg inn</button>
             <div class='text-center'>
                 <hr class='hr-normal'>
@@ -44,4 +43,5 @@
             </div>
         </div>
     </div>
+</form>
 }

@@ -5,6 +5,7 @@ using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Services.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceStack;
+using ServiceStack.Auth;
 
 namespace Arbeidstider.UnitTests.Base.Classes
 {
@@ -47,9 +48,23 @@ namespace Arbeidstider.UnitTests.Base.Classes
         [TestInitializeAttribute()]
         public void Initialize()
         {
+            DoAuth();
             IoC.Initialize();
         }
+
+        private void DoAuth()
+        {
+            var client = GetServiceClient();
+            var request = new Authenticate() {UserName = "johnor1410", Password = "test123", provider = AuthenticateService.CredentialsProvider};
+            var response = client.Post(request);
+        }
+
         #endregion
+
+        protected void WriteLine(string label, string value)
+        {
+            Console.WriteLine(string.Format("{0}: {1}", label, value));
+        }
 
         protected ServiceBundle Services
         {

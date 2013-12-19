@@ -6,6 +6,9 @@ using ServiceStack;
 
 namespace Arbeidstider.UnitTests.Web.Services.Services
 {
+    /// <summary>
+    /// Route: /timesheet/create
+    /// </summary>
     [TestFixture]
     public class CreateTimesheetService : TestBase
     {

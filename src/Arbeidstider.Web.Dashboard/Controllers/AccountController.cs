@@ -10,7 +10,7 @@ namespace Arbeidstider.Web.Dashboard.Controllers
     {
         public ActionResult Login()
         {
-            return View();
+            return View(new LoginModel());
         }
 
         [HttpPost]

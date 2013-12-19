@@ -5,6 +5,9 @@ using NUnit.Framework;
 
 namespace Arbeidstider.UnitTests.Web.Services.Services
 {
+    /// <summary>
+    /// Route: /timesheet/update
+    /// </summary>
     [TestFixture]
     public class UpdateTimesheetService : TestBase
     {

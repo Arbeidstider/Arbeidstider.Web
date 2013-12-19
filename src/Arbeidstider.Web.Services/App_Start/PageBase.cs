@@ -2,12 +2,11 @@ using System.Web.UI;
 using ServiceStack;
 using ServiceStack.Caching;
 
-
 /**
  * Base ASP.NET WebForms page using ServiceStack's Compontents, see: http://www.servicestack.net/mvc-powerpack/
  */
 
-namespace Arbeidstider.Web.Services2.App_Start
+namespace Arbeidstider.Web.Services.App_Start
 {
     //A customizeable typed UserSession that can be extended with your own properties
     public class CustomUserSession : AuthUserSession

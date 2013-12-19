@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1312.1622\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -50,10 +53,14 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\packages\ServiceStack.Interfaces.4.0.3\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.OrmLite, Version=4.0.5.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ServiceStack.OrmLite.SqlServer, Version=4.0.5.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="ServiceStack.Server, Version=4.0.5.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.4.0.3\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -64,8 +71,11 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\AssignRolesService.cs" />
+    <Compile Include="Services\AuthenticationServiceTests.cs" />
     <Compile Include="Services\CreateTimesheetService.cs" />
     <Compile Include="Services\DeleteTimesheetService.cs" />
+    <Compile Include="Services\RegisterServiceTests.cs" />
     <Compile Include="Services\TimesheetsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UpdateTimesheetService.cs" />
