@@ -28,9 +28,9 @@ define([
         signIn: function () {
             this.ajaxRequest("POST", "/auth/credentials", this.getData(), this.loginSuccess, this.loginError);
         },
-        loginSuccess: function (data) {
-            console.log("success: " + data);
-            this.set({ isAuthenticated: true, sessionId: data.SessionId, });
+        loginSuccess: function (response, status) {
+            console.log("success: " + response);
+            this.set({ isAuthenticated: true, sessionId: response.SessionId, });
         },
         loginError: function (jqXHR, textstatus, errorThrown) {
             /* Handle error */

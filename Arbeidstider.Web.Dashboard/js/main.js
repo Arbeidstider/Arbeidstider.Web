@@ -41,14 +41,13 @@ require(['jquery',
         'vm',
         'views/app',
         'router',
-        'formhelper'
-    ], function($, _, Backbone, Vm, AppView, Router, FormHelper) {
-        console.log("main initiaqlize");
-        FormHelper.initialize($);
+    ], function($, _, Backbone, Vm, AppView, Router) {
 
         var appView = Vm.reuseView("AppView", function() { return new AppView(); });
         Router.initialize({ appView: appView }); // The router now has a copy of all main appview
         // check redis session if authenticated and set on loginmodel
+
+        jQuery.cors = true;
 
         Backbone.View.prototype.close = function () {
             console.log("close");

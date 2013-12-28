@@ -15,9 +15,10 @@ define([
             },
             el: '#view-application',
             template: _.template(LayoutTemplate),
+            router: {},
             initialize: function () {
                 console.log("AppView initialize()");
-                _.bindAll(this, "isLoggedIn", "isAuthenticated", "render",  "signOut");
+                _.bindAll(this, "isLoggedIn", "isAuthenticated", "render",  "signOut","setRouter");
                 this.models = this.models || {};
                 this.models.session = new Session();
                 console.log("session initialize");
@@ -27,12 +28,17 @@ define([
                 var session = this.models.session;
                 
                 var view;
-                if (this.isLoggedIn()) view = Vm.reuseView('DashboardView', function() { return new DashboardView({ session: session }) });
-                else view = Vm.reuseView('LoginView', function() { return new LoginView({ session: session }) });
-                
-                this.render(view,  true);
+                if (this.isLoggedIn()) {
+                    this.router.navigate("");
+                    //view = Vm.reuseView('DashboardView', function () { return new DashboardView({ session: session }) });
+                } else {
+                    this.router.navigate("login");
+                    //view = Vm.reuseView('LoginView', function() { return new LoginView({ model: session }) });
+                }
+
+                //this.render(view,  true);
             },
-            render: function (view, close) {
+            render: function (selectorAndView, close) {
                 console.log("AppView.render()");
                 // Set app template
                 $(this.el).html(this.template());
@@ -40,11 +46,14 @@ define([
                 var previous = this.currentView || null;
                 if (previous && close) previous.close();
 
-                if (!this.isLoggedIn()) this.assign({ "#view-login": view });
-                else this.assign({ "#view-dashboard" : view });
+                if (!this.isLoggedIn()) this.assign(selectorAndView);
+                else this.assign(selectorAndView);
                 
-                this.currentView = view;
+                this.currentView = selectorAndView.view;
                 return this.el;
+            },
+            setRouter: function (router) {
+                this.router = router;
             },
             isLoggedIn: function () {
                 return this.models.session.get("isAuthenticated") == true;

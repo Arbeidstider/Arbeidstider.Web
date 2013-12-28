@@ -8,6 +8,12 @@ define([
     var SidebarView = BaseView.extend({
         template: _.template(SidebarTemplate), 
         el: '#view-sidebar',
+        defaults:
+        {
+            model: {
+                "#switch-shift-with-colleague": "Bytt vakt med kollega",
+            }
+        },
         initialize: function() {
         },
         render: function() {
