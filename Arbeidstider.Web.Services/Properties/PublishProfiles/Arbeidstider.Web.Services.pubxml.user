@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAApyIbXBO4L02xdTNKq3A6iQAAAAACAAAAAAAQZgAAAAEAACAAAAAAUMBfs3eBO2Jgf6FzvOK9ubVghBTukvkagywwEpGocwAAAAAOgAAAAAIAACAAAACEzIe0ED7sDmjKg0u9+HlU7NvEaMTjVKss6pL3jPGBXyAAAAArMNSFlkKEUm7FRS0cqWBsT61awOWC6E+cvDUPnC3pKkAAAADy7nNIoKOrMtq+PBhrwW/yKddIiQ4Vqog1p6EcjaO1oNZeWMMcMWaU3lB9b3tSPhYm1kRQWTyCSGuOYfAr5G4o</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Arbeidstider.DataAccess.dll">
+      <publishTime>12/28/2013 05:23:33</publishTime>
+    </File>
+    <File Include="bin/Arbeidstider.DataAccess.Domain.dll">
+      <publishTime>12/28/2013 05:23:32</publishTime>
+    </File>
+    <File Include="bin/Arbeidstider.DataAccess.Repository.dll">
+      <publishTime>12/28/2013 05:23:34</publishTime>
+    </File>
+    <File Include="bin/Arbeidstider.IoC.dll">
+      <publishTime>12/28/2013 05:23:35</publishTime>
+    </File>
+    <File Include="bin/Arbeidstider.Web.Framework.dll">
+      <publishTime>12/28/2013 05:23:36</publishTime>
+    </File>
+    <File Include="bin/Arbeidstider.Web.Services.dll">
+      <publishTime>12/28/2013 05:23:38</publishTime>
+    </File>
+    <File Include="bin/Autofac.dll">
+      <publishTime>10/26/2013 02:07:06</publishTime>
+    </File>
+    <File Include="bin/Dapper.dll">
+      <publishTime>11/20/2013 21:13:34</publishTime>
+    </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>10/26/2013 02:07:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/26/2013 02:07:06</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/31/2013 22:48:43</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Client.dll">
+      <publishTime>12/14/2013 00:48:16</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Common.dll">
+      <publishTime>12/14/2013 00:48:16</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.dll">
+      <publishTime>12/14/2013 00:48:17</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Interfaces.dll">
+      <publishTime>12/14/2013 00:48:16</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Mvc.dll">
+      <publishTime>12/20/2013 01:23:18</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.OrmLite.dll">
+      <publishTime>12/14/2013 01:09:22</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.OrmLite.SqlServer.dll">
+      <publishTime>12/14/2013 01:09:22</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Redis.dll">
+      <publishTime>12/14/2013 01:09:22</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Server.dll">
+      <publishTime>12/14/2013 01:09:22</publishTime>
+    </File>
+    <File Include="bin/ServiceStack.Text.dll">
+      <publishTime>12/14/2013 00:48:16</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>07/10/2012 22:52:12</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>10/31/2013 22:48:36</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>10/31/2013 22:48:39</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/31/2013 22:48:37</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>10/31/2013 22:48:36</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>10/31/2013 22:48:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/31/2013 22:48:36</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/31/2013 22:48:37</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/31/2013 22:48:37</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/31/2013 22:48:37</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/31/2013 22:48:37</publishTime>
+    </File>
+    <File Include="bin/WebActivator.dll">
+      <publishTime>12/14/2013 01:09:21</publishTime>
+    </File>
+    <File Include="default.htm">
+      <publishTime>12/21/2013 19:50:05</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>12/22/2013 17:32:55</publishTime>
+    </File>
+    <File Include="jqunback-1.51.min.js">
+      <publishTime>12/21/2013 19:50:05</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>12/22/2013 20:12:01</publishTime>
+    </File>
+    <File Include="README.txt">
+      <publishTime>12/21/2013 19:50:05</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>12/21/2013 16:34:28</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/28/2013 05:23:52</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
