@@ -1,6 +1,5 @@
 ﻿using System;
-using Arbeidstider.DataAccess.Domain;
-using ServiceStack;
+using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.Web.Framework.DTO
 {

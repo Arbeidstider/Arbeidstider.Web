@@ -29,7 +29,7 @@ namespace Arbeidstider.DataAccess.Repository
 
         public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _database.Execute(Names.UPDATE_TIMESHEET, parameters);
+            var dt = _database.Execute(StoredProcedures.UPDATE_TIMESHEET, parameters);
             return dt;
         }
 

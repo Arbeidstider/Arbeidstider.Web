@@ -1,4 +1,4 @@
-﻿using Arbeidstider.DataAccess.Domain;
+﻿using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.Session;
 
 namespace Arbeidstider.Web.Framework.DTO

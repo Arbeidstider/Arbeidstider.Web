@@ -7,36 +7,26 @@ define([
         'views/base',
         'views/dashboard',
         'views/login',
+        'events',
         'text!templates/layout.html',
-    ], function($, _, Backbone, Vm, Session, BaseView, DashboardView, LoginView,  LayoutTemplate) {
+    ], function($, _, Backbone, Vm, Session, BaseView, DashboardView, LoginView, Events, LayoutTemplate) {
         var AppView = BaseView.extend({
-            defaults: {
-                models:  {}
-            },
             el: '#view-application',
             template: _.template(LayoutTemplate),
             router: {},
-            initialize: function () {
+            initialize: function (options) {
                 console.log("AppView initialize()");
-                _.bindAll(this, "isLoggedIn", "isAuthenticated", "render",  "signOut","setRouter");
-                this.models = this.models || {};
-                this.models.session = new Session();
-                console.log("session initialize");
-                this.models.session.on('change:isAuthenticated', this.isAuthenticated);
+                _.bindAll(this, "isLoggedIn", "isAuthenticated", "render", "signOut");
+                this.models = {};
+                this.models.session = options.session;
+                this.models.session.bind('change:isAuthenticated', this.isAuthenticated);
             },
-            isAuthenticated: function() {
+            isAuthenticated: function (e) {
+                // Render dashboard on authenticated 
                 var session = this.models.session;
-                
-                var view;
-                if (this.isLoggedIn()) {
-                    this.router.navigate("");
-                    //view = Vm.reuseView('DashboardView', function () { return new DashboardView({ session: session }) });
-                } else {
-                    this.router.navigate("login");
-                    //view = Vm.reuseView('LoginView', function() { return new LoginView({ model: session }) });
-                }
-
-                //this.render(view,  true);
+                if (!this.models.session.get("isAuthenticated")) return;
+                var view = Vm.reuseView('DashboardView', function() { return new DashboardView({ session: session }); });
+                this.render({ "#view-dashboard": view}, true);
             },
             render: function (selectorAndView, close) {
                 console.log("AppView.render()");
@@ -44,19 +34,19 @@ define([
                 $(this.el).html(this.template());
                 
                 var previous = this.currentView || null;
-                if (previous && close) previous.close();
-
-                if (!this.isLoggedIn()) this.assign(selectorAndView);
-                else this.assign(selectorAndView);
+                if (previous && close) {
+                    console.log("previous: " + previous);
+                     previous.close();
+                }
+                
+                this.assign(selectorAndView);
                 
                 this.currentView = selectorAndView.view;
                 return this.el;
             },
-            setRouter: function (router) {
-                this.router = router;
-            },
             isLoggedIn: function () {
-                return this.models.session.get("isAuthenticated") == true;
+                var session = truStorage.getItem("AuthSession");
+                return (!session.SessionId && !session.UserName);
             },
             signOut: function() {
                 this.models.session.signOut();

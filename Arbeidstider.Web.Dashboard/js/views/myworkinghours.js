@@ -8,10 +8,7 @@ define([
         var MyWorkingHoursView = BaseView.extend({
             template: _.template(MyWorkingHoursTemplate),
             el: '#view-my-working-hours',
-            initialize: function (options) {
-                if (options.isObject) {
-                    this.userId = options.userId;
-                }
+            initialize: function () {
             },
             render: function () {
                 $(this.el).html(this.template());

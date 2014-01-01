@@ -1,4 +1,6 @@
-﻿namespace Arbeidstider.DataAccess.Domain
+﻿using Arbeidstider.Interfaces;
+
+namespace Arbeidstider.DataAccess.Domain
 {
     public class Workplace : IWorkplace
     {

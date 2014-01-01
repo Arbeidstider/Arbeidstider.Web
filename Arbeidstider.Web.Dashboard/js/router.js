@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'vm'
+    'vm',
 ], function($, _, Backbone, Vm) {
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -22,9 +22,8 @@ define([
         router.on('route:login', function () {
             console.log('login route');
             require(['views/login'], function (LoginView) {
-                var session = appView.models.session;
-                var view = Vm.reuseView('LoginView', function() { return new LoginView({ model: session }); });
-                appView.render({"#view-login":view}, true);
+                var view = Vm.reuseView('LoginView', function() { return new LoginView({ model: appView.models.session }); });
+                appView.render({ "#view-login": view }, true);
             });
         });
         /* Logout */
@@ -33,26 +32,24 @@ define([
             appView.signOut();
         });
         /* Default */
-        router.on('route:home', function () {
-            console.log('home route');
-            if (!appView.isLoggedIn()) {
-                console.log('not logged in');
-                router.navigate("login", { trigger: true});
+        router.on('route:home', function ()  {
+            console.log("defualt route");
+            if (!appView.models.isLoggedIn) {
+                require(['views/login'], function (LoginView) {
+                    var view = Vm.reuseView('LoginView', function() { return new LoginView({ model: appView.models.session }); });
+                    appView.render({ "#view-login": view }, true);
+                });
             }
-            console.log('logged in');
             require(['views/dashboard'], function(DashboardView) {
-                var session = appView.models.session;
-                var view = Vm.reuseView('DashboardView', function() { return new DashboardView({ session: session }); });
-                appView.render({ "#view-dashboard": view}, true);
-                router.navigate("", {trigger: true});
+                var view = Vm.reuseView('DashboardView', function() { return new DashboardView({ session: appView.models.session }); });
+                appView.render({ "#view-dashboard": view }, true);
             });
         });
-
-        appView.setRouter(router);
 
         Backbone.history.start();
     };  
     return {
+        AppRouter: AppRouter,
         initialize: initialize
     };
 });

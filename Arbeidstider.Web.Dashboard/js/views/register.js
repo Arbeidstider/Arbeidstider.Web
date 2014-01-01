@@ -4,9 +4,6 @@ app.RegisterView = app.BaseView.extend({
 	    //_.bindAll(this, "render", "register", "registerSuccess", "login");
 	    //this.model.bind("change", this.render);
 
-		this.$("[name=displayName]").val(localStorage.getItem("displayName"));
-		this.$("[name=email]").val(localStorage.getItem("email"));
-
 		this.$el = $(this.el);
 		this.$errorMsg = this.$el.find("form b[data-error=summary]");
 		this.$signup = $(this.el).find("#signup");
@@ -28,8 +25,8 @@ app.RegisterView = app.BaseView.extend({
 
 		this.$registerLogin.find("INPUT[name=userName]").val(form.find("INPUT[name=email]").val());
 
-		localStorage.setItem("displayName", this.$("[name=displayName]").val());
-		localStorage.setItem("email", this.$("[name=email]").val());
+		localDataStore.setItem("displayName", this.$("[name=displayName]").val());
+		localDataStore.setItem("email", this.$("[name=email]").val());
     },
 	registerSuccess: function(r) {
 		//this.model.set({ hasRegistered: true, userId: r.userId, isAuthenticated: !!r.sessionId });

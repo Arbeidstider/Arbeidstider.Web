@@ -1,28 +1,47 @@
-﻿using Arbeidstider.Web.Services.App_Start;
+﻿using Arbeidstider.Web.Framework.Session;
+using Arbeidstider.Web.Services.App_Start;
 using Arbeidstider.Web.Services.ServiceModels;
 using ServiceStack;
-using ServiceStack.Caching;
+using ServiceStack.Redis;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
 {
-    [EnableCors()]
-    public class SessionRequestService : IService
+    public class SessionRequestService : Service
     {
-        public object Options()
+        [EnableCors]
+        public object Options(SessionRequest request)
         {
-            return Any();
-        }
-        public object Get()
-        {
-            return Any();
+            return true;
         }
 
-        public object Any()
+        [CustomAuthenticate("EmployeeAuth")]
+        public object Get(SessionRequest request)
         {
-            return new SessionRequestResponse()
-                       {
-                           AuthSession = AppHost.Instance.Resolve<ICacheClient>().SessionAs<AuthUserSession>()
-                       };
+            using (var redis = AppHost.Instance.Resolve<IRedisClientsManager>().GetClient())
+            {
+                var sessionkeys = redis.SearchKeys("urn:iauthsession:*");
+                foreach (var key in sessionkeys)
+                {
+                    var session = redis.Get<EmployeeSession>(key);
+                    if (session != null)
+                    {
+                        if (Request.Headers["ss-pid"] != null && session.Id == Request.Headers["ss-pid"])
+                        {
+                            return new SessionRequestResponse() {AuthSession = session};
+                        }
+                        if (Request.Headers["ss-id"] != null && session.Id == Request.Headers["ss-id"])
+                        {
+                            return new SessionRequestResponse() {AuthSession = session};
+                        }
+                        if (Request.Headers["Session-Id"] != null && session.Id == Request.Headers["Session-Id"])
+                        {
+                            return new SessionRequestResponse() {AuthSession = session};
+                        }
+                    }
+                }
+
+                return new SessionRequestResponse() {};
+            }
         }
     }
 }

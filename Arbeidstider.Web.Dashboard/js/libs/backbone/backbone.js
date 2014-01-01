@@ -111,7 +111,7 @@
         return this;
       }
       names = name ? [name] : _.keys(this._events);
-      for (i = 0, l = names.length; i < l; i++) {
+      for (i = 0, l = StoredProcedures.length; i < l; i++) {
         name = names[i];
         if (events = this._events[name]) {
           this._events[name] = retain = [];
@@ -181,10 +181,10 @@
       return false;
     }
 
-    // Handle space separated event names.
+    // Handle space separated event StoredProcedures.
     if (eventSplitter.test(name)) {
       var names = name.split(eventSplitter);
-      for (var i = 0, l = names.length; i < l; i++) {
+      for (var i = 0, l = StoredProcedures.length; i < l; i++) {
         obj[action].apply(obj, [names[i]].concat(rest));
       }
       return false;

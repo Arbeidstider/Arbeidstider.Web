@@ -402,7 +402,7 @@ var requirejs, require, define;
          *
          * @param {String} name the module name
          * @param {String} [parentModuleMap] parent module map
-         * for the module name, used to resolve relative names.
+         * for the module name, used to resolve relative StoredProcedures.
          * @param {Boolean} isNormalized: is the ID already normalized.
          * This is true if this call is done for a define() module ID.
          * @param {Boolean} applyMap: apply the map config to the ID.
@@ -1725,7 +1725,7 @@ var requirejs, require, define;
 
     /**
      * Support require.config() to make it easier to cooperate with other
-     * AMD loaders on globally agreed names.
+     * AMD loaders on globally agreed StoredProcedures.
      */
     req.config = function (config) {
         return req(config);

@@ -40,14 +40,14 @@ function guid() {
 // window.Store is deprectated, use Backbone.LocalStorage instead
 Backbone.LocalStorage = window.Store = function(name) {
   if( !this.localStorage ) {
-    throw "Backbone.localStorage: Environment does not support localStorage."
+    throw "Backbone.localStorage: Environment does not support localDataStore."
   }
   this.name = name;
   var store = this.localStorage().getItem(this.name);
   this.records = (store && store.split(",")) || [];
 };
 
-_.extend(Backbone.LocalStorage.prototype, {
+_.extend(Backbone.LocalDataStore.prototype, {
 
   // Save the current state of the **Store** to *localStorage*.
   save: function() {
@@ -80,7 +80,7 @@ _.extend(Backbone.LocalStorage.prototype, {
     return this.jsonData(this.localStorage().getItem(this.name+"-"+model.id));
   },
 
-  // Return the array of all models currently in storage.
+  // Return the array of all models currently in DataStore.
   findAll: function() {
     // Lodash removed _#chain in v1.0.0-rc.1
     return (_.chain || _)(this.records)
@@ -129,7 +129,7 @@ _.extend(Backbone.LocalStorage.prototype, {
     this.records.length = 0;
   },
 
-  // Size of localStorage.
+  // Size of localDataStore.
   _storageSize: function() {
     return this.localStorage().length;
   }
@@ -138,8 +138,8 @@ _.extend(Backbone.LocalStorage.prototype, {
 
 // localSync delegate to the model or collection's
 // *localStorage* property, which should be an instance of `Store`.
-// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalStorage.sync instead
-Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
+// window.Store.sync and Backbone.localSync is deprecated, use Backbone.LocalDataStore.sync instead
+Backbone.LocalDataStore.sync = window.Store.sync = Backbone.localSync = function(method, model, options) {
   var store = model.localStorage || model.collection.localStorage;
 
   var resp, errorMessage, syncDfd = Backbone.$.Deferred && Backbone.$.Deferred(); //If $ is having Deferred - use it.

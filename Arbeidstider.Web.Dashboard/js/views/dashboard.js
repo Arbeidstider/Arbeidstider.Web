@@ -20,29 +20,22 @@ define([
                     this.session = options.session;
                 }
             },
-            onClose: function() {
-                console.log("dashboard onclose()");
-                this.unbind("render");
-            },
             render: function () {
-                if (this.session.get('isAuthenticated')== true) {
-                    console.log("DashboardView.render()");
-                    $("body").attr("class", "contrast-dark fixed-header fixed-navigation");
-                    $(this.el).html(this.template());
-                    var headerMenuView = Vm.reuseView('HeaderMenuView', function () { return new HeaderMenuView(); });
-                    var sideBarView = Vm.reuseView('SidebarView', function () { return new SidebarView(); });
-                    var myWorkingHoursView = Vm.reuseView('MyWorkingHoursView', function () { return new MyWorkingHoursView(); }); 
+                console.log("DashboardView.render()");
+                $("body").attr("class", "");
+                $("body").attr("class", "contrast-dark fixed-header fixed-navigation");
+                $(this.el).html(this.template());
+                var headerMenuView = Vm.reuseView('HeaderMenuView', function () { return new HeaderMenuView(); });
+                var sideBarView = Vm.reuseView('SidebarView', function () { return new SidebarView(); });
+                var myWorkingHoursView = Vm.reuseView('MyWorkingHoursView', function () { return new MyWorkingHoursView(); }); 
 
-                    console.log("myWorkingHoursView: " + myWorkingHoursView);
-                    
-                    this.assign({
-                        "#view-header-menu" : headerMenuView,
-                        "#view-sidebar" : sideBarView,
-                        "#view-my-working-hours" : myWorkingHoursView
-                    });
-                    
-                    return this.el;
-                }
+                this.assign({
+                    "#view-header-menu" : headerMenuView,
+                    "#view-sidebar" : sideBarView,
+                    "#view-my-working-hours" : myWorkingHoursView
+                });
+                
+                return this.el;
             },
             signOut: function () {
                 this.session.signOut();

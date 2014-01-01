@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="ServiceStack, Version=4.0.5.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework, Version=2.6.3.13283, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="ServiceStack.Client">
       <HintPath>..\packages\ServiceStack.Client.4.0.3\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
@@ -57,12 +57,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Arbeidstider.Web.Framework\Arbeidstider.Web.Framework.csproj">
-      <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>
+      <Project>{134152a9-4d12-44e9-8a13-3e48128b4ce4}</Project>
       <Name>Arbeidstider.Web.Framework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Web.Services\Arbeidstider.Web.Services.csproj">
-      <Project>{BB11E43C-14B1-433E-96E7-C4655F53ADD3}</Project>
+      <Project>{bb11e43c-14b1-433e-96e7-c4655f53add3}</Project>
       <Name>Arbeidstider.Web.Services</Name>
     </ProjectReference>
   </ItemGroup>
