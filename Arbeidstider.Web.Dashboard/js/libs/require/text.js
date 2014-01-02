@@ -202,7 +202,7 @@ define(['module'], function (module) {
 
             //Leverage own load() method to load plugin value, but only
             //write out values that do not have the strip argument,
-            //to avoid any potential issues with ! in file StoredProcedures.
+            //to avoid any potential issues with ! in file names.
             text.load(nonStripName, req, function (value) {
                 //Use own write() method to construct full module value.
                 //But need to create shell that translates writeFile's

@@ -4,7 +4,6 @@ using System.Linq;
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository;
 using Arbeidstider.DataAccess.Repository.Exceptions;
-using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.Services

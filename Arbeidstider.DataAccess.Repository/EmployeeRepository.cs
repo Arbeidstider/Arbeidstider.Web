@@ -3,7 +3,6 @@ using System.Linq;
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
 using Arbeidstider.DataAccess.Repository.Exceptions;
-using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.DataAccess.Repository
 {
@@ -17,18 +16,18 @@ namespace Arbeidstider.DataAccess.Repository
 
         public IEnumerable<IEmployee> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _database.GetMultiple<Employee>(StoredProcedures.GET_ALL_EMPLOYEES, parameters);
+            var dt = _database.GetMultiple<Employee>(Names.GET_ALL_EMPLOYEES, parameters);
             var employees = dt as Employee[] ?? dt.ToArray();
 
             if (employees == null || !employees.Any())
-                throw new EmployeeRepositoryException(string.Format("{0} returned 0 rows.", StoredProcedures.GET_ALL_EMPLOYEES));
+                throw new EmployeeRepositoryException(string.Format("{0} returned 0 rows.", Names.GET_ALL_EMPLOYEES));
 
             return employees;
         }
 
         public bool Create(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _database.Execute(StoredProcedures.CREATE_EMPLOYEE, parameters);
+            var dt = _database.Execute(Names.CREATE_EMPLOYEE, parameters);
             if (!dt) 
                 throw new EmployeeRepositoryException(string.Format("Failed to create Employee with userID: {0}", parameters.Select(x => x.Key == "UserID").FirstOrDefault().ToString()));
 
@@ -37,7 +36,7 @@ namespace Arbeidstider.DataAccess.Repository
 
         public IEmployee Get(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _database.GetSingle<Employee>(StoredProcedures.GET_EMPLOYEE, parameters);
+            var dt = _database.GetSingle<Employee>(Names.GET_EMPLOYEE, parameters);
 
             if (dt == null) throw new EmployeeRepositoryException(string.Format("Failed to get employee with username: {0}", parameters.ElementAtOrDefault(0).Value));
 
@@ -46,7 +45,7 @@ namespace Arbeidstider.DataAccess.Repository
 
         public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            var dt = _database.Execute(StoredProcedures.UPDATE_EMPLOYEE, parameters);
+            var dt = _database.Execute(Names.UPDATE_EMPLOYEE, parameters);
 
             if (!dt) throw new EmployeeRepositoryException(string.Format("Failed to update employee with employeeID: {0}", parameters.ElementAtOrDefault(0).Value));
 
@@ -55,7 +54,7 @@ namespace Arbeidstider.DataAccess.Repository
 
         public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)
         {
-            return _database.Execute(StoredProcedures.EMPLOYEE_EXISTS, parameters);
+            return _database.Execute(Names.EMPLOYEE_EXISTS, parameters);
         }
 
         public bool Delete(IEnumerable<KeyValuePair<string, object>> parameters)

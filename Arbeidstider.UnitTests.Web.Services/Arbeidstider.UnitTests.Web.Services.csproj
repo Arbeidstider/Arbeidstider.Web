@@ -11,12 +11,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Arbeidstider.UnitTests.Web.Services</RootNamespace>
     <AssemblyName>Arbeidstider.UnitTests.Web.Services</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -26,7 +25,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,7 +33,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
@@ -84,7 +81,6 @@
     <Compile Include="Services\TimesheetsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UpdateTimesheetService.cs" />
-    <Compile Include="TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -96,9 +92,9 @@
       <Project>{89ABA23F-72BE-4B40-8A8E-F8281A6BBCA6}</Project>
       <Name>Arbeidstider.DataAccess.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
-      <Project>{16088D48-AA1A-47AD-AC09-01E7B671F18F}</Project>
-      <Name>Arbeidstider.Interfaces</Name>
+    <ProjectReference Include="..\Arbeidstider.UnitTests.Base\Arbeidstider.UnitTests.Base.csproj">
+      <Project>{DAF1C4FF-4765-4EBF-B252-D6BFB1DB12AB}</Project>
+      <Name>Arbeidstider.UnitTests.Base</Name>
     </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Web.Framework\Arbeidstider.Web.Framework.csproj">
       <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>

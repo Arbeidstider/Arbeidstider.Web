@@ -2,6 +2,8 @@
 using Arbeidstider.UnitTests.Base.Classes;
 using Arbeidstider.Web.Services.ServiceModels;
 using NUnit.Framework;
+using ServiceStack;
+using ServiceStack.Auth;
 
 namespace Arbeidstider.UnitTests.Web.Services
 {
@@ -11,6 +13,7 @@ namespace Arbeidstider.UnitTests.Web.Services
         [TestCase()]
         public void Test_Login()
         {
+            DoAuth();
         }
 
         [TestCase()]
@@ -20,7 +23,7 @@ namespace Arbeidstider.UnitTests.Web.Services
             using (var client = GetServiceClient())
             {
                 var request = new Arbeidstider.Web.Services.ServiceModels.SessionRequest();
-                var response = client.Send<SessionRequestResponse>("GET", "/getsession", request);
+                var response = client.Get(request);
                 Assert.That(response.AuthSession != null && response.AuthSession.IsAuthenticated);
                 Console.WriteLine(response.AuthSession);
             }

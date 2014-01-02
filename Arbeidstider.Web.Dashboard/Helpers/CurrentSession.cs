@@ -1,7 +1,4 @@
-﻿using System.Web;
-using ServiceStack;
-using ServiceStack.Redis;
-using ServiceStack.Redis.Generic;
+﻿using ServiceStack;
 
 namespace Arbeidstider.Web.Dashboard.Helpers
 {
@@ -16,7 +13,7 @@ namespace Arbeidstider.Web.Dashboard.Helpers
             } 
         }
 
-        public static AuthUserSession GetSession(int userId, int sessionId)
+        public static AuthUserSession GetSession(int sessionID)
         {
             return new AuthUserSession();
             // Change to use redis

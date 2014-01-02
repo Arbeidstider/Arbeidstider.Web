@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbeidstider.Interfaces;
+using Arbeidstider.DataAccess.Domain;
 
 namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
 {

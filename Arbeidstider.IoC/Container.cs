@@ -1,5 +1,5 @@
-﻿using Arbeidstider.DataAccess.Repository;
-using Arbeidstider.Interfaces;
+﻿using Arbeidstider.DataAccess.Domain;
+using Arbeidstider.DataAccess.Repository;
 using Autofac;
 using log4net;
 
