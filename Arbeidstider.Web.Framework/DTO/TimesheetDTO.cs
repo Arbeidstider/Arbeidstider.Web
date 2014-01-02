@@ -16,7 +16,7 @@ namespace Arbeidstider.Web.Framework.DTO
 
         public int TimeSheetID { get; set; }
         public string ShiftDate { get; private set; }
-        public Guid UserID { get; private set; }
+        public int UserID { get; private set; }
         public string ShiftEnd { get; private set; }
 
         public string ShiftStart { get; private set; }

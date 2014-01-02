@@ -13,12 +13,11 @@ define([
         },
         initialize: function () {
             _.bindAll(this, 'signIn', 'render');
-            $("form").submit(this.signIn);
         },
         signIn: function(e) {
             if (e) e.preventDefault();
             if (this.model.validate())
-                this.model.signIn("form");
+                this.model.signIn();
         },
         render: function () {
             console.log("LoginView.render()");

@@ -11,6 +11,7 @@ namespace Arbeidstider.UnitTests.Web.Services.Services
     [TestFixture]
     public class UpdateTimesheetService : TestBase
     {
+        /*
         [TestCase]
         public void Update_1()
         {
@@ -41,5 +42,6 @@ namespace Arbeidstider.UnitTests.Web.Services.Services
             Assert.That(TimeSpan.Parse(timesheet.ShiftStart).Equals(newShiftStart));
             Assert.That(TimeSpan.Parse(timesheet.ShiftEnd).Equals(newShiftEnd));
         }
+         */
     }
 }

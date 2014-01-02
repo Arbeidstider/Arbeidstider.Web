@@ -7,6 +7,7 @@ namespace Arbeidstider.Web.Dashboard.App_Start
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            routes.IgnoreRoute("dashboard");
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(

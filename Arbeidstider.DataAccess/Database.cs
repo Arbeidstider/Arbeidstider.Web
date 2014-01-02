@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
@@ -40,7 +41,25 @@ namespace Arbeidstider.DataAccess
             var p = new DynamicParameters();
             foreach (var kvp in parameters)
             {
-                p.Add(string.Format("@{0}", kvp.Key), kvp.Value);
+                var dbType = DbType.String;
+                object value;
+                if (kvp.Value is int)
+                {
+                    dbType = DbType.Int32;
+                    value = int.Parse(kvp.Value.ToString());
+                }
+                else if (kvp.Value is DateTime)
+                {
+                    dbType = DbType.DateTime;
+                    value = DateTime.Parse(kvp.Value.ToString());
+                } 
+                else
+                {
+                    value = kvp.Value.ToString();
+                }
+ 
+                p.Add(name: kvp.Key, value: value, dbType: dbType);
+
             }
 
             return p;
@@ -101,7 +120,7 @@ namespace Arbeidstider.DataAccess
             using (var connection = GetOpenConnection())
             {
                 var p = GetDynamicParameters(parameters);
-                var result = connection.Query<T>(spName, p, commandType: CommandType.StoredProcedure);
+                var result = connection.Query<T>(spName, param: p, commandType: CommandType.StoredProcedure);
                 return result.ToList();
             }
         }

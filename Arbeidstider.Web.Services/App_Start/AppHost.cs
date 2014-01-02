@@ -98,7 +98,7 @@ namespace Arbeidstider.Web.Services.App_Start
 			//Default route: /auth/{provider}
 			Plugins.Add(new AuthFeature(() => new EmployeeSession(), 
 				new IAuthProvider[] {
-					new EmployeeAuthProvider(), 
+					new EmployeeAuthProvider()
 				}){HtmlRedirect = null}); 
 
 			//Default route: /register

@@ -25,10 +25,6 @@ require.config({
         backbone: {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
-        },
-        'backbone.localStorage': {
-            deps: ['backbone'],
-            exports: 'Backbone'
         }
     }
 });
@@ -39,11 +35,10 @@ require(['jquery',
         'underscore',
         'backbone',
         'vm',
+        'mixins',
         'views/app',
         'router',
-        'models/session'
-], function ($, _, Backbone, Vm, AppView, Router, Session) {
-    var session = new Session();
-    var appView = Vm.reuseView("AppView", function () { return new AppView({ session: session }); });
-    Router.initialize({ appView: appView }); // The router now has a copy of all main appview
-});
+], function ($, _, Backbone, Vm, Mixins, AppView, Router) {
+            var appView = Vm.reuseView("AppView", function() {  return new AppView(); });
+            Router.initialize({ appView: appView }); // The router now has a copy of all main appview
+        });

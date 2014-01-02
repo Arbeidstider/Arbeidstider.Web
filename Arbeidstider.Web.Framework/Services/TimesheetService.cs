@@ -65,23 +65,16 @@ namespace Arbeidstider.Web.Framework.Services
         }
         #endregion
 
-        public List<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, Guid userID)
+        public List<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, int userID)
         {
             var parameters = new List<KeyValuePair<string, object>>
                                  {
                                      new KeyValuePair<string, object>("StartDate", startDate),
                                      new KeyValuePair<string, object>("EndDate", endDate),
-                                     new KeyValuePair<string, object>("UserID", userID)
+                                     new KeyValuePair<string, object>("UserID", (int)userID)
                                  };
-            return  _getAllWithinRange(parameters);
-        }
-
-        #region GetAllWithinRange Callback
-        private List<TimesheetDTO> _getAllWithinRange(IEnumerable<KeyValuePair<string, object>> parameters)
-        {
             return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToList();
         }
-        #endregion
 
         public bool Create(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd)
         {
