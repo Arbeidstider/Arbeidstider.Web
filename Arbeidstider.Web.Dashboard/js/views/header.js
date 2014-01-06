@@ -4,15 +4,13 @@ define([
   'backbone',
   'marionette',
   'text!templates/header.html',
-  'libs/bootstrap/nav'
-], function ($, _, Backbone, Marionette, headerMenuTemplate, Nav) {
+], function ($, _, Backbone, Marionette, headerMenuTemplate) {
     return Backbone.Marionette.ItemView.extend({
         template: _.template(headerMenuTemplate),
         events: {
         },
         initialize: function () {
             console.log("HeaderMenuView.initialize()");
-            Nav.initialize();
             $(document).ready(function () {
                 $("a.dropdown-menu-link").click(function (e) {
                     e.preventDefault();

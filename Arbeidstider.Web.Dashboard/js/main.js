@@ -47,11 +47,11 @@ require.config({
 require([
         'jquery',
         'marionette',
-        'app',
         'bootstrap',
-        'libs/bootstrap/nav'
-    ], function($, marionette, App, Bootstrap, Nav) {
+        'app',
+    ], function($, marionette, Bootstrap, App) {
         $(document).ready(function () {
+            Bootstrap.initialize();
             $.support.cors = true;
             $.ajaxSetup({
                 statusCode: {
