@@ -1,5 +1,6 @@
 ﻿using Arbeidstider.Web.Framework.Session;
 using ServiceStack;
+using ServiceStack.Auth;
 
 namespace Arbeidstider.Web.Services.ServiceModels
 {

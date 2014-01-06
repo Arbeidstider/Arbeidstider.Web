@@ -1,6 +1,5 @@
 ﻿using System;
 using Arbeidstider.UnitTests.Base.Classes;
-using Arbeidstider.Web.Services.ServiceModels;
 using NUnit.Framework;
 
 namespace Arbeidstider.UnitTests.Web.Services.Services

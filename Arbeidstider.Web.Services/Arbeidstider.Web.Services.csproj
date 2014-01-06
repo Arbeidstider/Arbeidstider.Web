@@ -142,6 +142,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="ServiceInterfaces\CreateEmployeeService.cs" />
+    <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
     <Compile Include="CacheKeys.cs" />
     <Compile Include="Exceptions\TimesheetServiceException.cs" />
     <Compile Include="Global.asax.cs">
@@ -149,6 +151,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\CreateTimesheetService.cs" />
+    <Compile Include="ServiceInterfaces\CustomAuthenticateAttribute.cs" />
     <Compile Include="ServiceInterfaces\DeleteTimesheetService.cs" />
     <Compile Include="ServiceInterfaces\ServiceInterfaceBase.cs" />
     <Compile Include="ServiceInterfaces\SessionRequestService.cs" />
@@ -164,7 +167,6 @@
     <Compile Include="ServiceModels\TimesheetsResponse.cs" />
     <Compile Include="ServiceModels\UpdateTimesheet.cs" />
     <Compile Include="ServiceModels\UpdateTimesheetResponse.cs" />
-    <Compile Include="WebServiceExamples.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -172,8 +174,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
-    <Content Include="jqunback-1.51.min.js" />
-    <Content Include="README.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -183,12 +183,8 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Arbeidstider.Web.Framework;
-using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Services.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ServiceStack;
 using ServiceStack.Auth;
@@ -21,6 +17,7 @@ namespace Arbeidstider.UnitTests.Base.Classes
             return new JsonServiceClient("http://localhost:8181");
         }
 
+        /*
         protected List<TimesheetDTO> GetTestTimesheets()
         {
             var request = new Timesheets()
@@ -32,6 +29,7 @@ namespace Arbeidstider.UnitTests.Base.Classes
             var all = GetServiceClient().Get(request);
             return all.Timesheets;
         }
+         */
 
         protected Guid GetTestUserID()
         {
@@ -59,7 +57,7 @@ namespace Arbeidstider.UnitTests.Base.Classes
                                   {
                                       UserName = "johan.nordstrom86@gmail.com",
                                       Password = "Test123!",
-                                      provider = AuthenticateService.CredentialsProvider
+                                      provider = "Employee"
                                   };
                 client.Post<AuthenticateResponse>("/auth/credentials", request);
             }

@@ -1,51 +1,40 @@
-app.RegisterView = app.BaseView.extend({
-	className: "view-register",
-	initialize: function () {
-	    //_.bindAll(this, "render", "register", "registerSuccess", "login");
-	    //this.model.bind("change", this.render);
-
-		this.$("[name=displayName]").val(localStorage.getItem("displayName"));
-		this.$("[name=email]").val(localStorage.getItem("email"));
-
-		this.$el = $(this.el);
-		this.$errorMsg = this.$el.find("form b[data-error=summary]");
-		this.$signup = $(this.el).find("#signup");
-		this.$registerLogin = $(this.el).find("#register-login");
-
-		this.$signup.find("form").submit(this.register);
-		this.$registerLogin.find("form").submit(this.login);
-	},
-	register: function(e) {
-		if (e) e.preventDefault();
-
-		var form = this.$signup.find("form");
-		_.post({
-			form: form,
-			url: form.attr("action"),
-			data: _.formData(form),
-			success: this.registerSuccess
-		});
-
-		this.$registerLogin.find("INPUT[name=userName]").val(form.find("INPUT[name=email]").val());
-
-		localStorage.setItem("displayName", this.$("[name=displayName]").val());
-		localStorage.setItem("email", this.$("[name=email]").val());
-    },
-	registerSuccess: function(r) {
-		//this.model.set({ hasRegistered: true, userId: r.userId, isAuthenticated: !!r.sessionId });
-	},
-	login: function(e) {
-	    if (e) e.preventDefault();
-	    //this.model.login(this.$registerLogin.find("form"));
-	},
-	signIn: function(e) {
-		//this.model.set({ hasRegistered: true });
-	},
-    unregistered: function(e) {    
-        //this.model.set({ hasRegistered: false });
-    },
-    render: function() {
-		this.$errorMsg.html("");
-		//$("BODY").toggleClass("registered", this.model.get('hasRegistered'));
-	}
+define([
+        'jquery',
+        'underscore',
+        'backbone',
+        'marionette',
+        'helpers/mixins',
+        'models/settings',
+        'text!templates/register.html'
+], function ($, _, Backbone, Marionette, mixins, Settings, RegisterTemplate) {
+    return Backbone.Marionette.ItemView.extend({
+        template: _.template(RegisterTemplate),
+        //el: "#content",
+        events: {
+            "click .btn-block": "register"
+        },
+        initialize: function () {
+            _.bindAll(this, "register", "registerSuccess", "render");
+        },
+        registerSuccess: function (response) {
+            var data = JSON.stringify(response);
+            console.log("user created: " + data);
+            alert("user created: " + data);
+        },
+        register: function(e) {
+            if (e) e.preventDefault();
+            var data = _.formData("form");
+            _.post({
+                url: Settings.ServiceUrl("/employee/register"),
+                data: data,
+                success: this.registerSuccess,
+            });
+        },
+        /*
+        render: function () {
+            $(this.el).html(this.template());
+            return this.el;
+        }
+        */
+    });
 });

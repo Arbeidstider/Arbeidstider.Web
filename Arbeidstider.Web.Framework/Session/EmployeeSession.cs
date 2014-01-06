@@ -1,9 +1,18 @@
-﻿namespace Arbeidstider.Web.Framework.Session
+﻿using System.Collections.Generic;
+using ServiceStack;
+using ServiceStack.Auth;
+
+namespace Arbeidstider.Web.Framework.Session
 {
-    public class EmployeeSession : ServiceStack.AuthUserSession, IEmployeeSession
+    public class EmployeeSession : ServiceStack.AuthUserSession
     {
+        public int WorkplaceId { get; set; }
         // Connect to employee db
-        public string Username { get; set; }
-        public int SessionId { get; set; }
+        public override void OnAuthenticated(IServiceBase authService, IAuthSession session, IAuthTokens tokens,
+                                             Dictionary<string, string> authInfo)
+        {
+
+            base.OnAuthenticated(authService, session, tokens, authInfo);
+        }
     }
 }

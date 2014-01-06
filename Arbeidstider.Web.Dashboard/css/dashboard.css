@@ -1,15 +1,8 @@
-.view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: transition 0.5s ease;
-  transform: translate3d(100%, 0, 0);
-}
-
-.view.is-visible {
-  transform: translate3d(0, 0, 0);
-}
-
 .hide { display: none;}
+/*
+.wrapper {width: 90%; margin: 0 auto;} .child {width:auto;} 
+.container {
+    width: 94%;
+    margin: 0 3%;
+}
+*/

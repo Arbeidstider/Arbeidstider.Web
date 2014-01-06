@@ -7,7 +7,7 @@ namespace Arbeidstider.Web.Services.ServiceModels
     {
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public int? WorkplaceID { get; set; }
         public string UserID { get; set; }
+        public int? WorkplaceID { get; set; }
     }
 }

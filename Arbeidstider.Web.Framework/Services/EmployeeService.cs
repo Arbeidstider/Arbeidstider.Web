@@ -31,11 +31,9 @@ namespace Arbeidstider.Web.Framework.Services
         }
 
 
-        public bool CreateEmployee(string username, Guid userID, string lastname, string firstname, string mobile,
-                                   string birthDate, int workplaceID)
+        public bool CreateEmployee(int userId, int workplaceId)
         {
-            var parameters = Parameters.Employee.Create(username, userID, lastname, firstname, mobile, birthDate,
-                                                        workplaceID);
+            var parameters = Parameters.Employee.Create(userId, workplaceId);
             try
             {
                 _repository.Create(parameters);

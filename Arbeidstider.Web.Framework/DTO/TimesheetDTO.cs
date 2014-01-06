@@ -1,6 +1,4 @@
-﻿using System;
-using Arbeidstider.DataAccess.Domain;
-using ServiceStack;
+﻿using Arbeidstider.DataAccess.Domain;
 
 namespace Arbeidstider.Web.Framework.DTO
 {
@@ -12,10 +10,10 @@ namespace Arbeidstider.Web.Framework.DTO
             ShiftDate = domain.ShiftDate.ToString();
             ShiftEnd = domain.ShiftEnd.ToString();
             ShiftStart = domain.ShiftStart.ToString();
-            TimeSheetID = domain.EmployeeShiftID;
+            Id = domain.Id;
         }
 
-        public int TimeSheetID { get; set; }
+        public int Id { get; set; }
         public string ShiftDate { get; private set; }
         public int UserID { get; private set; }
         public string ShiftEnd { get; private set; }

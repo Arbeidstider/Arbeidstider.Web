@@ -7,9 +7,14 @@ require.config({
         jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
         underscore: 'libs/underscore/underscore', // https://github.com/amdjs
         backbone: 'libs/backbone/backbone', // https://github.com/amdjs
-        localStorage: 'libs/backbone.localStorage',
-        bootstrap: 'libs/bootstrap/bootstrap.min',
+        backbone_validateAll: 'libs/backbone.validateAll/backbone.validateAll', // 
+        "backbone.wreqr": 'libs/backbone.wreqr/wreqr', // 
+        "backbone.babysitter": 'libs/backbone.babysitter/backbone.babySitter', // 
+        marionette: 'libs/backbone.marionette/backbone.marionette', // 
+        jquery_mobile: 'libs/jquery_mobile/jquery.mobile.custom',
+        bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
+        store: 'libs/store/store',
 
         // Require.js plugins
         text: 'libs/require/text',
@@ -25,20 +30,43 @@ require.config({
         backbone: {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
-        }
+        },
+        'backbone.babysitter': {
+          deps: ['backbone','underscore']
+        },
+        "marionette":{
+            "deps":["underscore", "backbone", "jquery"],
+            // Exports the global window.Marionette object
+            "exports":"Marionette"
+        },
     }
 });
 
-// Let's kick off the application
+// Let's kick off the applicati§on
 
-require(['jquery',
-        'underscore',
-        'backbone',
-        'vm',
-        'mixins',
-        'views/app',
-        'router',
-], function ($, _, Backbone, Vm, Mixins, AppView, Router) {
-            var appView = Vm.reuseView("AppView", function() {  return new AppView(); });
-            Router.initialize({ appView: appView }); // The router now has a copy of all main appview
+require([
+        'jquery',
+        'marionette',
+        'app',
+        'bootstrap',
+        'libs/bootstrap/nav'
+    ], function($, marionette, App, Bootstrap, Nav) {
+        $(document).ready(function () {
+            $.support.cors = true;
+            $.ajaxSetup({
+                statusCode: {
+                    401: function(){
+                        // Redirec the to the login page.
+                        window.location.replace('/login');
+                     
+                    },
+                    403: function() {
+                        // 403 -- Access denied
+                        window.location.replace('/denied');
+                    }
+                }
+            });
+            
+            App.start();
         });
+    });

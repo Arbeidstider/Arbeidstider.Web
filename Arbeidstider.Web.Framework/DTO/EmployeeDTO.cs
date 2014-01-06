@@ -7,7 +7,6 @@ namespace Arbeidstider.Web.Framework.DTO
     {
         public EmployeeDTO(IEmployeeSession currentUser)
         {
-            Username = currentUser.Username;
         }
         public EmployeeDTO(IEmployee domain)
         {
