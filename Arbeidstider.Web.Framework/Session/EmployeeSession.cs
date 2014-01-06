@@ -1,9 +1,8 @@
-﻿namespace Arbeidstider.Web.Framework.Session
+﻿using ServiceStack;
+
+namespace Arbeidstider.Web.Framework.Session
 {
-    public class EmployeeSession : ServiceStack.AuthUserSession, IEmployeeSession
+    public class EmployeeSession : AuthUserSession
     {
-        // Connect to employee db
-        public string Username { get; set; }
-        public int SessionId { get; set; }
     }
 }

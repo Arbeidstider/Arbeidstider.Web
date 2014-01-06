@@ -17,6 +17,7 @@ define([
                     UserID: 5,
                     WorkplaceID: 0
                 };
+                console.log(params);
                 this.collection.fetch({
                     data: params
                 });

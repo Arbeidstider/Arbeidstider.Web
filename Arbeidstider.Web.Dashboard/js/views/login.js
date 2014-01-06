@@ -2,22 +2,23 @@ define([
         'jquery',
         'underscore',
         'backbone',
-        'views/base',
+        'marionette',
+        'models/session',
         'text!templates/login.html',
-], function ($, _, Backbone, BaseView, LoginTemplate) {
-    var LoginView = BaseView.extend({
-        template: _.template(LoginTemplate),
-        el: '#view-login',
+], function ($, _, Backbone, Marionette, Session, LoginTemplate) {
+    return Backbone.Marionette.ItemView.extend({
+        template: LoginTemplate,
+        el: '#login',
         events: {
             "click .btn-block" : "signIn"
         },
-        initialize: function () {
-            _.bindAll(this, 'signIn', 'render');
+        initialize: function (options) {
+            _.bindAll(this, "signIn", "render", "validate");
         },
         signIn: function(e) {
             if (e) e.preventDefault();
-            if (this.model.validate())
-                this.model.signIn();
+            if (this.validate())
+                Session.signIn();
         },
         render: function () {
             console.log("LoginView.render()");
@@ -27,9 +28,8 @@ define([
         },
         signOut: function () {
             console.log('LoginView.signOut');
-            this.model.signOut();
+            Session.signOut();
         },
+        validate: function () { return true; }
     });
-
-    return LoginView;
 });

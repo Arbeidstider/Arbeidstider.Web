@@ -1,6 +1,7 @@
 define(['underscore',
         'marionette',
         'helpers/mixins',
+        'libs/vm/vm',
         'models/settings',
         'collections/timesheets',
         'views/calendar',
@@ -14,7 +15,7 @@ define(['underscore',
         'views/addressbook',
         'views/messages'
 ],
-function (_, Marionette, Mixins, Settings, TimesheetCollection, CalendarView, CalendarItemView, RegisterView, ChangeWorkDayView, SetDaysFreeView,  ConfirmAvailableDaysView, ProfileView,AddressBookItemView,  AddressBookView,  MessagesView) {
+function (_, Marionette, Mixins, Vm, Settings, TimesheetCollection, CalendarView, CalendarItemView, RegisterView, ChangeWorkDayView, SetDaysFreeView,  ConfirmAvailableDaysView, ProfileView,AddressBookItemView,  AddressBookView,  MessagesView) {
     var AppController = Backbone.Marionette.Controller.extend({
         initialize: function (options) {
             _.bindAll(this, "dashboard", "changeView");

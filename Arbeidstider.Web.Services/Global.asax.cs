@@ -1,4 +1,5 @@
-﻿using System.Web.Routing;
+﻿using System.Web;
+using System.Web.Routing;
 using Arbeidstider.Web.Framework;
 using Arbeidstider.Web.Services.App_Start;
 
@@ -18,6 +19,17 @@ namespace Arbeidstider.Web.Services
             */
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             IoC.Initialize();
+        }
+
+        protected void Application_BeginRequest()
+        {
+            if (HttpContext.Current.Request.HttpMethod == "OPTIONS")
+            {
+                HttpContext.Current.Response.AddHeader("Access-Control-Allow-Methods", "GET, POST");
+                HttpContext.Current.Response.AddHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Session-Id, Authorization");
+                HttpContext.Current.Response.AddHeader("Access-Control-Max-Age", "1728000");
+                HttpContext.Current.Response.End();
+            }
         }
     }
 }

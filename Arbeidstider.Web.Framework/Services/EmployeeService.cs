@@ -5,6 +5,7 @@ using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository;
 using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
 using Arbeidstider.DataAccess.Repository.Exceptions;
+using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.DTO;
 
 namespace Arbeidstider.Web.Framework.Services
@@ -31,11 +32,9 @@ namespace Arbeidstider.Web.Framework.Services
         }
 
 
-        public bool CreateEmployee(string username, Guid userID, string lastname, string firstname, string mobile,
-                                   string birthDate, int workplaceID)
+        public bool CreateEmployee(int userId, int workplaceId)
         {
-            var parameters = Parameters.Employee.Create(username, userID, lastname, firstname, mobile, birthDate,
-                                                        workplaceID);
+            var parameters = Parameters.Employee.Create(userId, workplaceId);
             try
             {
                 _repository.Create(parameters);
