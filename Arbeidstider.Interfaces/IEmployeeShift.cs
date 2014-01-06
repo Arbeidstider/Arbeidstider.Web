@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arbeidstider.Interfaces
+namespace Arbeidstider.DataAccess.Domain
 {
     public interface IEmployeeShift
     {
