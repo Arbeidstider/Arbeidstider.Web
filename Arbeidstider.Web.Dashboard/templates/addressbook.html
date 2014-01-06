@@ -1,0 +1,44 @@
+﻿			  <!--HER KOMMER INNHOLD PÅ SIDEN-->
+                <div class='span12'>
+                  <div class='page-header'>
+                    <h1 class='pull-left'>
+                      <i class='icon-group'></i>
+                      <span>Kolleger</span>
+                    </h1>
+                    <div class='pull-right'>
+                      <ul class='breadcrumb'>
+                        <li>
+                          <a href='index.html'>
+                            <i class='icon-bar-chart'></i>
+                          </a>
+                        </li>
+                        <li class='separator'>
+                          <i class='icon-angle-right'></i>
+                        </li>
+                        <li class='active'>Kolleger</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              <div class='row-fluid'>
+                <div class='span12 box'>
+                  <div class='box-content box-no-padding'>
+                    <div class='clearfix' id='slider'>
+                      <div class='slider-content'>
+                          <ul>
+                              <% _.each(items, function(letter) { %>
+                              <li id="<%= letter.toLower() %>">
+                                  <a class='title'><%= letter %></a>
+                                  <ul>
+                                      <li>
+                                          <a href='#'></a>
+                                      </li>
+                                  </ul>
+                              </li>
+                              <% }); %>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>

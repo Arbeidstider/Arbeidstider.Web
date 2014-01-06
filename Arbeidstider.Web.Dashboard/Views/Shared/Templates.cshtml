@@ -1,0 +1,135 @@
+﻿<script id="template-register" type="text/template">
+    <div class='container-fluid'>
+        <div class='row-fluid' id='content-wrapper'>
+            <div class='span12'>
+                <div class='row-fluid'>
+                    <div class='span12'>
+                        <div class='page-header'>
+                            <h1 class='pull-left'>
+                                <i class='icon-edit'></i>
+                                <span>Legg til ansatt</span>
+                            </h1>
+                            <div class='pull-right'>
+                                <ul class='breadcrumb'>
+                                    <li>
+                                        <a href="/dashboard">
+                                            <i class='icon-bar-chart'></i>
+                                        </a>
+                                    </li>
+                                    <li class='separator'>
+                                        <i class='icon-angle-right'></i>
+                                    </li>
+                                    <li>Administrer
+                                    </li>
+                                    <li class='separator'>
+                                        <i class='icon-angle-right'></i>
+                                    </li>
+                                    <li class='active'></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row-fluid'>
+                    <div class='span12 box'>
+                        <div class='box-content box-padding'>
+                            <div class='fuelux'>
+                            </div>
+
+                            <big class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl est, vulputate at porttitor non, interdum a mauris. Phasellus imperdiet gravida pulvinar.
+                            </big>
+                            <hr class='hr-normal'>
+                            <form name="form" method="POST">
+                                <div class="row-fluid">
+                                    <div class="span12 box">
+                                        <div class="box-header blue-background">
+                                            <div class="title">
+                                                <div class="icon-male"></div>
+    Personalia
+</div>
+</div>
+<div class="box-content box-no-padding">
+    <div class="control-group">
+        <label class="control-label" for="firstname">Fornavn</label>
+        <div class="controls">
+            <input class="form-control input-block-level" data-rule-required='true' id="Firstname" placeholder="Fornavn" name="FirstName" type="text">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="surname">Etternavn</label>
+        <div class="controls">
+            <input class="form-control input-block-level" data-rule-required='true' id="surname" name="LastName" placeholder="Etternavn" type="text">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="birthday">Fødselsdag</label>
+        <div class="controls">
+            <input class="input-block-level" data-mask="99/99/9999" id="birthday" data-rule-required='true' name="BirthDate" placeholder="DD/MM/ÅÅÅÅ" type="text">
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+<hr class="hr-normal">
+<div class="row-fluid">
+<div class="span12 box">
+<div class="box-header blue-background">
+    <div class="title">
+        <div class="icon-phone-sign"></div>
+        Kontaktinformasjon
+    </div>
+</div>
+<div class="box-content box-no-padding">
+    <div class="control-group">
+        <label class="control-label" for="mobnr">Mobilnummer</label>
+        <div class="controls">
+            <input class="input-block-level" data-rule-required='true' id="mobnr" data-mask="99999999" name="PhoneNumber" placeholder="Mobilnummer" type="text">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="e-post">E-post</label>
+        <div class="controls">
+            <input class="input-block-level" name="Email" data-rule-email='true' data-rule-required='true' id="e-post" placeholder="E-post" type="text">
+        </div>
+    </div>
+
+</div>
+</div>
+</div>
+</form>
+<hr class="hr-normal">
+
+<div class="row-fluid">
+<div class="span12 box">
+<div class="box-header blue-background">
+<div class="title">
+    <div class="icon-smile"></div>
+    Dropdown
+</div>
+</div>
+<div class="box-content box-no-padding">
+<div class="control-group">
+    <label class="control-label" for="dropdown">Dropdown</label>
+    <div class="controls">
+        <select name="Role">
+            <option value="1">Administrator</option>
+            <option value="2">Arbeidsgiver</option>
+            <option value="3">Arbeidstaker</option>
+        </select>
+    </div>
+</div>
+</div>
+</div>
+
+</div>
+<input class="btn btn-success btn-block btn-large" value="Legg til ansatt!" type="submit">
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</script>
