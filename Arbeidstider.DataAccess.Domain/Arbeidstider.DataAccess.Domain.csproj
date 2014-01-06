@@ -74,16 +74,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEmployeeShift.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeShift.cs" />
-    <Compile Include="IEmployee.cs" />
-    <Compile Include="ITimesheet.cs" />
-    <Compile Include="IWorkplace.cs" />
     <Compile Include="ScheduleEvent.cs" />
-    <Compile Include="Timesheet.cs" />
     <Compile Include="Workplace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
+      <Project>{16088d48-aa1a-47ad-ac09-01e7b671f18f}</Project>
+      <Name>Arbeidstider.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

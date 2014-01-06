@@ -102,6 +102,10 @@
       <Project>{5BBBAB8C-4E10-4EE2-B8A0-B0E3B6EA1899}</Project>
       <Name>Arbeidstider.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
+      <Project>{16088d48-aa1a-47ad-ac09-01e7b671f18f}</Project>
+      <Name>Arbeidstider.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -145,6 +145,10 @@
       <Project>{8030CF66-B501-4169-9DF7-78A798A7720F}</Project>
       <Name>Arbeidstider.DataAccess.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
+      <Project>{16088d48-aa1a-47ad-ac09-01e7b671f18f}</Project>
+      <Name>Arbeidstider.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.IoC\Arbeidstider.IoC.csproj">
       <Project>{3517ED30-6C90-4335-AC9C-9003C6D44003}</Project>
       <Name>Arbeidstider.IoC</Name>

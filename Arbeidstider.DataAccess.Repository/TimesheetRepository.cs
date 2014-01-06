@@ -3,6 +3,7 @@ using System.Linq;
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
 using Arbeidstider.DataAccess.Repository.Exceptions;
+using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.DataAccess.Repository
 {
