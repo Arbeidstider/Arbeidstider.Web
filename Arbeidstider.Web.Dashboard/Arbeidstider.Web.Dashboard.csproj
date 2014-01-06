@@ -264,7 +264,7 @@
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />
     <Content Include="js\views\navigation.js" />
-    <Content Include="js\views\calendar.js" />
+    <Content Include="js\views\mytimesheets.js" />
     <Content Include="js\views\register.js" />
     <Content Include="js\views\profile.js" />
     <Content Include="js\libs\bootstrap\bootstrap.js" />
@@ -288,7 +288,7 @@
     <Content Include="templates\register.html">
       <BrowseToURL>p</BrowseToURL>
     </Content>
-    <Content Include="templates\calendar.html" />
+    <Content Include="templates\mytimesheets.html" />
     <Content Include="templates\header.html" />
     <Content Include="templates\layout.html" />
     <Content Include="templates\navbar.html" />
