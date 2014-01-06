@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Arbeidstider.DataAccess.Domain
+namespace Arbeidstider.Interfaces
 {
     public interface ITimesheet
     {

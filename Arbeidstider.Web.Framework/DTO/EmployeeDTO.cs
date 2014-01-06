@@ -1,11 +1,11 @@
-﻿using Arbeidstider.DataAccess.Domain;
+﻿using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.Session;
 
 namespace Arbeidstider.Web.Framework.DTO
 {
     public class EmployeeDTO
     {
-        public EmployeeDTO(IEmployeeSession currentUser)
+        public EmployeeDTO(EmployeeSession currentUser)
         {
         }
         public EmployeeDTO(IEmployee domain)

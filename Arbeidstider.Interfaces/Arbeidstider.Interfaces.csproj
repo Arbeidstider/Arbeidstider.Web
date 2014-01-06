@@ -42,10 +42,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="IEmployeeShift.cs" />
+    <Compile Include="ITinyModel.cs" />
     <Compile Include="ITimesheet.cs" />
     <Compile Include="IWorkplace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Timesheet.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿using System;
-using Arbeidstider.DataAccess.Domain;
+using Arbeidstider.Interfaces;
 
-namespace Arbeidstider.Interfaces
+namespace Arbeidstider.DataAccess.Domain
 {
     public class Timesheet : ITimesheet
     {

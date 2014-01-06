@@ -1,4 +1,5 @@
 ﻿using System;
+using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.DataAccess.Domain
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Arbeidstider.DataAccess.Domain;
+using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
 {
@@ -35,16 +35,16 @@ namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
 
         public IEnumerable<KeyValuePair<string, object>> Get(IEmployee employee)
         {
-            if (employee.UserID != null) return Get((Guid)employee.UserID);
+            if (employee.UserId != null) return Get((int)employee.UserId);
 
             return Get(employee.Username);
         }
 
-        private static IEnumerable<KeyValuePair<string, object>> Get(Guid userID)
+        private static IEnumerable<KeyValuePair<string, object>> Get(int userId)
         {
             return new List<KeyValuePair<string, object>>()
                        {
-                           new KeyValuePair<string, object>("UserID", userID),
+                           new KeyValuePair<string, object>("UserID", userId),
                        };
         }
 
