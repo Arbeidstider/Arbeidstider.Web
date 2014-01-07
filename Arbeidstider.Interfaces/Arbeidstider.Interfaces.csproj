@@ -39,9 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="IEmployeeShift.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="Interface1.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="ITinyModel.cs" />
     <Compile Include="ITimesheet.cs" />
     <Compile Include="IWorkplace.cs" />

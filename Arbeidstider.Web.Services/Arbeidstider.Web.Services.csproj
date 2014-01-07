@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="ServiceModels\CreateEmployeeResponse.cs" />
     <Compile Include="ServiceInterfaces\CreateEmployeeService.cs" />
     <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
     <Compile Include="CacheKeys.cs" />
@@ -153,8 +154,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceInterfaces\CreateTimesheetService.cs" />
-    <Compile Include="ServiceInterfaces\CustomAuthenticateAttribute.cs" />
+    <Compile Include="Attributes\CustomAuthenticateAttribute.cs" />
     <Compile Include="ServiceInterfaces\DeleteTimesheetService.cs" />
+    <Compile Include="ServiceInterfaces\RequiredEmployeeRole.cs" />
     <Compile Include="ServiceInterfaces\ServiceInterfaceBase.cs" />
     <Compile Include="ServiceInterfaces\SessionRequestService.cs" />
     <Compile Include="ServiceInterfaces\TimesheetsService.cs" />
@@ -191,6 +193,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
+      <Project>{16088D48-AA1A-47AD-AC09-01E7B671F18F}</Project>
+      <Name>Arbeidstider.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Web.Framework\Arbeidstider.Web.Framework.csproj">
       <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>
       <Name>Arbeidstider.Web.Framework</Name>

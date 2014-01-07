@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using Arbeidstider.Web.Framework.DTO;
 using Arbeidstider.Web.Services.ServiceModels;
-using ServiceStack;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
 {
     //[CustomAuthenticate("EmployeeAuth")]
     public class TimesheetsService : ServiceInterfaceBase
     {
-        private readonly Arbeidstider.Web.Framework.Services.TimesheetService _service;
+        private readonly Framework.Services.TimesheetService _service;
 
         public TimesheetsService()
         {
@@ -26,15 +25,19 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             try
             {
                 if (request.WorkplaceID != null && request.WorkplaceID != 0)
+                {
                     response.Timesheets = _service.GetWorkplaceTimesheets((int) request.WorkplaceID,
                                                                           DateTime.Parse(request.StartDate),
                                                                           DateTime.Parse(request.EndDate));
+                }
                 else
+                {
                     response.Timesheets = _service.GetAllWithinRange(DateTime.Parse(request.StartDate),
                                                                      DateTime.Parse(request.EndDate),
                                                                      request.UserID != string.Empty
                                                                          ? int.Parse(request.UserID)
                                                                          : 0);
+                }
             }
             catch 
             {

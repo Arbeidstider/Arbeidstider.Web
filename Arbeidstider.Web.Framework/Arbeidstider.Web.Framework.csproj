@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthProviders\EmployeeAuthProvider.cs" />
+    <Compile Include="Cache\CacheBase.cs" />
+    <Compile Include="Cache\EmployeeCache.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\TimesheetDTO.cs" />
     <Compile Include="IoC.cs" />

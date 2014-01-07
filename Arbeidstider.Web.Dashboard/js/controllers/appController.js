@@ -1,11 +1,9 @@
 define(['underscore',
         'marionette',
         'helpers/mixins',
-        'libs/vm/vm',
         'models/settings',
         'collections/timesheets',
-        'views/calendar',
-        'views/calendaritem',
+        'views/mytimesheets',
         'views/register',
         'views/changeworkday',
         'views/setdaysfree',
@@ -15,29 +13,26 @@ define(['underscore',
         'views/addressbook',
         'views/messages'
 ],
-function (_, Marionette, Mixins, Vm, Settings, TimesheetCollection, CalendarView, CalendarItemView, RegisterView, ChangeWorkDayView, SetDaysFreeView,  ConfirmAvailableDaysView, ProfileView,AddressBookItemView,  AddressBookView,  MessagesView) {
+function (_, Marionette, Mixins, Settings, TimesheetCollection, MyTimesheetsView, RegisterView, ChangeWorkDayView, SetDaysFreeView,  ConfirmAvailableDaysView, ProfileView,AddressBookItemView,  AddressBookView,  MessagesView) {
     var AppController = Backbone.Marionette.Controller.extend({
         initialize: function (options) {
             _.bindAll(this, "dashboard", "changeView");
             console.log("appController.initialize();");
         },
         addressbook: function () {
-            var view = new AddressBookView({ itemView: AddressBookItemView });
-            this.changeView(view);
+            this.changeView(AddressBookView);
         },
         dashboard: function () {
-            var view = new CalendarView({ itemView: CalendarItemView, collection: new TimesheetCollection() });
-            this.changeView(view);
+            this.changeView(MyTimesheetsView);
         },
         profile: function () {
-            this.changeView(new ProfileView());
+            this.changeView(ProfileView);
         },
         index: function () {
             this.dashboard();
         },
         register: function () {
-            console.log("register");
-            this.changeView(new RegisterView());
+            this.changeView(RegisterView);
         },
         logout: function() {
             var Store = require("store");
@@ -46,20 +41,22 @@ function (_, Marionette, Mixins, Vm, Settings, TimesheetCollection, CalendarView
             window.location.replace("/login");
         },
         messages: function () {
-            this.changeView(new MessagesView());
+            this.changeView(MessagesView);
         },
         changeWorkDay: function() {
-            this.changeView(new ChangeWorkDayView());
+            this.changeView(ChangeWorkDayView);
         },
         setDaysFree: function() {
-            this.changeView(new SetDaysFreeView());
+            this.changeView(SetDaysFreeView);
         },
         confirmAvailableDays: function() {
-            this.changeView(new ConfirmAvailableDaysView());
+            this.changeView(ConfirmAvailableDaysView);
         },
-        changeView: function (view) {
+        changeView: function(view) {
             var App = require('app');
-            App.layout.main.show(view);
+            var Store = require('store');
+            var newView = new view({ session: Store.get("AuthSession") });
+            App.layout.main.show(newView);
         }
     });
     return AppController;

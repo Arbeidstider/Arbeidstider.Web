@@ -225,6 +225,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="js\collections\base.js" />
+    <Content Include="js\collections\dailytimesheets.js" />
     <Content Include="js\controllers\appController.js" />
     <Content Include="js\helpers\datehelper.js" />
     <Content Include="js\layouts\appLayout.js" />
@@ -246,6 +247,7 @@
     <Content Include="js\libs\underscore\underscore.js" />
     <Content Include="js\collections\timesheets.js" />
     <Content Include="js\collections\colleagues.js" />
+    <Content Include="js\models\dailytimesheet.js" />
     <Content Include="js\models\employee.js" />
     <Content Include="js\models\settings.js" />
     <Content Include="js\models\timesheet.js" />
@@ -260,6 +262,7 @@
     <Content Include="js\views\confirmavailabledays.js" />
     <Content Include="js\views\addressbook.js" />
     <Content Include="js\views\addressbookitem.js" />
+    <Content Include="js\views\dailytimesheet.js" />
     <Content Include="js\views\messages.js" />
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />
@@ -328,10 +331,6 @@
     <Content Include="Views\Old\Javascripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arbeidstider.DataAccess.Domain\Arbeidstider.DataAccess.Domain.csproj">
-      <Project>{89ABA23F-72BE-4B40-8A8E-F8281A6BBCA6}</Project>
-      <Name>Arbeidstider.DataAccess.Domain</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.Web.Framework\Arbeidstider.Web.Framework.csproj">
       <Project>{134152A9-4D12-44E9-8A13-3E48128B4CE4}</Project>
       <Name>Arbeidstider.Web.Framework</Name>
