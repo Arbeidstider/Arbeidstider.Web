@@ -7,6 +7,13 @@ namespace Arbeidstider.Web.Services.ServiceModels
     public class DeleteTimesheet : IReturn<DeleteTimesheetResponse>
     {
         [DataMember]
-        public int TimesheetID { get; set; }
+        public int Id { get; set; }
+    }
+
+    [DataContract]
+    public class DeleteTimesheetResponse
+    {
+        [DataMember]
+        public bool TimesheetDeleted { get; set; }
     }
 }

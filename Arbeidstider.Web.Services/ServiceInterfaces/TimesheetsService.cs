@@ -24,9 +24,9 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             var response = new TimesheetsResponse();
             try
             {
-                if (request.WorkplaceID != null && request.WorkplaceID != 0)
+                if (request.WorkplaceId != null && request.WorkplaceId != 0)
                 {
-                    response.Timesheets = _service.GetWorkplaceTimesheets((int) request.WorkplaceID,
+                    response.Timesheets = _service.GetWorkplaceTimesheets((int) request.WorkplaceId,
                                                                           DateTime.Parse(request.StartDate),
                                                                           DateTime.Parse(request.EndDate));
                 }
@@ -34,8 +34,8 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                 {
                     response.Timesheets = _service.GetAllWithinRange(DateTime.Parse(request.StartDate),
                                                                      DateTime.Parse(request.EndDate),
-                                                                     request.UserID != string.Empty
-                                                                         ? int.Parse(request.UserID)
+                                                                     request.UserId != string.Empty
+                                                                         ? int.Parse(request.UserId)
                                                                          : 0);
                 }
             }

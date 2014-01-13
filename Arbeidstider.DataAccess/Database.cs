@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using Arbeidstider.Interfaces;
 using Dapper;
 
 namespace Arbeidstider.DataAccess
@@ -18,7 +19,6 @@ namespace Arbeidstider.DataAccess
         }
 
         #region Database Connection
-        private static string ConnectionString()
         {
             string connectionString;
             if (HttpContext.Current.IsDebuggingEnabled)
@@ -30,9 +30,11 @@ namespace Arbeidstider.DataAccess
 
         private static SqlConnection GetOpenConnection()
         {
-            var connection = new SqlConnection(ConnectionString());
-            connection.Open();
-            return connection;
+            using (var connection = new SqlConnection(ConnectionString()))
+            {
+                connection.Open();
+                return connection;
+            }
         }
         #endregion
 
@@ -57,9 +59,8 @@ namespace Arbeidstider.DataAccess
                 {
                     value = kvp.Value.ToString();
                 }
- 
-                p.Add(name: kvp.Key, value: value, dbType: dbType);
 
+                p.Add(name: kvp.Key, value: value, dbType: dbType, direction: ParameterDirection.Input);
             }
 
             return p;

@@ -7,7 +7,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
     {
         public object Post(CreateTimesheet request)
         {
-            if (request.UserID == null || request.SelectedDay == null
+            if (request.UserId == null || request.SelectedDay == null
                 || request.ShiftStart == null || request.ShiftEnd == null)
             {
                 throw new TimesheetServiceException("One or more values are null for TimesheetService.Create");
@@ -16,7 +16,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             return new CreateTimesheetResponse()
                        {
                            TimesheetCreated = TimesheetService.Create(
-                               request.UserID.Value,
+                               request.UserId.Value,
                                request.SelectedDay.Value,
                                request.ShiftStart.Value,
                                request.ShiftEnd.Value)

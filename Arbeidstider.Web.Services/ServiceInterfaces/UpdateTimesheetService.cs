@@ -8,8 +8,8 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         {
             return new UpdateTimesheetResponse() { 
                 TimesheetUpdated = TimesheetService.UpdateTimesheet(
-                    request.TimesheetID,
-                    request.UserID,
+                    request.Id,
+                    request.UserId,
                     request.SelectedDate,
                     request.ShiftStart,
                     request.ShiftEnd

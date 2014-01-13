@@ -21,7 +21,7 @@ namespace Arbeidstider.UnitTests.Web.Services.Services
                                     SelectedDay = DateTime.Now.Date,
                                     ShiftStart = new TimeSpan(8, 0, 0),
                                     ShiftEnd = new TimeSpan(17, 0, 0),
-                                    UserID = new Guid("62560772-CFD8-4DDB-8CE3-3F37638C4327")
+                                    UserId = 5
                                 };
 
             var response = client.Post(request);
@@ -37,7 +37,7 @@ namespace Arbeidstider.UnitTests.Web.Services.Services
                                     SelectedDay = DateTime.Now.Date.AddDays(1),
                                     ShiftStart = new TimeSpan(10, 0, 0),
                                     ShiftEnd = new TimeSpan(20, 0, 0),
-                                    UserID = new Guid("62560772-CFD8-4DDB-8CE3-3F37638C4327")
+                                    UserId = 5
                                 };
 
             var response = client.Post(request);

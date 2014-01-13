@@ -1,21 +1,19 @@
 define([
         'jquery',
         'underscore',
-        'backbone',
         'marionette',
         'helpers/mixins',
         'models/settings',
         'models/employee',
         'text!templates/register.html'
-], function ($, _, Backbone, Marionette, mixins, Settings, EmployeeModel, RegisterTemplate) {
+], function ($, _, Marionette, mixins, Settings, EmployeeModel, RegisterTemplate) {
     return Backbone.Marionette.ItemView.extend({
         template: _.template(RegisterTemplate),
-        //el: "#content",
-        model: EmployeeModel,
         events: {
             "click .btn-block": "register"
         },
         initialize: function () {
+            this.model = new EmployeeModel();
             _.bindAll(this, "register", "registerSuccess", "render");
         },
         registerSuccess: function (response) {
@@ -23,15 +21,15 @@ define([
             console.log("user created: " + data);
             alert("user created: " + data);
         },
-        register: function(e) {
+        register: function (e) {
             if (e) e.preventDefault();
-            var data = _.formData("form");
-            console.log("data");
-            _.post({
-                url: Settings.ServiceUrl("/employee/register"),
-                data: data,
-                success: this.registerSuccess,
-            });
+            console.log(Settings.ServiceUrl("/employee/register"));
+
+            this.model.save({
+                Firstname: this.$("#Firstname"),
+                Surname: this.$("#surname"),
+                BirthDate: this.$("#birthdate"),
+            }, { url: Settings.ServiceUrl("/employee/register"), type: "POST" });
         },
         /*
         render: function () {

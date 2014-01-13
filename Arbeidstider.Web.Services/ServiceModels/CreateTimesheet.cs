@@ -14,6 +14,16 @@ namespace Arbeidstider.Web.Services.ServiceModels
         [DataMember]
         public TimeSpan? ShiftEnd { get; set; }
         [DataMember]
-        public Guid? UserID { get; set; }
+        public int? UserId { get; set; }
+    }
+
+    [DataContract]
+    public class CreateTimesheetResponse
+    {
+        [DataMember]
+        public bool TimesheetCreated { get; set; }
+
+        [DataMember]
+        public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
     }
 }

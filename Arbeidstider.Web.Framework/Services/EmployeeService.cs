@@ -7,6 +7,7 @@ using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
 using Arbeidstider.DataAccess.Repository.Exceptions;
 using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Session;
 
 namespace Arbeidstider.Web.Framework.Services
 {
@@ -47,10 +48,10 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public EmployeeDTO GetEmployee(Guid? userID)
+        public EmployeeDTO GetEmployee(int userId)
         {
-            var employee = (IEmployee)(object) new {UserID = userID};
-            var parameters = Parameters.Employee.Get(employee);
+            var employee = (IEmployee)(object) new {UserId = userId};
+            var parameters = Parameters.Employee.Get(employee, new EmployeeSession(){ UserAuthId = userId.ToString()});
             try
             {
                 var obj = _repository.Get(parameters);
@@ -66,7 +67,7 @@ namespace Arbeidstider.Web.Framework.Services
         public EmployeeDTO GetEmployee(string username)
         {
             var employee = (IEmployee)(object) new {Username = username};
-            var parameters = Parameters.Employee.Get(employee);
+            var parameters = Parameters.Employee.Get(employee, new EmployeeSession() { UserName = username});
 
             try
             {

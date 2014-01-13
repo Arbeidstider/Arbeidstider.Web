@@ -9,11 +9,11 @@ namespace Arbeidstider.Web.Services.ServiceModels
     {
         /* EmployeeScheduleEventID in DB */
         [DataMember]
-        public int TimesheetID { get; set; }
+        public int Id { get; set; }
 
         /* Change ShiftWorker */
         [DataMember]
-        public Guid? UserID { get; set; }
+        public int? UserId { get; set; }
 
         /* Change Day / Time */
         [DataMember]
@@ -22,5 +22,15 @@ namespace Arbeidstider.Web.Services.ServiceModels
         public TimeSpan? ShiftStart { get; set; }
         [DataMember]
         public TimeSpan? ShiftEnd { get; set; }
+    }
+
+    [DataContract]
+    public class UpdateTimesheetResponse : IHasResponseStatus
+    {
+        [DataMember]
+        public bool TimesheetUpdated { get; set; }
+
+        [DataMember]
+        public ResponseStatus ResponseStatus { get; set; }
     }
 }

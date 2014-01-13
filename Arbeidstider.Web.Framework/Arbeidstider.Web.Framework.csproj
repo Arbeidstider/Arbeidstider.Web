@@ -91,6 +91,9 @@
       <HintPath>..\Arbeidstider.Web.Dashboard\bin\ServiceStack.Client.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL" />
+    <Reference Include="ServiceStack.Server">
+      <HintPath>..\packages\ServiceStack.Server.4.0.5\lib\net40\ServiceStack.Server.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.4.0.5\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
@@ -131,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthProviders\EmployeeAuthProvider.cs" />
+    <Compile Include="AuthRepository\EmployeeAuthService.cs" />
     <Compile Include="Cache\CacheBase.cs" />
     <Compile Include="Cache\EmployeeCache.cs" />
     <Compile Include="DTO\EmployeeDTO.cs" />

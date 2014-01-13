@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Arbeidstider.DataAccess
+namespace Arbeidstider.Interfaces
 {
     public interface IDatabase
     {

@@ -76,10 +76,10 @@ namespace Arbeidstider.Web.Framework.Services
             return _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToList();
         }
 
-        public bool Create(Guid userID, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd)
+        public bool Create(int userId, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd)
         {
             var parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("UserID", userID));
+            parameters.Add(new KeyValuePair<string, object>("UserId", userId));
             parameters.Add(new KeyValuePair<string, object>("ShiftDate", selectedDay.Date));
             parameters.Add(new KeyValuePair<string, object>("ShiftStart", shiftStart.ToString()));
             parameters.Add(new KeyValuePair<string, object>("ShiftEnd", shiftEnd.ToString()));
@@ -96,15 +96,15 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public bool UpdateTimesheet(int shiftID, Guid? userID, DateTime? selectedDate, TimeSpan? startShift, TimeSpan? endShift)
+        public bool UpdateTimesheet(int shiftID, int? userId, DateTime? selectedDate, TimeSpan? startShift, TimeSpan? endShift)
         {
             var parameters = new List<KeyValuePair<string, object>>();
             /* Id of timesheet to update */
             parameters.Add(new KeyValuePair<string, object>("ShiftID", shiftID));
 
             /* Change user of shiftworker */
-            if (userID != null)
-                parameters.Add(new KeyValuePair<string, object>("UserID", userID.Value));
+            if (userId != null)
+                parameters.Add(new KeyValuePair<string, object>("UserId", userId.Value));
             else
             {
                 parameters.Add(new KeyValuePair<string, object>("ShiftDate", selectedDate.Value.Date));

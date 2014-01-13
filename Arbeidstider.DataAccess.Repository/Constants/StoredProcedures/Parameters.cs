@@ -29,22 +29,22 @@ namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
         {
                 var parameters = new List<KeyValuePair<string, object>>();
                 parameters.Add(new KeyValuePair<string, object>("UserId", userId));
-                parameters.Add(new KeyValuePair<string, object>("WorkplaceID", workplaceId));
+                parameters.Add(new KeyValuePair<string, object>("WorkplaceId", workplaceId));
                 return parameters;
         }
 
-        public IEnumerable<KeyValuePair<string, object>> Get(IEmployee employee)
+        public IEnumerable<KeyValuePair<string, object>> Get(IEmployee employee, IEmployeeSession session)
         {
-            if (employee.UserId != null) return Get((int)employee.UserId);
+            if (session.UserId != 0) return Get((int)session.UserId);
 
-            return Get(employee.Username);
+            return Get(session.Username);
         }
 
         private static IEnumerable<KeyValuePair<string, object>> Get(int userId)
         {
             return new List<KeyValuePair<string, object>>()
                        {
-                           new KeyValuePair<string, object>("UserID", userId),
+                           new KeyValuePair<string, object>("UserId", userId),
                        };
         }
 

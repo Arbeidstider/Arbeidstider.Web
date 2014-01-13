@@ -144,8 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
-    <Compile Include="ServiceModels\CreateEmployeeResponse.cs" />
-    <Compile Include="ServiceInterfaces\CreateEmployeeService.cs" />
+    <Compile Include="ServiceModels\RegisterEmployee.cs" />
     <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
     <Compile Include="CacheKeys.cs" />
     <Compile Include="Exceptions\TimesheetServiceException.cs" />
@@ -156,21 +155,17 @@
     <Compile Include="ServiceInterfaces\CreateTimesheetService.cs" />
     <Compile Include="Attributes\CustomAuthenticateAttribute.cs" />
     <Compile Include="ServiceInterfaces\DeleteTimesheetService.cs" />
-    <Compile Include="ServiceInterfaces\RequiredEmployeeRole.cs" />
+    <Compile Include="Attributes\RequiredEmployeeRole.cs" />
     <Compile Include="ServiceInterfaces\ServiceInterfaceBase.cs" />
     <Compile Include="ServiceInterfaces\SessionRequestService.cs" />
     <Compile Include="ServiceInterfaces\TimesheetsService.cs" />
     <Compile Include="ServiceInterfaces\UpdateTimesheetService.cs" />
     <Compile Include="ServiceModels\CreateTimesheet.cs" />
-    <Compile Include="ServiceModels\CreateTimesheetResponse.cs" />
     <Compile Include="ServiceModels\DeleteTimesheet.cs" />
-    <Compile Include="ServiceModels\DeleteTimesheetResponse.cs" />
+    <Compile Include="ServiceModels\EmployeeAuth.cs" />
     <Compile Include="ServiceModels\SessionRequest.cs" />
-    <Compile Include="ServiceModels\SessionResponse.cs" />
     <Compile Include="ServiceModels\Timesheets.cs" />
-    <Compile Include="ServiceModels\TimesheetsResponse.cs" />
     <Compile Include="ServiceModels\UpdateTimesheet.cs" />
-    <Compile Include="ServiceModels\UpdateTimesheetResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
