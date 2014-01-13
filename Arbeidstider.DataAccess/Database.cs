@@ -13,20 +13,22 @@ namespace Arbeidstider.DataAccess
     public class Database : IDatabase
     {
         private static IDatabase _instance = null;
+
         public static IDatabase Instance
         {
             get { return _instance ?? (_instance = new Database()); }
         }
 
         #region Database Connection
-        {
-            string connectionString;
-            if (HttpContext.Current.IsDebuggingEnabled)
-                connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
-            else
-                connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
-            return connectionString;
-        }
+    private static string ConnectionString()
+    {
+        string connectionString;
+        if (HttpContext.Current.IsDebuggingEnabled)
+            connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
+        else
+            connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
+        return connectionString;
+    }
 
         private static SqlConnection GetOpenConnection()
         {
@@ -36,6 +38,7 @@ namespace Arbeidstider.DataAccess
                 return connection;
             }
         }
+
         #endregion
 
         private static DynamicParameters GetDynamicParameters(IEnumerable<KeyValuePair<string, object>> parameters)
@@ -54,7 +57,7 @@ namespace Arbeidstider.DataAccess
                 {
                     dbType = DbType.DateTime;
                     value = DateTime.Parse(kvp.Value.ToString());
-                } 
+                }
                 else
                 {
                     value = kvp.Value.ToString();
@@ -77,10 +80,10 @@ namespace Arbeidstider.DataAccess
             {
                 var result =
                     connection.Query<int>(
-                    spName, 
-                    GetDynamicParameters(parameters), 
-                    commandType:  CommandType.StoredProcedure).
-                    First();
+                        spName,
+                        GetDynamicParameters(parameters),
+                        commandType: CommandType.StoredProcedure).
+                               First();
 
                 return result == 1;
             }

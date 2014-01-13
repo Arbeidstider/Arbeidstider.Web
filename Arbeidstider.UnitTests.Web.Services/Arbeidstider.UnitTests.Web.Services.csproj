@@ -95,6 +95,10 @@
       <Project>{89ABA23F-72BE-4B40-8A8E-F8281A6BBCA6}</Project>
       <Name>Arbeidstider.DataAccess.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Arbeidstider.Interfaces\Arbeidstider.Interfaces.csproj">
+      <Project>{16088d48-aa1a-47ad-ac09-01e7b671f18f}</Project>
+      <Name>Arbeidstider.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Arbeidstider.UnitTests.Base\Arbeidstider.UnitTests.Base.csproj">
       <Project>{DAF1C4FF-4765-4EBF-B252-D6BFB1DB12AB}</Project>
       <Name>Arbeidstider.UnitTests.Base</Name>
