@@ -39,8 +39,10 @@ define(['jquery',
 
         App.isAuthenticated = function () {
             var session = Store.get("AuthSession");
-            console.log("sessionuserid: " + session.userId);
-            console.log("sessionid: " + session.sessionId);
+            if (!_.isUndefined(session)) {
+                console.log("sessionuserid: " + session.userId);
+                console.log("sessionid: " + session.sessionId);
+            }
             return _.isObject(session) && session.sessionId && session.userId;
         };
 

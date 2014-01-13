@@ -190,8 +190,11 @@
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
+    <Reference Include="Wurfl">
+      <HintPath>..\packages\WURFL_Official_API.1.5.0.3\lib\Wurfl.dll</HintPath>
+    </Reference>
     <Reference Include="Wurfl.Aspnet.Extensions">
-      <HintPath>..\packages\WURFL_Official_API.1.5\lib\Wurfl.Aspnet.Extensions.dll</HintPath>
+      <HintPath>..\packages\WURFL_Official_API.1.5.0.3\lib\Wurfl.Aspnet.Extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -203,11 +206,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\CurrentSession.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Release Notes 1.5.0.3.txt" />
     <Content Include="App_Readme\Release Notes 1.5.txt" />
     <Content Include="App_Readme\RequestReduce.readme.txt" />
     <Content Include="css\dashboard.css" />
@@ -309,6 +312,7 @@
     <Content Include="WURFL AGPL License.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helpers\" />
     <Folder Include="img\ajax-loaders\" />
     <Folder Include="img\bootstrap\" />
     <Folder Include="img\emails\" />
@@ -361,6 +365,8 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="js\routers\.AppRouter.js.swp" />
+    <Content Include="Introspector\Introspector.pdf" />
+    <Content Include="Introspector\Introspector.ashx" />
     <None Include="Properties\PublishProfiles\Arbeidstider.Web.Dashboard.pubxml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Shared\Templates.cshtml" />
@@ -384,7 +390,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61731</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4242</IISUrl>
+          <IISUrl>http://localhost:4200</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

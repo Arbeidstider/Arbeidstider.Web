@@ -95,6 +95,7 @@
                     
                     contentType: "application/json",
                     url: ServiceUrl("/auth"),
+                    async: false,
                     success: loginSuccess,
                     beforeSend: function(xhr) { xhr.setRequestHeader("Authorization", makeBaseAuth()); }
                 });
