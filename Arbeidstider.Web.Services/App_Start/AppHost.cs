@@ -162,7 +162,7 @@ namespace Arbeidstider.Web.Services.App_Start
             //Default route: /register
             Plugins.Add(new RegistrationFeature());
             using (var db = container.Resolve<IDbConnectionFactory>().Open())
-                            db.CreateTableIfNotExists();
+                db.CreateTableIfNotExists();
         }
 
         public static void Start()

@@ -64,14 +64,15 @@
     <script src="/js/libs/store/store.js"></script>
     <script>
         $(document).ready(function () {
-            $.support.cors = true;
             function ServiceUrl(action) {
                 var baseUrl;
                 if (document.domain.indexOf("localhost") > -1)
                     baseUrl = "http://localhost:8181";
                 else
+                {        
+                    $.support.cors = true;
                     baseUrl = "http://services.arbeidstider.no";
-                        
+                }          
                 return baseUrl + action;
             }
             

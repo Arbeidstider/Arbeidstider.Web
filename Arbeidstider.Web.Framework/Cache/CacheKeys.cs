@@ -12,21 +12,10 @@ namespace Arbeidstider.Web.Framework.Cache
         public static readonly string GetTimesheet = "GetTimesheet";
         public static readonly string UpdateTimesheet = "UpdateTimesheet";
         public static readonly string GetAllTimesheets = "GetAllTimesheets";
-        
-        public static string Generate(string key)
-        {
-            return string.Format(key, DateTime.Now.ToString());
-        }
     }
+
     public class CacheKey
     {
-        public CacheKey()
-        {
-        }
-        public override string ToString()
-        {
-        }
-
         public static string Create(string key, object parameters)
         {
             return string.Format("{0}:{1}", key, parameters.GetHashCode()); 

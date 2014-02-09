@@ -8,13 +8,13 @@ namespace Arbeidstider.Web.Services.ServiceModels
     {
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public int? UserId { get; set; }
+        public int? EmployeeId { get; set; }
         public int? WorkplaceId { get; set; }
     }
 
     public class TimesheetsResponse
     {
-        public List<TimesheetDTO> Timesheets { get; set; }
+        public IEnumerable<TimesheetDTO> Timesheets { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
     }
 }

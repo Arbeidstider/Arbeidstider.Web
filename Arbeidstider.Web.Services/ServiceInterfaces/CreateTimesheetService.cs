@@ -13,13 +13,16 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                 throw new TimesheetServiceException("One or more values are null for TimesheetService.Create");
             }
 
+            int id = TimesheetService.CreateTimesheet(
+                request.UserId.Value,
+                request.SelectedDay.Value,
+                request.ShiftStart.Value,
+                request.ShiftEnd.Value);
+            bool created = id != 0;
+
             return new CreateTimesheetResponse()
                        {
-                           TimesheetCreated = TimesheetService.Create(
-                               request.UserId.Value,
-                               request.SelectedDay.Value,
-                               request.ShiftStart.Value,
-                               request.ShiftEnd.Value)
+                           TimesheetCreated = created,
                        };
         }
     }

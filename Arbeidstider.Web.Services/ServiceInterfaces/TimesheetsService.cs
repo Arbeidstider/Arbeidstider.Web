@@ -19,21 +19,28 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         {
             return Get(request);
         }
+
         public object Get(Timesheets request)
         {
             var response = new TimesheetsResponse();
             try
             {
-                response.Timesheets = _service.GetAllWithinRange(DateTime.Parse(request.StartDate),
-                                                                      DateTime.Parse(request.EndDate),
-                                                                      request.UserId,
-                                                                      request.WorkplaceId);
+                DateTime startDate;
+                DateTime endDate;
+                if (DateTime.TryParse(request.StartDate, out startDate) && DateTime.TryParse(request.EndDate, out endDate))
+                {
+                    response.Timesheets = _service.GetAllWithinRange(
+                        startDate,
+                        endDate,
+                        request.EmployeeId,
+                        request.WorkplaceId);
+                }
             }
             catch
             {
                 response.Timesheets = new List<TimesheetDTO>();
             }
             return response;
-        }    
+        }
     }
 }

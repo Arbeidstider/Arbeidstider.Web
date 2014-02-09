@@ -78,7 +78,7 @@
     </Reference>
     <Reference Include="Dapper, Version=1.12.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Arbeidstider.Web.Dashboard\bin\Dapper.dll</HintPath>
+      <HintPath>..\packages\Dapper.1.13\lib\net45\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -96,6 +96,8 @@
     <Compile Include="Exceptions\ScheduleEventRepositoryException.cs" />
     <Compile Include="Exceptions\TimesheetRepositoryException.cs" />
     <Compile Include="Parameters\EmployeeParameters.cs" />
+    <Compile Include="Parameters\RepositoryParameters.cs" />
+    <Compile Include="Parameters\TimesheetParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryExtensions.cs" />
     <Compile Include="ScheduleEventRepository.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository.Exceptions;
+using Arbeidstider.DataAccess.Repository.Parameters;
 using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.Cache;
 using Arbeidstider.Web.Framework.DTO;
@@ -13,6 +14,7 @@ namespace Arbeidstider.Web.Framework.Services
     {
         private readonly IRepository<ITimesheet> _repository;
         private static TimesheetService _instance;
+        private static TimeSpan _defaultExpiration = new TimeSpan(0, 15, 0);
 
         public static TimesheetService Instance
         {
@@ -34,40 +36,22 @@ namespace Arbeidstider.Web.Framework.Services
         /// <summary>
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IEmployeeShift> GetWeeklyShifts(int userId, DateTime weekStart)
+        public IEnumerable<IEmployeeShift> GetWeeklyShifts(int employeeId, DateTime weekStart)
         {
-            if (userId == 0 || weekStart == new DateTime())
+            if (employeeId == 0 || weekStart == new DateTime())
                 throw new Exception("Null parameters were sent to GetWeeklyTimesheet");
 
-            var parameters = new
-                             {
-                                 UserId = userId,
-                                 StartDate = weekStart,
-                                 EndDate = weekStart.AddDays(6)
-                             };
+            var parameters = TimesheetParameters.Create(employeeId: employeeId, startDate: weekStart, endDate: weekStart.AddDays(6));
 
-
-            EmployeeShift[] shifts;
             try
             {
-                using (var cache = Arbeidstider.Web.Framework.Cache.CacheClient.GetClient())
-                {
-                    var cacheKey = CacheKey.Create(
-                        CacheKeys.GetWeeklyTimesheet,
-                        parameters);
+                // CacheKey, Callback
+                var cacheKey = CacheKey.Create(CacheKeys.GetWeeklyTimesheet, parameters);
+                Func<IEnumerable<IEmployeeShift>> callback = () => (from x in _repository.GetAll(parameters)
+                                                                    select new EmployeeShift(x))
+                                                                       .ToArray();
 
-                    shifts = cache.Get<EmployeeShift[]>(cacheKey);
-                    if (shifts != null) return shifts;
-                    else
-                    {
-                        shifts = (from x in _repository.GetAll(parameters)
-                                  select new EmployeeShift(x)).ToArray();
-                        if (shifts.Length > 0)
-                        {
-                            cache.Add(cacheKey, shifts, DateTime.Now.AddMinutes(15));
-                        }
-                    }
-                }
+                return CacheClient.GetFromOrAddToCache<IEnumerable<IEmployeeShift>>(cacheKey, callback, _defaultExpiration);
             }
             catch (TimesheetRepositoryException ex)
             {
@@ -76,72 +60,38 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public List<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, int? userId, int? workplaceId)
+        public IEnumerable<TimesheetDTO> GetAllWithinRange(DateTime startDate, DateTime endDate, int? employeeId, int? workplaceId)
         {
-            var parameters = new
-            {
-                UserId = userId,
-                StartDate = startDate,
-                EndDate = endDate,
-                WorkplaceId = workplaceId
-            };
-            List<TimesheetDTO> timesheets;
+            var parameters = TimesheetParameters.Create(employeeId: employeeId, startDate: startDate, endDate: endDate, workplaceId: workplaceId);
+            var cacheKey = CacheKey.Create(CacheKeys.GetAllTimesheets, parameters);
 
-            using (var cache = Arbeidstider.Web.Framework.Cache.CacheClient.GetClient())
-            {
-                var cacheKey = CacheKey.Create(
-                    CacheKeys.GetAllTimesheets,
-                    parameters);
+            Func<IEnumerable<TimesheetDTO>> callback = () => _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToList();
 
-                timesheets = cache.Get<List<TimesheetDTO>>(cacheKey);
-                if (timesheets != null) return timesheets;
-                else
-                {
-                    timesheets = _repository.GetAll(parameters).Select(x => new TimesheetDTO(x)).ToList();
-                    if (timesheets.Count > 0)
-                    {
-                        cache.Add(cacheKey, timesheets, DateTime.Now.AddMinutes(15));
-                    }
-                }
-            }
-            return timesheets;
+            return CacheClient.GetFromOrAddToCache<IEnumerable<TimesheetDTO>>(cacheKey, callback, _defaultExpiration);
         }
 
-        public bool Create(int userId, DateTime selectedDay, TimeSpan shiftStart, TimeSpan shiftEnd)
+        public int CreateTimesheet(int employeeId, DateTime shiftDate, TimeSpan shiftStart, TimeSpan shiftEnd)
         {
+            var parameters = TimesheetParameters.Create(employeeId: employeeId, shiftDate: shiftDate, shiftStart:shiftStart, shiftEnd:shiftEnd);
             try
             {
-                _repository.Create(
-                    new
-                    {
-                        UserId = userId,
-                        ShiftDate = selectedDay,
-                        ShiftStart = shiftStart,
-                        ShiftEnd = shiftEnd
-                    }
-                );
-                return true;
+                return  _repository.Create(parameters);
             }
             catch (TimesheetRepositoryException ex)
             {
                 Logger.Error(ex.Message);
-                return false;
+                return 0;
             }
         }
 
-        public bool UpdateTimesheet(int timesheetId, int? userId, DateTime? selectedDate, TimeSpan? startShift, TimeSpan? endShift)
+        public bool UpdateTimesheet(int timesheetId, int? employeeId, DateTime? shiftDate, TimeSpan? startShift, TimeSpan? endShift)
         {
             try
             {
-                return _repository.Update(
-                new
-                {
-                    Id = timesheetId,
-                    UserId = userId,
-                    ShiftDate = selectedDate,
-                    ShiftStart = startShift,
-                    ShiftEnd = endShift
-                });
+                var parameters = TimesheetParameters.Create(id: timesheetId, employeeId: employeeId ?? 0,
+                                                            shiftDate: shiftDate ?? DateTime.MinValue, shiftStart: startShift ?? TimeSpan.Zero,
+                                                            shiftEnd: endShift ?? TimeSpan.Zero);
+                return _repository.Update(parameters);
             }
             catch (TimesheetRepositoryException ex)
             {
@@ -152,7 +102,7 @@ namespace Arbeidstider.Web.Framework.Services
 
         public bool Delete(int timesheetId)
         {
-            var parameters = Parameters.Timesheet.Delete((ITimesheet)(object)new { Id = timesheetId });
+            var parameters = TimesheetParameters.Create(id: timesheetId);
             ;
             return _repository.Delete(parameters);
         }

@@ -2,6 +2,7 @@
 using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.DataAccess.Repository.Constants;
 using Arbeidstider.Interfaces;
+using Dapper;
 
 namespace Arbeidstider.DataAccess.Repository
 {
@@ -17,9 +18,9 @@ namespace Arbeidstider.DataAccess.Repository
             throw new System.NotImplementedException();
         }
 
-        public ScheduleEvent Create(object parameters)
+        public int Create(object parameters)
         {
-            return new ScheduleEvent();
+            return 0;
         }
 
         public ScheduleEvent Get(object parameters)
@@ -29,7 +30,7 @@ namespace Arbeidstider.DataAccess.Repository
 
         public bool Update(object parameters)
         {
-            var dt = _database.Execute(Names.UPDATE_TIMESHEET, GetParameters(parameters));
+            var dt = _database.Execute(StoredProcedures.UPDATE_TIMESHEET, (DynamicParameters)parameters);
             return dt;
         }
 

@@ -6,7 +6,7 @@
         internal static readonly string GET_ALL_EMPLOYEES = "GetAllEmployees";
         internal static readonly string GET_WEEKLY_TIMESHEETS = "GetWeeklyTimesheets";
         internal static readonly string GET_WORKPLACE_TIMESHEETS = "GetWorkplaceTimesheets";
-        internal static readonly string CREATE_NEW_TIMESHEET = "CreateNewTimesheet";
+        internal static readonly string CREATE_TIMESHEET = "CreateTimesheet";
         internal static readonly string EMPLOYEE_EXISTS = "EmployeeExists";
         internal static readonly string GET_EMPLOYEE = "GetEmployee";
         internal static readonly string GET_USERID = "GetUserID";
