@@ -9,5 +9,7 @@ namespace Arbeidstider.Interfaces
         DateTime ShiftDate { get; set; }
         TimeSpan ShiftStart { get; set; }
         TimeSpan ShiftEnd { get; set; }
+        DateTime? DateStart { get; set; }
+        DateTime? DateEnd { get; set; }
     }
 }

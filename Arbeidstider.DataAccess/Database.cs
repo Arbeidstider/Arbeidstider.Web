@@ -20,15 +20,15 @@ namespace Arbeidstider.DataAccess
         }
 
         #region Database Connection
-    private static string ConnectionString()
-    {
-        string connectionString;
-        if (HttpContext.Current.IsDebuggingEnabled)
-            connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
-        else
-            connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
-        return connectionString;
-    }
+        private static string ConnectionString()
+        {
+            string connectionString;
+            if (HttpContext.Current.IsDebuggingEnabled)
+                connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
+            else
+                connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
+            return connectionString;
+        }
 
         private static SqlConnection GetOpenConnection()
         {
@@ -41,47 +41,45 @@ namespace Arbeidstider.DataAccess
 
         #endregion
 
-        private static DynamicParameters GetDynamicParameters(IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            var p = new DynamicParameters();
-            foreach (var kvp in parameters)
-            {
-                var dbType = DbType.String;
-                object value;
-                if (kvp.Value is int)
-                {
-                    dbType = DbType.Int32;
-                    value = int.Parse(kvp.Value.ToString());
-                }
-                else if (kvp.Value is DateTime)
-                {
-                    dbType = DbType.DateTime;
-                    value = DateTime.Parse(kvp.Value.ToString());
-                }
-                else
-                {
-                    value = kvp.Value.ToString();
-                }
+        
 
-                p.Add(name: kvp.Key, value: value, dbType: dbType, direction: ParameterDirection.Input);
-            }
+        //private static DynamicParameters GetDynamicParameters(IEnumerable<KeyValuePair<string, object>> parameters)
+        //{
+        //    var p = new DynamicParameters();
+        //    foreach (var kvp in parameters)
+        //    {
+        //        DbType dbType;
+        //        object value;
+        //        if (kvp.Value is int)
+        //        {
+        //            dbType = DbType.Int32;
+        //            value = int.Parse(kvp.Value.ToString());
+        //        }
+        //        else if (kvp.Value is DateTime)
+        //        {
+        //            dbType = DbType.DateTime;
+        //            value = DateTime.Parse(kvp.Value.ToString());
+        //        }
+        //        else
+        //        {
+        //            dbType = DbType.String;
+        //            value = kvp.Value.ToString();
+        //        }
 
-            return p;
-        }
+        //        p.Add(name: kvp.Key, value: value, dbType: dbType, direction: ParameterDirection.Input);
+        //    }
 
-        public bool Execute(string spName, KeyValuePair<string, object> parameters)
-        {
-            return Execute(spName, new List<KeyValuePair<string, object>>() {parameters});
-        }
+        //    return p;
+        //}
 
-        public bool Execute(string spName, IEnumerable<KeyValuePair<string, object>> parameters)
+        public bool Execute(string spName, DynamicParameters parameters)
         {
             using (var connection = GetOpenConnection())
             {
                 var result =
                     connection.Query<int>(
                         spName,
-                        GetDynamicParameters(parameters),
+                        parameters,
                         commandType: CommandType.StoredProcedure).
                                First();
 
@@ -89,42 +87,30 @@ namespace Arbeidstider.DataAccess
             }
         }
 
-        public T GetSingle<T>(string spName, KeyValuePair<string, object> parameters)
+        //public T GetSingle<T>(string spName, KeyValuePair<string, object> parameters)
+        //{
+        //    using (var connection = GetOpenConnection())
+        //    {
+        //        var p = GetDynamicParameters(new List<KeyValuePair<string, object>>() { parameters });
+        //        var result = connection.Query<T>(spName, p, commandType: CommandType.StoredProcedure);
+        //        return result.FirstOrDefault();
+        //    }
+        //}
+
+        public T GetSingle<T>(string spName, DynamicParameters parameters)
         {
             using (var connection = GetOpenConnection())
             {
-                var p = GetDynamicParameters(new List<KeyValuePair<string, object>>() {parameters});
-                var result = connection.Query<T>(spName, p, commandType: CommandType.StoredProcedure);
+                var result = connection.Query<T>(spName, parameters, commandType: CommandType.StoredProcedure);
                 return result.FirstOrDefault();
             }
         }
 
-        public T GetSingle<T>(string spName, IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEnumerable<T> GetMultiple<T>(string spName, DynamicParameters parameters)
         {
             using (var connection = GetOpenConnection())
             {
-                var p = GetDynamicParameters(parameters);
-                var result = connection.Query<T>(spName, p, commandType: CommandType.StoredProcedure);
-                return result.FirstOrDefault();
-            }
-        }
-
-        public IEnumerable<T> GetMultiple<T>(string spName, KeyValuePair<string, object> parameters)
-        {
-            using (var connection = GetOpenConnection())
-            {
-                var p = GetDynamicParameters(new List<KeyValuePair<string, object>>() {parameters});
-                var result = connection.Query<T>(spName, p, commandType: CommandType.StoredProcedure);
-                return result.ToList();
-            }
-        }
-
-        public IEnumerable<T> GetMultiple<T>(string spName, IEnumerable<KeyValuePair<string, object>> parameters)
-        {
-            using (var connection = GetOpenConnection())
-            {
-                var p = GetDynamicParameters(parameters);
-                var result = connection.Query<T>(spName, param: p, commandType: CommandType.StoredProcedure);
+                var result = connection.Query<T>(spName, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
             }
         }

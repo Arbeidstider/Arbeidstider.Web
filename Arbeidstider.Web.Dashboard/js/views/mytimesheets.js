@@ -17,7 +17,7 @@ define([
                 this.itemView = DailyTimesheetModel;
                 var params = {
                     StartDate: DateHelper.getDayOfWeek(1),
-                    EndDate: DateHelper.getDayOfWeek(0),
+                    EndDate: DateHelper.getDayOfWeek(0, StartDate),
                     UserID: this.session.userId,
                     WorkplaceID: 0
                 };

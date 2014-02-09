@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Arbeidstider.Web.Framework.DTO;
 using ServiceStack;
@@ -9,7 +8,7 @@ namespace Arbeidstider.Web.Services.ServiceModels
     {
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public string UserId { get; set; }
+        public int? UserId { get; set; }
         public int? WorkplaceId { get; set; }
     }
 

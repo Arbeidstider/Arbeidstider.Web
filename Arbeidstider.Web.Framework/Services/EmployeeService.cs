@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Arbeidstider.DataAccess.Domain;
-using Arbeidstider.DataAccess.Repository;
-using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
 using Arbeidstider.DataAccess.Repository.Exceptions;
 using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.DTO;
-using Arbeidstider.Web.Framework.Session;
 
 namespace Arbeidstider.Web.Framework.Services
 {
@@ -33,25 +29,24 @@ namespace Arbeidstider.Web.Framework.Services
         }
 
 
-        public bool CreateEmployee(int userId, int workplaceId)
+        public IEmployee CreateEmployee(int userId, int workplaceId)
         {
-            var parameters = Parameters.Employee.Create(userId, workplaceId);
             try
             {
-                _repository.Create(parameters);
-                return true;
+                var parameters = EmployeeParameters.Create(userId, workplaceId);
+                return _repository.Create((IEmployee)(object)new { UserId = userId, WorkplaceId = workplaceId});
             }
             catch (EmployeeRepositoryException ex)
             {
                 Logger.Error(ex.Message);
-                return false;
+                throw ex;
             }
         }
 
         public EmployeeDTO GetEmployee(int userId)
         {
             var employee = (IEmployee)(object) new {UserId = userId};
-            var parameters = Parameters.Employee.Get(employee, new EmployeeSession(){ UserAuthId = userId.ToString()});
+            var parameters = Parameters.Employee.Get(employee);
             try
             {
                 var obj = _repository.Get(parameters);
@@ -67,7 +62,7 @@ namespace Arbeidstider.Web.Framework.Services
         public EmployeeDTO GetEmployee(string username)
         {
             var employee = (IEmployee)(object) new {Username = username};
-            var parameters = Parameters.Employee.Get(employee, new EmployeeSession() { UserName = username});
+            var parameters = Parameters.Employee.Get(employee);
 
             try
             {
@@ -80,11 +75,9 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
-        public IEnumerable<EmployeeDTO> GetAllEmployees(int workplaceID)
+        public IEnumerable<EmployeeDTO> GetAllEmployees(int workplaceId)
         {
-            /* REFACTOR: */
-            var parameters = new List<KeyValuePair<string, object>>();
-            parameters.Add(new KeyValuePair<string, object>("WorkplaceID", workplaceID));
+            var parameters = Parameters.Employee.GetAll((IEmployee) (object) new {WorkplaceId = workplaceId});
 
             try
             {
@@ -101,6 +94,7 @@ namespace Arbeidstider.Web.Framework.Services
 
         public bool UpdateEmployee(Guid userID, string username)
         {
+            //var parameters = Parameters.Employee.Update();
             /* REFACTOR : */
             var parameters = new List<KeyValuePair<string, object>>();
             parameters.Add(new KeyValuePair<string, object>("UserID", userID));

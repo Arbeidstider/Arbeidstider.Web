@@ -1,14 +1,16 @@
 ﻿using System.Collections.Generic;
+using Dapper;
 
 namespace Arbeidstider.Interfaces
 {
     public interface IRepository<T>
     {
-        IEnumerable<T> GetAll(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Create(IEnumerable<KeyValuePair<string, object>> parameters);
-        T Get(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Update(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Exists(IEnumerable<KeyValuePair<string, object>> parameters);
-        bool Delete(IEnumerable<KeyValuePair<string, object>> parameters);
+        IEnumerable<T> GetAll(object parameters);
+        T Create(object parameters);
+        T Get(object parameters);
+        bool Update(object parameters);
+        bool Exists(object parameters);
+        bool Delete(object parameters);
+        DynamicParameters GetParameters(object parameters);
     }
 }

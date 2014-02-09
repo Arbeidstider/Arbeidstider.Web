@@ -1,6 +1,6 @@
-﻿namespace Arbeidstider.DataAccess.Repository.Constants.StoredProcedures
+﻿namespace Arbeidstider.DataAccess.Repository.Constants
 {
-    internal class Names
+    internal class StoredProcedures
     {
         internal static readonly string GET_ALL_TIMESHEETS = "GetAllTimesheets";
         internal static readonly string GET_ALL_EMPLOYEES = "GetAllEmployees";

@@ -1,4 +1,5 @@
-﻿using Arbeidstider.Web.Framework.Session;
+﻿using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Framework.Session;
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Host;
@@ -109,8 +110,10 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                     LoadUserAuthInfo(userSession, null, null);
                 }
 
+                var employee = EmployeeService.Instance.GetEmployee(userSession.Id);
                 var authRepo = authService.TryResolve<IAuthRepository>();
                 userSession.Id = sessionId;
+                userSession.WorkplaceId = employee.WorkplaceId;
                 authService.SaveSession(userSession, SessionExpiry);
                 base.OnAuthenticated(authService, session, null, null);
 
@@ -118,7 +121,8 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                 {
                     UserName = userName,
                     Sessionid = sessionId,
-                    UserId = userSession.UserAuthId
+                    UserId = userSession.UserAuthId,
+                    WorkplaceId = employee.WorkplaceId
                 };
             }
             throw HttpError.Unauthorized("Invalid UserName or Password");

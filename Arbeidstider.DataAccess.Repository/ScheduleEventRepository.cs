@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Arbeidstider.DataAccess.Domain;
-using Arbeidstider.DataAccess.Repository.Constants.StoredProcedures;
+using Arbeidstider.DataAccess.Repository.Constants;
 using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.DataAccess.Repository
@@ -12,35 +12,41 @@ namespace Arbeidstider.DataAccess.Repository
         {
             _database = Database.Instance;
         }
-        public IEnumerable<ScheduleEvent> GetAll(IEnumerable<KeyValuePair<string, object>> parameters)
+        public IEnumerable<ScheduleEvent> GetAll(object parameters)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Create(IEnumerable<KeyValuePair<string, object>> parameters)
+        public ScheduleEvent Create(object parameters)
         {
-            return true;
+            return new ScheduleEvent();
         }
 
-        public ScheduleEvent Get(IEnumerable<KeyValuePair<string, object>> parameters)
+        public ScheduleEvent Get(object parameters)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Update(IEnumerable<KeyValuePair<string, object>> parameters)
+        public bool Update(object parameters)
         {
-            var dt = _database.Execute(Names.UPDATE_TIMESHEET, parameters);
+            var dt = _database.Execute(Names.UPDATE_TIMESHEET, GetParameters(parameters));
             return dt;
         }
 
-        public bool Exists(IEnumerable<KeyValuePair<string, object>> parameters)
+        public bool Exists(object parameters)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Delete(IEnumerable<KeyValuePair<string, object>> parameters)
+        public bool Delete(object parameters)
         {
             throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<KeyValuePair<string, object>> GetParameters(object parameters)
+        {
+            var list = new List<KeyValuePair<string, object>>();
+            return list;
         }
     }
 }

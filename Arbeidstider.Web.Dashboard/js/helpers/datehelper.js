@@ -71,8 +71,18 @@
                 return this.findForward(date, day);
             }
         },
-        getDayOfWeek: function (day) {
+        getDayOfWeek: function (day, weekStart) {
+            if (!_.isUndefined(weekStart)) {
+                var d = new Date();
+                // Return date if incrementing with 6 days to sunday works
+                d.setDate(weekStart.getDate() + 6);
+                if (d.getMonth == weekStart.getMonth && d.getYear == weekStart.getYear) {
+                    return d;
+                }
+            }
+
             var dateString = "";
+            
             // First try
             var date = this.tryToGetDateOfDay(new Date(), day);
             if (date.getDay() == day) {

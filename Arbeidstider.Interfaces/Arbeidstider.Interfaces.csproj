@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\Arbeidstider.Web.Dashboard\bin\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,10 +44,12 @@
   <ItemGroup>
     <Compile Include="IDatabase.cs" />
     <Compile Include="IEmployee.cs" />
+    <Compile Include="IEmployeeParameters.cs" />
     <Compile Include="IEmployeeSession.cs" />
     <Compile Include="IEmployeeShift.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryParameters.cs" />
     <Compile Include="ITinyModel.cs" />
     <Compile Include="ITimesheet.cs" />
     <Compile Include="IWorkplace.cs" />

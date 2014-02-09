@@ -11,6 +11,8 @@ namespace Arbeidstider.DataAccess.Domain
         public DateTime ShiftDate { get; set; }
         public TimeSpan ShiftStart { get; set; }
         public TimeSpan ShiftEnd { get; set; }
+        public DateTime? DateStart { get; set; }
+        public DateTime? DateEnd { get; set; }
         public IEmployee ShiftWorker { get; set; }
     }
 }

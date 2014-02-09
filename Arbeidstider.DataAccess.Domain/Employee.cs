@@ -10,7 +10,7 @@ namespace Arbeidstider.DataAccess.Domain
         public string Fullname { get { return Firstname + " " + Lastname; }}
         public string Username { get; set; }
         public string Mobile { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public int EmployeeGroup { get; set; }
         public int WorkplaceId { get; set; }
         public bool IsTiny { get; set; }

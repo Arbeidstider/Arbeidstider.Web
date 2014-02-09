@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Runtime.Serialization;
+using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Services.ServiceModels;
 using ServiceStack;
 using ServiceStack.Auth;
@@ -79,6 +80,11 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             var session = this.GetSession();
             var newUserAuth = ToUserAuth(request);
             var existingUser = UserAuthRepo.GetUserAuth(session, null);
+            if (existingUser == null)
+            {
+                var employee = EmployeeService.Instance.CreateEmployee(newUserAuth.Id, request.WorkplaceId);
+                newUserAuth.Set(employee);
+            }
 
             var registerNewUser = existingUser == null;
             var user = registerNewUser
