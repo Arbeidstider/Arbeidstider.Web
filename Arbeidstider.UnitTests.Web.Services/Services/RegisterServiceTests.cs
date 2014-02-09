@@ -8,7 +8,6 @@ using ServiceStack.FluentValidation;
 using ServiceStack.Host;
 using ServiceStack.OrmLite;
 using ServiceStack.Testing;
-using WebMatrix.WebData;
 
 namespace Arbeidstider.UnitTests.Web.Services.Services
 {

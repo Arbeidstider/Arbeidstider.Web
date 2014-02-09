@@ -13,7 +13,7 @@ namespace Arbeidstider.UnitTests.Web.Services.Services
         public void Test_Authenicate_1()
         {
             var client = GetServiceClient();
-            var request = new Authenticate() {UserName = "johnor1410", Password = "test123", provider = AuthenticateService.CredentialsProvider};
+            var request = new Authenticate() {UserName = "johnor1410", Password = "Test123!"};
             var response = client.Post(request);
             WriteLine("ErrorCode", response.ResponseStatus.ErrorCode);
             WriteLine("Username", response.UserName);

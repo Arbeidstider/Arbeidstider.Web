@@ -59,7 +59,7 @@ namespace Arbeidstider.UnitTests.Base.Classes
                                       Password = "Test123!",
                                       provider = "Employee"
                                   };
-                client.Post<AuthenticateResponse>("/auth/credentials", request);
+                client.Post<AuthenticateResponse>("/auth", request);
             }
         }
 

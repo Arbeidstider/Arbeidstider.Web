@@ -111,8 +111,8 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                 }
 
                 var employee = EmployeeService.Instance.GetEmployee(userSession.Id);
-                var authRepo = authService.TryResolve<IAuthRepository>();
                 userSession.Id = sessionId;
+                // set employeemetadata on session
                 userSession.WorkplaceId = employee.WorkplaceId;
                 authService.SaveSession(userSession, SessionExpiry);
                 base.OnAuthenticated(authService, session, null, null);

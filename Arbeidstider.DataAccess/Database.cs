@@ -12,6 +12,7 @@ namespace Arbeidstider.DataAccess
 {
     public class Database : IDatabase
     {
+        private readonly string _connectionString;
         private static IDatabase _instance = null;
 
         public static IDatabase Instance
@@ -19,24 +20,20 @@ namespace Arbeidstider.DataAccess
             get { return _instance ?? (_instance = new Database()); }
         }
 
-        #region Database Connection
-        private static string ConnectionString()
+        private Database()
         {
-            string connectionString;
             if (HttpContext.Current.IsDebuggingEnabled)
-                connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
+                _connectionString = ConfigurationManager.ConnectionStrings["Debug"].ToString();
             else
-                connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
-            return connectionString;
+                _connectionString = ConfigurationManager.ConnectionStrings["Release"].ToString();
         }
 
-        private static SqlConnection GetOpenConnection()
+        #region Database Connection
+        private SqlConnection GetOpenConnection()
         {
-            using (var connection = new SqlConnection(ConnectionString()))
-            {
-                connection.Open();
-                return connection;
-            }
+            var connection = new SqlConnection(_connectionString);
+            connection.Open();
+            return connection;
         }
 
         #endregion
