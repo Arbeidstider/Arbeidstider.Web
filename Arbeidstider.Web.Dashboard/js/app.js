@@ -24,7 +24,7 @@ define(['jquery',
         App.addRegions({
             container: "#container"
         });
-        
+
         App.setupJquery = function () {
             $.support.cors = true;
             $.ajaxSetup({
@@ -69,8 +69,8 @@ define(['jquery',
 
         App.initCalendar = function () {
             console.log("initializeCalendar");
-            App.Collections = App.Collections || {};
-            var collection = App.Collections.CalendarWeekCollection || new CalendarWeekCollection();
+            Preload.Collections = Preload.Collections || {};
+            var collection = Preload.Collections.CalendarWeekCollection || new CalendarWeekCollection();
             var calendarView = new CalendarView({ collection: collection });
             App.contentLayout.mainColumn.show(calendarView);
         };
@@ -85,6 +85,8 @@ define(['jquery',
             }
             return false;
         };
+        
+        App.appRouter = new AppRouter({ controller: new AppController() });
 
         return App;
     });

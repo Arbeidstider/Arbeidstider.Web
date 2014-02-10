@@ -46,15 +46,17 @@ require.config({
 require(['jquery',
         'backbone',
         'helpers/bootstrapper',
+        'controllers/appController',
+        'routers/appRouter',
         'app'
-], function ($, Backbone, Bootstrapper, App) {
+], function ($, Backbone, Bootstrapper, AppController, AppRouter, App) {
     $(document).ready(function () {
         App.on("initialize:after", function () {
             Backbone.history.start();
         });
-
-        App.appRouter = new AppRouter({ controller: new AppController() });
+        
         App.start();
+        console.log("App.start");
         $.when(Bootstrapper.StrapCollections).done(function () {
             App.initCalendar();
         });
