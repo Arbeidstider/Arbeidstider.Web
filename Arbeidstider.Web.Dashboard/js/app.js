@@ -46,10 +46,10 @@ define(['backbone',
             console.log("initializeTimesheets");
             var session = App.getSession();
             var collection = new CalendarDayCollection();
-            var calendarView = new CalendarView({ collection: collection});
             var p = collection.fetch({ data: { WeeklyView: true, EmployeeId: session.employeeId} });
             p.done(function() {
                 console.log("done");
+                var calendarView = new CalendarView({ collection: collection});
                 App.layout.main.show(calendarView);
             });
         };
