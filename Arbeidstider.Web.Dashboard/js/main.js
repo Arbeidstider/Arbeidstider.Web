@@ -6,6 +6,7 @@ require.config({
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
         jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
         underscore: 'libs/underscore/underscore', // https://github.com/amdjs
+        "underscore.deferred": 'libs/underscore.deferred/underscore.deferred', // https://github.com/amdjs
         backbone: 'libs/backbone/backbone', // https://github.com/amdjs
         backbone_validateAll: 'libs/backbone.validateAll/backbone.validateAll', // 
         "backbone.wreqr": 'libs/backbone.wreqr/wreqr', // 
@@ -27,6 +28,9 @@ require.config({
         underscore: {
             exports: "_"
         },
+        "underscore.deferred": {
+            deps: ['underscore']
+        },
         backbone: {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
@@ -45,20 +49,18 @@ require.config({
 // Let's kick off the application
 require(['jquery',
         'backbone',
-        'helpers/bootstrapper',
-        'controllers/appController',
         'routers/appRouter',
+        'collections/calendardays',
+        'controllers/appController',
+        'helpers/bootstrapper',
         'app'
-], function ($, Backbone, Bootstrapper, AppController, AppRouter, App) {
+], function ($, Backbone, AppRouter, CalendarDayCollection, AppController, Bootstrapper, App) {
     $(document).ready(function () {
         App.on("initialize:after", function () {
             Backbone.history.start();
         });
-        
+
         App.start();
         console.log("App.start");
-        $.when(Bootstrapper.StrapCollections).done(function () {
-            App.initCalendar();
-        });
     });
 });

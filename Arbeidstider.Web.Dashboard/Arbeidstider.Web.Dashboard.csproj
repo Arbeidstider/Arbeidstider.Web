@@ -229,13 +229,14 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="js\collections\base.js" />
-    <Content Include="js\collections\calendarweek.js" />
+    <Content Include="js\collections\calendardays.js" />
     <Content Include="js\collections\dailytimesheets.js" />
     <Content Include="js\controllers\appController.js" />
     <Content Include="js\helpers\bootstrapper.js" />
     <Content Include="js\helpers\datehelper.js" />
     <Content Include="js\layouts\appLayout.js" />
     <Content Include="js\layouts\content.js" />
+    <Content Include="js\libs\backbone-deferred-jquery\backbone-deferred-jquery.js" />
     <Content Include="js\libs\backbone.babysitter\backbone.babysitter.js" />
     <Content Include="js\libs\backbone.eventbinder\backbone.eventbinder.js" />
     <Content Include="js\libs\backbone.validateAll\backbone.validateAll.js" />

@@ -2,17 +2,18 @@ define(['jquery',
         'backbone',
         'marionette',
         'underscore',
+        "helpers/mixins",
         "layouts/appLayout",
         "layouts/content",
         "views/headers/calendar",
         "views/header",
         "views/navigation",
-        "collections/calendarweek",
+        "collections/calendardays",
         "views/calendar",
         "store",
         "routers/appRouter",
         "controllers/appController"],
-    function ($, Backbone, Marionette, _, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarWeekCollection, CalendarView, Store, AppRouter, AppController) {
+    function ($, Backbone, Marionette, _, Mixins, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarDayCollection, CalendarView, Store, AppRouter, AppController) {
         var App = new Backbone.Marionette.Application();
 
         App.getSession = function () {
@@ -47,6 +48,7 @@ define(['jquery',
                 window.location.replace("/login");
             }
 
+            App.appRouter = new AppRouter({ controller: new AppController() });
             App.setupJquery();
             App.initLayout();
             App.initContentLayout();
@@ -65,28 +67,30 @@ define(['jquery',
             App.layout.content.show(App.contentLayout);
             App.contentLayout.render();
             App.contentLayout.pageHeader.show(new CalendarHeaderView());
+            App.initCalendar();
         };
 
         App.initCalendar = function () {
-            console.log("initializeCalendar");
-            Preload.Collections = Preload.Collections || {};
-            var collection = Preload.Collections.CalendarWeekCollection || new CalendarWeekCollection();
+            var session = App.getSession();
+            var collection = new CalendarDayCollection();
             var calendarView = new CalendarView({ collection: collection });
-            App.contentLayout.mainColumn.show(calendarView);
+            collection.fetch({
+                data: { WeeklyView: true, EmployeeId: session.employeeId },
+            }).done(function () {
+                console.log("show calendar");
+                App.contentLayout.mainColumn.show(calendarView);
+            });
         };
 
         App.isAuthenticated = function () {
             var session = App.getSession();
+            console.log(session);
             if (!_.isUndefined(session) && !_.isNumber(session.sessionId)) {
-                console.log("session: " + session);
-                console.log("sessionuserid: " + session.userId);
-                console.log("sessionid: " + session.sessionId);
+                console.log("authenticated");
                 return true;
             }
             return false;
         };
-        
-        App.appRouter = new AppRouter({ controller: new AppController() });
 
         return App;
     });

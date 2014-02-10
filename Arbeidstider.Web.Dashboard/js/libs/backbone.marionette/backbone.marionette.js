@@ -1177,7 +1177,7 @@ Marionette.CollectionView = Marionette.View.extend({
     this.closeChildren();
 
     if (this.collection && this.collection.length > 0) {
-      this.showCollection();
+        this.showCollection();
     } else {
       this.showEmptyView();
     }
@@ -1186,8 +1186,8 @@ Marionette.CollectionView = Marionette.View.extend({
   },
 
   // Internal method to loop through each item in the
-  // collection view and show it
-  showCollection: function(){
+    // collection view and show it
+  showCollection: function () {
     var ItemView;
     this.collection.each(function(item, index){
       ItemView = this.getItemView(item);
@@ -1225,8 +1225,8 @@ Marionette.CollectionView = Marionette.View.extend({
 
   // Retrieve the itemView type, either from `this.options.itemView`
   // or from the `itemView` in the object definition. The "options"
-  // takes precedence.
-  getItemView: function(item){
+    // takes precedence.
+  getItemView: function (item) {
     var itemView = Marionette.getOption(this, "itemView");
 
     if (!itemView){
@@ -1237,8 +1237,8 @@ Marionette.CollectionView = Marionette.View.extend({
   },
 
   // Render the child item's view and add it to the
-  // HTML for the collection view.
-  addItemView: function(item, ItemView, index){
+    // HTML for the collection view.
+  addItemView: function (item, ItemView, index) {
     // get the itemViewOptions if any were specified
     var itemViewOptions = Marionette.getOption(this, "itemViewOptions");
     if (_.isFunction(itemViewOptions)){
@@ -1287,8 +1287,8 @@ Marionette.CollectionView = Marionette.View.extend({
     }, this);
   },
 
-  // render the item view
-  renderItemView: function(view, index) {
+    // render the item view
+  renderItemView: function (view, index) {
       view.render();
       this.appendHtml(this, view, index);
   },
