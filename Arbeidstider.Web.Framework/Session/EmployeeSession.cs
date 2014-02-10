@@ -1,13 +1,11 @@
-﻿using Arbeidstider.Interfaces;
-using ServiceStack;
+﻿using ServiceStack;
 
 namespace Arbeidstider.Web.Framework.Session
 {
-    public class EmployeeSession : AuthUserSession, IEmployeeSession
+    public class EmployeeSession : AuthUserSession
     {
-        public string Username { get; set; }
-        public int SessionId { get; set; }
-        public int UserId { get; set; }
+        public int EmployeeId { get; set; }
+        public string SessionId { get; set; }
         public int WorkplaceId { get; set; }
     }
 }

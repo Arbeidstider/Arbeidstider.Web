@@ -1,4 +1,5 @@
-﻿using Arbeidstider.Web.Services.Exceptions;
+﻿using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Services.Exceptions;
 using Arbeidstider.Web.Services.ServiceModels;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
@@ -13,7 +14,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                 throw new TimesheetServiceException("One or more values are null for TimesheetService.Create");
             }
 
-            int id = TimesheetService.CreateTimesheet(
+            int id = TimesheetService.Instance.CreateTimesheet(
                 request.UserId.Value,
                 request.SelectedDay.Value,
                 request.ShiftStart.Value,

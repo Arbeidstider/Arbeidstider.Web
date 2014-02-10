@@ -13,23 +13,28 @@ define([
             "click .btn-block": "register"
         },
         initialize: function () {
-            this.model = new EmployeeModel();
-            _.bindAll(this, "register", "registerSuccess", "render");
+            _.bindAll(this, "register", "registerSuccess", "registerError", "render");
+        },
+        registerError: function (a, b, c) {
+            console.log("error");
+            console.log(a);
+            console.log(b);
+            console.log(c);
         },
         registerSuccess: function (response) {
             var data = JSON.stringify(response);
             console.log("user created: " + data);
-            alert("user created: " + data);
         },
         register: function (e) {
             if (e) e.preventDefault();
-            console.log(Settings.ServiceUrl("/employee/register"));
-
-            this.model.save({
-                Firstname: this.$("#Firstname"),
-                Surname: this.$("#surname"),
-                BirthDate: this.$("#birthdate"),
-            }, { url: Settings.ServiceUrl("/employee/register"), type: "POST" });
+            
+            var model = new EmployeeModel({
+                FirstName: $("#Firstname").val(),
+                LastName: $("#surname").val(),
+                Email: $("#e-post").val(),
+                BirthDate: $("#birthday").val(),
+            });
+            model.save({}, { success: this.registerSuccess, error: this.registerError, url: Settings.ServiceUrl("/employee/register"), type: "POST" });
         },
         /*
         render: function () {

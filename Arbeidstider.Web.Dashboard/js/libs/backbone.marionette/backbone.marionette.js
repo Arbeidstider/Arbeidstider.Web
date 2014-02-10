@@ -1010,7 +1010,7 @@ Marionette.View = Backbone.View.extend({
 
 // A single item view implementation that contains code for rendering
 // with underscore.js templates, serializing the view's model or collection,
-// and calling several methods on extended views, such as `onRender`.
+      // and calling several methods on extended views, such as `onRender`.
 Marionette.ItemView = Marionette.View.extend({
 
   // Setting up the inheritance chain which allows changes to
@@ -1289,12 +1289,12 @@ Marionette.CollectionView = Marionette.View.extend({
 
   // render the item view
   renderItemView: function(view, index) {
-    view.render();
-    this.appendHtml(this, view, index);
+      view.render();
+      this.appendHtml(this, view, index);
   },
 
-  // Build an `itemView` for every model in the collection.
-  buildItemView: function(item, ItemViewType, itemViewOptions){
+    // Build an `itemView` for every model in the collection.
+  buildItemView: function (item, ItemViewType, itemViewOptions) {
     var options = _.extend({model: item}, itemViewOptions);
     return new ItemViewType(options);
   },
@@ -1333,8 +1333,8 @@ Marionette.CollectionView = Marionette.View.extend({
     }
   },
 
-  // You might need to override this if you've overridden appendHtml
-  appendBuffer: function(collectionView, buffer) {
+    // You might need to override this if you've overridden appendHtml
+  appendBuffer: function (collectionView, buffer) {
     collectionView.$el.append(buffer);
   },
 

@@ -21,7 +21,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                     var session = redis.Get<EmployeeSession>(key);
                     if (session != null)
                     {
-                        if (session.Id == request.SessionId)
+                        if (session.SessionId == request.SessionId)
                         {
                             return new SessionRequestResponse() {AuthSession = session};
                         }

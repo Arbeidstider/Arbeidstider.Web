@@ -1,4 +1,5 @@
-﻿using Arbeidstider.Web.Services.ServiceModels;
+﻿using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Services.ServiceModels;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
 {
@@ -6,7 +7,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
     {
         public object Any(DeleteTimesheet request)
         {
-            return new DeleteTimesheetResponse() {TimesheetDeleted = TimesheetService.Delete(request.Id)};
+            return new DeleteTimesheetResponse() {TimesheetDeleted = TimesheetService.Instance.Delete(request.Id)};
         }
     }
 }

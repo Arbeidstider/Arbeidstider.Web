@@ -4,8 +4,9 @@
     var TimesheetModel = BaseModel.extend({
         defaults: {
             Id: null,
-            UserID: null,
-            WorkplaceID: "",
+            UserId: null,
+            EmployeeId: null,
+            WorkplaceId: "",
             StartDate: null,
             EndDate: null,
             ShiftStart: null,

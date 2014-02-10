@@ -1,6 +1,5 @@
 using System;
 using System.Globalization;
-using System.Runtime.Serialization;
 using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Services.ServiceModels;
 using ServiceStack;
@@ -38,7 +37,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         }
     }
 
-    [DefaultRequest(typeof(RegisterEmployee))]
+    [CustomAuthenticate("Employee")]
     public class RegisterEmployeeService : Service
     {
         public IUserAuthRepository UserAuthRepo { get; set; }
@@ -82,8 +81,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             var existingUser = UserAuthRepo.GetUserAuth(session, null);
             if (existingUser == null)
             {
-                var employee = EmployeeService.Instance.CreateEmployee(newUserAuth.Id, request.WorkplaceId);
-                newUserAuth.Set(employee);
+                int employeeId = EmployeeService.Instance.CreateEmployee(newUserAuth.Id, request.WorkplaceId);
             }
 
             var registerNewUser = existingUser == null;

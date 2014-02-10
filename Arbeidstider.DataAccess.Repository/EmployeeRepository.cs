@@ -44,7 +44,7 @@ namespace Arbeidstider.DataAccess.Repository
 
             if (dt == null)
                 throw new EmployeeRepositoryException(string.Format("Failed to get employee with username: {0}",
-                                                                    ((IEmployee)(object)parameters).Username));
+                                                                    ((DynamicParameters)parameters).Get<string>("Username")));
 
             return dt;
         }

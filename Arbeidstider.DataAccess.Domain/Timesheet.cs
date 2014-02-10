@@ -6,13 +6,9 @@ namespace Arbeidstider.DataAccess.Domain
     public class Timesheet : ITimesheet
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string Fullname { get; set; }
+        public int EmployeeId { get; set; }
         public DateTime ShiftDate { get; set; }
         public TimeSpan ShiftStart { get; set; }
         public TimeSpan ShiftEnd { get; set; }
-        public DateTime? DateStart { get; set; }
-        public DateTime? DateEnd { get; set; }
-        public IEmployee ShiftWorker { get; set; }
     }
 }

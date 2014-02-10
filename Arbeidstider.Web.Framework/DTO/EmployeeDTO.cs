@@ -12,9 +12,11 @@ namespace Arbeidstider.Web.Framework.DTO
         {
             Username = domain.Username;
             WorkplaceId = domain.WorkplaceId;
+            Id = domain.Id;
         }
 
         public string Username { get; set; }
+        public int Id { get; set; }
         public int WorkplaceId { get; set; }
     }
 }

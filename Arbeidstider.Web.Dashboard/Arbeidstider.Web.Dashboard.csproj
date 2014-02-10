@@ -228,6 +228,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="js\collections\base.js" />
+    <Content Include="js\collections\calendardays.js" />
     <Content Include="js\collections\dailytimesheets.js" />
     <Content Include="js\controllers\appController.js" />
     <Content Include="js\helpers\datehelper.js" />
@@ -250,6 +251,7 @@
     <Content Include="js\libs\underscore\underscore.js" />
     <Content Include="js\collections\timesheets.js" />
     <Content Include="js\collections\colleagues.js" />
+    <Content Include="js\models\calendarday.js" />
     <Content Include="js\models\dailytimesheet.js" />
     <Content Include="js\models\employee.js" />
     <Content Include="js\models\settings.js" />
@@ -260,17 +262,17 @@
     <Content Include="js\app.js" />
     <Content Include="js\routers\appRouter.js" />
     <Content Include="js\helpers\vent.js" />
-    <Content Include="js\views\calendaritem.js" />
+    <Content Include="js\views\calendarday.js" />
     <Content Include="js\views\changeworkday.js" />
     <Content Include="js\views\confirmavailabledays.js" />
     <Content Include="js\views\addressbook.js" />
     <Content Include="js\views\addressbookitem.js" />
-    <Content Include="js\views\dailytimesheet.js" />
+    <Content Include="js\views\calendaritem.js" />
     <Content Include="js\views\messages.js" />
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />
     <Content Include="js\views\navigation.js" />
-    <Content Include="js\views\mytimesheets.js" />
+    <Content Include="js\views\calendar.js" />
     <Content Include="js\views\register.js" />
     <Content Include="js\views\profile.js" />
     <Content Include="js\libs\bootstrap\bootstrap.js" />
@@ -285,7 +287,7 @@
     <Content Include="js\libs\vm\vm.js" />
     <Content Include="README.txt" />
     <Content Include="templates\addressbook.html" />
-    <Content Include="templates\calendaritem.html" />
+    <Content Include="templates\calendarday.html" />
     <Content Include="templates\changeworkday.html" />
     <Content Include="templates\confirmavailabledays.html" />
     <Content Include="templates\addressbookitem.html" />
@@ -294,7 +296,7 @@
     <Content Include="templates\register.html">
       <BrowseToURL>p</BrowseToURL>
     </Content>
-    <Content Include="templates\mytimesheets.html" />
+    <Content Include="templates\calendar.html" />
     <Content Include="templates\header.html" />
     <Content Include="templates\layout.html" />
     <Content Include="templates\navbar.html" />

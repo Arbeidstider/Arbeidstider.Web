@@ -2,9 +2,9 @@ define(['backbone', 'marionette', "controllers/appController"], function (Backbo
     return Backbone.Marionette.AppRouter.extend({
         //"index" must be a method in AppRouter's controller
         appRoutes: {
-            "": "dashboard",
+            "": "index",
             'register': 'register',
-            "dashboard": "dashboard",
+            //"dashboard": "index",
             "profile": "profile",
             "logout": "logout",
             "signout": "logout",

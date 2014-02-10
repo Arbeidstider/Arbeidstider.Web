@@ -1,4 +1,5 @@
-﻿using Arbeidstider.Web.Services.ServiceModels;
+﻿using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Services.ServiceModels;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
 {
@@ -7,7 +8,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         public object Any(UpdateTimesheet request)
         {
             return new UpdateTimesheetResponse() { 
-                TimesheetUpdated = TimesheetService.UpdateTimesheet(
+                TimesheetUpdated = TimesheetService.Instance.UpdateTimesheet(
                     request.Id,
                     request.UserId,
                     request.SelectedDate,

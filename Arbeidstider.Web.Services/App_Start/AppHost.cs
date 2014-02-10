@@ -146,7 +146,7 @@ namespace Arbeidstider.Web.Services.App_Start
                 .Add<Timesheets>("/timesheets")
                 .Add<CreateTimesheet>("/timesheet/create", "POST")
                 .Add<UpdateTimesheet>("/timesheet/update", "POST")
-                .Add<RegisterEmployee>("/employee/register")
+                .Add<RegisterEmployee>("/employee/register", "POST, OPTIONS")
                 .Add<SessionRequest>("/getsession", "GET, OPTIONS");
         }
 

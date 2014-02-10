@@ -110,17 +110,27 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                     LoadUserAuthInfo(userSession, null, null);
                 }
 
-                var employee = EmployeeService.Instance.GetEmployee(userSession.Id);
-                userSession.Id = sessionId;
+                var httpRes = authService.Request.Response as IHttpResponse;
+                if (httpRes != null)
+                {
+                    httpRes.Cookies.AddPermanentCookie(HttpHeaders.XUserAuthId, session.UserAuthId);
+                }
+
+                var employee = EmployeeService.Instance.GetEmployee(userSession.UserName);
+
                 // set employeemetadata on session
+                userSession.SessionId = sessionId;
+                userSession.EmployeeId = employee.Id;
                 userSession.WorkplaceId = employee.WorkplaceId;
+
                 authService.SaveSession(userSession, SessionExpiry);
                 base.OnAuthenticated(authService, session, null, null);
 
                 return new
                 {
                     UserName = userName,
-                    Sessionid = sessionId,
+                    SessionId = sessionId,
+                    EmployeeId = employee.Id,
                     UserId = userSession.UserAuthId,
                     WorkplaceId = employee.WorkplaceId
                 };

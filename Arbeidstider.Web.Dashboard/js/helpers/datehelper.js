@@ -1,9 +1,9 @@
-﻿define(["underscore"], function(_) {
+﻿define(["underscore"], function (_) {
     var DateHelper = {
-        initialize: function() {
-            _.bindAll(this, "getDayOfWeek", "tryToGetDateOfDay", "daysInMonth","findBackward","findForward");
+        initialize: function () {
+            _.bindAll(this, "getDayOfWeek", "tryToGetDateOfDay", "daysInMonth", "findBackward", "findForward", "getDateString");
         },
-        findForward: function(date, day) {
+        findForward: function (date, day) {
             var j = date.getDate();
             var currentDay;
             var daysInMonth = this.daysInMonth(date.getMonth(), date.getFullYear());
@@ -18,10 +18,10 @@
                     if (currentDay == day) {
                         return date;
                     }
-                    
+
                     // Is not december
                     if (date.getMonth() != 11) {
-                        date.setMonth(date.getMonth() +1);
+                        date.setMonth(date.getMonth() + 1);
                         date.setDate(1);
                         return this.findForward(new Date(date), day);
                     } else {
@@ -33,7 +33,7 @@
                 }
             }
         },
-        findBackward: function(date, day) {
+        findBackward: function (date, day) {
             var j = date.getDate();
             var currentDay;
 
@@ -50,7 +50,7 @@
                     // Is not january, go back one month
                     if (date.getMonth() != 0) {
                         date.setMonth(date.getMonth() - 1);
-                        date.setDate(this.daysInMonth(date.getMonth(),date.getFullYear()));
+                        date.setDate(this.daysInMonth(date.getMonth(), date.getFullYear()));
                         return this.findBackward(new Date(date), day);
                     } else {
                         date.setFullYear(date.getFullYear() - 1);
@@ -71,32 +71,33 @@
                 return this.findForward(date, day);
             }
         },
+        getDateString: function (date) {
+            var month = parseInt(date.getMonth()) + 1;
+            var dd = date.getDate();
+            if (month < 10)
+                month = '0' + month;
+            if (dd < 10)
+                dd = '0' + dd;
+            return date.getFullYear() + "-" + month + "-" + dd;
+        },
         getDayOfWeek: function (day, weekStart) {
             if (!_.isUndefined(weekStart)) {
                 var d = new Date();
                 // Return date if incrementing with 6 days to sunday works
                 d.setDate(weekStart.getDate() + 6);
                 if (d.getMonth == weekStart.getMonth && d.getYear == weekStart.getYear) {
-                    return d;
+                    return this.getDateString(d);
                 }
             }
 
-            var dateString = "";
-            
             // First try
             var date = this.tryToGetDateOfDay(new Date(), day);
             if (date.getDay() == day) {
-                var month = parseInt(date.getMonth()) + 1;
-                var dd = date.getDate();
-                if (month < 10)
-                    month = '0' + month;
-                if (dd < 10)
-                    dd = '0' + dd;
-                dateString = date.getFullYear() + "-" + month + "-" + dd;
+                return this.getDateString(date);
             }
-            return dateString;
+            return "";
         },
-        daysInMonth: function(month, year) {
+        daysInMonth: function (month, year) {
             return new Date(year, month, 0).getDate();
         }
     };

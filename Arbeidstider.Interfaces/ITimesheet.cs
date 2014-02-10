@@ -5,11 +5,9 @@ namespace Arbeidstider.Interfaces
     public interface ITimesheet
     {
         int Id { get; set; }
-        int UserId { get; set; }
+        int EmployeeId { get; set; }
         DateTime ShiftDate { get; set; }
         TimeSpan ShiftStart { get; set; }
         TimeSpan ShiftEnd { get; set; }
-        DateTime? DateStart { get; set; }
-        DateTime? DateEnd { get; set; }
     }
 }

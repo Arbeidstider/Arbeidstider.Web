@@ -116,13 +116,17 @@
                         contentType: "application/json",
                         success: function(data) {
                             var session = {
-                                sessionId: data.AuthSession.Id,
+                                sessionId: data.AuthSession.SessionId,
                                 userId: data.AuthSession.UserAuthId,
+                                employeeId: data.AuthSession.EmployeeId,
+                                workplaceId: data.AuthSession.WorkplaceId,
                                 email: data.AuthSession.Email,
                                 username: data.AuthSession.UserAuthName,
                                 fullname: data.AuthSession.DisplayName,
                                 roles: data.AuthSession.Roles
                             };
+                            var session2 = session;
+                            console.log("session: " + JSON.stringify(session2));
                             store.remove("AuthSession");
                             store.set("AuthSession", session);
                             window.location.href = "/";

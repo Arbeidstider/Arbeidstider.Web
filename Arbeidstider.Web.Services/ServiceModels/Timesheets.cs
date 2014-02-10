@@ -10,11 +10,19 @@ namespace Arbeidstider.Web.Services.ServiceModels
         public string EndDate { get; set; }
         public int? EmployeeId { get; set; }
         public int? WorkplaceId { get; set; }
+        public bool? WeeklyView { get; set; }
     }
 
     public class TimesheetsResponse
     {
         public IEnumerable<TimesheetDTO> Timesheets { get; set; }
+        public IEnumerable<WeeklyTimesheet> WeeklyTimesheets { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
+    }
+
+    public class WeeklyTimesheet
+    {
+        public int DayOfWeek { get; set; }
+        public IEnumerable<TimesheetDTO> Timesheets { get; set; }
     }
 }
