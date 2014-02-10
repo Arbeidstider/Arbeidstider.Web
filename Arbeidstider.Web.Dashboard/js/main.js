@@ -32,41 +32,31 @@ require.config({
             exports: 'Backbone'
         },
         'backbone.babysitter': {
-          deps: ['backbone','underscore']
+            deps: ['backbone', 'underscore']
         },
-        "marionette":{
-            "deps":["underscore", "backbone", "jquery"],
+        "marionette": {
+            "deps": ["underscore", "backbone", "jquery"],
             // Exports the global window.Marionette object
-            "exports":"Marionette"
+            "exports": "Marionette"
         },
     }
 });
 
-// Let's kick off the applicati§on
+// Let's kick off the application
+require(['jquery',
+        'backbone',
+        'helpers/bootstrapper',
+        'app'
+], function ($, Backbone, Bootstrapper, App) {
+    $(document).ready(function () {
+        App.on("initialize:after", function () {
+            Backbone.history.start();
+        });
 
-require([
-        'jquery',
-        'marionette',
-        'bootstrap',
-        'app',
-    ], function($, marionette, Bootstrap, App) {
-        $(document).ready(function () {
-            Bootstrap.initialize();
-            $.support.cors = true;
-            $.ajaxSetup({
-                statusCode: {
-                    401: function(){
-                        // Redirec the to the login page.
-                        window.location.replace('/login');
-                     
-                    },
-                    403: function() {
-                        // 403 -- Access denied
-                        window.location.replace('/denied');
-                    }
-                }
-            });
-            
-            App.start();
+        App.appRouter = new AppRouter({ controller: new AppController() });
+        App.start();
+        $.when(Bootstrapper.StrapCollections).done(function () {
+            App.initCalendar();
         });
     });
+});

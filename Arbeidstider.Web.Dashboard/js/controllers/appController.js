@@ -18,6 +18,7 @@ function (_, Marionette, RegisterView, ChangeWorkDayView, SetDaysFreeView, Confi
             this.changeView(AddressBookView);
         },
         index: function () {
+            console.log("index");
         },
         profile: function () {
             this.changeView(ProfileView);

@@ -52,7 +52,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         private object GetWeeklyTimesheets(Timesheets request)
         {
             var response = new TimesheetsResponse();
-            var weeklyTimesheets = new List<WeeklyTimesheet>();
+            var weeklyTimesheets = new List<DailyTimesheet>();
             var monday = GetMondayDate(request);
 
             var dtos = TimesheetService.Instance.GetAllWithinRange(
@@ -76,7 +76,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                 if (!dailyTimesheets.Any())
                     dailyTimesheets = new List<TimesheetDTO>();
 
-                weeklyTimesheets.Add(new WeeklyTimesheet() { DayOfWeek = i, Timesheets = dailyTimesheets });
+                weeklyTimesheets.Add(new DailyTimesheet() { DayOfWeek = i, Timesheets = dailyTimesheets });
             }
             response.WeeklyTimesheets = weeklyTimesheets.OrderBy(x => x.DayOfWeek);
             return response;

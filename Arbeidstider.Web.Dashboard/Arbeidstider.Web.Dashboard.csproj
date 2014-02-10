@@ -206,6 +206,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\WebHelper.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -228,11 +229,13 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="js\collections\base.js" />
-    <Content Include="js\collections\calendardays.js" />
+    <Content Include="js\collections\calendarweek.js" />
     <Content Include="js\collections\dailytimesheets.js" />
     <Content Include="js\controllers\appController.js" />
+    <Content Include="js\helpers\bootstrapper.js" />
     <Content Include="js\helpers\datehelper.js" />
     <Content Include="js\layouts\appLayout.js" />
+    <Content Include="js\layouts\content.js" />
     <Content Include="js\libs\backbone.babysitter\backbone.babysitter.js" />
     <Content Include="js\libs\backbone.eventbinder\backbone.eventbinder.js" />
     <Content Include="js\libs\backbone.validateAll\backbone.validateAll.js" />
@@ -268,6 +271,8 @@
     <Content Include="js\views\addressbook.js" />
     <Content Include="js\views\addressbookitem.js" />
     <Content Include="js\views\calendardayitem.js" />
+    <Content Include="js\views\headers\addressbook.js" />
+    <Content Include="js\views\headers\calendar.js" />
     <Content Include="js\views\messages.js" />
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />
@@ -291,6 +296,10 @@
     <Content Include="templates\changeworkday.html" />
     <Content Include="templates\confirmavailabledays.html" />
     <Content Include="templates\addressbookitem.html" />
+    <Content Include="templates\calendardayitem.html" />
+    <Content Include="templates\content.html" />
+    <Content Include="templates\headers\addressbook.html" />
+    <Content Include="templates\headers\calendar.html" />
     <Content Include="templates\messages.html" />
     <Content Include="templates\setdaysfree.html" />
     <Content Include="templates\register.html">
@@ -314,7 +323,6 @@
     <Content Include="WURFL AGPL License.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="img\ajax-loaders\" />
     <Folder Include="img\bootstrap\" />
     <Folder Include="img\emails\" />

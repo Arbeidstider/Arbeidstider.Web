@@ -1,59 +1,78 @@
-define(['backbone',
+define(['jquery',
+        'backbone',
         'marionette',
         'underscore',
         "layouts/appLayout",
+        "layouts/content",
+        "views/headers/calendar",
         "views/header",
         "views/navigation",
-        "collections/calendardays",
+        "collections/calendarweek",
         "views/calendar",
         "store",
         "routers/appRouter",
         "controllers/appController"],
-    function (Backbone, Marionette, _, AppLayout, HeaderView, NavigationView, CalendarDayCollection, CalendarView, Store, AppRouter, AppController) {
+    function ($, Backbone, Marionette, _, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarWeekCollection, CalendarView, Store, AppRouter, AppController) {
         var App = new Backbone.Marionette.Application();
 
-        App.getSession = function() {
+        App.getSession = function () {
             return Store.get("AuthSession");
         };
 
         //Organize Application into regions corresponding to DOM elements
         //Regions can contain views, Layouts, or subregions nested as necessary
         App.addRegions({
-            mainRegion: "#main"
+            container: "#container"
         });
         
+        App.setupJquery = function () {
+            $.support.cors = true;
+            $.ajaxSetup({
+                statusCode: {
+                    401: function () {
+                        // Redirec the to the login page.
+                        window.location.replace('/login');
+
+                    },
+                    403: function () {
+                        // 403 -- Access denied
+                        window.location.replace('/denied');
+                    }
+                }
+            });
+        };
+
         App.addInitializer(function () {
             if (!App.isAuthenticated()) {
                 window.location.replace("/login");
             }
-            
-            App.appRouter = new AppRouter({ controller: new AppController() });
+
+            App.setupJquery();
             App.initLayout();
-            App.inititalizeTimesheets();
-            
-            Backbone.history.start({ pushState: true });
+            App.initContentLayout();
         });
 
-        App.initLayout = function() {
+        App.initLayout = function () {
             App.layout = new AppLayout();
-            App.mainRegion.show(App.layout);
+            App.container.show(App.layout);
             App.layout.render();
             App.layout.header.show(new HeaderView());
             App.layout.nav.show(new NavigationView());
         };
-        
-        App.inititalizeTimesheets = function() {
-            console.log("initializeTimesheets");
-            var session = App.getSession();
-            var collection = new CalendarDayCollection();
-            console.log("session: " + session);
-            console.log("session.employeeId: " + session.employeeId);
-            var p = collection.fetch({ data: { WeeklyView: true, EmployeeId: session.employeeId} });
-            p.done(function() {
-                console.log("done");
-                var calendarView = new CalendarView({ collection: collection});
-                App.layout.main.show(calendarView);
-            });
+
+        App.initContentLayout = function () {
+            App.contentLayout = new ContentLayout();
+            App.layout.content.show(App.contentLayout);
+            App.contentLayout.render();
+            App.contentLayout.pageHeader.show(new CalendarHeaderView());
+        };
+
+        App.initCalendar = function () {
+            console.log("initializeCalendar");
+            App.Collections = App.Collections || {};
+            var collection = App.Collections.CalendarWeekCollection || new CalendarWeekCollection();
+            var calendarView = new CalendarView({ collection: collection });
+            App.contentLayout.mainColumn.show(calendarView);
         };
 
         App.isAuthenticated = function () {

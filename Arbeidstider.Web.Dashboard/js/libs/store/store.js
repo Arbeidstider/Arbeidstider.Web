@@ -6,8 +6,8 @@
 		storage
 
 	store.disabled = false
-	store.set = function(key, value) {}
-	store.get = function(key) {}
+	store.set = function (key, value) { }
+	store.get = function (key) { }
 	store.remove = function(key) {}
 	store.clear = function() {}
 	store.transact = function(key, defaultVal, transactionFn) {

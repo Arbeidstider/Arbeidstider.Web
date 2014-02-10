@@ -1080,7 +1080,7 @@ Marionette.ItemView = Marionette.View.extend({
 // Collection View
 // ---------------
 
-// A view that iterates over a Backbone.Collection
+      // A view that iterates over a Backbone.Collection
       // and renders an individual ItemView for each model.
 Marionette.CollectionView = Marionette.View.extend({
   // used as the prefix for item view events
@@ -1119,8 +1119,8 @@ Marionette.CollectionView = Marionette.View.extend({
   // binds to. Override this method to prevent the initial
   // events, or to add your own initial events.
   _initialEvents: function(){
-    if (this.collection){
-      this.listenTo(this.collection, "add", this.addChildView, this);
+      if (this.collection) {
+          this.listenTo(this.collection, "add", this.addChildView, this);
       this.listenTo(this.collection, "remove", this.removeItemView, this);
       this.listenTo(this.collection, "reset", this.render, this);
     }
@@ -1143,8 +1143,8 @@ Marionette.CollectionView = Marionette.View.extend({
   },
 
   // Internal method to trigger the before render callbacks
-  // and events
-  triggerBeforeRender: function(){
+    // and events
+  triggerBeforeRender: function () {
     this.triggerMethod("before:render", this);
     this.triggerMethod("collection:before:render", this);
   },
@@ -1201,7 +1201,7 @@ Marionette.CollectionView = Marionette.View.extend({
   showEmptyView: function(){
     var EmptyView = this.getEmptyView();
 
-    if (EmptyView && !this._showingEmptyView){
+    if (EmptyView && !this._showingEmptyView) {
       this._showingEmptyView = true;
       var model = new Backbone.Model();
       this.addItemView(model, EmptyView, 0);
