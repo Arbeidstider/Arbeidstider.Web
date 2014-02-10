@@ -16,12 +16,13 @@ namespace Arbeidstider.Web.Services.ServiceModels
     public class TimesheetsResponse
     {
         public IEnumerable<TimesheetDTO> Timesheets { get; set; }
-        public IEnumerable<WeeklyTimesheet> WeeklyTimesheets { get; set; }
+        public IEnumerable<DailyTimesheet> WeeklyTimesheets { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
     }
 
-    public class WeeklyTimesheet
+    public class DailyTimesheet
     {
+        public int Id { get { return DayOfWeek; } }
         public int DayOfWeek { get; set; }
         public IEnumerable<TimesheetDTO> Timesheets { get; set; }
     }

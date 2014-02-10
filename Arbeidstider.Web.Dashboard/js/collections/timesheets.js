@@ -11,9 +11,9 @@ define([
         action: "/timesheets",
         initialize: function () {
         },
-        parse: function(response) {
-            console.log("TimesheetsCollection.parse(): " + JSON.stringify(response.Timesheets));
-            return response.Timesheets;
+        parse: function (response) {
+            var r = JSON.stringify(response);
+            return r.Timesheets;
         },
         url: function() {
             return Settings.ServiceUrl(this.action);

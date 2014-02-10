@@ -267,7 +267,7 @@
     <Content Include="js\views\confirmavailabledays.js" />
     <Content Include="js\views\addressbook.js" />
     <Content Include="js\views\addressbookitem.js" />
-    <Content Include="js\views\calendaritem.js" />
+    <Content Include="js\views\calendardayitem.js" />
     <Content Include="js\views\messages.js" />
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />

@@ -46,6 +46,8 @@ define(['backbone',
             console.log("initializeTimesheets");
             var session = App.getSession();
             var collection = new CalendarDayCollection();
+            console.log("session: " + session);
+            console.log("session.employeeId: " + session.employeeId);
             var p = collection.fetch({ data: { WeeklyView: true, EmployeeId: session.employeeId} });
             p.done(function() {
                 console.log("done");
@@ -58,7 +60,6 @@ define(['backbone',
             var session = App.getSession();
             if (!_.isUndefined(session) && !_.isNumber(session.sessionId)) {
                 console.log("session: " + session);
-                console.log("session: " + JSON.stringify(session));
                 console.log("sessionuserid: " + session.userId);
                 console.log("sessionid: " + session.sessionId);
                 return true;

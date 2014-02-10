@@ -446,7 +446,6 @@
         // If the server returns an attributes hash that differs, the model's
         // state will be `set` again.
         save: function (key, val, options) {
-            console.log("save: options"+ options);
             var attrs, method, xhr, attributes = this.attributes;
 
             // Handle both `"key", value` and `{key: value}` -style arguments.
@@ -457,7 +456,6 @@
                 (attrs = {})[key] = val;
             }
 
-            console.log("save: attrs" + attrs);
             options = _.extend({ validate: true }, options);
 
             // If we're not waiting and attributes exist, save acts as
@@ -1130,9 +1128,6 @@
     // Useful when interfacing with server-side languages like **PHP** that make
     // it difficult to read the body of `PUT` requests.
     Backbone.sync = function (method, model, options) {
-        console.log("method: " + method);
-        console.log("model: " + model);
-        console.log("options: " + options);
         var type = methodMap[method];
 
         // Default options, unless specified.
