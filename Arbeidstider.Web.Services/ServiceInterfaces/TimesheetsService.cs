@@ -22,6 +22,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             {
                 if (request.WeeklyView != null && (bool)request.WeeklyView)
                 {
+                    // refactor back to use ienumerable
                     response.WeeklyTimesheetCalendar = TimesheetService.Instance.GetCurrentTimesheetWeek(request.EmployeeId, request.WorkplaceId);
                 }
                 response.Timesheets = (IEnumerable<TimesheetDTO>) GetTimesheetsWithinRange(request);

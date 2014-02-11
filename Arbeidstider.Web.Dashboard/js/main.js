@@ -50,7 +50,8 @@ require(['jquery',
         'controllers/appController'
     ], function($, Backbone, App, AppRouter, AppController) {
         $(document).ready(function() {
-            App.on("initialize:after", function() {
+            App.on("initialize:after", function () {
+                App.appRouter = new AppRouter({ controller: new AppController() });
                 Backbone.history.start();
             });
 

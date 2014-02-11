@@ -46,7 +46,6 @@ define(['jquery',
             App.setupJquery();
             App.initLayout();
             App.initContentLayout();
-            App.appRouter = new AppRouter({ controller: new AppController() });
         });
 
         App.initLayout = function () {
@@ -62,6 +61,7 @@ define(['jquery',
             App.layout.content.show(App.contentLayout);
             App.contentLayout.render();
             App.contentLayout.pageHeader.show(new CalendarHeaderView());
+            App.contentLayout.showCalendar();
         };
 
         App.isAuthenticated = function () {

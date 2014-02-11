@@ -15,6 +15,8 @@ namespace Arbeidstider.Web.Framework.Services
     {
         private readonly IRepository<ITimesheet> _repository;
         private static TimesheetService _instance;
+        private const int SUNDAY = 7;
+        private const int WEEK_LENGTH = 7;
         private static TimeSpan _defaultExpiration = new TimeSpan(0, 15, 0);
 
         public static TimesheetService Instance
@@ -108,15 +110,40 @@ namespace Arbeidstider.Web.Framework.Services
             return _repository.Delete(parameters);
         }
 
-        public TimesheetCalendar GetCurrentTimesheetWeek(int? employeeId = null, int? workplaceId = null)
+        public IEnumerable<CalendarDay> GetCurrentTimesheetWeek(int? employeeId = null, int? workplaceId = null)
         {
             var monday = GetMondayDate();
             var parameters = TimesheetParameters.Create(startDate: monday, endDate: monday.AddDays(6),
                                                         employeeId: employeeId, workplaceId: workplaceId);
-            var results = _repository.GetAll(parameters);
-            var weeklyCalendar = new TimesheetCalendar(results);
+            var timesheets = _repository.GetAll(parameters);
+            var timesheetWeek = GetCalendarWeek(timesheets);
 
-            return weeklyCalendar;
+            return timesheetWeek;
+        }
+
+        private static IEnumerable<CalendarDay> GetCalendarWeek(IEnumerable<ITimesheet> timesheets)
+        {
+            var calendarWeek = new List<CalendarDay>();
+            for (int i = (int)DayOfWeek.Monday; i < WEEK_LENGTH + 1; i++)
+            {
+                DayOfWeek day;
+                // convert to .NET standard
+                if (i == SUNDAY) day = DayOfWeek.Sunday;
+                else day = (DayOfWeek)i;
+
+                var calendarDay = GetShiftsByDay(day, timesheets);
+                calendarWeek.Add(calendarDay);
+            }
+
+            return calendarWeek;
+        }
+
+        private static CalendarDay GetShiftsByDay(DayOfWeek dayOfWeek, IEnumerable<ITimesheet> results)
+        {
+            var shifts = (from x in results
+                    where x.ShiftDate.DayOfWeek == dayOfWeek
+                    select new ShiftDTO(x)).ToList();
+            return new CalendarDay(dayOfWeek, shifts);
         }
 
         private static DateTime GetMondayDate(DateTime? dayOfWeek = null)

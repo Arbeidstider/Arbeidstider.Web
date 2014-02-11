@@ -17,7 +17,8 @@ namespace Arbeidstider.Web.Services.ServiceModels
     public class TimesheetsResponse
     {
         public IEnumerable<TimesheetDTO> Timesheets { get; set; }
-        public TimesheetCalendar WeeklyTimesheetCalendar { get; set; }
+        // Refactor back to use array instead of days
+        public IEnumerable<CalendarDay> WeeklyTimesheetCalendar { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
     }
 }

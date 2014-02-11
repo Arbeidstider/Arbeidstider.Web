@@ -20,9 +20,6 @@ function (_, Marionette, Globals, CalendarDayCollection, CalendarView, RegisterV
             this.changeView(AddressBookView);
         },
         index: function () {
-            console.log("bootstrappedCalendar: " + Globals.bootstrappedCalendar);
-            var collection = new CalendarDayCollection(Globals.bootstrappedCalendar || []);
-            this.changeView(CalendarView, collection);
         },
         profile: function () {
             this.changeView(ProfileView);
@@ -50,11 +47,8 @@ function (_, Marionette, Globals, CalendarDayCollection, CalendarView, RegisterV
         },
         changeView: function (view, collection, pageHeader) {
             var newView = collection ? new view({ collection: collection }) : new view();
-            require(['App'], function (App) {
-                setTimeout(function() {
-                }, 500);
-                App.contentLayout.mainColumn.show(newView);
-            });
+            var App = require(['App']);
+            App.contentLayout.mainColumn.show(newView);
         }
     });
     return AppController;
