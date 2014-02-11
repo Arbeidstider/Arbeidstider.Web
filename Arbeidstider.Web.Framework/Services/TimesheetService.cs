@@ -7,6 +7,7 @@ using Arbeidstider.DataAccess.Repository.Parameters;
 using Arbeidstider.Interfaces;
 using Arbeidstider.Web.Framework.Cache;
 using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Models;
 
 namespace Arbeidstider.Web.Framework.Services
 {
@@ -105,6 +106,47 @@ namespace Arbeidstider.Web.Framework.Services
             var parameters = TimesheetParameters.Create(id: timesheetId);
             ;
             return _repository.Delete(parameters);
+        }
+
+        public TimesheetCalendar GetCurrentTimesheetWeek(int? employeeId = null, int? workplaceId = null)
+        {
+            var monday = GetMondayDate();
+            var parameters = TimesheetParameters.Create(startDate: monday, endDate: monday.AddDays(6),
+                                                        employeeId: employeeId, workplaceId: workplaceId);
+            var results = _repository.GetAll(parameters);
+            var weeklyCalendar = new TimesheetCalendar(results);
+
+            return weeklyCalendar;
+        }
+
+        private static DateTime GetMondayDate(DateTime? dayOfWeek = null)
+        {
+            if (dayOfWeek == null)
+            {
+                return DateTime.Now.DayOfWeek != DayOfWeek.Monday ? FindMondayDate(DateTime.Now) : DateTime.Now;
+            }
+
+            return dayOfWeek.Value.DayOfWeek == DayOfWeek.Monday ? dayOfWeek.Value : FindMondayDate(dayOfWeek.Value);
+        }
+
+        private static DateTime FindMondayDate(DateTime date)
+        {
+            while (date.DayOfWeek != DayOfWeek.Monday)
+            {
+                date = date.AddDays(-1);
+                if (date.DayOfWeek == DayOfWeek.Monday) break;
+            }
+
+            return date;
+        }
+
+        private static IEnumerable<TimesheetDTO> GetTimesheetsByDay(IEnumerable<TimesheetDTO> results, int i)
+        {
+            return (from x in results
+                    where !string.IsNullOrEmpty(x.ShiftDate)
+                       && (((int)(DateTime.Parse(x.ShiftDate).DayOfWeek)) == i)
+                    select x).ToArray();
+
         }
     }
 }

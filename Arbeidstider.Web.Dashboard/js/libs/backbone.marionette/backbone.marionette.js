@@ -284,8 +284,8 @@ _.extend(Marionette.Callbacks.prototype, {
 
   // Run all registered callbacks with the context specified.
   // Additional callbacks can be added after this has been run
-  // and they will still be executed.
-  run: function(options, context){
+    // and they will still be executed.
+  run: function (options, context) {
     this._deferred.resolve(context, options);
   },
 
@@ -1747,8 +1747,8 @@ Marionette.AppRouter = Backbone.Router.extend({
 // Stores and starts up `Region` objects, includes an
 // event aggregator as `app.vent`
 Marionette.Application = function(options){
-  this._initRegionManager();
-  this._initCallbacks = new Marionette.Callbacks();
+    this._initRegionManager();
+    this._initCallbacks = new Marionette.Callbacks();
   this.vent = new Backbone.Wreqr.EventAggregator();
   this.commands = new Backbone.Wreqr.Commands();
   this.reqres = new Backbone.Wreqr.RequestResponse();
@@ -1774,8 +1774,8 @@ _.extend(Marionette.Application.prototype, Backbone.Events, {
 
   // Add an initializer that is either run at when the `start`
   // method is called, or run immediately if added after `start`
-  // has already been called.
-  addInitializer: function(initializer){
+    // has already been called.
+  addInitializer: function (initializer) {
     this._initCallbacks.add(initializer);
   },
 
@@ -1871,8 +1871,8 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
 
   // Initializer for a specific module. Initializers are run when the
   // module's `start` method is called.
-  addInitializer: function(callback){
-    this._initializerCallbacks.add(callback);
+    addInitializer: function (callback) {
+        this._initializerCallbacks.add(callback);
   },
 
   // Finalizers are run when a module is stopped. They are used to teardown

@@ -2,7 +2,6 @@ define(['jquery',
         'backbone',
         'marionette',
         'underscore',
-        "helpers/mixins",
         "layouts/appLayout",
         "layouts/content",
         "views/headers/calendar",
@@ -13,7 +12,7 @@ define(['jquery',
         "store",
         "routers/appRouter",
         "controllers/appController"],
-    function ($, Backbone, Marionette, _, Mixins, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarDayCollection, CalendarView, Store, AppRouter, AppController) {
+    function ($, Backbone, Marionette, _, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarDayCollection, CalendarView, Store, AppRouter, AppController) {
         var App = new Backbone.Marionette.Application();
 
         App.getSession = function () {
@@ -42,16 +41,12 @@ define(['jquery',
                 }
             });
         };
-
+        
         App.addInitializer(function () {
-            if (!App.isAuthenticated()) {
-                window.location.replace("/login");
-            }
-
-            App.appRouter = new AppRouter({ controller: new AppController() });
             App.setupJquery();
             App.initLayout();
             App.initContentLayout();
+            App.appRouter = new AppRouter({ controller: new AppController() });
         });
 
         App.initLayout = function () {
@@ -67,21 +62,6 @@ define(['jquery',
             App.layout.content.show(App.contentLayout);
             App.contentLayout.render();
             App.contentLayout.pageHeader.show(new CalendarHeaderView());
-            App.initCalendar();
-        };
-
-        App.initCalendar = function () {
-            var session = App.getSession();
-            var collection = new CalendarDayCollection();
-            var calendarView = new CalendarView({ collection: collection });
-            $.when(
-                collection.fetch({
-                    data: { WeeklyView: true, EmployeeId: session.employeeId },
-                })
-            ).done(function(data, textStatus, jqXHR) {
-                    console.log("!!!!!!!!!!show calendar");
-                    App.contentLayout.mainColumn.show(calendarView);
-                });
         };
 
         App.isAuthenticated = function () {

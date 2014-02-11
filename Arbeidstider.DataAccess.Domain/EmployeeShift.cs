@@ -5,18 +5,32 @@ namespace Arbeidstider.DataAccess.Domain
 {
     public class EmployeeShift : IEmployeeShift
     {
-        private readonly TimeSpan _shiftEnd;
-        private readonly TimeSpan _shiftStart;
-        private readonly int _dayOfWeek;
         public EmployeeShift(ITimesheet timesheet)
         {
-            _dayOfWeek = (int)timesheet.ShiftDate.DayOfWeek;
-            _shiftEnd = timesheet.ShiftEnd;
-            _shiftStart = timesheet.ShiftStart;
+            if (timesheet != null)
+            {
+                ShiftDate = timesheet.ShiftDate;
+                EmployeeId = timesheet.EmployeeId;
+                ShiftEnd = timesheet.ShiftEnd;
+                ShiftStart = timesheet.ShiftStart;
+            }
         }
 
-        public int DayOfWeek { get { return _dayOfWeek; } }
-        public TimeSpan ShiftEnd { get { return _shiftEnd; } }
-        public TimeSpan ShiftStart { get { return _shiftStart; } }
+        public DateTime? ShiftDate { get; set; }
+        public int? EmployeeId { get; set; }
+
+        private int _dayOfWeek;
+        public int DayOfWeek
+        {
+            get 
+            {
+                if (ShiftDate != null) return (int) ShiftDate.Value.DayOfWeek;
+                return _dayOfWeek;
+            }
+            set { _dayOfWeek = value; }
+        }
+
+        public TimeSpan ShiftEnd { get; set; }
+        public TimeSpan ShiftStart { get; set; }
     }
 }

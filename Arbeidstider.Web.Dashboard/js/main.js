@@ -45,17 +45,18 @@ require.config({
 // Let's kick off the application
 require(['jquery',
         'backbone',
+        'app',
         'routers/appRouter',
-        'collections/calendardays',
-        'controllers/appController',
-        'app'
-], function ($, Backbone, AppRouter, CalendarDayCollection, AppController, App) {
-    $(document).ready(function () {
-        App.on("initialize:after", function () {
-            Backbone.history.start();
-        });
+        'controllers/appController'
+    ], function($, Backbone, App, AppRouter, AppController) {
+        $(document).ready(function() {
+            App.on("initialize:after", function() {
+                Backbone.history.start();
+            });
 
-        App.start();
-        console.log("App.start");
+            App.start(function() {
+                if (!App.isAuthenticated)
+                    window.location.replace("/login");
+            });
+        });
     });
-});

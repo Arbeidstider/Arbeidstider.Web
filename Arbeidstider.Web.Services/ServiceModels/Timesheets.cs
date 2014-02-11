@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Arbeidstider.Web.Framework.DTO;
+using Arbeidstider.Web.Framework.Models;
 using ServiceStack;
 
 namespace Arbeidstider.Web.Services.ServiceModels
@@ -16,14 +17,7 @@ namespace Arbeidstider.Web.Services.ServiceModels
     public class TimesheetsResponse
     {
         public IEnumerable<TimesheetDTO> Timesheets { get; set; }
-        public IEnumerable<DailyTimesheet> WeeklyTimesheets { get; set; }
+        public TimesheetCalendar WeeklyTimesheetCalendar { get; set; }
         public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
-    }
-
-    public class DailyTimesheet
-    {
-        public int Id { get { return DayOfWeek; } }
-        public int DayOfWeek { get; set; }
-        public IEnumerable<TimesheetDTO> Timesheets { get; set; }
     }
 }

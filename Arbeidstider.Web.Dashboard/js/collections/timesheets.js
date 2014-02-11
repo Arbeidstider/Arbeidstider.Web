@@ -12,7 +12,7 @@ define([
         initialize: function () {
         },
         parse: function (response) {
-            return r.Timesheets;
+            return response.Timesheets;
         },
         url: function() {
             return Settings.ServiceUrl(this.action);

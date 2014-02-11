@@ -1,5 +1,8 @@
 define(['underscore',
         'marionette',
+        'globals',
+        'collections/calendardays',
+        'views/calendar',
         'views/register',
         'views/changeworkday',
         'views/setdaysfree',
@@ -8,17 +11,18 @@ define(['underscore',
         'views/addressbook',
         'views/messages'
 ],
-function (_, Marionette, RegisterView, ChangeWorkDayView, SetDaysFreeView, ConfirmAvailableDaysView, ProfileView, AddressBookView, MessagesView) {
+function (_, Marionette, Globals, CalendarDayCollection, CalendarView, RegisterView, ChangeWorkDayView, SetDaysFreeView, ConfirmAvailableDaysView, ProfileView, AddressBookView, MessagesView) {
     var AppController = Backbone.Marionette.Controller.extend({
         initialize: function () {
             _.bindAll(this, "changeView");
-            console.log("appController.initialize();");
         },
         addressbook: function () {
             this.changeView(AddressBookView);
         },
         index: function () {
-            console.log("index");
+            console.log("bootstrappedCalendar: " + Globals.bootstrappedCalendar);
+            var collection = new CalendarDayCollection(Globals.bootstrappedCalendar || []);
+            this.changeView(CalendarView, collection);
         },
         profile: function () {
             this.changeView(ProfileView);
@@ -44,12 +48,13 @@ function (_, Marionette, RegisterView, ChangeWorkDayView, SetDaysFreeView, Confi
         confirmAvailableDays: function () {
             this.changeView(ConfirmAvailableDaysView);
         },
-        changeView: function (view) {
-            var App = require('app');
-            var Store = require('store');
-            var session = Store.get("AuthSession");
-            var newView = new view({ session: session });
-            App.layout.main.show(newView);
+        changeView: function (view, collection, pageHeader) {
+            var newView = collection ? new view({ collection: collection }) : new view();
+            require(['App'], function (App) {
+                setTimeout(function() {
+                }, 500);
+                App.contentLayout.mainColumn.show(newView);
+            });
         }
     });
     return AppController;

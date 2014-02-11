@@ -1,9 +1,17 @@
-﻿<!DOCTYPE html>
+﻿@model Arbeidstider.Web.Dashboard.Models.Index
+<!DOCTYPE html>
 <html>
 <head>
     @Html.Partial("Header")
     @Html.Partial("Stylesheets")
     <script data-main="js/main" src="@Url.Content("~/js/libs/require/require.js")"></script>
+    <script>
+        define('config', function () {
+            var config = {};
+            config.bootstrappedCalendar = @Html.Raw(Json.Encode(Model.TimesheetCalendar));
+            return config;
+        });
+    </script>
 </head>
 <body class='contrast-dark fixed-header fixed-navigation'>
     <div id="container">

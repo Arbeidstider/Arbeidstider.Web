@@ -124,6 +124,10 @@
     <Reference Include="ServiceStack.Interfaces">
       <HintPath>..\packages\ServiceStack.Interfaces.4.0.5\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="ServiceStack.Text, Version=4.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.9\lib\net40\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IO">
@@ -207,6 +211,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\WebHelper.cs" />
+    <Compile Include="Models\Index.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,7 +236,9 @@
     <Content Include="js\collections\base.js" />
     <Content Include="js\collections\calendardays.js" />
     <Content Include="js\collections\dailytimesheets.js" />
+    <Content Include="js\config.js" />
     <Content Include="js\controllers\appController.js" />
+    <Content Include="js\globals.js" />
     <Content Include="js\helpers\bootstrapper.js" />
     <Content Include="js\helpers\datehelper.js" />
     <Content Include="js\layouts\appLayout.js" />
@@ -266,6 +273,7 @@
     <Content Include="js\app.js" />
     <Content Include="js\routers\appRouter.js" />
     <Content Include="js\helpers\vent.js" />
+    <Content Include="js\test.js" />
     <Content Include="js\views\calendarday.js" />
     <Content Include="js\views\changeworkday.js" />
     <Content Include="js\views\confirmavailabledays.js" />
