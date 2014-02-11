@@ -12,7 +12,6 @@ define([
         initialize: function () {
         },
         parse: function (response) {
-            var r = JSON.stringify(response);
             return r.Timesheets;
         },
         url: function() {

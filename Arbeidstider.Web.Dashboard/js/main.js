@@ -6,7 +6,6 @@ require.config({
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
         jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
         underscore: 'libs/underscore/underscore', // https://github.com/amdjs
-        "underscore.deferred": 'libs/underscore.deferred/underscore.deferred', // https://github.com/amdjs
         backbone: 'libs/backbone/backbone', // https://github.com/amdjs
         backbone_validateAll: 'libs/backbone.validateAll/backbone.validateAll', // 
         "backbone.wreqr": 'libs/backbone.wreqr/wreqr', // 
@@ -27,9 +26,6 @@ require.config({
     shim: {
         underscore: {
             exports: "_"
-        },
-        "underscore.deferred": {
-            deps: ['underscore']
         },
         backbone: {
             deps: ['underscore', 'jquery'],
@@ -52,9 +48,8 @@ require(['jquery',
         'routers/appRouter',
         'collections/calendardays',
         'controllers/appController',
-        'helpers/bootstrapper',
         'app'
-], function ($, Backbone, AppRouter, CalendarDayCollection, AppController, Bootstrapper, App) {
+], function ($, Backbone, AppRouter, CalendarDayCollection, AppController, App) {
     $(document).ready(function () {
         App.on("initialize:after", function () {
             Backbone.history.start();

@@ -74,12 +74,14 @@ define(['jquery',
             var session = App.getSession();
             var collection = new CalendarDayCollection();
             var calendarView = new CalendarView({ collection: collection });
-            collection.fetch({
-                data: { WeeklyView: true, EmployeeId: session.employeeId },
-            }).done(function () {
-                console.log("show calendar");
-                App.contentLayout.mainColumn.show(calendarView);
-            });
+            $.when(
+                collection.fetch({
+                    data: { WeeklyView: true, EmployeeId: session.employeeId },
+                })
+            ).done(function(data, textStatus, jqXHR) {
+                    console.log("!!!!!!!!!!show calendar");
+                    App.contentLayout.mainColumn.show(calendarView);
+                });
         };
 
         App.isAuthenticated = function () {
