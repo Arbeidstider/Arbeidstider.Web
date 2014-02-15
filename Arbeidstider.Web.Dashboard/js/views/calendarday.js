@@ -1,9 +1,10 @@
 ﻿define(['underscore',
         'marionette',
+        'collections/shifts',
         'views/calendardayitem',
         'text!templates/calendarday.html'
 ],
-    function (_, Marionette, CalendarDayItemView, CalendarDayTemplate) {
+    function (_, Marionette, ShiftCollection, CalendarDayItemView, CalendarDayTemplate) {
         var CalendarDayView = Backbone.Marionette.CompositeView.extend({
             template: _.template(CalendarDayTemplate),
             itemView: CalendarDayItemView,
@@ -11,10 +12,10 @@
             initialize: function () {
                 _.bindAll(this, "render");
                 //console.log("this.model: " + this.model);
+                //console.log("this.model: " + JSON.stringify(this.model));
                 //TODO Convert to shiftcollection
-                this.collection = this.model.get("Shifts");
+                this.collection = new ShiftCollection(this.model.get("Shifts"));
                 //console.log("timesheets: " + timesheets);
-                console.log("this.collection: " + this.collection);
             }
         });
 

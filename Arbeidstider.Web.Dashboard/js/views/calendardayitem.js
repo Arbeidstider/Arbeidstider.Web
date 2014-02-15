@@ -7,7 +7,7 @@
         tagName: "div",
         className: "timesheet-shift",
         initialize: function (options) {
-            console.log("CalendarDayItemView this.model: " + this.model);
+            console.log("CalendarDayItemView this.model: " + JSON.stringify(this.model));
             console.log("CalendarDayItemView initialize");
         },
     });

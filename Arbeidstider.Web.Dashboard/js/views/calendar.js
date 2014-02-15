@@ -3,14 +3,15 @@ define(['underscore',
         'views/calendarday',
         'text!templates/calendar.html'
 ], function (_, Marionette, CalendarDayView, CalendarTemplate) {
-    var CalendarView = Backbone.Marionette.CollectionView.extend({
-        el: "#calendar-items",
+    var CalendarView = Backbone.Marionette.CompositeView.extend({
+        itemViewContainer: "div.calendar-items",
         template: _.template(CalendarTemplate),
         itemView: CalendarDayView,
         initialize: function () {
             console.log("Calendar initialize");
             _.bindAll(this, "render");
-            this.collection.on("reset", this.render, this);
+            //console.log("calendar collection: " + JSON.stringify(this.collection));
+            //this.collection.on("reset", this.render, this);
         },
         //appendHtml: function (collectionView, itemView, index) {
         //    if (collectionView.isBuffering) {

@@ -47,7 +47,7 @@ function (_, Marionette, Globals, CalendarDayCollection, CalendarView, RegisterV
         },
         changeView: function (view, collection, pageHeader) {
             var newView = collection ? new view({ collection: collection }) : new view();
-            var App = require(['App']);
+            var App = require('App');
             App.contentLayout.mainColumn.show(newView);
         }
     });

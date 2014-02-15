@@ -61,7 +61,10 @@ define(['jquery',
             App.layout.content.show(App.contentLayout);
             App.contentLayout.render();
             App.contentLayout.pageHeader.show(new CalendarHeaderView());
-            App.contentLayout.showCalendar();
+            var calendarView = App.contentLayout.getCalendarView();
+            var view = calendarView.view;
+            App.contentLayout.mainColumn.show(view);
+            calendarView.reset();
         };
 
         App.isAuthenticated = function () {
