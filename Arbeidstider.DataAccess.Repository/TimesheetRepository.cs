@@ -20,8 +20,9 @@ namespace Arbeidstider.DataAccess.Repository
         {
             var dt = _database.GetMultiple<Timesheet>(StoredProcedures.GET_ALL_TIMESHEETS, (DynamicParameters)parameters);
             var timesheets = dt as Timesheet[] ?? dt.ToArray();
-            if (dt == null || !timesheets.Any())
-                throw new TimesheetRepositoryException(string.Format("Failed to GetAll with parameters: {0}", parameters));
+            // try catch
+            //if (dt == null || !timesheets.Any())
+            // throw new TimesheetRepositoryException(string.Format("Failed to GetAll with parameters: {0}", parameters));
 
             return timesheets;
         }
@@ -41,7 +42,7 @@ namespace Arbeidstider.DataAccess.Repository
             var dt = _database.GetSingle<Timesheet>(StoredProcedures.GET_TIMESHEET, (DynamicParameters)parameters);
             if (dt == null)
                 throw new TimesheetRepositoryException(
-                    string.Format("Failed to get timesheet for user with employeeId: {0}", ((IEmployee) parameters).Id));
+                    string.Format("Failed to get timesheet for user with employeeId: {0}", ((IEmployee)parameters).Id));
 
             return dt;
         }

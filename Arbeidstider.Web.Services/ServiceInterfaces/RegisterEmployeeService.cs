@@ -120,6 +120,8 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
 
             if (registerNewUser)
             {
+                int? employeeId;
+                // TODO: Create employee and save employeeId
                 session.OnRegistered(this);
             }
 

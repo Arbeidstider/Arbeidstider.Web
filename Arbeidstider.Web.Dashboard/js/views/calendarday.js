@@ -8,7 +8,8 @@
         var CalendarDayView = Backbone.Marionette.CompositeView.extend({
             template: _.template(CalendarDayTemplate),
             itemView: CalendarDayItemView,
-            itemViewContainer: "div.calendar-days",
+            el: "div.calendar-day",
+            itemViewContainer: "div.calendar-day",
             initialize: function () {
                 _.bindAll(this, "render");
                 //console.log("this.model: " + this.model);

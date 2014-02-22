@@ -4,10 +4,8 @@
 ], function (_, Marionette, CalendarDayItemTemplate) {
     var CalendarDayItemView = Backbone.Marionette.ItemView.extend({
         template: _.template(CalendarDayItemTemplate),
-        tagName: "div",
-        className: "timesheet-shift",
+        el: "div.timesheet-shift",
         initialize: function (options) {
-            console.log("CalendarDayItemView this.model: " + JSON.stringify(this.model));
             console.log("CalendarDayItemView initialize");
         },
     });

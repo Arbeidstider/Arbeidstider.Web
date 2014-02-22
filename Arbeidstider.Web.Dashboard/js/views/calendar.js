@@ -4,6 +4,7 @@ define(['underscore',
         'text!templates/calendar.html'
 ], function (_, Marionette, CalendarDayView, CalendarTemplate) {
     var CalendarView = Backbone.Marionette.CompositeView.extend({
+        el: "div.calendar-items",
         itemViewContainer: "div.calendar-items",
         template: _.template(CalendarTemplate),
         itemView: CalendarDayView,

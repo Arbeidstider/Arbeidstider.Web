@@ -235,7 +235,7 @@
     <Content Include="Global.asax" />
     <Content Include="js\collections\base.js" />
     <Content Include="js\collections\calendardays.js" />
-    <Content Include="js\collections\dailytimesheets.js" />
+    <Content Include="js\collections\shifts.js" />
     <Content Include="js\config.js" />
     <Content Include="js\controllers\appController.js" />
     <Content Include="js\globals.js" />
@@ -263,9 +263,9 @@
     <Content Include="js\collections\timesheets.js" />
     <Content Include="js\collections\colleagues.js" />
     <Content Include="js\models\calendarday.js" />
-    <Content Include="js\models\dailytimesheet.js" />
     <Content Include="js\models\employee.js" />
     <Content Include="js\models\settings.js" />
+    <Content Include="js\models\shift.js" />
     <Content Include="js\models\timesheet.js" />
     <Content Include="js\libs\bootstrap\nav.js" />
     <Content Include="js\models\base.js" />
@@ -383,7 +383,6 @@
     <Content Include="Views\Old\_Layout.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="js\routers\.AppRouter.js.swp" />
     <Content Include="Introspector\Introspector.pdf" />
     <Content Include="Introspector\Introspector.ashx" />
     <None Include="Properties\PublishProfiles\Arbeidstider.Web.Dashboard.pubxml" />
