@@ -61,7 +61,7 @@
     </div>
     <!-- / jquery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="/js/libs/store/store.js"></script>
+    <script src="/js/helpers/StoreWithExpiration.js.js"></script>
     <script>
         $(document).ready(function () {
             function ServiceUrl(action) {
@@ -105,9 +105,9 @@
                 });
 
                 function loginSuccess(response) {
-                    console.log("response: " + JSON.stringify(response));
                     var sessionId = response.SessionId;
-                    console.log("sessionId: " + sessionId);
+                    console.log("loginSuccess sessionId: ");
+                    console.log(sessionId);
                     $.ajax({
                         type: "GET",
                         url: ServiceUrl("/getsession"),
@@ -125,9 +125,11 @@
                                 fullname: data.AuthSession.DisplayName,
                                 roles: data.AuthSession.Roles
                             };
-                            var session2 = session;
-                            console.log("session: " + JSON.stringify(session2));
+                            console.log("Login session: ");
+                            console.log(session);
                             store.remove("AuthSession");
+                            // 1hr expire time for login if remember me is not checked
+                            var exp = 60000;
                             store.set("AuthSession", session);
                             window.location.href = "/";
                         },

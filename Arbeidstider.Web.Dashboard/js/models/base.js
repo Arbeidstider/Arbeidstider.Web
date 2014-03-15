@@ -1,8 +1,5 @@
-define([
-        'jquery',
-        'underscore',
-        'backbone',
-    ], function($, _, Backbone) {
+define(['backbone',
+    ], function(Backbone) {
         var BaseModel = Backbone.Model.extend({
             initialize: function () {
             },

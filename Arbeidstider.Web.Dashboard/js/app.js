@@ -1,21 +1,13 @@
-define(['jquery',
-        'backbone',
-        'marionette',
-        'underscore',
-        "layouts/appLayout",
-        "layouts/content",
-        "views/headers/calendar",
+define(['marionette',
+        "layouts/app",
+        "layouts/main",
         "views/header",
         "views/navigation",
-        "collections/calendardays",
-        "views/calendar",
-        "store",
-        "routers/appRouter",
-        "controllers/appController"],
-    function ($, Backbone, Marionette, _, AppLayout, ContentLayout, CalendarHeaderView, HeaderView, NavigationView, CalendarDayCollection, CalendarView, Store, AppRouter, AppController) {
+        "store"],
+    function (Marionette, AppLayout, MainLayout, HeaderView, NavigationView, Store) {
         var App = new Backbone.Marionette.Application();
 
-        App.getSession = function () {
+        App.session = function () {
             return Store.get("AuthSession");
         };
 
@@ -44,28 +36,32 @@ define(['jquery',
         
         App.addInitializer(function () {
             App.setupJquery();
-            App.initLayout();
-            App.initContentLayout();
+            App.initAppLayout();
+            App.initMainLayout();
         });
 
-        App.initLayout = function () {
-            App.layout = new AppLayout();
-            App.container.show(App.layout);
-            App.layout.render();
-            App.layout.header.show(new HeaderView());
-            App.layout.nav.show(new NavigationView());
+        App.initAppLayout = function () {
+            App.appLayout = new AppLayout();
+            console.log("App.initAppLayout appLayout: ");
+            console.log(App.appLayout);
+            App.container.show(App.appLayout);
+            App.appLayout.render();
+            App.appLayout.header.show(new HeaderView());
+            App.appLayout.nav.show(new NavigationView());
         };
 
-        App.initContentLayout = function () {
-            App.contentLayout = new ContentLayout();
-            App.layout.content.show(App.contentLayout);
-            App.contentLayout.render();
-            App.contentLayout.pageHeader.show(new CalendarHeaderView());
-            App.contentLayout.showCalendar();
+        App.initMainLayout = function () {
+            App.mainLayout = new MainLayout();
+            console.log("App.initMainLayout appLayout: ");
+            console.log(App.appLayout);
+            App.appLayout.content.show(App.mainLayout);
+            App.mainLayout.render();
+            App.mainLayout.showDashboard();
         };
 
         App.isAuthenticated = function () {
-            var session = App.getSession();
+            var session = App.session();
+            console.log("App.isAuthenticated, session: \n");
             console.log(session);
             if (!_.isUndefined(session) && !_.isNumber(session.sessionId)) {
                 console.log("authenticated");

@@ -1,8 +1,5 @@
-define([
-        'jquery',
-        'underscore',
-        'backbone',
-    ], function($, _, Backbone) {
+define(['backbone'],
+    function (Backbone) {
         var BaseCollection = Backbone.Collection.extend({
             initialize: function () {
             },

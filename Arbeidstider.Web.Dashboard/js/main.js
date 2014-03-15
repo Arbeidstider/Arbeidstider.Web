@@ -47,7 +47,7 @@ require(['jquery',
         'backbone',
         'app',
         'routers/appRouter',
-        'controllers/appController'
+        'controllers/app'
     ], function($, Backbone, App, AppRouter, AppController) {
         $(document).ready(function() {
             App.on("initialize:after", function () {
@@ -58,6 +58,7 @@ require(['jquery',
             App.start(function() {
                 if (!App.isAuthenticated)
                     window.location.replace("/login");
+                console.log("App.start: is authenticated");
             });
         });
     });
