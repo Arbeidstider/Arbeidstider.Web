@@ -1,6 +1,6 @@
 define(['backbone',
         'models/calendarday',
-        'models/settings'
+        'settings'
 ],
     function (Backbone, CalendarDayModel, Settings) {
         var CalendarDayCollection = Backbone.Collection.extend({

@@ -3,7 +3,7 @@ define([
         'underscore',
         'marionette',
         'helpers/mixins',
-        'models/settings',
+        'settings',
         'models/employee',
         'text!templates/register.html'
 ], function ($, _, Marionette, mixins, Settings, EmployeeModel, RegisterTemplate) {

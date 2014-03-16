@@ -61,24 +61,22 @@
     </div>
     <!-- / jquery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="/js/helpers/StoreWithExpiration.js.js"></script>
+    <script src="/js/session.js"></script>
     <script>
         $(document).ready(function () {
             function ServiceUrl(action) {
                 var baseUrl;
                 if (document.domain.indexOf("localhost") > -1)
                     baseUrl = "http://localhost:8181";
-                else
-                {        
+                else {
                     $.support.cors = true;
                     baseUrl = "http://services.arbeidstider.no";
-                }          
+                }
                 return baseUrl + action;
             }
-            
-            function makeBaseAuth()
-            {
-                var data = 
+
+            function makeBaseAuth() {
+                var data =
                             {
                                 UserName: $('input[name="UserName"]').val(),
                                 Password: $('input[name="Password"]').val(),
@@ -88,7 +86,7 @@
                 return "Basic " + hash;
             }
 
-            $(".btn-block").click(function(e) {
+            $(".btn-block").click(function (e) {
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
@@ -96,12 +94,12 @@
                     contentType: "application/json",
                     url: ServiceUrl("/auth"),
                     async: false,
-                    error: function(jqXHR, textStatus, errorThrown) {
+                    error: function (jqXHR, textStatus, errorThrown) {
                         console.log(textStatus);
                         console.log(errorThrown);
                     },
                     success: loginSuccess,
-                    beforeSend: function(xhr) { xhr.setRequestHeader("Authorization", makeBaseAuth()); }
+                    beforeSend: function (xhr) { xhr.setRequestHeader("Authorization", makeBaseAuth()); }
                 });
 
                 function loginSuccess(response) {
@@ -114,7 +112,7 @@
                         data: { SessionId: sessionId },
                         dataType: "json",
                         contentType: "application/json",
-                        success: function(data) {
+                        success: function (data) {
                             var session = {
                                 sessionId: data.AuthSession.SessionId,
                                 userId: data.AuthSession.UserAuthId,
@@ -125,15 +123,9 @@
                                 fullname: data.AuthSession.DisplayName,
                                 roles: data.AuthSession.Roles
                             };
-                            console.log("Login session: ");
-                            console.log(session);
-                            store.remove("AuthSession");
-                            // 1hr expire time for login if remember me is not checked
-                            var exp = 60000;
-                            store.set("AuthSession", session);
-                            window.location.href = "/";
+                            Session.signIn(session);
                         },
-                        beforeSend: function(xhr) { xhr.setRequestHeader("Session-Id", sessionId); }
+                        beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", sessionId); }
                     });
                 }
             });

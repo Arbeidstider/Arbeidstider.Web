@@ -1,7 +1,7 @@
 define(['underscore',
         'marionette',
         'helpers/mixins',
-        'models/settings',
+        'settings',
         'text!templates/profile.html'
 ], function (_, Marionette, mixins, Settings, ProfileTemplate) {
     return Backbone.Marionette.ItemView.extend({

@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "models/settings", "store"],
+define(["jquery", "underscore", "settings", "store"],
     function($, _, Settings, Store) {
         _.mixin({
             formData: function (form) {

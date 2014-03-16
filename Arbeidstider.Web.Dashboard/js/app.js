@@ -1,15 +1,12 @@
-define(['marionette',
+define(["marionette",
+        "session",
         "layouts/app",
         "layouts/main",
         "views/header",
         "views/navigation",
         "store"],
-    function (Marionette, AppLayout, MainLayout, HeaderView, NavigationView, Store) {
+    function (Marionette, Session, AppLayout, MainLayout, HeaderView, NavigationView, Store) {
         var App = new Backbone.Marionette.Application();
-
-        App.session = function () {
-            return Store.get("AuthSession");
-        };
 
         //Organize Application into regions corresponding to DOM elements
         //Regions can contain views, Layouts, or subregions nested as necessary
@@ -56,12 +53,11 @@ define(['marionette',
             console.log(App.appLayout);
             App.appLayout.content.show(App.mainLayout);
             App.mainLayout.render();
-            App.mainLayout.showDashboard();
+            App.mainLayout.showDashboard(Session);
         };
 
         App.isAuthenticated = function () {
-            var session = App.session();
-            console.log("App.isAuthenticated, session: \n");
+            console.log("session: \n");
             console.log(session);
             if (!_.isUndefined(session) && !_.isNumber(session.sessionId)) {
                 console.log("authenticated");

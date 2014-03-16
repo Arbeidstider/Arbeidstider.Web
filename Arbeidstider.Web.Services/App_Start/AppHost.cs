@@ -144,6 +144,7 @@ namespace Arbeidstider.Web.Services.App_Start
             //Configure User Defined REST Paths
             Routes
                 .Add<Timesheets>("/timesheets")
+                .Add<Dashboard>("/timesheet/dashboard/{employeeId}", "GET")
                 .Add<CreateTimesheet>("/timesheet/create", "POST")
                 .Add<UpdateTimesheet>("/timesheet/update", "POST")
                 .Add<RegisterEmployee>("/employee/register", "POST, OPTIONS")

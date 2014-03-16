@@ -1,10 +1,13 @@
 ﻿define(['models/base'
     ], function(BaseModel) {
         var DashboardModel = BaseModel.extend({
+            defaults: {
+                employeeId: 0
+            },
             initialize: function () {
                 console.log("models/dashboard.initialize()");
             },
-            url: function () {}
+            url: function () { return this.getUrl("timesheet/dashboard/" + this.employeeId); }
             //createEmployee: function() {
             //    var employee = {
             //        Firstname: $("input[name=Firstname]").text(),

@@ -4,7 +4,7 @@ define([
         'backbone',
         'marionette',
         'models/timesheet',
-        'models/settings'
+        'settings'
 ], function ($, _, Backbone, Marionette, TimesheetModel, Settings) {
     return Backbone.Collection.extend({
         model: TimesheetModel,

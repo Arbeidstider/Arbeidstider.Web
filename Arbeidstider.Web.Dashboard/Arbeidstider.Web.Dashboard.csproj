@@ -265,7 +265,8 @@
     <Content Include="js\collections\colleagues.js" />
     <Content Include="js\models\calendarday.js" />
     <Content Include="js\models\employee.js" />
-    <Content Include="js\models\settings.js" />
+    <Content Include="js\session.js" />
+    <Content Include="js\settings.js" />
     <Content Include="js\models\shift.js" />
     <Content Include="js\models\timesheet.js" />
     <Content Include="js\libs\bootstrap\nav.js" />

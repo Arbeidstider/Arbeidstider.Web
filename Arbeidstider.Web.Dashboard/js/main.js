@@ -15,6 +15,7 @@ require.config({
         bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
         store: 'libs/store/store',
+        session: 'session',
 
         // Require.js plugins
         text: 'libs/require/text',
@@ -38,6 +39,10 @@ require.config({
             "deps": ["underscore", "backbone", "jquery"],
             // Exports the global window.Marionette object
             "exports": "Marionette"
+        },
+        "session": {
+            deps: ["store"],
+            exports: "session"
         },
     }
 });
