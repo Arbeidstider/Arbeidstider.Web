@@ -16,5 +16,6 @@ namespace Arbeidstider.Web.Services.ServiceModels
         }
         public EmployeeSession AuthSession { get; set; }
         public ResponseStatus ResponseStatus { get; set; }
+        public bool IsVerified { get; set; }
     }
 }

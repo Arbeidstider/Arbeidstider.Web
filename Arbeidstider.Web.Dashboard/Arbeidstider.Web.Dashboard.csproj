@@ -248,6 +248,7 @@
     <Content Include="js\libs\backbone.babysitter\backbone.babysitter.js" />
     <Content Include="js\libs\backbone.eventbinder\backbone.eventbinder.js" />
     <Content Include="js\libs\backbone.validateAll\backbone.validateAll.js" />
+    <Content Include="js\libs\jquery.cookie\jquery.cookie.js" />
     <Content Include="js\libs\jquery_mobile\jquery.mobile.custom.js" />
     <Content Include="js\libs\backbone.marionette\backbone.marionette.js" />
     <Content Include="js\libs\store\store.js" />
@@ -265,7 +266,7 @@
     <Content Include="js\collections\colleagues.js" />
     <Content Include="js\models\calendarday.js" />
     <Content Include="js\models\employee.js" />
-    <Content Include="js\session.js" />
+    <Content Include="js\models\session.js" />
     <Content Include="js\settings.js" />
     <Content Include="js\models\shift.js" />
     <Content Include="js\models\timesheet.js" />

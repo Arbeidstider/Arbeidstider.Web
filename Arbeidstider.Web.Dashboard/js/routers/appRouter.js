@@ -4,6 +4,7 @@ define(['marionette'],
             //"index" must be a method in AppRouter's controller
             appRoutes: {
                 "": "index",
+                "dashboard": "index",
                 'register': 'register',
                 //"dashboard": "index",
                 "profile": "profile",

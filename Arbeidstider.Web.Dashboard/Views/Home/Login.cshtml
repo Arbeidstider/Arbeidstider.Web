@@ -61,10 +61,11 @@
     </div>
     <!-- / jquery -->
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="/js/session.js"></script>
+    <script src="@Url.Content("~/js/libs/jquery.cookie/jquery.cookie.js")"></script>
     <script>
         $(document).ready(function () {
-            function ServiceUrl(action) {
+
+            function serviceUrl(action) {
                 var baseUrl;
                 if (document.domain.indexOf("localhost") > -1)
                     baseUrl = "http://localhost:8181";
@@ -77,13 +78,26 @@
 
             function makeBaseAuth() {
                 var data =
-                            {
-                                UserName: $('input[name="UserName"]').val(),
-                                Password: $('input[name="Password"]').val(),
-                            };
+                {
+                    UserName: $('input[name="UserName"]').val(),
+                    Password: $('input[name="Password"]').val(),
+                }; 
                 var tok = data.UserName + ':' + data.Password;
                 var hash = btoa(tok);
                 return "Basic " + hash;
+            }
+            
+            function createSessionCookie(key, value) {
+                $.cookie(key, value, { path: '/'});
+            }
+
+            function loginSuccess(response) {
+                console.log(response);
+                createSessionCookie("sessionId", response.SessionId);
+                createSessionCookie("employeeId", response.EmployeeId);
+                createSessionCookie("userId", response.UserId);
+                createSessionCookie("userName", response.UserName);
+                window.location.replace("/dashboard");
             }
 
             $(".btn-block").click(function (e) {
@@ -92,42 +106,12 @@
                     type: "POST",
                     dataType: "json",
                     contentType: "application/json",
-                    url: ServiceUrl("/auth"),
+                    url: serviceUrl("/auth"),
                     async: false,
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus);
-                        console.log(errorThrown);
-                    },
+                    error: function (jqXHR, textStatus, errorThrown) { },
                     success: loginSuccess,
                     beforeSend: function (xhr) { xhr.setRequestHeader("Authorization", makeBaseAuth()); }
                 });
-
-                function loginSuccess(response) {
-                    var sessionId = response.SessionId;
-                    console.log("loginSuccess sessionId: ");
-                    console.log(sessionId);
-                    $.ajax({
-                        type: "GET",
-                        url: ServiceUrl("/getsession"),
-                        data: { SessionId: sessionId },
-                        dataType: "json",
-                        contentType: "application/json",
-                        success: function (data) {
-                            var session = {
-                                sessionId: data.AuthSession.SessionId,
-                                userId: data.AuthSession.UserAuthId,
-                                employeeId: data.AuthSession.EmployeeId,
-                                workplaceId: data.AuthSession.WorkplaceId,
-                                email: data.AuthSession.Email,
-                                username: data.AuthSession.UserAuthName,
-                                fullname: data.AuthSession.DisplayName,
-                                roles: data.AuthSession.Roles
-                            };
-                            Session.signIn(session);
-                        },
-                        beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", sessionId); }
-                    });
-                }
             });
         });
     </script>

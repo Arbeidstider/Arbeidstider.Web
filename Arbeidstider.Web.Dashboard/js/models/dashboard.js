@@ -4,10 +4,13 @@
             defaults: {
                 employeeId: 0
             },
-            initialize: function () {
+            initialize: function (options) {
                 console.log("models/dashboard.initialize()");
+                if (options) {
+                    this.employeeId = options.employeeId;
+                }
             },
-            url: function () { return this.getUrl("timesheet/dashboard/" + this.employeeId); }
+            url: function () { return this.getUrl("getdashboard/?employeeId=" + this.employeeId); }
             //createEmployee: function() {
             //    var employee = {
             //        Firstname: $("input[name=Firstname]").text(),

@@ -144,11 +144,12 @@ namespace Arbeidstider.Web.Services.App_Start
             //Configure User Defined REST Paths
             Routes
                 .Add<Timesheets>("/timesheets")
-                .Add<Dashboard>("/timesheet/dashboard/{employeeId}", "GET")
+                .Add<Dashboard>("/getdashboard/{employeeId}")
                 .Add<CreateTimesheet>("/timesheet/create", "POST")
                 .Add<UpdateTimesheet>("/timesheet/update", "POST")
                 .Add<RegisterEmployee>("/employee/register", "POST, OPTIONS")
-                .Add<SessionRequest>("/getsession", "GET, OPTIONS");
+                .Add<SessionRequest>("/getsession", "GET, OPTIONS")
+                .Add<SessionRequest>("/verifysession", "POST");
         }
 
         private void ConfigureAuth(Funq.Container container)

@@ -5,6 +5,7 @@ require.config({
         // Major libraries
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
         jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
+        "jquery.cookie": 'libs/jquery.cookie/jquery.cookie',
         underscore: 'libs/underscore/underscore', // https://github.com/amdjs
         backbone: 'libs/backbone/backbone', // https://github.com/amdjs
         backbone_validateAll: 'libs/backbone.validateAll/backbone.validateAll', // 
@@ -15,7 +16,6 @@ require.config({
         bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
         store: 'libs/store/store',
-        session: 'session',
 
         // Require.js plugins
         text: 'libs/require/text',
@@ -35,14 +35,13 @@ require.config({
         'backbone.babysitter': {
             deps: ['backbone', 'underscore']
         },
+        'jquery.cookie': {
+            deps: ['jquery']
+        },
         "marionette": {
             "deps": ["underscore", "backbone", "jquery"],
             // Exports the global window.Marionette object
             "exports": "Marionette"
-        },
-        "session": {
-            deps: ["store"],
-            exports: "session"
         },
     }
 });
@@ -52,16 +51,18 @@ require(['jquery',
         'backbone',
         'app',
         'routers/appRouter',
-        'controllers/app'
-    ], function($, Backbone, App, AppRouter, AppController) {
+        'controllers/app',
+        'models/session'
+    ], function($, Backbone, App, AppRouter, AppController, SessionModel) {
         $(document).ready(function() {
             App.on("initialize:after", function () {
                 App.appRouter = new AppRouter({ controller: new AppController() });
-                Backbone.history.start();
+                Backbone.history.start({ pushState: true });
             });
 
-            App.start(function() {
-                if (!App.isAuthenticated)
+            App.start(function () {
+                var session = new SessionModel();
+                if (!session.authenticated)
                     window.location.replace("/login");
                 console.log("App.start: is authenticated");
             });
