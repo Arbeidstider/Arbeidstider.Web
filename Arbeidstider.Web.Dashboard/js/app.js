@@ -4,8 +4,9 @@ define(["marionette",
         "models/session",
         "views/header",
         "views/navigation",
+        "nav",
         "store"],
-        function (Marionette, AppLayout, MainLayout, SessionModel, HeaderView, NavigationView, Store) {
+        function (Marionette, AppLayout, MainLayout, SessionModel, HeaderView, NavigationView, Nav, Store) {
             var App = new Backbone.Marionette.Application();
 
             //Organize Application into regions corresponding to DOM elements
@@ -33,27 +34,21 @@ define(["marionette",
 
             App.addInitializer(function () {
                 App.setupJquery();
-                App.initAppLayout();
-                App.initMainLayout();
+                App.initLayouts();
             });
 
-            App.initAppLayout = function () {
-                App.appLayout = new AppLayout();
-                console.log("App.initAppLayout appLayout: ");
-                console.log(App.appLayout);
-                App.container.show(App.appLayout);
-                App.appLayout.render();
-                App.appLayout.header.show(new HeaderView());
-                App.appLayout.nav.show(new NavigationView());
-            };
+            App.initLayouts = function () {
+                var appLayout = new AppLayout();
+                App.container.show(appLayout);
+                appLayout.render();
+                appLayout.header.show(new HeaderView());
+                appLayout.nav.show(new NavigationView());
+                Nav.initialize();
 
-            App.initMainLayout = function () {
-                App.mainLayout = new MainLayout();
-                console.log("App.initMainLayout appLayout: ");
-                console.log(App.appLayout);
-                App.appLayout.content.show(App.mainLayout);
-                App.mainLayout.render();
-                App.mainLayout.showDashboard();
+                var mainLayout = App.mainLayout = new MainLayout();
+                appLayout.content.show(mainLayout);
+                mainLayout.render();
+                mainLayout.showDashboard();
             };
 
             return App;

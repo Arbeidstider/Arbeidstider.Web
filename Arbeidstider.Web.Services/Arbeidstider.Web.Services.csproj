@@ -145,9 +145,10 @@
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
     <Compile Include="ServiceInterfaces\DashboardService.cs" />
+    <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
     <Compile Include="ServiceModels\Dashboard.cs" />
     <Compile Include="ServiceModels\RegisterEmployee.cs" />
-    <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
+    <Compile Include="ServiceInterfaces\RegisterEmployeeService_2.cs" />
     <Compile Include="CacheKeys.cs" />
     <Compile Include="Exceptions\TimesheetServiceException.cs" />
     <Compile Include="Global.asax.cs">

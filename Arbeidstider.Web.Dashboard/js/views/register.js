@@ -27,14 +27,14 @@ define([
         },
         register: function (e) {
             if (e) e.preventDefault();
-            
-            var model = new EmployeeModel({
+
+            var model = new EmployeeModel();
+            model.save({
                 FirstName: $("#Firstname").val(),
                 LastName: $("#surname").val(),
                 Email: $("#e-post").val(),
                 BirthDate: $("#birthday").val(),
-            });
-            model.save({}, { success: this.registerSuccess, error: this.registerError, url: Settings.ServiceUrl("/employee/register"), type: "POST" });
+            }, { success: this.registerSuccess, error: this.registerError, url: Settings.ServiceUrl("employee/register"), type: "POST" });
         },
         /*
         render: function () {

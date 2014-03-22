@@ -2,14 +2,13 @@ define([
     'jquery',
     'underscore',
     'marionette',
-    'libs/bootstrap/nav',
+    'nav',
     'text!templates/navbar.html'
     ], function ($, _, Marionette, Nav, NavbarTemplate) {
     return Backbone.Marionette.ItemView.extend({
         template: _.template(NavbarTemplate), 
         initialize: function () {
             $(document).ready(function () {
-                Nav.initialize();
                 $("a.navigation-link").click(function (e) {
                     e.preventDefault();
                     var target = $(this).data("target");

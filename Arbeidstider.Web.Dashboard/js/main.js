@@ -16,6 +16,7 @@ require.config({
         bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
         store: 'libs/store/store',
+        nav: 'libs/bootstrap/nav',
 
         // Require.js plugins
         text: 'libs/require/text',
@@ -49,22 +50,24 @@ require.config({
 // Let's kick off the application
 require(['jquery',
         'backbone',
+        'bootstrap',
         'app',
         'routers/appRouter',
         'controllers/app',
         'models/session'
-    ], function($, Backbone, App, AppRouter, AppController, SessionModel) {
-        $(document).ready(function() {
-            App.on("initialize:after", function () {
-                App.appRouter = new AppRouter({ controller: new AppController() });
-                Backbone.history.start({ pushState: true });
-            });
+], function ($, Backbone, Bootstrap, App, AppRouter, AppController, SessionModel) {
+    $(document).ready(function () {
+        Bootstrap.initialize();
+        App.on("initialize:after", function () {
+            App.appRouter = new AppRouter({ controller: new AppController() });
+            Backbone.history.start({ pushState: true });
+        });
 
-            App.start(function () {
-                var session = new SessionModel();
-                if (!session.authenticated)
-                    window.location.replace("/login");
-                console.log("App.start: is authenticated");
-            });
+        App.start(function () {
+            var session = new SessionModel();
+            if (!session.authenticated)
+                window.location.replace("/login");
+            console.log("App.start: is authenticated");
         });
     });
+});
