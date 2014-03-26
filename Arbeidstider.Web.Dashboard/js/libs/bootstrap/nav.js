@@ -1,7 +1,7 @@
 define(["jquery", "jquery.mobile"], function($, mobile) {
     return {
         initialize: function () {
-                console.log("nav initialize");
+                console.log("Nav.initialize()");
                 var body, content, nav, nav_closed_width, nav_open, nav_toggler;
                 nav_toggler = $("header .toggle-nav");
                 nav = $("#main-nav");

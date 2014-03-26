@@ -175,5 +175,23 @@ namespace Arbeidstider.Web.Framework.Services
                     select x).ToArray();
 
         }
+
+        public TimesheetDTO GetTimesheet(int timesheetId)
+        {
+            var parameters = TimesheetParameters.Create(id: timesheetId);
+            var timesheet = _repository.Get(parameters);
+            return new TimesheetDTO(timesheet);
+        }
+
+        public WorkingHoursDTO GetUpcomingWorkingHours(int employeeId)
+        {
+            var timesheets = Framework.Services.TimesheetService.Instance.GetAllWithinRange(DateTime.Now.AddDays(1),
+                                                                                           DateTime.Now.AddDays(14),
+                                                                                           employeeId, null);
+
+            return (from timesheet in timesheets let shiftDate = DateTime.Parse(timesheet.ShiftDate) 
+                    where shiftDate > DateTime.Now.Date 
+                    select new WorkingHoursDTO(timesheet)).FirstOrDefault();
+        }
     }
 }

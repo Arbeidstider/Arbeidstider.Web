@@ -1,8 +1,7 @@
 define(['backbone',
-        'models/calendarday',
-        'settings'
+        'models/calendarday'
 ],
-    function (Backbone, CalendarDayModel, Settings) {
+    function (Backbone, CalendarDayModel) {
         var CalendarDayCollection = Backbone.Collection.extend({
             model: CalendarDayModel,
             initialize: function (options) {
@@ -11,7 +10,6 @@ define(['backbone',
                 return response.WeeklyTimesheetCalendar;
             },
             url: function () {
-                return Settings.ServiceUrl("/timesheets");
             }
         });
 

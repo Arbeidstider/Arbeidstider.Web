@@ -5,7 +5,6 @@ using System.Web;
 using Arbeidstider.Web.Framework.AuthProviders;
 using Arbeidstider.Web.Framework.Session;
 using Arbeidstider.Web.Services.App_Start;
-using Arbeidstider.Web.Services.ServiceInterfaces;
 using Arbeidstider.Web.Services.ServiceModels;
 using ServiceStack;
 using ServiceStack.Auth;
@@ -14,7 +13,6 @@ using ServiceStack.Data;
 using ServiceStack.Host.Handlers;
 using ServiceStack.OrmLite;
 using ServiceStack.Redis;
-using ServiceStack.Validation;
 using ServiceStack.Web;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(AppHost), "Start")]
@@ -48,7 +46,7 @@ namespace Arbeidstider.Web.Services.App_Start
             context.Response.Headers["Access-Control-Allow-Origin"] = "*";
             context.Response.Headers["Access-Control-Allow-Methods"] = "POST,GET,OPTIONS";
             context.Response.Headers["Access-Control-Allow-Headers"] =
-                "X-Requested-With, Content-Type, SessionId, Authorization";
+                "X-Requested-With, Content-Type, Session-Id, Authorization";
             context.Response.Headers["Access-Control-Max-Age"] = "1000";
             context.Response.End();
         }
@@ -91,7 +89,6 @@ namespace Arbeidstider.Web.Services.App_Start
         {
             EnableCors();
             ConfigureIoC(container);
-            ConfigureServiceRoutes();
             ConfigureAuth(container);
         }
 
@@ -142,17 +139,6 @@ namespace Arbeidstider.Web.Services.App_Start
                                           });
         }
 
-        private void ConfigureServiceRoutes()
-        {
-            //Configure User Defined REST Paths
-            Routes
-                .Add<Timesheets>("/timesheets")
-                .Add<Dashboard>("/getdashboard/{employeeId}")
-                .Add<CreateTimesheet>("/timesheet/create", "POST")
-                .Add<UpdateTimesheet>("/timesheet/update", "POST")
-                .Add<AddEmployee>("/addemployee");
-        }
-
         private void ConfigureAuth(Funq.Container container)
         {
             //Default route: /auth/{provider}
@@ -164,9 +150,7 @@ namespace Arbeidstider.Web.Services.App_Start
             Plugins.Add(new RequestLogsFeature());
             //Default route: /register
             //Plugins.Add(new RegistrationFeature());
-            Plugins.Remove(new ValidationFeature());
-            Plugins.Remove(new SessionFeature());
-            //using (var db = container.Resolve<IDbConnectionFactory>().Open())
+
                 //db.CreateTableIfNotExists();
         }
 

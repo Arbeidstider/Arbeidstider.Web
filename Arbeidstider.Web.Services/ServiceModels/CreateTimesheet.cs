@@ -1,29 +1,16 @@
 ﻿using System;
-using System.Runtime.Serialization;
+using Arbeidstider.Web.Framework.DTO;
 using ServiceStack;
 
 namespace Arbeidstider.Web.Services.ServiceModels
 {
-    [DataContract]
-    public class CreateTimesheet : IReturn<CreateTimesheetResponse>
+    [Route("/timesheets", "POST")]
+    [Route("/timesheets/create", "POST")]
+    public class CreateTimesheet : IReturn<TimesheetDTO>
     {
-        [DataMember]
-        public DateTime? SelectedDay { get; set; }
-        [DataMember]
-        public TimeSpan? ShiftStart { get; set; }
-        [DataMember]
-        public TimeSpan? ShiftEnd { get; set; }
-        [DataMember]
-        public int? UserId { get; set; }
-    }
-
-    [DataContract]
-    public class CreateTimesheetResponse
-    {
-        [DataMember]
-        public bool TimesheetCreated { get; set; }
-
-        [DataMember]
-        public ResponseStatus ResponseStatus { get; set; } //Where Exceptions get auto-serialized
+        public string SelectedDay { get; set; }
+        public string ShiftStart { get; set; }
+        public string ShiftEnd { get; set; }
+        public int EmployeeId { get; set; }
     }
 }

@@ -2,17 +2,18 @@ define([
         'jquery',
         'underscore',
         'marionette',
-        'settings',
         'models/employee',
         'text!templates/register.html'
-], function ($, _, Marionette, Settings, EmployeeModel, RegisterTemplate) {
+], function ($, _, Marionette, EmployeeModel, RegisterTemplate) {
     return Backbone.Marionette.ItemView.extend({
         template: _.template(RegisterTemplate),
         events: {
             "click .btn-block": "register"
         },
         initialize: function () {
-            _.bindAll(this, "register", "registerSuccess", "registerError", "render");
+            _.bindAll(this, "register", "registerSuccess", "registerError", "render", "validate");
+            this.model = new EmployeeModel();
+            this.model.on("change", this.validate);
         },
         registerError: function (a, b, c) {
             console.log("error");
@@ -27,8 +28,9 @@ define([
         register: function (e) {
             console.log("register()");
             if (e) e.preventDefault();
+            var self = this;
 
-            var data = 
+            this.model.set(
             {
                 FirstName: $("#Firstname").val(),
                 LastName: $("#surname").val(),
@@ -39,21 +41,20 @@ define([
                 Zipcode: $("#zip-code").val(),
                 City: $("#city").val(),
                 Continue: "/dashboard",
-            };
-            
-            console.log("data: ");
-            console.log(data);
-            //post("employee/register", data, successCb);
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                url: Settings.ServiceUrl("addemployee"),
-                error: function (jqXHR, textStatus, errorThrown) { console.log(errorThrown); },
-                success: this.registerSuccess,
-                beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", $.cookie("sessionId")); }
             });
+
+            this.model.save({}, {wait: true, error: self.registerError, success: self.registerSuccess, beforeSend: self.setRequestHeader()});
+            
+            //$.ajax({
+            //    type: "POST",
+            //    dataType: "json",
+            //    data: JSON.stringify(data),
+            //    contentType: "application/json",
+            //    url: Settings.ServiceUrl("addemployee"),
+            //    error: function (jqXHR, textStatus, errorThrown) { console.log(errorThrown); },
+            //    success: this.registerSuccess,
+            //    beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", $.cookie("sessionId")); }
+            //});
         },
         /*
         render: function () {

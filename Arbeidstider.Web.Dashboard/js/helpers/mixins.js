@@ -1,5 +1,5 @@
-define(["jquery", "underscore", "settings", "store"],
-    function($, _, Settings, Store) {
+define(["jquery", "underscore", "store"],
+    function($, _, Store) {
         _.mixin({
             formData: function (form) {
                 var ret = {};

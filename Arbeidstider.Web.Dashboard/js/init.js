@@ -55,11 +55,10 @@ require(['jquery',
         'routers/appRouter',
 ], function ($, Backbone, Bootstrap, SessionModel, App, AppRouter) {
     // Just use GET and POST to support all browsers
-    Backbone.emulateHTTP = true;
     App.session = new SessionModel();
     App.router = new AppRouter();
 
-    App.session.checkAuth(function () {
+    App.session.doAuth(function () {
         // HTML5 pushState for URLs without hashbangs
         var hasPushstate = !!(window.history && history.pushState);
         if (hasPushstate) Backbone.history.start({ pushState: true, root: '/' });

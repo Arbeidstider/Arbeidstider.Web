@@ -94,7 +94,23 @@ define(['app',
                 }
 
                 // checkAuth/isAuthenticated
-                this.contentLayout.changeView(view);
+                var self = this;
+                App.session.checkAuth({
+                    success:
+                        function (mod, resp) {
+                            if (resp && resp.IsAuthenticated) {
+                                console.log("checkAuth ok");
+                                App.session.set({ loggedIn: true });
+                                self.contentLayout.changeView(view);
+                            } else {
+                                console.log("checkAuth not ok");
+                                App.session.set({ loggedIn: false });
+                            }
+                        },
+                    error: function () {
+                        console.log("Could not verify authentication and can not change view");
+                    }
+                });
                 // Need to be authenticated before rendering view.
                 // For cases like a user's settings page where we need to double check against the server.
                 //if (typeof options !== 'undefined' && options.requiresAuth) {
@@ -111,12 +127,20 @@ define(['app',
 
             },
             index: function () {
-                console.log("index()");
+                var self = this;
                 // Fix for non-pushState routing (IE9 and below)
                 var hasPushState = !!(window.history && history.pushState);
                 if (!hasPushState) this.navigate(window.location.pathname.substring(1), { trigger: true, replace: true });
                 else {
-                    if (App.session.get('loggedIn')) this.show(new DashboardView({}));
+                    if (App.session.get('loggedIn')) {
+                        var view = new DashboardView();
+                        view.model.fetch({
+                            data: { EmployeeId: App.session.get("EmployeeId") },
+                            success: function (data) {
+                                self.show(view);
+                            }
+                        });
+                    }
                     //else window.location.replace("/login");
                 }
 

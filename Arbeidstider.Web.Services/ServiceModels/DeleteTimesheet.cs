@@ -1,19 +1,25 @@
-using System.Runtime.Serialization;
+using System.Collections.Generic;
 using ServiceStack;
 
 namespace Arbeidstider.Web.Services.ServiceModels
 {
-    [DataContract]
-    public class DeleteTimesheet : IReturn<DeleteTimesheetResponse>
+    [Route("/timesheets", "DELETE")]
+    [Route("/timesheets/delete", "DELETE")]
+    [Route("/timesheets/delete/{Id}", "DELETE")]
+    [Route("/timesheets/delete/{Ids}", "DELETE")]
+    public class DeleteTimesheet
     {
-        [DataMember]
-        public int Id { get; set; }
-    }
+        public DeleteTimesheet(List<int> Ids)
+        {
+            this.Ids = Ids;
+        }
 
-    [DataContract]
-    public class DeleteTimesheetResponse
-    {
-        [DataMember]
-        public bool TimesheetDeleted { get; set; }
+        public DeleteTimesheet(int Id)
+        {
+            this.Id = Id;
+        }
+
+        public List<int> Ids { get; set; }
+        public int? Id { get; set; }
     }
 }

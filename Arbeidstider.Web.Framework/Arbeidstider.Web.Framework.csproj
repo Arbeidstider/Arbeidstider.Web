@@ -158,6 +158,7 @@
     <Compile Include="DTO\EmployeeDTO.cs" />
     <Compile Include="DTO\ShiftDTO.cs" />
     <Compile Include="DTO\TimesheetDTO.cs" />
+    <Compile Include="DTO\WorkingHoursDTO.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="Models\TimesheetCalendar.cs" />
     <Compile Include="Models\CalendarDay.cs" />

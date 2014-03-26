@@ -2,6 +2,7 @@
         'models/base'
 ], function (BaseModel) {
     var TimesheetModel = BaseModel.extend({
+        idAttribute: "Id",
         defaults: {
             Id: null,
             UserId: null,
@@ -12,9 +13,9 @@
             ShiftStart: null,
             ShiftEnd: null,
         },
-        idAttribute: "Id",
         initialize: function () {
         },
+        url: function () { return this.getUrl("/timesheet"); }
     });
 
     return TimesheetModel;

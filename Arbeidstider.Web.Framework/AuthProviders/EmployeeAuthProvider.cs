@@ -120,16 +120,19 @@ namespace Arbeidstider.Web.Framework.AuthProviders
 
                 // set employeemetadata on session
                 userSession.SessionId = sessionId;
+                userSession.Id = sessionId;
                 userSession.EmployeeId = employee.Id;
                 userSession.WorkplaceId = employee.WorkplaceId;
 
                 authService.SaveSession(userSession, SessionExpiry);
+                userSession.SessionId = sessionId;
                 base.OnAuthenticated(authService, userSession, null, null);
+                userSession.SessionId = sessionId;
 
                 return new
                 {
                     UserName = userName,
-                    SessionId = sessionId,
+                    SessionId = userSession.SessionId,
                     EmployeeId = employee.Id,
                     UserId = userSession.UserAuthId,
                     WorkplaceId = employee.WorkplaceId

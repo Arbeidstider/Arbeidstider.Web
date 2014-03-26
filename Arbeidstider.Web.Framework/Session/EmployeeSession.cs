@@ -13,8 +13,6 @@ namespace Arbeidstider.Web.Framework.Session
         [DataMember]
         public int WorkplaceId { get; set; }
         [DataMember]
-        public bool IsAuthenticated { get; set; }
-        [DataMember]
         public string Stuff { get; set; }
     }
 }

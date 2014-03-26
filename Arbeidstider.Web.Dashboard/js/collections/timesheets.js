@@ -3,12 +3,10 @@ define([
         'underscore',
         'backbone',
         'marionette',
-        'models/timesheet',
-        'settings'
-], function ($, _, Backbone, Marionette, TimesheetModel, Settings) {
+        'models/timesheet'
+], function ($, _, Backbone, Marionette, TimesheetModel) {
     return Backbone.Collection.extend({
         model: TimesheetModel,
-        action: "/timesheets",
         initialize: function () {
         },
         parse: function (response) {

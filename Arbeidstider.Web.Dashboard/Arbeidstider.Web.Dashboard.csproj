@@ -238,7 +238,6 @@
     <Content Include="js\collections\calendardays.js" />
     <Content Include="js\collections\shifts.js" />
     <Content Include="js\config.js" />
-    <Content Include="js\controllers\app.js" />
     <Content Include="js\globals.js" />
     <Content Include="js\helpers\datehelper.js" />
     <Content Include="js\helpers\servicehelper.js" />
@@ -246,7 +245,6 @@
     <Content Include="js\layouts\app.js" />
     <Content Include="js\layouts\base.js" />
     <Content Include="js\layouts\content.js" />
-    <Content Include="js\libs\backbone-deferred-jquery\backbone-deferred-jquery.js" />
     <Content Include="js\libs\backbone.babysitter\backbone.babysitter.js" />
     <Content Include="js\libs\backbone.eventbinder\backbone.eventbinder.js" />
     <Content Include="js\libs\jquery.cookie\jquery.cookie.js" />
@@ -269,7 +267,6 @@
     <Content Include="js\models\employee.js" />
     <Content Include="js\models\header.js" />
     <Content Include="js\models\session.js" />
-    <Content Include="js\settings.js" />
     <Content Include="js\models\shift.js" />
     <Content Include="js\models\timesheet.js" />
     <Content Include="js\libs\bootstrap\nav.js" />
@@ -293,7 +290,6 @@
     <Content Include="js\views\register.js" />
     <Content Include="js\views\profile.js" />
     <Content Include="js\libs\bootstrap\bootstrap.js" />
-    <Content Include="js\libs\bootstrap\bootstrap.min.js" />
     <Content Include="js\libs\html5shiv\html5shiv.js" />
     <Content Include="js\init.js" />
     <Content Include="js\libs\modernizr\modernizr.min.js" />
@@ -301,7 +297,6 @@
     <Content Include="js\libs\require\text.js" />
     <Content Include="js\views\shared\header.js" />
     <Content Include="js\views\login.js" />
-    <Content Include="js\libs\vm\vm.js" />
     <Content Include="README.txt" />
     <Content Include="templates\addressbook.html" />
     <Content Include="templates\calendarday.html" />

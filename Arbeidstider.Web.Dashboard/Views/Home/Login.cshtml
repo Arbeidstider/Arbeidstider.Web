@@ -93,6 +93,11 @@
 
             function loginSuccess(response) {
                 console.log(response);
+                $.get("/auth/logout");
+                $.removeCookie("sessionId");
+                $.removeCookie("userId");
+                $.removeCookie("employeeId");
+                $.removeCookie("userName");
                 createSessionCookie("sessionId", response.SessionId);
                 createSessionCookie("employeeId", response.EmployeeId);
                 createSessionCookie("userId", response.UserId);

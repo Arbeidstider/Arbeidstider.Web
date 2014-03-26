@@ -1,16 +1,22 @@
-﻿define(['models/base'
-    ], function(BaseModel) {
-        var DashboardModel = BaseModel.extend({
+﻿define(['app', 'backbone'
+    ], function(App, Backbone) {
+        var DashboardModel = Backbone.Model.extend({
             defaults: {
-                employeeId: 0
+                // id is employeeId
+                EmployeeId: null,
+                Day: null,
+                StartHour: null,
+                EndHour: null,
+                Date: null
             },
             initialize: function (options) {
                 console.log("models/dashboard.initialize()");
-                if (options) {
-                    this.employeeId = options.employeeId;
-                }
             },
-            url: function () { return this.getUrl("getdashboard/?employeeId=" + this.employeeId); }
+            parse: function(resp) {
+                console.log("parse() resp: ");
+                console.log(resp);
+            },
+            url: function () { return App.API + "/workinghours/upcoming"; }
             //createEmployee: function() {
             //    var employee = {
             //        Firstname: $("input[name=Firstname]").text(),

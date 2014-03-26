@@ -1,21 +1,22 @@
-﻿define(['models/base',
-        'settings'
-], function (BaseModel, Settings) {
-    var Employee = BaseModel.extend({
+﻿define(['App', 'backbone'
+], function (App, Backbone) {
+    var Employee = Backbone.Model.extend({
+        idAttribute: "Id",
         defaults: {
+            Id: null,
             FirstName: null,
             LastName: null,
             Email: null,
             BirthDate: null,
             WorkplaceId: null,
-            UserName: null,
-            EmployeeId: null,
-            Roles: ""
+            Phonenumber: null,
+            City: null,
+            Address: null,
+            Zipcode: null,
+            Roles: null
         },
         initialize: function (opt) {
             console.log("Employee.initialize()");
-            _.bindAll(this, "url");
-            //_.bindAll(this, "getUrl");
         },
         isAdmin: function () {
             var roles = this.Roles.split(",");
@@ -31,7 +32,8 @@
             }
             return false;
         },
-        url: function () { return Settings.ServiceUrl("employee/get"); },
+        url: function () { return this.getUrl("/employee"); },
+        validate: function () { }
     });
     return Employee;
 });

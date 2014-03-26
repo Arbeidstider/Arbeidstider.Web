@@ -3,9 +3,10 @@ using ServiceStack;
 
 namespace Arbeidstider.Web.Services.ServiceModels
 {
-    [Route("/employee/session/get", "GET")]
-    public class GetEmployeeSession : IReturn<EmployeeSession>
+    [Route("/employee/auth/check", "GET")]
+    public class CheckAuthentication : IReturn<EmployeeSession>
     {
         public int? EmployeeId { get; set; }
+        public string SessionId { get; set; }
     }
 }
