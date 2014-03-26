@@ -1,0 +1,5 @@
+﻿
+post
+ajax
+get
+put

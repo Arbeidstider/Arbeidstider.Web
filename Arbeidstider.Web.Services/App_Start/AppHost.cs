@@ -14,6 +14,7 @@ using ServiceStack.Data;
 using ServiceStack.Host.Handlers;
 using ServiceStack.OrmLite;
 using ServiceStack.Redis;
+using ServiceStack.Validation;
 using ServiceStack.Web;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(AppHost), "Start")]
@@ -105,10 +106,12 @@ namespace Arbeidstider.Web.Services.App_Start
 
             var connectionString = ConfigurationManager.ConnectionStrings["Auth"].ConnectionString;
 
-            container.Register<IDbConnectionFactory>(c =>
-                                                     new OrmLiteConnectionFactory(connectionString,
-                                                                                  SqlServerDialect.Provider));
 
+            container.Register<IDbConnectionFactory>(c =>
+                new OrmLiteConnectionFactory(
+                    connectionString, SqlServerDialect.Provider));
+           container.Register(c =>
+                new OrmLiteAuthRepository(c.Resolve<IDbConnectionFactory>()));
             container.Register<IUserAuthRepository>(c =>
                                                     new OrmLiteAuthRepository(c.Resolve<IDbConnectionFactory>()));
         }
@@ -147,9 +150,7 @@ namespace Arbeidstider.Web.Services.App_Start
                 .Add<Dashboard>("/getdashboard/{employeeId}")
                 .Add<CreateTimesheet>("/timesheet/create", "POST")
                 .Add<UpdateTimesheet>("/timesheet/update", "POST")
-                .Add<RegisterEmployee>("/employee/register", "POST, OPTIONS")
-                .Add<SessionRequest>("/getsession", "GET, OPTIONS")
-                .Add<SessionRequest>("/verifysession", "POST");
+                .Add<AddEmployee>("/addemployee");
         }
 
         private void ConfigureAuth(Funq.Container container)
@@ -160,11 +161,13 @@ namespace Arbeidstider.Web.Services.App_Start
                                             {
                                                 new EmployeeAuthProvider()
                                             }) { HtmlRedirect = null });
-
+            Plugins.Add(new RequestLogsFeature());
             //Default route: /register
-            Plugins.Add(new RegistrationFeature());
-            using (var db = container.Resolve<IDbConnectionFactory>().Open())
-                db.CreateTableIfNotExists();
+            //Plugins.Add(new RegistrationFeature());
+            Plugins.Remove(new ValidationFeature());
+            Plugins.Remove(new SessionFeature());
+            //using (var db = container.Resolve<IDbConnectionFactory>().Open())
+                //db.CreateTableIfNotExists();
         }
 
         public static void Start()

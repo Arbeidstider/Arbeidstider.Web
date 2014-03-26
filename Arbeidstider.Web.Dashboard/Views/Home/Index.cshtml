@@ -4,7 +4,7 @@
 <head>
     @Html.Partial("Header")
     @Html.Partial("Stylesheets")
-    <script data-main="js/main" src="@Url.Content("~/js/libs/require/require.js")"></script>
+    <script data-main="js/init" src="@Url.Content("~/js/libs/require/require.js")"></script>
     <script>
         define('config', function () {
             var config = {};
@@ -14,7 +14,7 @@
     </script>
 </head>
 <body class='contrast-red fixed-header fixed-navigation'>
-    <div id="container">
-    </div>
+    @*In Here goes templates/layouts/layout.html*@
+    <div id="app-content"></div>
 </body>
 </html>

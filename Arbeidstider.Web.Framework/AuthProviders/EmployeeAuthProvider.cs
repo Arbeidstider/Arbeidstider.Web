@@ -116,7 +116,7 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                     httpRes.Cookies.AddPermanentCookie(HttpHeaders.XUserAuthId, session.UserAuthId);
                 }
 
-                var employee = EmployeeService.Instance.GetEmployee(userSession.UserName);
+                var employee = EmployeeService.Instance.GetEmployee(session.UserName);
 
                 // set employeemetadata on session
                 userSession.SessionId = sessionId;
@@ -124,7 +124,7 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                 userSession.WorkplaceId = employee.WorkplaceId;
 
                 authService.SaveSession(userSession, SessionExpiry);
-                base.OnAuthenticated(authService, session, null, null);
+                base.OnAuthenticated(authService, userSession, null, null);
 
                 return new
                 {

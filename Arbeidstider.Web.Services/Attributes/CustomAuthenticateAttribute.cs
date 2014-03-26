@@ -4,7 +4,7 @@ using ServiceStack.Auth;
 using ServiceStack.Host;
 using ServiceStack.Web;
 
-namespace Arbeidstider.Web.Services.ServiceInterfaces
+namespace Arbeidstider.Web.Services.Attributes
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
     public class CustomAuthenticateAttribute : RequestFilterAttribute

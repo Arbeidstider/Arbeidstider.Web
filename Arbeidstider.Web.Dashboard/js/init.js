@@ -4,15 +4,14 @@ require.config({
     paths: {
         // Major libraries
         jquery: '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
-        jquery_ui: '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
+        "jquery.ui": '//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min',
         "jquery.cookie": 'libs/jquery.cookie/jquery.cookie',
         underscore: 'libs/underscore/underscore', // https://github.com/amdjs
         backbone: 'libs/backbone/backbone', // https://github.com/amdjs
-        backbone_validateAll: 'libs/backbone.validateAll/backbone.validateAll', // 
         "backbone.wreqr": 'libs/backbone.wreqr/wreqr', // 
         "backbone.babysitter": 'libs/backbone.babysitter/backbone.babySitter', // 
         marionette: 'libs/backbone.marionette/backbone.marionette', // 
-        jquery_mobile: 'libs/jquery_mobile/jquery.mobile.custom',
+        "jquery.mobile": 'libs/jquery.mobile/jquery.mobile.custom',
         bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
         store: 'libs/store/store',
@@ -51,23 +50,32 @@ require.config({
 require(['jquery',
         'backbone',
         'bootstrap',
+        'models/session',
         'app',
         'routers/appRouter',
-        'controllers/app',
-        'models/session'
-], function ($, Backbone, Bootstrap, App, AppRouter, AppController, SessionModel) {
-    $(document).ready(function () {
-        Bootstrap.initialize();
-        App.on("initialize:after", function () {
-            App.appRouter = new AppRouter({ controller: new AppController() });
-            Backbone.history.start({ pushState: true });
-        });
+], function ($, Backbone, Bootstrap, SessionModel, App, AppRouter) {
+    // Just use GET and POST to support all browsers
+    Backbone.emulateHTTP = true;
+    App.session = new SessionModel();
+    App.router = new AppRouter();
 
-        App.start(function () {
-            var session = new SessionModel();
-            if (!session.authenticated)
-                window.location.replace("/login");
-            console.log("App.start: is authenticated");
-        });
+    App.session.checkAuth(function () {
+        // HTML5 pushState for URLs without hashbangs
+        var hasPushstate = !!(window.history && history.pushState);
+        if (hasPushstate) Backbone.history.start({ pushState: true, root: '/' });
+        else Backbone.history.start();
     });
+
+    // All navigation that is relative should be passed through the navigate
+    // method, to be processed by the router. If the link has a `data-bypass`
+    // attribute, bypass the delegation completely.
+    $('#content-wrapper').on("click", "a:not([data-bypass])", function (evt) {
+        console.log("main click handler");
+        evt.preventDefault();
+        var href = $(this).attr("href");
+        App.router.navigate(href, { trigger: true, replace: false });
+    });
+
+    // Dropdown toggle, pretty much
+    Bootstrap.initialize();
 });

@@ -45,35 +45,43 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.4.0.5\lib\net40\ServiceStack.dll</HintPath>
+    <Reference Include="ServiceStack, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.4.0.15\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client">
-      <HintPath>..\packages\ServiceStack.Client.4.0.5\lib\net40\ServiceStack.Client.dll</HintPath>
+    <Reference Include="ServiceStack.Client, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Client.4.0.15\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.4.0.5\lib\net40\ServiceStack.Common.dll</HintPath>
+    <Reference Include="ServiceStack.Common, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.4.0.15\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.5\lib\net40\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.15\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Mvc">
       <HintPath>..\packages\ServiceStack.Mvc.4.0.5\lib\net40\ServiceStack.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\packages\ServiceStack.OrmLite.4.0.5\lib\net40\ServiceStack.OrmLite.dll</HintPath>
+    <Reference Include="ServiceStack.OrmLite, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.OrmLite.4.0.15\lib\net40\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.OrmLite.SqlServer">
-      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.4.0.5\lib\net40\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.4.0.15\lib\net40\ServiceStack.OrmLite.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\packages\ServiceStack.Redis.4.0.5\lib\net40\ServiceStack.Redis.dll</HintPath>
+    <Reference Include="ServiceStack.Redis, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Redis.4.0.15\lib\net40\ServiceStack.Redis.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Server">
-      <HintPath>..\packages\ServiceStack.Server.4.0.5\lib\net40\ServiceStack.Server.dll</HintPath>
+    <Reference Include="ServiceStack.Server, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Server.4.0.15\lib\net40\ServiceStack.Server.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.4.0.5\lib\net40\ServiceStack.Text.dll</HintPath>
+    <Reference Include="ServiceStack.Text, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.15\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -144,10 +152,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="ServiceInterfaces\EmployeeService.cs" />
     <Compile Include="ServiceInterfaces\DashboardService.cs" />
-    <Compile Include="ServiceInterfaces\RegisterEmployeeService.cs" />
+    <Compile Include="ServiceInterfaces\AddEmployeeService.cs" />
+    <Compile Include="ServiceModels\AddEmployee.cs" />
     <Compile Include="ServiceModels\Dashboard.cs" />
-    <Compile Include="ServiceModels\RegisterEmployee.cs" />
     <Compile Include="ServiceInterfaces\RegisterEmployeeService_2.cs" />
     <Compile Include="CacheKeys.cs" />
     <Compile Include="Exceptions\TimesheetServiceException.cs" />
@@ -160,15 +169,17 @@
     <Compile Include="ServiceInterfaces\DeleteTimesheetService.cs" />
     <Compile Include="Attributes\RequiredEmployeeRole.cs" />
     <Compile Include="ServiceInterfaces\ServiceInterfaceBase.cs" />
-    <Compile Include="ServiceInterfaces\SessionRequestService.cs" />
+    <Compile Include="ServiceInterfaces\SessionService.cs" />
     <Compile Include="ServiceInterfaces\TimesheetsService.cs" />
     <Compile Include="ServiceInterfaces\UpdateTimesheetService.cs" />
     <Compile Include="ServiceModels\CreateTimesheet.cs" />
     <Compile Include="ServiceModels\DeleteTimesheet.cs" />
     <Compile Include="ServiceModels\EmployeeAuth.cs" />
-    <Compile Include="ServiceModels\SessionRequest.cs" />
+    <Compile Include="ServiceModels\GetEmployee.cs" />
+    <Compile Include="ServiceModels\SessionResponse.cs" />
     <Compile Include="ServiceModels\Timesheets.cs" />
     <Compile Include="ServiceModels\UpdateTimesheet.cs" />
+    <Compile Include="ServiceModels\Session.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />

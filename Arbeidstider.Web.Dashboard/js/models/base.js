@@ -1,7 +1,8 @@
-define(['backbone', 'settings'
-    ], function(Backbone, Settings) {
+define(['backbone', 'jquery', 'settings'
+    ], function(Backbone, $, Settings) {
         var BaseModel = Backbone.Model.extend({
             initialize: function () {
+                //_.bindAll(this, "post", "getUrl");
             },
             getUrl: function (action) {
                 return Settings.ServiceUrl(action);
@@ -12,7 +13,7 @@ define(['backbone', 'settings'
                     dataType: "json",
                     data: data,
                     contentType: "application/json",
-                    url: getUrl(action),
+                    url: this.getUrl(action),
                     error: function (jqXHR, textStatus, errorThrown) { },
                     success: successCb,
                     beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", $.cookie("sessionId")); }

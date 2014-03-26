@@ -1,8 +1,10 @@
-﻿using Arbeidstider.DataAccess.Domain;
+﻿using System.Runtime.Serialization;
+using Arbeidstider.DataAccess.Domain;
 using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.Web.Framework.DTO
 {
+    [DataContract]
     public class ShiftDTO
     {
         public ShiftDTO(ITimesheet timesheet)

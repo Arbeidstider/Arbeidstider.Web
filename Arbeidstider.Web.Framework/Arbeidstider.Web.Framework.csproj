@@ -88,18 +88,21 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.4.0.5\lib\net40\ServiceStack.dll</HintPath>
+    <Reference Include="ServiceStack, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.4.0.15\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client">
-      <HintPath>..\Arbeidstider.Web.Dashboard\bin\ServiceStack.Client.dll</HintPath>
+    <Reference Include="ServiceStack.Client, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Client.4.0.15\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.4.0.9\lib\net40\ServiceStack.Common.dll</HintPath>
+    <Reference Include="ServiceStack.Common, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Common.4.0.15\lib\net40\ServiceStack.Common.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.9\lib\net40\ServiceStack.Interfaces.dll</HintPath>
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.15\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Redis">
       <HintPath>..\packages\ServiceStack.Redis.4.0.9\lib\net40\ServiceStack.Redis.dll</HintPath>
@@ -107,8 +110,9 @@
     <Reference Include="ServiceStack.Server">
       <HintPath>..\packages\ServiceStack.Server.4.0.5\lib\net40\ServiceStack.Server.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.4.0.9\lib\net40\ServiceStack.Text.dll</HintPath>
+    <Reference Include="ServiceStack.Text, Version=4.0.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Text.4.0.15\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />

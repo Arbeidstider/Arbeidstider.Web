@@ -121,8 +121,9 @@
     <Reference Include="ServiceStack.Client">
       <HintPath>..\packages\ServiceStack.Client.4.0.3\lib\net40\ServiceStack.Client.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Interfaces.4.0.5\lib\net40\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ServiceStack.Interfaces.4.0.15\lib\net40\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Text, Version=4.0.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -240,16 +241,16 @@
     <Content Include="js\controllers\app.js" />
     <Content Include="js\globals.js" />
     <Content Include="js\helpers\datehelper.js" />
+    <Content Include="js\helpers\servicehelper.js" />
     <Content Include="js\helpers\storewithexpiration.js" />
     <Content Include="js\layouts\app.js" />
     <Content Include="js\layouts\base.js" />
-    <Content Include="js\layouts\main.js" />
+    <Content Include="js\layouts\content.js" />
     <Content Include="js\libs\backbone-deferred-jquery\backbone-deferred-jquery.js" />
     <Content Include="js\libs\backbone.babysitter\backbone.babysitter.js" />
     <Content Include="js\libs\backbone.eventbinder\backbone.eventbinder.js" />
-    <Content Include="js\libs\backbone.validateAll\backbone.validateAll.js" />
     <Content Include="js\libs\jquery.cookie\jquery.cookie.js" />
-    <Content Include="js\libs\jquery_mobile\jquery.mobile.custom.js" />
+    <Content Include="js\libs\jquery.mobile\jquery.mobile.custom.js" />
     <Content Include="js\libs\backbone.marionette\backbone.marionette.js" />
     <Content Include="js\libs\store\store.js" />
     <Content Include="js\libs\backbone.wreqr\amd.js" />
@@ -266,6 +267,7 @@
     <Content Include="js\collections\colleagues.js" />
     <Content Include="js\models\calendarday.js" />
     <Content Include="js\models\employee.js" />
+    <Content Include="js\models\header.js" />
     <Content Include="js\models\session.js" />
     <Content Include="js\settings.js" />
     <Content Include="js\models\shift.js" />
@@ -283,23 +285,21 @@
     <Content Include="js\views\addressbookitem.js" />
     <Content Include="js\views\calendardayitem.js" />
     <Content Include="js\views\dashboard.js" />
-    <Content Include="js\views\headers\addressbook.js" />
-    <Content Include="js\views\headers\dashboard.js" />
     <Content Include="js\views\messages.js" />
     <Content Include="js\views\setdaysfree.js" />
     <Content Include="js\views\error.js" />
-    <Content Include="js\views\navigation.js" />
+    <Content Include="js\views\shared\navbar.js" />
     <Content Include="js\views\calendar.js" />
     <Content Include="js\views\register.js" />
     <Content Include="js\views\profile.js" />
     <Content Include="js\libs\bootstrap\bootstrap.js" />
     <Content Include="js\libs\bootstrap\bootstrap.min.js" />
     <Content Include="js\libs\html5shiv\html5shiv.js" />
-    <Content Include="js\main.js" />
+    <Content Include="js\init.js" />
     <Content Include="js\libs\modernizr\modernizr.min.js" />
     <Content Include="js\libs\require\require.js" />
     <Content Include="js\libs\require\text.js" />
-    <Content Include="js\views\header.js" />
+    <Content Include="js\views\shared\header.js" />
     <Content Include="js\views\login.js" />
     <Content Include="js\libs\vm\vm.js" />
     <Content Include="README.txt" />
@@ -309,19 +309,18 @@
     <Content Include="templates\confirmavailabledays.html" />
     <Content Include="templates\addressbookitem.html" />
     <Content Include="templates\calendardayitem.html" />
-    <Content Include="templates\main.html" />
+    <Content Include="templates\indexmock.html" />
+    <Content Include="templates\layouts\content.html" />
     <Content Include="templates\dashboard.html" />
-    <Content Include="templates\headers\addressbook.html" />
-    <Content Include="templates\headers\dashboard.html" />
     <Content Include="templates\messages.html" />
     <Content Include="templates\setdaysfree.html" />
     <Content Include="templates\register.html">
       <BrowseToURL>p</BrowseToURL>
     </Content>
     <Content Include="templates\calendar.html" />
-    <Content Include="templates\header.html" />
-    <Content Include="templates\layout.html" />
-    <Content Include="templates\navbar.html" />
+    <Content Include="templates\shared\header.html" />
+    <Content Include="templates\layouts\layout.html" />
+    <Content Include="templates\shared\navbar.html" />
     <Content Include="Views\Home\forgot_password.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -346,7 +345,6 @@
     <Folder Include="img\plugins\naked_password\" />
     <Folder Include="img\plugins\select2\" />
     <Folder Include="img\plugins\xeditable\" />
-    <Folder Include="Views\Templates\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -389,7 +387,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Arbeidstider.Web.Dashboard.pubxml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Shared\Templates.cshtml" />
+    <Content Include="Views\Old\Templates.cshtml" />
     <Content Include="templates\profile.html" />
   </ItemGroup>
   <PropertyGroup>

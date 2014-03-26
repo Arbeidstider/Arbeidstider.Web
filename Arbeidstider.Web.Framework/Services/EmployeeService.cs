@@ -45,6 +45,21 @@ namespace Arbeidstider.Web.Framework.Services
             }
         }
 
+        public EmployeeDTO GetEmployeeByUserId(int userId, bool getTiny = false)
+        {
+            var parameters = EmployeeParameters.Create(userId: userId);
+            try
+            {
+                var obj = _repository.Get(parameters);
+                return new EmployeeDTO(obj);
+            }
+            catch (EmployeeRepositoryException ex)
+            {
+                Logger.Error(ex.Message);
+                return null;
+            }
+        }
+
         public EmployeeDTO GetEmployee(int employeeId, bool getTiny = false)
         {
             var parameters = EmployeeParameters.Create(employeeId: employeeId);

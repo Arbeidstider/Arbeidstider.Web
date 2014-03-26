@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 using Arbeidstider.Web.Framework.Services;
+using Arbeidstider.Web.Framework.Session;
 using Arbeidstider.Web.Services.ServiceModels;
 using ServiceStack;
 using ServiceStack.Auth;
@@ -10,13 +11,12 @@ using ServiceStack.Web;
 
 namespace Arbeidstider.Web.Services.ServiceInterfaces
 {
-    [DefaultRequest(typeof(RegisterEmployee))]
-    public class RegisterEmployeeService : Service
+    public class AddEmployeeService : Service
     {
         public IUserAuthRepository UserAuthRepo { get; set; }
-        public static ValidateFn ValidateFn { get; set; }
+        //public static ValidateFn ValidateFn { get; set; }
 
-        public IValidator<Registration> RegistrationValidator { get; set; }
+        //public IValidator<Registration> RegistrationValidator { get; set; }
 
         private void AssertUserAuthRepo()
         {
@@ -27,36 +27,43 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
         /// <summary>
         /// Create new Registration
         /// </summary>
-        public object Post(RegisterEmployee request)
+        public object Any(AddEmployee request)
         {
             //if (!ValidationFeature.Enabled) //Already gets run
             //    RegistrationValidator.ValidateAndThrow(request, ApplyTo.Post);
 
             AssertUserAuthRepo();
 
-            if (ValidateFn != null)
-            {
-                var validateResponse = ValidateFn(this, HttpMethods.Post, request);
-                if (validateResponse != null) return validateResponse;
-            }
+            //if (ValidateFn != null)
+            //{
+            //    var validateResponse = ValidateFn(this, HttpMethods.Post, request);
+            //    if (validateResponse != null) return validateResponse;
+            //}
 
-            RegisterEmployeeResponse response = null;
-            var session = this.GetSession();
+            AddEmployeeResponse response = null;
+            var session = GetSession();
             var newUserAuth = request.ConvertTo<UserAuth>();
             var existingUser = UserAuthRepo.GetUserAuth(session, null);
 
-            var registerNewUser = existingUser == null;
-            var user = registerNewUser
-                           ? this.UserAuthRepo.CreateUserAuth(newUserAuth, request.Password)
-                           : this.UserAuthRepo.UpdateUserAuth(existingUser, newUserAuth, request.Password);
+            // TODO: Implement autogenerate
 
-            if (registerNewUser)
-            {
-                // TODO: Create employee and save employeeId
-                int employeeId = EmployeeService.Instance.CreateEmployee(user.Id, request.WorkplaceId);
-                session.OnRegistered(this);
-            }
+            string password = "test123";
 
+            //var registerNewUser = existingUser == null;
+            //var user = registerNewUser
+            var user =
+                            this.UserAuthRepo.CreateUserAuth(newUserAuth, password);
+            //: this.UserAuthRepo.UpdateUserAuth(existingUser, newUserAuth, password);
+
+            //if (registerNewUser)
+            //{
+            // TODO: Create employee and save employeeId
+            var employee = Framework.Services.EmployeeService.Instance.GetEmployeeByUserId(existingUser.Id);
+            int employeeId = Framework.Services.EmployeeService.Instance.CreateEmployee(user.Id, employee.WorkplaceId);
+            //session.OnRegistered(this);
+            //}
+
+            /*
             if (request.AutoLogin.GetValueOrDefault())
             {
                 using (var authService = base.ResolveService<AuthenticateService>())
@@ -81,13 +88,13 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                         };
                     }
                 }
-            }
+            }*/
 
             if (response == null)
             {
-                response = new RegisterEmployeeResponse() {
-                    UserId = user.Id.ToString(CultureInfo.InvariantCulture),
-                    ReferrerUrl = request.Continue
+                response = new AddEmployeeResponse()
+                {
+                    UserId = user.Id.ToString(CultureInfo.InvariantCulture)
                 };
             }
 
@@ -120,25 +127,26 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             //if (!ValidationFeature.Enabled)
             //    RegistrationValidator.ValidateAndThrow(request, ApplyTo.Put);
 
-            if (ValidateFn != null)
-            {
-                var response = ValidateFn(this, HttpMethods.Put, request);
-                if (response != null) return response;
-            }
+            //if (ValidateFn != null)
+            //{
+            //    var response = ValidateFn(this, HttpMethods.Put, request);
+            //    if (response != null) return response;
+            //}
 
-            var session = this.GetSession();
-            var existingUser = UserAuthRepo.GetUserAuth(session, null);
-            if (existingUser == null)
-            {
-                throw HttpError.NotFound("User does not exist");
-            }
+            //var session = this.GetSession();
+            //var existingUser = UserAuthRepo.GetUserAuth(session, null);
+            //if (existingUser == null)
+            //{
+            //    throw HttpError.NotFound("User does not exist");
+            //}
 
-            var newUserAuth = ToUserAuth(request);
-            UserAuthRepo.UpdateUserAuth(newUserAuth, existingUser, request.Password);
+            //var newUserAuth = ToUserAuth(request);
+            //UserAuthRepo.UpdateUserAuth(newUserAuth, existingUser, request.Password);
 
-            return new RegistrationResponse {
-                UserId = existingUser.Id.ToString(CultureInfo.InvariantCulture),
-            };
+            //return new RegistrationResponse {
+            //    UserId = existingUser.Id.ToString(CultureInfo.InvariantCulture),
+            //};
+            return null;
         }
     }
 }

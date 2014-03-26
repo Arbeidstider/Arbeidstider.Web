@@ -1,11 +1,10 @@
 define(["underscore",
         'marionette',
         'text!templates/addressbook.html',
-        'views/headers/addressbook',
         'views/addressbookitem'
-], function (_, Marionette, AddressBookTemplate, AddressBookHeaderView, AddressBookItemView) {
+], function (_, Marionette, AddressBookTemplate, AddressBookItemView) {
     return Backbone.Marionette.CollectionView.extend({
-        header: AddressBookHeaderView,
+        //header: AddressBookHeaderView,
         letters: function() {
             var array = [];
             var charCodeRange = {

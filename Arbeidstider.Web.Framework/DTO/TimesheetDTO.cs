@@ -1,7 +1,9 @@
-﻿using Arbeidstider.Interfaces;
+﻿using System.Runtime.Serialization;
+using Arbeidstider.Interfaces;
 
 namespace Arbeidstider.Web.Framework.DTO
 {
+    [DataContract]
     public class TimesheetDTO : ITinyModel
     {
         public TimesheetDTO(ITimesheet domain)
