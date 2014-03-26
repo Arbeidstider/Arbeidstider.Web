@@ -30,12 +30,12 @@
                     url: Settings.ServiceUrl("employee/session/get"),
                     error: function (jqXHR, textStatus, errorThrown) { console.log(errorThrown); },
                     success: function (data) {
-                        if (data) {
-                            console.log("data ok");
+                        if (data.IsAuthenticated) {
+                            console.log("checkAuth ok");
                             self.employee.set(_.pick(data, _.keys(self.employee.defaults)));
                             self.set({ loggedIn: true });
                         } else {
-                            console.log("data not ok");
+                            console.log("checkAuth not ok");
                             self.set({ loggedIn: false });
                         }
                     },

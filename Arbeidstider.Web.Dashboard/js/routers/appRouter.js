@@ -93,6 +93,7 @@ define(['app',
                     this.contentLayout.render();
                 }
 
+                // checkAuth/isAuthenticated
                 this.contentLayout.changeView(view);
                 // Need to be authenticated before rendering view.
                 // For cases like a user's settings page where we need to double check against the server.
