@@ -10,11 +10,7 @@
                 Date: null
             },
             initialize: function (options) {
-                console.log("models/dashboard.initialize()");
-            },
-            parse: function(resp) {
-                console.log("parse() resp: ");
-                console.log(resp);
+                if (DEBUG) console.log("models/dashboard.initialize()");
             },
             url: function () { return App.API + "/workinghours/upcoming"; }
             //createEmployee: function() {

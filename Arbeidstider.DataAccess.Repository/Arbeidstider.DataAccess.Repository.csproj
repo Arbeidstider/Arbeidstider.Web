@@ -93,6 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\StoredProcedures.cs" />
+    <Compile Include="Parameters\CalendarGetAll.cs" />
+    <Compile Include="ScheduleRepository.cs" />
     <Compile Include="EmployeeRepository.cs" />
     <Compile Include="Exceptions\EmployeeRepositoryException.cs" />
     <Compile Include="Exceptions\RepositoryExceptionBase.cs" />
@@ -103,7 +105,6 @@
     <Compile Include="Parameters\TimesheetParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryExtensions.cs" />
-    <Compile Include="ScheduleEventRepository.cs" />
     <Compile Include="TimesheetRepository.cs" />
   </ItemGroup>
   <ItemGroup>

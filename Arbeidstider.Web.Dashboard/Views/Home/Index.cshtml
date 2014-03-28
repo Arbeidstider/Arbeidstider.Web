@@ -4,17 +4,21 @@
 <head>
     @Html.Partial("Header")
     @Html.Partial("Stylesheets")
-    <script data-main="js/init" src="@Url.Content("~/js/libs/require/require.js")"></script>
     <script>
-        define('config', function () {
+       @*     define('config', function () {
             var config = {};
             config.bootstrappedCalendar = @Html.Raw(Json.Encode(Model.TimesheetCalendar));
             return config;
-        });
+        });*@
+        var Calendar = {};
     </script>
 </head>
 <body class='contrast-red fixed-header fixed-navigation'>
     @*In Here goes templates/layouts/layout.html*@
-    <div id="app-content"></div>
+    <div id="app-content">
+        <script data-main="js/init" src="@Url.Content("~/js/libs/require/require.js")"></script>
+        <script>
+        </script>
+    </div>
 </body>
 </html>

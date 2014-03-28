@@ -18,13 +18,14 @@ namespace Arbeidstider.DataAccess.Repository
 
         public IEnumerable<ITimesheet> GetAll(object parameters)
         {
-            var dt = _database.GetMultiple<Timesheet>(StoredProcedures.GET_ALL_TIMESHEETS, (DynamicParameters)parameters);
-            var timesheets = dt as Timesheet[] ?? dt.ToArray();
-            // try catch
-            //if (dt == null || !timesheets.Any())
-            // throw new TimesheetRepositoryException(string.Format("Failed to GetAll with parameters: {0}", parameters));
+            return new List<ITimesheet>();
+            //var dt = _database.GetMultiple<Timesheet>(StoredProcedures.GET_ALL_TIMESHEETS, (DynamicParameters)parameters);
+            //var timesheets = dt as Timesheet[] ?? dt.ToArray();
+            //// try catch
+            ////if (dt == null || !timesheets.Any())
+            //// throw new TimesheetRepositoryException(string.Format("Failed to GetAll with parameters: {0}", parameters));
 
-            return timesheets;
+            //return timesheets;
         }
 
         public int Create(object parameters)

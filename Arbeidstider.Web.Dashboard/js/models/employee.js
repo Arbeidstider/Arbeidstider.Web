@@ -1,12 +1,13 @@
 ﻿define(['App', 'backbone'
 ], function (App, Backbone) {
     var Employee = Backbone.Model.extend({
-        idAttribute: "Id",
+        idAttribute: "EmployeeId",
         defaults: {
-            Id: null,
+            EmployeeId: null,
             FirstName: null,
             LastName: null,
             Email: null,
+            PrimaryEmail: null,
             BirthDate: null,
             WorkplaceId: null,
             Phonenumber: null,
@@ -16,23 +17,25 @@
             Roles: null
         },
         initialize: function (opt) {
-            console.log("Employee.initialize()");
+            if (DEBUG) console.log("Employee.initialize()");
         },
         isAdmin: function () {
-            var roles = this.Roles.split(",");
+            var roles = this.get("Roles").split(",");
             for (var i = 0; i < roles.length; i++) {
                 if (roles[i] == "Administrator") return true;
             }
             return false;
         },
         isManager: function () {
-            var roles = this.Roles.split(",");
+            var roles = this.get("Roles").split(",");
             for (var i = 0; i < roles.length; i++) {
                 if (roles[i] == "Manager") return true;
             }
             return false;
         },
-        url: function () { return this.getUrl("/employee"); },
+        url: function () {
+            return App.API + "/employee";
+        },
         validate: function () { }
     });
     return Employee;

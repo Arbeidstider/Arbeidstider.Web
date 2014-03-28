@@ -36,7 +36,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
             return null;
         }
 
-        public EmployeeSession Get(AuthenticateEmployeeSession request)
+        public EmployeeSession Get(AuthenticateEmployee request)
         {
             StringBuilder stuff = new StringBuilder();
             using (var redis = AppHost.Instance.Resolve<IRedisClientsManager>().GetClient())
@@ -48,12 +48,6 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                     var session = redis.Get<EmployeeSession>(key);
                     if (session != null)
                     {
-                        stuff.AppendLine("request.sessionId: " + request.SessionId);
-                        stuff.AppendLine("session.employeeId: " + session.EmployeeId);
-                        stuff.AppendLine("session.sessionid: " + session.SessionId);
-                        stuff.AppendLine("session.id: " + session.Id);
-                        stuff.AppendLine("request.employeeId =" + request.EmployeeId);
-                        stuff.AppendLine("session.employeeId =" + session.EmployeeId);
                         if (session.SessionId == request.SessionId && session.EmployeeId == (int)request.EmployeeId)
                         {
                             session.IsAuthenticated = true;
@@ -61,7 +55,7 @@ namespace Arbeidstider.Web.Services.ServiceInterfaces
                         }
                     }
                 }
-                return new EmployeeSession() {Stuff = stuff.ToString()};
+                return new EmployeeSession() {IsAuthenticated = false};
             }
             return null;
         }

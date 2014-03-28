@@ -81,7 +81,7 @@
   <ItemGroup>
     <Compile Include="Employee.cs" />
     <Compile Include="EmployeeShift.cs" />
-    <Compile Include="ScheduleEvent.cs" />
+    <Compile Include="Schedule.cs" />
     <Compile Include="Timesheet.cs" />
     <Compile Include="Workplace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

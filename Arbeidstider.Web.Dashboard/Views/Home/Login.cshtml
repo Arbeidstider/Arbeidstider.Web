@@ -94,10 +94,10 @@
             function loginSuccess(response) {
                 console.log(response);
                 $.get("/auth/logout");
-                $.removeCookie("sessionId");
-                $.removeCookie("userId");
-                $.removeCookie("employeeId");
-                $.removeCookie("userName");
+                $.removeCookie("sessionId", {path: '/'});
+                $.removeCookie("userId", {path: '/'});
+                $.removeCookie("employeeId", {path: '/'});
+                $.removeCookie("userName", {path: '/'});
                 createSessionCookie("sessionId", response.SessionId);
                 createSessionCookie("employeeId", response.EmployeeId);
                 createSessionCookie("userId", response.UserId);

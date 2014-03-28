@@ -152,8 +152,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="ServiceInterfaces\ScheduleService.cs" />
     <Compile Include="ServiceInterfaces\EmployeeService.cs" />
     <Compile Include="ServiceInterfaces\WorkingHoursService.cs" />
+    <Compile Include="ServiceModels\EditCalendarEvent.cs" />
+    <Compile Include="ServiceModels\FindSchedules.cs" />
+    <Compile Include="ServiceModels\GetCalendarEvents.cs" />
     <Compile Include="ServiceModels\CheckAuthentication.cs" />
     <Compile Include="ServiceModels\RegisterEmployee.cs" />
     <Compile Include="CacheKeys.cs" />
@@ -169,7 +174,7 @@
     <Compile Include="ServiceInterfaces\TimesheetsService.cs" />
     <Compile Include="ServiceModels\CreateTimesheet.cs" />
     <Compile Include="ServiceModels\DeleteTimesheet.cs" />
-    <Compile Include="ServiceModels\Authenticate.cs" />
+    <Compile Include="ServiceModels\AuthenticateEmployee.cs" />
     <Compile Include="ServiceModels\FindTimesheets.cs" />
     <Compile Include="ServiceModels\UpdateEmployee.cs" />
     <Compile Include="ServiceModels\UpdateTimesheets.cs" />

@@ -1,3 +1,4 @@
+if (typeof DEBUG === 'undefined') DEBUG = false;
 // Require.js allows us to configure shortcut alias
 // Their usage will become more apparent futher along in the tutorial.
 require.config({
@@ -12,6 +13,9 @@ require.config({
         "backbone.babysitter": 'libs/backbone.babysitter/backbone.babySitter', // 
         marionette: 'libs/backbone.marionette/backbone.marionette', // 
         "jquery.mobile": 'libs/jquery.mobile/jquery.mobile.custom',
+        "bootstrap.calendar": 'libs/bootstrap.calendar/calendar',
+        "tooltip": 'libs/bootstrap/tooltip',
+        "options": 'libs/bootstrap.calendar/options',
         bootstrap: 'libs/bootstrap/bootstrap',
         html5shiv: 'libs/html5shiv/html5shiv',
         store: 'libs/store/store',
@@ -32,8 +36,15 @@ require.config({
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
         },
+        "bootstrap.calendar": {
+            deps: ['underscore', 'jquery', 'bootstrap'],
+            exports: 'calendar'
+        },
         'backbone.babysitter': {
             deps: ['backbone', 'underscore']
+        },
+        'bootstrap': {
+            deps: ['jquery']
         },
         'jquery.cookie': {
             deps: ['jquery']
@@ -50,14 +61,37 @@ require.config({
 require(['jquery',
         'backbone',
         'bootstrap',
+        'tooltip',
+        'bootstrap.calendar',
         'models/session',
         'app',
         'routers/appRouter',
-], function ($, Backbone, Bootstrap, SessionModel, App, AppRouter) {
-    // Just use GET and POST to support all browsers
+], function ($, Backbone, Bootstrap, Tooltip, Calendar, SessionModel, App, AppRouter) {
+    $.support.cors = true;
+    $.ajaxSetup({
+        cache: false,
+        statusCode: {
+            401: function () {
+                // Redirect the to the login page.
+                alert("401");
+                App.router.navigate("unauthorized", { trigger: true, replace: false });
+                window.location.replace('/login');
+
+            },
+            403: function () {
+                alert("403");
+                // 403 -- Access denied
+                App.router.navigate("unauthorized", { trigger: true, replace: false });
+                window.location.replace('/denied');
+            }
+        }
+    });
+
+
     App.session = new SessionModel();
     App.router = new AppRouter();
 
+    Calendar.initialize();
     App.session.doAuth(function () {
         // HTML5 pushState for URLs without hashbangs
         var hasPushstate = !!(window.history && history.pushState);
@@ -69,12 +103,10 @@ require(['jquery',
     // method, to be processed by the router. If the link has a `data-bypass`
     // attribute, bypass the delegation completely.
     $('#content-wrapper').on("click", "a:not([data-bypass])", function (evt) {
-        console.log("main click handler");
         evt.preventDefault();
         var href = $(this).attr("href");
+        if (DEBUG) console.log("click inside #content-wrapper to: " + href);
         App.router.navigate(href, { trigger: true, replace: false });
     });
 
-    // Dropdown toggle, pretty much
-    Bootstrap.initialize();
 });

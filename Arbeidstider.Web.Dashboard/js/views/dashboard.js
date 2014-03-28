@@ -6,9 +6,9 @@ define(['app',
     var DashboardView = Backbone.Marionette.ItemView.extend({
         template: _.template(DashboardTemplate),
         initialize: function () {
-            this.model = new DashboardModel({});
+            this.model = new DashboardModel();
             this.model.bind("sync", this.render, this);
-            console.log("views/dashboard initialize");
+            if (DEBUG) console.log("views/dashboard initialize");
         },
     });
 

@@ -7,13 +7,9 @@ define([
 ], function ($, _, Marionette, HeaderModel, headerMenuTemplate) {
     return Backbone.Marionette.ItemView.extend({
         template: _.template(headerMenuTemplate),
-        events: {
-        },
         initialize: function () {
             this.model = new HeaderModel();
-            console.log("HeaderMenuView.initialize()");
-            $(document).ready(function () {
-            });
+            if (DEBUG) console.log("views/shared/header initialize()");
         },
     });
 });

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 using ServiceStack;
 
 namespace Arbeidstider.Web.Framework.Session
@@ -7,12 +8,10 @@ namespace Arbeidstider.Web.Framework.Session
     public class EmployeeSession : AuthUserSession
     {
         [DataMember]
+        public string SessionId { get { return base.Id; } }
+        [DataMember]
         public int EmployeeId { get; set; }
         [DataMember]
-        public string SessionId { get; set; }
-        [DataMember]
         public int WorkplaceId { get; set; }
-        [DataMember]
-        public string Stuff { get; set; }
     }
 }

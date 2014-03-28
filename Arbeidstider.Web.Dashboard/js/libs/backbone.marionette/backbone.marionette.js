@@ -1009,7 +1009,7 @@ Marionette.View = Backbone.View.extend({
 // ---------
 
 // A single item view implementation that contains code for rendering
-// with underscore.js templates, serializing the view's model or collection,
+      // with underscore.js templates, serializing the view's model or collection,
       // and calling several methods on extended views, such as `onRender`.
 Marionette.ItemView = Marionette.View.extend({
 

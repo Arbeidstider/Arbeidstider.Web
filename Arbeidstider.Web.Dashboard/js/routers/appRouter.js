@@ -1,9 +1,11 @@
 define(['app',
         'backbone',
+    'jquery',
         'nav',
         'layouts/app',
         'layouts/content',
         'views/addressbook',
+        'views/calendar',
         'views/changeworkday',
         'views/confirmavailabledays',
         'views/messages',
@@ -14,7 +16,7 @@ define(['app',
         "views/shared/header",
         "views/shared/navbar"
 ],
-    function (App, Backbone, Nav, AppLayout, ContentLayout, AddressbookView, ChangeworkdayView, ConfirmavailabledaysView, MessagesView, SetdaysfreeView, DashboardView, ProfileView, RegisterView, HeaderView, NavbarView) {
+    function (App, Backbone, $, Nav, AppLayout, ContentLayout, AddressbookView, CalendarView, ChangeworkdayView, ConfirmavailabledaysView, MessagesView, SetdaysfreeView, DashboardView, ProfileView, RegisterView, HeaderView, NavbarView) {
         return Backbone.Router.extend({
             //"index" must be a method in AppRouter's controller
             initialize: function () {
@@ -27,8 +29,9 @@ define(['app',
                 "signout": "logout",
                 "logoff": "logout",
                 "signoff": "logout",
+                "calendar": "calendar",
                 "dashboard": "index",
-                'addemployee': 'register',
+                'register/employee': 'registerEmployee',
                 "profile": "profile",
                 "settings": "profile",
                 "changeWorkDay": "changeWorkDay",
@@ -49,13 +52,16 @@ define(['app',
             addressbook: function () {
                 this.show(new AddressbookView());
             },
+            calendar: function () {
+                this.show(new CalendarView());
+            },
             messages: function () {
                 this.show(new MessagesView());
             },
             profile: function () {
                 this.show(new ProfileView());
             },
-            register: function () {
+            registerEmployee: function () {
                 this.show(new RegisterView());
             },
             show: function (view, options) {
@@ -81,7 +87,7 @@ define(['app',
                 }
 
                 // Close and unbind any existing page view
-                if (this.currentView) this.currentView.close();
+                //if (this.currentView) this.currentView.close();
 
                 // Establish the requested view into scope
                 this.currentView = view;
@@ -95,36 +101,27 @@ define(['app',
 
                 // checkAuth/isAuthenticated
                 var self = this;
-                App.session.checkAuth({
-                    success:
-                        function (mod, resp) {
-                            if (resp && resp.IsAuthenticated) {
-                                console.log("checkAuth ok");
-                                App.session.set({ loggedIn: true });
-                                self.contentLayout.changeView(view);
-                            } else {
-                                console.log("checkAuth not ok");
-                                App.session.set({ loggedIn: false });
-                            }
-                        },
-                    error: function () {
-                        console.log("Could not verify authentication and can not change view");
-                    }
-                });
                 // Need to be authenticated before rendering view.
                 // For cases like a user's settings page where we need to double check against the server.
-                //if (typeof options !== 'undefined' && options.requiresAuth) {
-                //var self = this;
+                self.contentLayout.changeView(view);
                 //App.session.checkAuth({
-                //success: function (res) {
-                // If auth successful, render inside the page wrapper
-                //$('#content').html(self.currentView.render().$el);
-                //}, error: function (res) {
-                //self.navigate("/", { trigger: true, replace: true });
-                //}
+                //    success:
+                //        function (mod, resp) {
+                //            if (resp && resp.IsAuthenticated) {
+                //                console.log("checkAuth ok");
+                //                App.session.set({ loggedIn: true });
+                //                self.contentLayout.changeView(view);
+                //            } else {
+                //                //if (DEBUG) console.log("checkAuth not ok");
+                //                console.log("checkAuth not ok");
+                //                App.session.set({ loggedIn: false });
+                //            }
+                //        },
+                //    error: function () {
+                //        if (DEBUG) console.log("Could not verify authentication and can not change view");
+                //        self.navigate("/", { trigger: true, replace: true });
+                //    }
                 //});
-
-
             },
             index: function () {
                 var self = this;
@@ -141,7 +138,10 @@ define(['app',
                             }
                         });
                     }
-                    //else window.location.replace("/login");
+                    else {
+                        if (DEBUG) console.log("index(): not logged in");
+                        window.location.replace("/login");
+                    }
                 }
 
             },

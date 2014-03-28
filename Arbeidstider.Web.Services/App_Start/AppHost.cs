@@ -101,7 +101,7 @@ namespace Arbeidstider.Web.Services.App_Start
                                                              .GetCacheClient())
                      .ReusedWithin(Funq.ReuseScope.None);
 
-            var connectionString = ConfigurationManager.ConnectionStrings["Auth"].ConnectionString;
+            var connectionString = ConfigurationManager.ConnectionStrings["ServiceStack.Auth-Debug"].ConnectionString;
 
 
             container.Register<IDbConnectionFactory>(c =>
@@ -150,8 +150,6 @@ namespace Arbeidstider.Web.Services.App_Start
             Plugins.Add(new RequestLogsFeature());
             //Default route: /register
             //Plugins.Add(new RegistrationFeature());
-
-                //db.CreateTableIfNotExists();
         }
 
         public static void Start()

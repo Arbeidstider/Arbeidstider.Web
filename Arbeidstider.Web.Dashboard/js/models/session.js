@@ -5,6 +5,7 @@
             defaults: {
                 EmployeeId: null,
                 SessionId: null,
+                Role: 3,
                 loggedIn: false
             },
             initialize: function () {
@@ -13,20 +14,36 @@
                 this.set({ EmployeeId: _.isUndefined(employeeId) ? null : employeeId });
                 this.set({ SessionId: _.isUndefined(sessionId) ? null : sessionId });
                 this.employee = new EmployeeModel({});
-                _.bindAll(this, "doAuth", "authSuccess", "checkAuth");
+                _.bindAll(this, "doAuth", "authSuccess", "authError", "checkAuth", "parse", "setRole");
+            },
+            setRole: function () {
+                if (_.isUndefined(this.employee.Roles)) return;
+                if (this.employee.Roles.contains("Administrator")) {
+                    this.set({ Role: 0 });
+                    return;
+                }
+                if (this.employee.Roles.contains("Manager")) {
+                    this.set({ Role: 1 });
+                    return;
+                }
+                if (this.get("isLoggedIn")) {
+                    this.set({ Role: 2 });
+                    return;
+                }
+                this.set({ Role: 3 });
             },
             url: function () {
                 return App.API + "/employee/auth";
             },
             checkAuth: function (callback, args) {
                 var self = this;
-                var data = { EmployeeId: this.get("EmployeeId"), SessionId: this.get("SessionId") };
+                var data = { EmployeeId: self.get("EmployeeId"), SessionId: self.get("SessionId") };
                 self.fetch({
                     data: data,
                     url: self.url() + "/check",
                     beforeSend: function (xhr) { xhr.setRequestHeader("Session-Id", self.get("SessionId")); },
-                    error: function (mod, resp) { callback.error(mod, resp); },
-                    success: function (mod, resp) { callback.success(mod, resp); },
+                    error: function (mod, resp) { if ("error" in callback) callback.error(mod, resp); },
+                    success: function (mod, resp) { if ("success" in callback) callback.success(mod, resp); },
                 }).complete(function () {
                     if ("complete" in callback) callback.complete();
                 });
@@ -59,22 +76,17 @@
                 //});
             },
             authError: function (jqXHR, textStatus, errorThrown) {
-                console.log("authError");
-                console.log(errorThrown);
+                if (DEBUG) console.log("authError: ");
+                if (DEBUG) console.log(errorThrown);
             },
             authSuccess: function (model, resp, options) {
                 var self = this;
-                console.log("authSuccess()");
-                console.log(resp);
-                console.log("authSuccess: model()");
-                console.log(model);
                 if (resp.IsAuthenticated) {
-                    console.log("doAuth ok");
-                    console.log("employee: " + self.employee);
                     self.employee.set(_.pick(resp, _.keys(self.employee.defaults)));
+                    if (DEBUG) console.log("authSuccess() self.employee: " + JSON.stringify(self.employee));
                     self.set({ loggedIn: true });
                 } else {
-                    console.log("doAuth not ok");
+                    if (DEBUG) console.log("authSuccess: not authenticated");
                     self.set({ loggedIn: false });
                 }
             },
@@ -84,7 +96,7 @@
                 var dataToSend = { EmployeeId: self.get("EmployeeId"), SessionId: self.get("SessionId") };
                 //$.param(dataToSend, true);
                 // refactor to fetch
-                self.fetch({ data: dataToSend, beforeSend: function () {}, wait: true, error: self.authError, success: self.authSuccess }).complete(function () {
+                self.fetch({ data: dataToSend, wait: true, error: self.authError, success: self.authSuccess }).complete(function () {
                     callback();
                 });
                 //$.ajax({
@@ -111,10 +123,10 @@
                 //});
             },
             signOut: function () {
-                $.removeCookie("sessionId");
-                $.removeCookie("userId");
-                $.removeCookie("employeeId");
-                $.removeCookie("userName");
+                $.removeCookie("sessionId", {path: '/'});
+                $.removeCookie("userId", {path: '/'});
+                $.removeCookie("employeeId", {path: '/'});
+                $.removeCookie("userName", {path: '/'});
                 this.set({ loggedIn: false });
                 this.employee.set({});
                 $.get("/auth/logout");

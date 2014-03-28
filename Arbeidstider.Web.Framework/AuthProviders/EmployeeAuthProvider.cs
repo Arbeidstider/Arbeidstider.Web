@@ -1,4 +1,5 @@
-﻿using Arbeidstider.Web.Framework.Services;
+﻿using System;
+using Arbeidstider.Web.Framework.Services;
 using Arbeidstider.Web.Framework.Session;
 using ServiceStack;
 using ServiceStack.Auth;
@@ -82,7 +83,6 @@ namespace Arbeidstider.Web.Framework.AuthProviders
 
         public override object Authenticate(IServiceBase authService, IAuthSession session, Authenticate request)
         {
-            var sessionId = session.Id;
             var httpReq = authService.Request;
             var basicAuth = httpReq.GetBasicAuthUserAndPassword();
             if (basicAuth == null)
@@ -104,11 +104,11 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                     session.UserAuthName = userName;
                 }
 
-                var userSession = session as EmployeeSession;
-                if (userSession != null)
-                {
-                    LoadUserAuthInfo(userSession, null, null);
-                }
+                // For twitter, facebook, oauth etc
+                //if (session != null)
+                //{
+                //    LoadUserAuthInfo(session, null, null);
+                //}
 
                 var httpRes = authService.Request.Response as IHttpResponse;
                 if (httpRes != null)
@@ -119,20 +119,17 @@ namespace Arbeidstider.Web.Framework.AuthProviders
                 var employee = EmployeeService.Instance.GetEmployee(session.UserName);
 
                 // set employeemetadata on session
-                userSession.SessionId = sessionId;
-                userSession.Id = sessionId;
+                var userSession = session as EmployeeSession;
                 userSession.EmployeeId = employee.Id;
                 userSession.WorkplaceId = employee.WorkplaceId;
 
                 authService.SaveSession(userSession, SessionExpiry);
-                userSession.SessionId = sessionId;
                 base.OnAuthenticated(authService, userSession, null, null);
-                userSession.SessionId = sessionId;
 
                 return new
                 {
                     UserName = userName,
-                    SessionId = userSession.SessionId,
+                    SessionId = session.Id,
                     EmployeeId = employee.Id,
                     UserId = userSession.UserAuthId,
                     WorkplaceId = employee.WorkplaceId

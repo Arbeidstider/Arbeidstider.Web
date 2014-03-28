@@ -8,7 +8,7 @@ define(['app', 'backbone'
             getUrl: function (relativeUrl) {
                 relativeUrl = relativeUrl.charAt(0) == "/" ? relativeUrl : ("/" + relativeUrl);
                 var absoluteUrl = App.API + relativeUrl;
-                console.log("absoluteUrl: " + absoluteUrl);
+                if (DEBUG) console.log("absoluteUrl: " + absoluteUrl);
                 return absoluteUrl;
             },
             post: function (action, data, callback) {
