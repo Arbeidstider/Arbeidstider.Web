@@ -81,14 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurrentSessionTests.cs" />
-    <Compile Include="Services\AssignRolesService.cs" />
     <Compile Include="Services\AuthenticationServiceTests.cs" />
-    <Compile Include="Services\CreateTimesheetService.cs" />
-    <Compile Include="Services\DeleteTimesheetService.cs" />
     <Compile Include="Services\RegisterServiceTests.cs" />
-    <Compile Include="Services\TimesheetsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\UpdateTimesheetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -96,7 +91,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Qunit\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arbeidstider.DataAccess.Domain\Arbeidstider.DataAccess.Domain.csproj">
       <Project>{89ABA23F-72BE-4B40-8A8E-F8281A6BBCA6}</Project>
